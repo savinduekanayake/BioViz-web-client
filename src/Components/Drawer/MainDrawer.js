@@ -12,11 +12,8 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 
 
-import { useDispatch} from 'react-redux';
-
-
-
 import {DrawerList} from './DrawerList'
+import MainContent from '../MainContent';
 
 const drawerWidth = 240;
 
@@ -61,7 +58,6 @@ function MainDrawer(props) {
   const { container } = props;
   const classes = useStyles();
   const theme = useTheme();
-  const dispatch = useDispatch();
 
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -129,7 +125,7 @@ function MainDrawer(props) {
 
 
         <Box >
-          Content Here
+          <MainContent/>
           
         </Box>
 

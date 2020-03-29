@@ -23,8 +23,8 @@ export function DrawerList(props) {
     const classes = useStyles();
     const dispatch = useDispatch();
 
-    const navItems = [["PairAlign",  <Icon><img src={DnaIcon} /></Icon>],
-    ["MSA",<span> <Icon><img src={DnaIcon} /></Icon> <Icon><img src={DnaIcon} /></Icon></span>],
+    const navItems = [["PairAlign",  <Icon><img src={DnaIcon} alt="PairAlign Icon" /></Icon>],
+    ["MSA",<span> <Icon><img src={DnaIcon} alt="MSA Icon" /></Icon> <Icon><img src={DnaIcon} alt="MSA Icon" /></Icon></span>],
     ["Alignment Game", <SportsEsportsIcon />]]
 
     return (
