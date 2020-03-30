@@ -13,7 +13,7 @@ import DnaIcon from '../../assets/icons/dna.svg';
 
 
 import { useDispatch } from 'react-redux';
-import { setMode } from '../../Redux/Actions'
+import { setMode } from '../../Redux/Actions/Mode'
 
 const useStyles = makeStyles(theme => ({
     toolbar: theme.mixins.toolbar,

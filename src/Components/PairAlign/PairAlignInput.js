@@ -1,7 +1,8 @@
 import React from 'react'
-import { setP1Input,setP2Input } from '../../Redux/Actions'
+import { setP1Input,setP2Input } from '../../Redux/Actions/PairAlign'
 import CommonInput from '../CommonInput/CommonInput'
 import Grid from '@material-ui/core/Grid';
+import CommonScore from '../CommonScoreSchema/ScoreSchema';
 
 
 export default function PairAlignInput() {
@@ -13,6 +14,9 @@ export default function PairAlignInput() {
                 </Grid>
                 <Grid item>
                 <CommonInput inputHandler = {setP2Input} inputSelector = 'P2'/>
+                </Grid>
+                <Grid item>
+                    <CommonScore/>
                 </Grid>
 
             </Grid>
