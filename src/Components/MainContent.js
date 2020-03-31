@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector} from 'react-redux';
 import PairAlignContent from './PairAlign/PairAlignContent';
+import MSAContent from './MSA/MSAContent';
 
 
 export default function MainContent() {
@@ -11,6 +12,10 @@ export default function MainContent() {
     switch (modeValue) {
         case 1:
             content = <PairAlignContent/>
+            break;
+        
+        case 2:
+            content = <MSAContent/>
             break;
     
         default:

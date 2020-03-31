@@ -2,7 +2,7 @@ import React from 'react'
 import PairAlignInput from './PairAlignInput'
 import Matrix from '../Matrix/Matrix'
 import PairAlignAlignment from './PairAlignAlignment'
-import { Button } from '@material-ui/core'
+import Button from '@material-ui/core/Button';
 
 export default function PairAlignContent() {
     return (

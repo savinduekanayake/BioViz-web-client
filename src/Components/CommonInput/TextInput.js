@@ -5,12 +5,17 @@ import { useSelector,useDispatch } from 'react-redux';
 
 export default function TextInput(props) {
     const dispatch = useDispatch();
-    const DNAseq = useSelector(state => state[props.inputSelector]);
+    
+    const DNAseq = props.value
+    
 
     const onInputChange = (event)=>{
-        dispatch(props.inputHandler(event.target.value.trim()))
+        if(props.type==='MSA'){
+            dispatch(props.inputHandler(event.target.value.trim(),props.MSAkey))
+        }else{
+            dispatch(props.inputHandler(event.target.value.trim().trim()))
+        }
     }
-    console.log(DNAseq)
     return (
         
         <div>

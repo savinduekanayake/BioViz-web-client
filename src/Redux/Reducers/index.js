@@ -2,6 +2,7 @@ import {modeReducer} from './Mode'
 import {P1Reducer,P2Reducer} from './PairAlign'
 import {combineReducers} from 'redux';
 import { MatchScoreReducer, MisMatchPenaltyReducer,GapPenaltyReducer } from './Score';
+import { MSASeqReducer } from './MSA';
 
 const allReducers = combineReducers({
     mode:modeReducer,
@@ -9,7 +10,8 @@ const allReducers = combineReducers({
     P2:P2Reducer,
     matchScore:MatchScoreReducer,
     mismatchPenalty:MisMatchPenaltyReducer,
-    gapPenalty:GapPenaltyReducer
+    gapPenalty:GapPenaltyReducer,
+    MSASeq:MSASeqReducer,
 })
 
 export default allReducers;

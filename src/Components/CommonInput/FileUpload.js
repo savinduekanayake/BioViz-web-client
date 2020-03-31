@@ -12,8 +12,12 @@ export default function FileUpload(props) {
 
     const handleFileRead = (e) => {
         const content = fileReader.result;
-        console.log(content);
-        dispatch(props.inputHandler(content.trim()))
+        if(props.type==='MSA'){
+            dispatch(props.inputHandler(content.trim(),props.MSAkey))
+        }else{
+            dispatch(props.inputHandler(content.trim()))
+        }
+        
     };
 
     const handleError = (error)=>{

@@ -5,8 +5,9 @@ import TextInput from '../CommonInput/TextInput'
 export default function CommonInput(props) {
     return (
         <div>
-            <FileUpload inputHandler = {props.inputHandler}/>
-            <TextInput inputHandler = {props.inputHandler} inputSelector = {props.inputSelector}/>
+            <h3>{props.title}</h3>
+            <FileUpload inputHandler = {props.inputHandler} MSAkey={props.MSAkey} value={props.value} type={props.type}/>
+            <TextInput inputHandler = {props.inputHandler}  MSAkey={props.MSAkey} value={props.value} type={props.type}/>
         </div>
     )
 }
