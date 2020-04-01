@@ -1,11 +1,10 @@
 import React from 'react';
-import MainDrawer from './Drawer/MainDrawer'
+import MainDrawer from './Drawer/MainDrawer';
 
 export const MainWrapper = () =>{
-
-    return(
+    return (
         <div>
             <MainDrawer/>
         </div>
-    )
-}
+    );
+};

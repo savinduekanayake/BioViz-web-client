@@ -1,10 +1,10 @@
-export const modeReducer = (state = 1,action)=>{
+export const modeReducer = (state = 1, action)=>{
     switch (action.type) {
         case 'SET_MODE':
-            return action.payload            
-    
+            return action.payload;
+
         default:
-            return state
+            return state;
     }
-}
+};
 

@@ -1,31 +1,28 @@
-import React from 'react'
-import { setP1Input, setP2Input } from '../../Redux/Actions/PairAlign'
-import CommonInput from '../CommonInput/CommonInput'
+import React from 'react';
+import CommonInput from '../CommonInput/CommonInput';
 import Grid from '@material-ui/core/Grid';
-import CommonScore from '../CommonScoreSchema/ScoreSchema';
 import Button from '@material-ui/core/Button';
 
-import { useSelector, useDispatch } from 'react-redux';
-import { addNewMSA, setMSAInput } from '../../Redux/Actions/MSA';
-
+import {useSelector, useDispatch} from 'react-redux';
+import {addNewMSA, setMSAInput} from '../../Redux/Actions/MSA';
 
 
 export default function MSAInput() {
     const dispatch = useDispatch();
     const handleMSAadd = (e) => {
-
-        dispatch(addNewMSA())
+        dispatch(addNewMSA());
     };
 
-    const MSASeq = useSelector(state => state.MSASeq);
+    const MSASeq = useSelector((state) => state.MSASeq);
 
-    let inputs = []
+    const inputs = [];
 
     MSASeq.forEach((element, index) => {
-        const title = 'Input Sequence '.concat(index + 1, ' for MSA')
+        const title = 'Input Sequence '.concat(index + 1, ' for MSA');
         inputs.push(<Grid item>
-            <CommonInput inputHandler={setMSAInput} value={element.seq} MSAkey={element.key} title={title} type='MSA' />
-        </Grid>)
+            <CommonInput inputHandler={setMSAInput} value={element.seq}
+                MSAkey={element.key} title={title} type='MSA' />
+        </Grid>);
     });
 
     return (
@@ -34,7 +31,8 @@ export default function MSAInput() {
                 {inputs}
 
             </Grid>
-            <Button variant="outlined" color="secondary" onClick={handleMSAadd}>Add</Button>
+            <Button variant="outlined" color="secondary"
+                onClick={handleMSAadd}>Add</Button>
         </div>
-    )
+    );
 }

@@ -1,7 +1,10 @@
-import React from 'react'
+import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import NumberInput from './NumberInput'
-import { setMatchScore, setMisMatchPenalty, setGapPenalty } from '../../Redux/Actions/Score'
+import NumberInput from './NumberInput';
+import {
+    setMatchScore, setMisMatchPenalty,
+    setGapPenalty,
+} from '../../Redux/Actions/Score';
 
 export default function CommonScore(props) {
     return (
@@ -36,5 +39,5 @@ export default function CommonScore(props) {
 
             </Grid>
         </div>
-    )
+    );
 }

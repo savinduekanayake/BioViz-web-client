@@ -1,7 +1,7 @@
-import React from 'react'
-import PairAlignInput from './PairAlignInput'
-import Matrix from '../Matrix/Matrix'
-import PairAlignAlignment from './PairAlignAlignment'
+import React from 'react';
+import PairAlignInput from './PairAlignInput';
+import Matrix from '../Matrix/Matrix';
+import PairAlignAlignment from './PairAlignAlignment';
 import Button from '@material-ui/core/Button';
 
 export default function PairAlignContent() {
@@ -16,5 +16,5 @@ export default function PairAlignContent() {
             <br/>
             <PairAlignAlignment/>
         </div>
-    )
+    );
 }

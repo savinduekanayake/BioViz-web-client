@@ -1,33 +1,30 @@
-import React from 'react'
+import React from 'react';
 import Cell from './Cell';
 
 export default function Matrix() {
-
-    let tableData=[];
-    let tableHeader = []
-    tableHeader.push(<th>...</th>)
+    const tableData=[];
+    const tableHeader = [];
+    tableHeader.push(<th>...</th>);
     for (let j = 0; j < 10; j++) {
-        tableHeader.push(<th>A</th>)        
+        tableHeader.push(<th>A</th>);
     }
-    tableData.push(<tr>{tableHeader}</tr>)
+    tableData.push(<tr>{tableHeader}</tr>);
 
     for (let i = 0; i < 10; i++) {
-        let tableRow=[]
-        tableRow.push(<th>G</th>)
+        const tableRow=[];
+        tableRow.push(<th>G</th>);
         for (let j = 0; j < 10; j++) {
-            tableRow.push(<td><Cell value={10*i+j}/></td>)
-            
+            tableRow.push(<td><Cell value={10*i+j}/></td>);
         }
-        tableData.push(<tr>{tableRow}</tr>)
-        
+        tableData.push(<tr>{tableRow}</tr>);
     }
 
     return (
-        <div style={{overflowX:"scroll",width:'1000px',height:'500px'}}>
+        <div style={{overflowX: 'scroll', width: '1000px', height: '500px'}}>
             <table >
                 {tableData}
             </table>
 
         </div>
-    )
+    );
 }
