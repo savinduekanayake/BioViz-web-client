@@ -31,7 +31,7 @@ export default function MainContent() {
     }
 
     return (
-        <div>
+        <div style={{padding: 5}}>
             {content}
         </div>
     );
