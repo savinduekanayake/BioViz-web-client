@@ -2,6 +2,8 @@ import React from 'react';
 import {useSelector} from 'react-redux';
 import PairAlignContent from './PairAlign/PairAlignContent';
 import MSAContent from './MSA/MSAContent';
+import HomeSection from './HomeSection/HomeSection';
+import GameSection from './GameSection/GameSection';
 
 
 export default function MainContent() {
@@ -9,6 +11,9 @@ export default function MainContent() {
     let content;
 
     switch (modeValue) {
+        case 0:
+            content = <HomeSection/>;
+            break;
         case 1:
             content = <PairAlignContent/>;
             break;
@@ -17,6 +22,9 @@ export default function MainContent() {
             content = <MSAContent/>;
             break;
 
+        case 3:
+            content = <GameSection/>;
+            break;
         default:
             content = 'Other Mode';
             break;

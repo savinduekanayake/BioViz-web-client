@@ -7,6 +7,7 @@ import Divider from '@material-ui/core/Divider';
 import {makeStyles} from '@material-ui/core/styles';
 import Icon from '@material-ui/core/Icon';
 import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
+import HomeIcon from '@material-ui/icons/Home';
 
 import DnaIcon from '../../assets/icons/dna.svg';
 
@@ -22,11 +23,12 @@ export function DrawerList(props) {
     const dispatch = useDispatch();
 
     const navItems =
-        [['PairAlign', <Icon key='0'><img src={DnaIcon}
+        [['Home', <HomeIcon key='0' />],
+            ['PairAlign', <Icon key='1'><img src={DnaIcon}
             alt="PairAlign Icon" /></Icon>],
-        ['MSA', <span key='1'> <Icon><img src={DnaIcon} alt="MSA Icon" /></Icon>
+        ['MSA', <span key='2'> <Icon><img src={DnaIcon} alt="MSA Icon" /></Icon>
             <Icon><img src={DnaIcon} alt="MSA Icon" /></Icon></span>],
-        ['Alignment Game', <SportsEsportsIcon key='2' />]];
+        ['Alignment Game', <SportsEsportsIcon key='3' />]];
 
     return (
         <div>
@@ -35,7 +37,7 @@ export function DrawerList(props) {
             <List>
                 {navItems.map((item, index) => (
                     <ListItem button key={item[0]} onClick={() => {
-                        dispatch(setMode(index + 1));
+                        dispatch(setMode(index));
                     }}>
                         <ListItemIcon>{item[1]}</ListItemIcon>
                         <ListItemText primary={item[0]} />
