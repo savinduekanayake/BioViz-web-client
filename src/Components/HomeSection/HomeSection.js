@@ -1,15 +1,17 @@
 import React from 'react';
-import Services from './Services';
 
-//import css modules
-import style from './assets/css/image.module.css';
+//pages
+import Services from './Services';
+import Steps from './Steps';
+// import Test from './test'
 
 export default function HomeSection() {
     return (
         <div>
-            <h2 className={style.heading}>Services</h2>
-            <p className={style.subHeading}>Lorem ipsum dolor sit amet consectetur.</p>
+            
             <Services />
+            <Steps />
+{/* <Test /> */}
         </div>
     );
 }

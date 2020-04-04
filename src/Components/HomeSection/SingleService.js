@@ -1,20 +1,16 @@
 import React from 'react';
-import Services from './Services';
+import { makeStyles} from '@material-ui/core/styles';
+
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
 
 //import css modules
 import style from './assets/css/image.module.css';
 
-//
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import Grid, { GridSpacing } from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-
-import image1 from './assets/img/1.jpg';
-
 
 const useStyles = makeStyles((theme) => ({
     paper: {
-        height: 450,
+        height: 425,
         width: 300,
         margin: 25,
     },
@@ -25,6 +21,15 @@ const useStyles = makeStyles((theme) => ({
         marginTop: 0,
         paddingTop: 25,
     },
+    image: {
+        height: 255,
+        maxWidth: 400,
+        overflow: 'hidden',
+        display: 'block',
+        width: '75%',
+        display: 'center',
+        borderRadius: 20
+      },
 
 }));
 

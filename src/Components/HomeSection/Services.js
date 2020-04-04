@@ -1,6 +1,6 @@
 import React from 'react';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import Grid, { GridSpacing } from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
 
 
 //import css modules
@@ -33,7 +33,11 @@ export default function Services() {
     const classes = useStyles();
 
     return (
-        <div>
+        <div className={style.servicesBackground}>
+
+            <h2 className={style.heading}>Services</h2>
+            <p className={style.subHeading}>Lorem ipsum dolor sit amet consectetur.</p>
+            
             <Grid container className={classes.root} >
                 <Grid item xs={12}>
                     <Grid container justify="center" >
