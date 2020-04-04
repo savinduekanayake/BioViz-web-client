@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
-import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
 
 import MenuIcon from '@material-ui/icons/Menu';
@@ -23,13 +22,13 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
     },
     drawer: {
-        [theme.breakpoints.up('sm')]: {
+        [theme.breakpoints.up('xl')]: {
             width: drawerWidth,
             flexShrink: 0,
         },
     },
     appBar: {
-        [theme.breakpoints.up('sm')]: {
+        [theme.breakpoints.up('xl')]: {
             width: `calc(100% - ${drawerWidth}px)`,
             marginLeft: drawerWidth,
         },
@@ -37,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
     },
     menuButton: {
         marginRight: theme.spacing(2),
-        [theme.breakpoints.up('sm')]: {
+        [theme.breakpoints.up('xl')]: {
             display: 'none',
         },
     },
@@ -91,9 +90,7 @@ function MainDrawer(props) {
                 </Toolbar>
             </AppBar>
             <nav className={classes.drawer} aria-label="mailbox folders">
-                {/* The implementation can be swapped with js to avoid
-         SEO duplication of links. */}
-                <Hidden smUp implementation="css">
+
                     <Drawer
                         container={container}
                         variant="temporary"
@@ -110,18 +107,7 @@ function MainDrawer(props) {
                     >
                         <DrawerList />
                     </Drawer>
-                </Hidden>
-                <Hidden xsDown implementation="css">
-                    <Drawer
-                        classes={{
-                            paper: classes.drawerPaper,
-                        }}
-                        variant="permanent"
-                        open
-                    >
-                        <DrawerList />
-                    </Drawer>
-                </Hidden>
+
             </nav>
             <main className={classes.content}>
                 <div className={classes.toolbar} />
