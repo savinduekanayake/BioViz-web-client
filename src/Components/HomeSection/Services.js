@@ -23,6 +23,7 @@ const services = [
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
+        marginBottom:20
     },
 
 }));
@@ -37,7 +38,7 @@ export default function Services() {
 
             <h2 className={style.heading}>Services</h2>
             <p className={style.subHeading}>Lorem ipsum dolor sit amet consectetur.</p>
-            
+
             <Grid container className={classes.root} >
                 <Grid item xs={12}>
                     <Grid container justify="center" >

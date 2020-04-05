@@ -11,6 +11,8 @@ import Typography from '@material-ui/core/Typography';
 
 //import css modules
 import style from './assets/css/image.module.css';
+
+//should add images according to Pairwise steps
 import image1 from './assets/img/1.jpg'
 
 const useStyles = makeStyles((theme) => ({
@@ -89,8 +91,7 @@ export default function VerticalLinearStepper() {
     return (
         <div className={classes.root}>
 
-            <h2 className={style.heading}>Steps</h2>
-            <p className={style.subHeading}>Lorem ipsum dolor sit amet consectetur.</p>
+            <h1>Pairwise</h1>
 
             <Stepper activeStep={activeStep} orientation="vertical">
                 {steps.map((label, index) => (
@@ -101,7 +102,6 @@ export default function VerticalLinearStepper() {
                             <div className={classes.actionsContainer}>
                                 <div>
                                     <img className={style.img} src={image1} alt='' />
-                                    {/* <h3 className={style.title}>New </h3> */}
                                     <Typography>{getStepContent(index)}</Typography>
                                     <Button
                                         disabled={activeStep === 0}
@@ -131,7 +131,7 @@ export default function VerticalLinearStepper() {
                     <Button onClick={handleReset} className={classes.button}>
                         Reset
           </Button>
-          <Button variant="outlined" color="secondary">Go To Alignment</Button>
+          <Button variant="outlined" color="secondary">Go To Pairwise Alignment</Button>
                 </Paper>
                 
             )}
