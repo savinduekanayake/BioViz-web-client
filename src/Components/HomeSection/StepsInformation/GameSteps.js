@@ -10,10 +10,10 @@ import Typography from '@material-ui/core/Typography';
 
 
 //import css modules
-import style from './assets/css/image.module.css';
+import style from '../assets/css/image.module.css';
 
-//should add images according to Pairwise steps
-import image1 from './assets/img/1.jpg'
+//should add images according to Game steps
+import image1 from '../assets/img/1.jpg'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -45,27 +45,22 @@ const useStyles = makeStyles((theme) => ({
 );
 
 function getSteps() {
-    return [ 'Select a BioInformatic Alignment', 'Enter your DNA sequences', 'Enter your variables', 'Click enter to results'];
+    return [ 'Select a GamePlay', 'Read the instruction', 'Enter your answer', 'Click enter to get score'];
 }
 
 function getStepContent(step: number) {
     switch (step) {
         case 0:
-            return `For each ad campaign that you create, you can control how much
-              you're willing to spend on clicks and conversions, which networks
-              and geographical locations you want your ads to show on, and more.`;
+            return `First click the menu icon. Then you can see some menu items in leftside. 
+            After that click 'Alignment Game' to play Alignment Game.`;
         case 1:
-            return 'An ad group contains one or more ads which target a shared set of keywords.';
+            return `Read the instructions...`;
         case 2:
-            return `Try out different ad text to see what brings in the most customers,
-              and learn how to enhance your ads using features like ad extensions.
-              If you run into any problems with your ads, find out how to tell if
-              they're running and how to resolve approval issues.`;
+            return `There are defaultly set values of 'match' 'mismatch' and 'gap'. 
+            You need to enter your answers.`;
         case 3:
-            return `Try out different ad text to see what brings in the most customers,
-                and learn how to enhance your ads using features like ad extensions.
-                If you run into any problems with your ads, find out how to tell if
-                they're running and how to resolve approval issues.`;
+            return `If you are finished the all above steps just click 'Enter' to get the result.
+            This may can get few secounds to visualize the score.`;
         default:
             return 'Unknown step';
     }
@@ -91,7 +86,7 @@ export default function VerticalLinearStepper() {
     return (
         <div className={classes.root}>
 
-            <h1>Pairwise</h1>
+            <h1>Game play</h1>
 
             <Stepper activeStep={activeStep} orientation="vertical">
                 {steps.map((label, index) => (
@@ -131,7 +126,7 @@ export default function VerticalLinearStepper() {
                     <Button onClick={handleReset} className={classes.button}>
                         Reset
           </Button>
-          <Button variant="outlined" color="secondary">Go To Pairwise Alignment</Button>
+          <Button variant="outlined" color="secondary">Go To GamePlay</Button>
                 </Paper>
                 
             )}

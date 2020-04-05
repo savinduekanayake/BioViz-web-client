@@ -9,9 +9,9 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
 //pages
-import ParwiseSteps from './PairwiseSteps';
-import MSASteps from './MSASteps';
-import GameSteps from './GameSteps';
+import ParwiseSteps from './StepsInformation/PairwiseSteps';
+import MSASteps from './StepsInformation/MSASteps';
+import GameSteps from './StepsInformation/GameSteps';
 
 //import css modules
 import style from './assets/css/image.module.css';
