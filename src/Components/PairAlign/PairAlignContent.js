@@ -1,6 +1,6 @@
 import React from 'react';
 import PairAlignInput from './PairAlignInput';
-import Matrix from '../Matrix/Matrix';
+import Matrix from './Matrix/Matrix';
 import PairAlignAlignment from './PairAlignAlignment';
 import Button from '@material-ui/core/Button';
 

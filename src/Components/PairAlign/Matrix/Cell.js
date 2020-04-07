@@ -21,6 +21,7 @@ export default function Cell(props) {
                 classes={{tooltip: classes.customWidth}}>
                 <Button>{props.value}</Button>
             </Tooltip>
+            {/* {props.value} */}
 
         </div>
     );
