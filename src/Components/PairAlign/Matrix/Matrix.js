@@ -2,68 +2,75 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Cell from './Cell';
 import {FixedSizeGrid} from 'react-window';
+import {makeStyles} from '@material-ui/core/styles';
+import {nwResult} from '../DummyData';
 
-const max = 1000;
-const makeCell = ({columnIndex, rowIndex, style}) => {
-    let cell;
-    if (columnIndex === 0) {
-        if (rowIndex ===0) {
-            cell = '...';
-        } else {
-            cell = <b>G</b>;
-        }
-    } else if (rowIndex===0) {
-        cell = <b>A</b>;
-    } else {
-        cell = <Cell value={(rowIndex-1) *max + columnIndex} />;
-    }
-    return (
-        <div style={style}>
-            {cell}
-        </div>
-    );
-};
+const inputLenA = 30;
+const inputLenB = 30;
+const scoreMatrix = nwResult.result.score_matrix;
+const path = nwResult.result.alignments[0].path;
+const pathSet = new Set();
+path.forEach((p) => {
+    pathSet.add(`${p[0]}${p[1]}${p[0] * p[1]}`);
+});
 
-makeCell.propTypes = {
-    columnIndex: PropTypes.number.isRequired,
-    rowIndex: PropTypes.number.isRequired,
-    style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-};
+const useStyles = makeStyles((theme) => ({
+    cell: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+
+    },
+    inpath: {
+        backgroundColor: 'red',
+    },
+}));
 
 
 export default function Matrix() {
-    // const tableData=[];
-    // const tableHeader = [];
-    // tableHeader.push(<th>...</th>);
-    // for (let j = 0; j < max; j++) {
-    //     tableHeader.push(<th>A</th>);
-    // }
-    // tableData.push(<tr>{tableHeader}</tr>);
+    const classes = useStyles();
 
-    // for (let i = 0; i < max; i++) {
-    //     const tableRow=[];
-    //     tableRow.push(<th>G</th>);
-    //     for (let j = 0; j < max; j++) {
-    //         tableRow.push(<td><Cell value={max*i+j}/></td>);
-    //     }
-    //     tableData.push(<tr>{tableRow}</tr>);
-    // }
+    const makeCell = ({columnIndex, rowIndex, style}) => {
+        const cIdx = columnIndex;
+        const rIdx = rowIndex;
+        let cell;
+        let inPath;
+        if (cIdx === 0) {
+            if (rIdx === 0) {
+                cell = '...';
+            } else {
+                cell = <b>G</b>;
+            }
+        } else if (rIdx === 0) {
+            cell = <b>A</b>;
+        } else {
+            cell = <Cell value={scoreMatrix[rIdx - 1][cIdx - 1]} />;
+            inPath = pathSet.has(
+                `${rIdx - 1}${cIdx - 1}${(rIdx - 1) * (cIdx - 1)}`,
+            );
+        }
 
-    // return (
-    //     <div style={{overflowX: 'auto', width: '1000px', height: '500px'}}>
-    //         <table >
-    //             {tableData}
-    //         </table>
+        return (
+            <div style={style}
+                className={`${classes.cell} ${inPath ? classes.inpath : ''}`}>
+                {cell}
+            </div>
+        );
+    };
 
-    //     </div>
-    // );
+    makeCell.propTypes = {
+        columnIndex: PropTypes.number.isRequired,
+        rowIndex: PropTypes.number.isRequired,
+        style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+    };
+
     return (
         <FixedSizeGrid
             className="Grid"
-            columnCount={max}
+            columnCount={inputLenB}
             columnWidth={50}
             height={300}
-            rowCount={max}
+            rowCount={inputLenA}
             rowHeight={35}
             width={600}
         >
