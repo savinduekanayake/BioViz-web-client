@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Cell from './Cell';
 import {FixedSizeGrid} from 'react-window';
 
-const max = 100;
+const max = 1000;
 const makeCell = ({columnIndex, rowIndex, style}) => {
     let cell;
     if (columnIndex === 0) {
@@ -21,6 +22,12 @@ const makeCell = ({columnIndex, rowIndex, style}) => {
             {cell}
         </div>
     );
+};
+
+makeCell.propTypes = {
+    columnIndex: PropTypes.number.isRequired,
+    rowIndex: PropTypes.number.isRequired,
+    style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
 };
 
 
