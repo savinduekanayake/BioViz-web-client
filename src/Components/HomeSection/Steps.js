@@ -1,33 +1,26 @@
 import React from 'react';
-
-//Material UI
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
+import {makeStyles} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
-//pages
+// pages
 import ParwiseSteps from './StepsInformation/PairwiseSteps';
 import MSASteps from './StepsInformation/MSASteps';
 import GameSteps from './StepsInformation/GameSteps';
 
-//import css modules
+// import css modules
 import style from './assets/css/image.module.css';
 
-//icons
+// icons
 import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
 
 
-interface TabPanelProps {
-  children?: React.ReactNode;
-  index: any;
-  value: any;
-}
-
-function TabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props;
+function TabPanel(props) {
+  const {children, value, index, ...other} = props;
 
   return (
     <Typography
@@ -43,16 +36,26 @@ function TabPanel(props: TabPanelProps) {
   );
 }
 
-function a11yProps(index: any) {
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired,
+};
+
+function a11yProps(index) {
   return {
-    id: `scrollable-auto-tab-${index}`,
+    'id': `scrollable-auto-tab-${index}`,
     'aria-controls': `scrollable-auto-tabpanel-${index}`,
   };
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles((theme) => ({
   root: {
-    paddingLeft:'10%',
+    // flexGrow: 1,
+    // width: '100%',
+    // backgroundColor: theme.palette.background.paper,
+
+    paddingLeft: '10%',
     paddingRight: '10%',
     flexGrow: 1,
     width: '100%',
@@ -61,18 +64,21 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function SectionTabs() {
+export default function ScrollableTabsButtonAuto() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
-  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
+  const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   return (
     <div className={classes.root}>
-        <h2 className={style.heading}>Steps</h2>
-        <p className={style.subHeading}>Lorem ipsum dolor sit amet consectetur.</p>
+
+      <h2 className={style.heading}>Services</h2>
+      <p className={style.subHeading}>
+        Lorem ipsum dolor sit amet consectetur.
+      </p>
 
       <AppBar position="static" color="default">
         <Tabs
@@ -84,9 +90,11 @@ export default function SectionTabs() {
           aria-label="scrollable auto tabs example"
           centered
         >
-          <Tab label="Pairwise Alignment"  {...a11yProps(0)} />
+          <Tab label="Pairwise Alignment" {...a11yProps(0)} />
           <Tab label="MSA Alignment" {...a11yProps(1)} />
-          <Tab label="Game Play" icon={<SportsEsportsIcon />} {...a11yProps(2)} />
+          <Tab label="Game Play"
+            icon={<SportsEsportsIcon />} {...a11yProps(2)} />
+
         </Tabs>
       </AppBar>
 
@@ -101,7 +109,7 @@ export default function SectionTabs() {
       <TabPanel value={value} index={2}>
         <GameSteps />
       </TabPanel>
- 
+
     </div>
   );
 }

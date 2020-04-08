@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -7,20 +7,20 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { Theme } from '@material-ui/core/styles';
 
-//import css modules
+
+// import css modules
 import style from './assets/css/image.module.css';
 
-//pages
-import Ratings from './Ratings';
+// pages
+// import Ratings from './Ratings';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles((theme) => ({
   table: {
     minWidth: 650,
   },
   root: {
-    paddingLeft:'10%',
+    paddingLeft: '10%',
     paddingRight: '10%',
     flexGrow: 1,
     width: '100%',
@@ -29,8 +29,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
+
 function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
+  return {name, calories, fat, carbs, protein};
 }
 
 const rows = [
@@ -38,7 +39,6 @@ const rows = [
   createData('Ice cream sandwich', 237),
   createData('Eclair', 262),
 ];
-
 
 
 export default function Feedback() {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
@@ -9,11 +9,11 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
 
-//import css modules
+// import css modules
 import style from '../assets/css/image.module.css';
 
-//should add images according to MSA steps
-import image1 from '../assets/img/Steps/MSA.png'
+// should add images according to MSA steps
+import image1 from '../assets/img/Steps/MSA.png';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -39,29 +39,37 @@ const useStyles = makeStyles((theme) => ({
         display: 'block',
         width: '100%',
         display: 'center',
-        borderRadius: 20
+        borderRadius: 20,
       },
 }),
 );
 
 function getSteps() {
-    return [ 'Select a BioInformatic MSA Alignment', 'Enter your DNA sequences', 'Enter your variables', 'Click enter to results'];
+    return [
+        'Select a BioInformatic MSA Alignment',
+        'Enter your DNA sequences', 'Enter your variables',
+        'Click enter to results',
+    ];
 }
 
-function getStepContent(step: number) {
+function getStepContent(step) {
     switch (step) {
         case 0:
-            return `First click the menu icon. Then you can see some menu items in leftside. 
+            return `First click the menu icon. 
+            Then you can see some menu items in leftside. 
             After that click 'MSA' to visit Multiple Sequence Alignment.`;
         case 1:
-            return `There are two inputs in default.You can add new input according to your requirments. 
+            return `There are two inputs in default.
+            You can add new input according to your requirments. 
             You need to enter your DNA sequences. 
             You can either upload ".txt" file or type the sequence.`;
         case 2:
             return `There are default values for 'match' 'mismatch' and 'gap'. 
-            If you willing to change the values you can enter new values for relavent variables.`;
+            If you willing to change the values 
+            you can enter new values for relavent variables.`;
         case 3:
-            return `If you are finished the all above steps just click 'Enter' to get the result.
+            return `If you are finished the all above steps 
+            just click 'Enter' to get the result.
             This may can get few secounds to visualize the result.`;
         default:
             return 'Unknown step';
@@ -88,18 +96,23 @@ export default function VerticalLinearStepper() {
     return (
         <div className={classes.root}>
 
-            <h1>MSA</h1>
+            <h2>MSA</h2>
 
             <Stepper activeStep={activeStep} orientation="vertical">
                 {steps.map((label, index) => (
                     <Step key={label}>
                         <StepLabel>{label}</StepLabel>
                         <StepContent>
-                            
+
                             <div className={classes.actionsContainer}>
                                 <div>
-                                    <img className={style.img} src={image1} alt='' />
-                                    <Typography>{getStepContent(index)}</Typography>
+                                    <img
+                                        className={style.img}
+                                        src={image1} alt=''
+                                    />
+                                    <Typography>
+                                        {getStepContent(index)}
+                                    </Typography>
                                     <Button
                                         disabled={activeStep === 0}
                                         onClick={handleBack}
@@ -113,24 +126,32 @@ export default function VerticalLinearStepper() {
                                         onClick={handleNext}
                                         className={classes.button}
                                     >
-                                        {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                                        {activeStep === steps.length - 1 ?
+                                        'Finish' : 'Next'}
                                     </Button>
                                 </div>
                             </div>
                         </StepContent>
                     </Step>
-                   
+
                 ))}
             </Stepper>
             {activeStep === steps.length && (
                 <Paper square elevation={0} className={classes.resetContainer}>
-                    <Typography>All steps completed - you&apos;re finished</Typography>
+                    <Typography>
+                        All steps completed - you&apos;re finished
+                    </Typography>
                     <Button onClick={handleReset} className={classes.button}>
                         Reset
-          </Button>
-          <Button variant="outlined" color="secondary">Go To MSA Alignment</Button>
+                    </Button>
+
+                    <Button
+                        variant="outlined"
+                        color="secondary"
+                    >Go To MSA Alignment
+                    </Button>
                 </Paper>
-                
+
             )}
         </div>
     );
