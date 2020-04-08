@@ -18,3 +18,13 @@ export const P2Reducer = (state = '', action)=>{
     }
 };
 
+export const PAlgoReducer = (state = '1', action)=>{
+    switch (action.type) {
+        case 'SET_P_ALGO':
+            return action.payload;
+
+        default:
+            return state;
+    }
+};
+
