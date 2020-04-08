@@ -5,13 +5,6 @@ import {makeStyles} from '@material-ui/core/styles';
 import {FixedSizeList} from 'react-window';
 
 
-const algnA = `GATA-CTACTCAGTATTCTACCACCA-ACGAT\
--GACATCTA-T-AG-A--ATACGAATATACGATA`;
-const algnB = `GACATCTA-T-AG-A--ATACGAATATACGAT\
-AGATA-CTACTCAGTATTCTACCACCA-ACGAT-`;
-const totalLen = algnA.length;
-
-
 const useStyles = makeStyles((theme) => ({
     avatar: {
         height: '20px',
@@ -49,30 +42,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function PairAlignAlignment() {
+export default function PairAlignAlignment(props) {
     const classes = useStyles();
-    // const row1 = [];
-    // for (let i = 0; i < algnA.length; i++) {
-    //     const char = algnA.charAt(i) === '-' ? 'ga' : algnA.charAt(i);
-    //     row1.push(<td><Avatar variant="square"
-    //         className={`${classes.avatar} ${classes[char]}`}>
-    //         {algnA.charAt(i)}</Avatar></td>);
-    // }
-    // const row2 = [];
-    // for (let j = 0; j < algnB.length; j++) {
-    //     const char = algnB.charAt(j) === '-' ? 'ga' : algnB.charAt(j);
-    //     row2.push(<td><Avatar variant="square"
-    //         className={`${classes.avatar} ${classes[char]}`}>
-    //         {algnB.charAt(j)}</Avatar></td>);
-    // }
-
-    // const middle = [];
-    // for (let k = 0; k < algnA.length; k++) {
-    //     const char = (algnA.charAt(k) === algnB.charAt(k) &&
-    //         algnA.charAt(k) !== '-') ? '\u007C' : '';
-
-    //     middle.push(<td><b>{char}</b></td>);
-    // }
+    const algnA = props.result.alignments[0].algn_a;
+    const algnB = props.result.alignments[0].algn_b;
+    const totalLen = algnA.length;
     const makeSegment = ({index, style}) => {
         const classA = algnA.charAt(index) === '-' ? 'ga' : algnA.charAt(index);
         const classB = algnB.charAt(index) === '-' ? 'ga' : algnB.charAt(index);
@@ -124,4 +98,14 @@ export default function PairAlignAlignment() {
     );
 }
 
-
+PairAlignAlignment.propTypes = {
+    result: PropTypes.shape({
+        score_matrix: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)),
+        alignments: PropTypes.arrayOf(
+            PropTypes.shape({
+                algn_a: PropTypes.string,
+                algn_b: PropTypes.string,
+            }),
+        ),
+    }),
+};

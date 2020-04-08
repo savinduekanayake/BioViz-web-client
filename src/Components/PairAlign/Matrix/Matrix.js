@@ -3,16 +3,7 @@ import PropTypes from 'prop-types';
 import Cell from './Cell';
 import {FixedSizeGrid} from 'react-window';
 import {makeStyles} from '@material-ui/core/styles';
-import {nwResult} from '../DummyData';
 
-const inputLenA = 30;
-const inputLenB = 30;
-const scoreMatrix = nwResult.result.score_matrix;
-const path = nwResult.result.alignments[0].path;
-const pathSet = new Set();
-path.forEach((p) => {
-    pathSet.add(`${p[0]}${p[1]}${p[0] * p[1]}`);
-});
 
 const useStyles = makeStyles((theme) => ({
     cell: {
@@ -27,8 +18,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function Matrix() {
+export default function Matrix(props) {
     const classes = useStyles();
+
+    const inputLenA = props.input.seqA.length;
+    const inputLenB = props.input.seqB.length;
+    const scoreMatrix = props.result.score_matrix;
+    const path = props.result.alignments[0].path;
+    const pathSet = new Set();
+    path.forEach((p) => {
+        pathSet.add(`${p[0]}${p[1]}${p[0] * p[1]}`);
+    });
 
     const makeCell = ({columnIndex, rowIndex, style}) => {
         const cIdx = columnIndex;
@@ -67,10 +67,10 @@ export default function Matrix() {
     return (
         <FixedSizeGrid
             className="Grid"
-            columnCount={inputLenB}
+            columnCount={inputLenB+2}
             columnWidth={50}
             height={300}
-            rowCount={inputLenA}
+            rowCount={inputLenA+2}
             rowHeight={35}
             width={600}
         >
@@ -79,3 +79,19 @@ export default function Matrix() {
 
     );
 }
+
+Matrix.propTypes = {
+    input: PropTypes.shape({
+        seqA: PropTypes.string,
+        seqB: PropTypes.string,
+    }),
+    result: PropTypes.shape({
+        score_matrix: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)),
+        alignments: PropTypes.arrayOf(
+            PropTypes.shape({
+                path: PropTypes.arrayOf(
+                    PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number))),
+            })),
+    }),
+};
+
