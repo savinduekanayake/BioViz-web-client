@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function ScrollableTabsButtonAuto() {
+export default function SectionTabs() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 

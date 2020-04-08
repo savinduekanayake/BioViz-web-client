@@ -13,7 +13,9 @@ import Typography from '@material-ui/core/Typography';
 import style from '../assets/css/image.module.css';
 
 //should add images according to Pairwise steps
-import image1 from '../assets/img/1.jpg'
+import image1 from '../assets/img/Steps/pw.png';
+
+import DrawerList from '../../Drawer/DrawerList';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -66,6 +68,7 @@ function getStepContent(step: number) {
             return 'Unknown step';
     }
 }
+
 
 export default function VerticalLinearStepper() {
     const classes = useStyles();
@@ -131,6 +134,6 @@ export default function VerticalLinearStepper() {
                 </Paper>
                 
             )}
-        </div>
+        </div>         
     );
 }

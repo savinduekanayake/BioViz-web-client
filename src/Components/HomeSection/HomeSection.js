@@ -3,15 +3,15 @@ import Divider from '@material-ui/core/Divider';
 
 //pages
 import Services from './Services';
-import SelectionTabs from  './SelectionTabs';
-// import Feedback from './Feedback'
+import Steps from  './Steps';
+import Feedback from './Feedback'
 
 export default function HomeSection() {
     return (
         <div>
             <Services />
             <Divider />
-            <SelectionTabs />
+            <Steps />
             {/* <Feedback /> */}
         </div>
     );

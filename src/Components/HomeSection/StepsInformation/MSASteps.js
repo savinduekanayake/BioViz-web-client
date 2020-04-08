@@ -13,7 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import style from '../assets/css/image.module.css';
 
 //should add images according to MSA steps
-import image1 from '../assets/img/1.jpg'
+import image1 from '../assets/img/Steps/MSA.png'
 
 const useStyles = makeStyles((theme) => ({
     root: {

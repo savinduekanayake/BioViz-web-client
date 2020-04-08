@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles} from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 
 //Material UI
 import Grid from '@material-ui/core/Grid';
@@ -9,7 +9,7 @@ import Paper from '@material-ui/core/Paper';
 import style from './assets/css/image.module.css';
 
 //pages
-import Test from './ViewMore'
+import ViewMore from './ViewMore'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -50,7 +50,7 @@ export default function SingleService({ title, description, image }) {
                     <div className={classes.DivDecoration}>
                         <img className={style.image} src={image} alt='' />
                         <h3 className={style.title}>{title}</h3>
-                        <Test title={"View more.."} description={description} />
+                        <ViewMore title={"View more.."} description={description} />
                         {/* <p className={style.subTitle}>{description}</p> */}
                     </div>
                 </Paper>

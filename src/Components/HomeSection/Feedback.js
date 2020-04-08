@@ -1,52 +1,79 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import { makeStyles } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+import { Theme } from '@material-ui/core/styles';
 
-export default function FormDialog() {
-  const [open, setOpen] = React.useState(false);
+//import css modules
+import style from './assets/css/image.module.css';
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+//pages
+import Ratings from './Ratings';
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+const useStyles = makeStyles((theme: Theme) => ({
+  table: {
+    minWidth: 650,
+  },
+  root: {
+    paddingLeft:'10%',
+    paddingRight: '10%',
+    flexGrow: 1,
+    width: '100%',
+    backgroundColor: theme.palette.background.paper,
+    marginTop: 50,
+  },
+}));
+
+function createData(name, calories, fat, carbs, protein) {
+  return { name, calories, fat, carbs, protein };
+}
+
+const rows = [
+  createData('Frozen yoghurt', 22),
+  createData('Ice cream sandwich', 237),
+  createData('Eclair', 262),
+];
+
+
+
+export default function Feedback() {
+  const classes = useStyles();
 
   return (
-    <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Give a feedback
-      </Button>
-      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Feedback Form</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            Share with us your own feelings using our website.
-          </DialogContentText>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="feedback"
-            type="email"
-            fullWidth
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={handleClose} color="primary">
-            Submit
-          </Button>
-        </DialogActions>
-      </Dialog>
+    <div className={classes.root}>
+    <h2 className={style.heading}>Feedback</h2>
+    <p className={style.subHeading}>Lorem ipsum dolor sit amet consectetur.</p>
+
+    <TableContainer component={Paper}>
+      <Table className={classes.table} aria-label="caption table">
+        <caption>A basic table example with a caption</caption>
+        <TableHead>
+          <TableRow>
+            <TableCell>Functions</TableCell>
+            <TableCell align="right">Ratings</TableCell>
+
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {rows.map((row) => (
+            <TableRow key={row.name}>
+              <TableCell component="th" scope="row">
+                {row.name}
+              </TableCell>
+              <TableCell align="right">{row.calories}</TableCell>
+              <TableCell align="right">{row.fat}</TableCell>
+              <TableCell align="right">{row.carbs}</TableCell>
+              <TableCell align="right">{row.protein}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
     </div>
   );
 }
