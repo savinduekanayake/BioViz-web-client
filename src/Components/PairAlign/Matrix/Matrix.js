@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import Cell from './Cell';
 import {FixedSizeGrid} from 'react-window';
@@ -20,14 +20,26 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Matrix(props) {
     const classes = useStyles();
+    const gridRef = React.createRef();
 
     const inputLenA = props.input.seqA.length;
     const inputLenB = props.input.seqB.length;
     const scoreMatrix = props.result.score_matrix;
-    const path = props.result.alignments[0].path;
+    const path = props.result.alignments[props.selected].path;
     const pathSet = new Set();
     path.forEach((p) => {
         pathSet.add(`${p[0]}${p[1]}${p[0] * p[1]}`);
+    });
+
+    const scrollToPath = () => {
+        gridRef.current.scrollToItem({
+          align: 'start',
+          columnIndex: path[path.length-1][1]-1,
+          rowIndex: path[path.length-1][0]-1,
+        });
+      };
+    useEffect(() => {
+        scrollToPath();
     });
 
     const makeCell = ({columnIndex, rowIndex, style}) => {
@@ -68,11 +80,14 @@ export default function Matrix(props) {
         <FixedSizeGrid
             className="Grid"
             columnCount={inputLenB+2}
-            columnWidth={50}
+            columnWidth={30}
             height={300}
             rowCount={inputLenA+2}
             rowHeight={35}
-            width={600}
+            width={300}
+            ref={gridRef}
+            // initialScrollLeft={30*(path[path.length-1][1]-1)}
+            // initialScrollTop={30*(path[path.length-1][0]-1)}
         >
             {makeCell}
         </FixedSizeGrid>
@@ -93,5 +108,6 @@ Matrix.propTypes = {
                     PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number))),
             })),
     }),
+    selected: PropTypes.number,
 };
 

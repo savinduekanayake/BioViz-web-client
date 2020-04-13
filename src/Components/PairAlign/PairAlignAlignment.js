@@ -44,9 +44,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PairAlignAlignment(props) {
     const classes = useStyles();
-    const algnA = props.result.alignments[0].algn_a;
-    const algnB = props.result.alignments[0].algn_b;
+    const algnA = props.alignment.algn_a;
+    const algnB = props.alignment.algn_b;
     const totalLen = algnA.length;
+
+    const onclick = ()=>{
+        props.setSelected(props.index);
+        console.log('clickded');
+    };
     const makeSegment = ({index, style}) => {
         const classA = algnA.charAt(index) === '-' ? 'ga' : algnA.charAt(index);
         const classB = algnB.charAt(index) === '-' ? 'ga' : algnB.charAt(index);
@@ -75,16 +80,7 @@ export default function PairAlignAlignment(props) {
 
 
     return (
-        // <div>
-        //     <table>
-        //         <tr>{row1}</tr>
-        //         <tr>{middle}</tr>
-        //         <tr>{row2}</tr>
-        //     </table>
-
-        // </div>
-
-        <div>
+        <div onClick={onclick}>
             <FixedSizeList
                 height={100}
                 itemCount={totalLen}
@@ -99,13 +95,10 @@ export default function PairAlignAlignment(props) {
 }
 
 PairAlignAlignment.propTypes = {
-    result: PropTypes.shape({
-        score_matrix: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)),
-        alignments: PropTypes.arrayOf(
-            PropTypes.shape({
-                algn_a: PropTypes.string,
-                algn_b: PropTypes.string,
-            }),
-        ),
-    }),
+    alignment: PropTypes.shape({
+            algn_a: PropTypes.string,
+            algn_b: PropTypes.string,
+        }),
+    setSelected: PropTypes.func,
+    index: PropTypes.number,
 };
