@@ -4478,3 +4478,7 @@ export const paInput = {
     seqB: 'CTTTTCTTTATCTCTAGGACTCCGCTCTCACGAGC'+
     'GGATTGGCTTCGACCCCACGTGGGCGACTTGACGTCGGATGGCCGTCGATACGCA',
 };
+// export const paInput = {
+//     seqA: 'AAAA',
+//     seqB: 'AAAG',
+// };
