@@ -8,6 +8,8 @@ const useStyles = makeStyles((theme) => ({
     tree: {
         borderWidth: 4,
         borderStyle: 'solid',
+        width: 600,
+        height: 400,
     },
 }));
 
@@ -21,7 +23,7 @@ export default function MSATree(props) {
             graph = new G6.TreeGraph({
                 container: ref.current,
                 width: 600,
-                height: 600,
+                height: 400,
                 modes: {
                     default: [
                         {
@@ -91,7 +93,8 @@ export default function MSATree(props) {
                                     'left',
                         offset: 5,
                         style: {
-                            fill: '#FFFFFF',
+                            fill: '#0000FF',
+                            fontSize: 17,
                         },
                     },
                 };
