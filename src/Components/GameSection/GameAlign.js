@@ -5,11 +5,10 @@ import Base from './Base';
 export default function GameAlign() {
 
     const inputAlign = {
-        algnA:'GATA-CTACTCAGTATTCTACCACCA-ACGAT-',
-        algnB:'GACATCTA-T-AG-A--ATACGAATATACGATA'
+        algnA:"AAGTTTTTTTA",
+        algnB:"AAAAGTTTTTT",    
     }
-
-    const [algn , setAlgn ] = useState(inputAlign)
+    const [algn , setAlgn ] = useState(inputAlign);
 
     const row1 = [];
     for (let i = 0; i < algn.algnA.length; i++) {
@@ -17,13 +16,14 @@ export default function GameAlign() {
         const base = algn.algnA.charAt(i) === '-' || algn.algnA.charAt(i) === 'g' ? 'ga' : algn.algnA.charAt(i);
         row1.push({base:<Base index={index} base={base}/>, id:index});
     }
+   
     const row2 = [];
     for (let j = 0; j < algn.algnB.length; j++) {
         const index = j;
         const base = algn.algnB.charAt(j) === '-' || algn.algnB.charAt(j) === 'g' ? 'ga' : algn.algnB.charAt(j);
         row2.push({base:<Base index={index} base={base}/>, id:index});
     }
-
+        
     function addGapA(index){
 
         if(algn.algnA.charAt(index)==='g'){
