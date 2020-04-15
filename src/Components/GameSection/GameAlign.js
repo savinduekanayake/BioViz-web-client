@@ -1,5 +1,8 @@
 import React , {useState} from 'react';
 import Base from './Base';
+import Button from '@material-ui/core/Button'
+import Icon from '@material-ui/core/Icon'
+import DnaIcon from '../../assets/icons/dna.svg';
 
 
 export default function GameAlign() {
@@ -14,14 +17,14 @@ export default function GameAlign() {
     for (let i = 0; i < algn.algnA.length; i++) {
         const index = i;
         const base = algn.algnA.charAt(i) === '-' || algn.algnA.charAt(i) === 'g' ? 'ga' : algn.algnA.charAt(i);
-        row1.push({base:<Base index={index} base={base}/>, id:index});
+        row1.push({base:<Base index={index} base={base} row={"A"}/>, id:index});
     }
    
     const row2 = [];
     for (let j = 0; j < algn.algnB.length; j++) {
         const index = j;
         const base = algn.algnB.charAt(j) === '-' || algn.algnB.charAt(j) === 'g' ? 'ga' : algn.algnB.charAt(j);
-        row2.push({base:<Base index={index} base={base}/>, id:index});
+        row2.push({base:<Base index={index} base={base} row={"B"}/>, id:index});
     }
         
     function addGapA(index){
@@ -60,10 +63,15 @@ export default function GameAlign() {
     const align2 = row2.map(ele => <td key={ele.id}><button onClick={() => addGapB(ele.id)} >{ele.base}</button></td>)
 
     return (
-        <div>
+        <div style={{backgroundColor:"#171b32" , height:"300px" , borderRadius:"10px"}}>
+            {/* "#171b32" */}
+            <br/><br/><br/>
             <table>
                 <tbody>
                     <tr>
+                        <td style={{width:70}}>
+                            <Icon  key='1'><img src={DnaIcon} alt="PairAlign Icon" /></Icon>
+                        </td>
                         {align1}
                     </tr>
                 </tbody>
@@ -71,10 +79,23 @@ export default function GameAlign() {
             <table>
                 <tbody>
                     <tr>
+                        <td style={{width:70}}>
+                        <Icon  key='1'><img src={DnaIcon} alt="PairAlign Icon" /></Icon>
+                        </td>
                         {align2}
                     </tr>
                 </tbody>
             </table>
+            <br/>
+            <br/>
+            {/* <Button variant="contained" color="secondary" type='submit'>Submit</Button> */}
+            <Button
+        variant="contained"
+        color="secondary"
+        endIcon={<Icon>send</Icon>}
+      >
+        Submit
+      </Button>
         </div>
     );
 }

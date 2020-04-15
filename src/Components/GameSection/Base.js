@@ -1,5 +1,5 @@
 import React from 'react';
-import {Avatar} from '@material-ui/core';
+import {Avatar, Tooltip} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
@@ -36,10 +36,15 @@ export default function Base(props) {
     const classes = useStyles();
     const index = props.index;
     const base = props.base;
+    const row = props.row;
+    const tilte = base === "ga" ? "Remove Gap" : "Add Gap";
+    const placement = row === "A" ? "top" : "bottom";
     
     return(
+        <Tooltip title={tilte} placement={placement} arrow>
             <Avatar variant='square' id={index}
             className={`${classes.avatar} ${classes[base]}`} >
-            {base}</Avatar>    
+            {base}</Avatar>   
+        </Tooltip>
         );
 }
