@@ -4,6 +4,7 @@ import CommonInput from '../CommonInput/CommonInput';
 import Grid from '@material-ui/core/Grid';
 import CommonScore from '../CommonScoreSchema/ScoreSchema';
 import {useSelector} from 'react-redux';
+import AlgoSelector from './AlgoSelector';
 
 
 export default function PairAlignInput() {
@@ -25,6 +26,10 @@ export default function PairAlignInput() {
                 <Grid item>
                     <CommonScore />
                 </Grid>
+                <Grid item>
+                    <AlgoSelector/>
+                </Grid>
+
 
             </Grid>
 
