@@ -10,3 +10,10 @@ export const setMSAInput = (seq, key)=>{
         payload: {seq: seq, key: key},
     };
 };
+
+export const removeMSA = (key)=>{
+    return {
+        type: 'REMOVE_MSA',
+        payload: {key},
+    };
+};
