@@ -48,10 +48,6 @@ export default function PairAlignAlignment(props) {
     const algnB = props.alignment.algn_b;
     const totalLen = algnA.length;
 
-    const onclick = ()=>{
-        props.setSelected(props.index);
-        console.log('clickded');
-    };
     const makeSegment = ({index, style}) => {
         const classA = algnA.charAt(index) === '-' ? 'ga' : algnA.charAt(index);
         const classB = algnB.charAt(index) === '-' ? 'ga' : algnB.charAt(index);
@@ -80,13 +76,13 @@ export default function PairAlignAlignment(props) {
 
 
     return (
-        <div onClick={onclick}>
+        <div>
             <FixedSizeList
                 height={100}
                 itemCount={totalLen}
                 itemSize={20}
                 layout="horizontal"
-                width={800}
+                width={300}
             >
                 {makeSegment}
             </FixedSizeList>
@@ -99,6 +95,5 @@ PairAlignAlignment.propTypes = {
             algn_a: PropTypes.string,
             algn_b: PropTypes.string,
         }),
-    setSelected: PropTypes.func,
     index: PropTypes.number,
 };
