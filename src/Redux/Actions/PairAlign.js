@@ -11,3 +11,10 @@ export const setP2Input = (input)=>{
         payload: input,
     };
 };
+
+export const setPAlgo = (algo)=>{
+    return {
+        type: 'SET_P_ALGO',
+        payload: algo,
+    };
+};
