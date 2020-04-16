@@ -1,79 +1,104 @@
-import React from 'react';
-import {Avatar} from '@material-ui/core';
-import {makeStyles} from '@material-ui/core/styles';
+import React , {useState} from 'react';
 import Base from './Base';
+import Button from '@material-ui/core/Button'
+import Icon from '@material-ui/core/Icon'
+import DnaIcon from '../../assets/icons/dna.svg';
+import { Tooltip } from '@material-ui/core';
 
-const algnA = 'GATA-CTACTCAGTATTCTACCACCA-ACGAT-';
-const algnB = 'GACATCTA-T-AG-A--ATACGAATATACGATA';
-
-
-const useStyles = makeStyles((theme) => ({
-    avatar: {
-        height: '20px',
-        width: '20px',
-        fontSize: '12px',
-
-    },
-    A: {
-        color: 'white',
-        backgroundColor: 'red',
-    },
-    C: {
-        color: 'white',
-        backgroundColor: 'blue',
-    },
-    G: {
-        color: 'white',
-        backgroundColor: 'purple',
-    },
-    T: {
-        color: 'white',
-        backgroundColor: 'green',
-    },
-    ga: {
-        color: 'black',
-        backgroundColor: 'black',
-    },
-
-}));
 
 export default function GameAlign() {
-    const classes = useStyles();
+
+    const inputAlign = {
+        algnA:"AAGTTTTTTTA",
+        algnB:"AAAAGTTTTTT",    
+    }
+    const [algn , setAlgn ] = useState(inputAlign);
+
     const row1 = [];
-
-    
-    for (let i = 0; i < algnA.length; i++) {
-        const name = i + 'A';
-        const base = algnA.charAt(i) === '-' ? 'ga' : algnA.charAt(i);
-        row1.push(<td><Base name={name} base={base}/></td>);
+    for (let i = 0; i < algn.algnA.length; i++) {
+        const index = i;
+        const base = algn.algnA.charAt(i) === '-' || algn.algnA.charAt(i) === 'g' ? 'ga' : algn.algnA.charAt(i);
+        const title = base === "ga" ? "Remove Gap" : "Add Gap";
+        row1.push({base:<Base index={index} base={base}/>, id:index, title:title});
     }
+   
     const row2 = [];
-    for (let j = 0; j < algnB.length; j++) {
-        const name = j + 'B';
-        const base = algnB.charAt(j) === '-' ? 'ga' : algnB.charAt(j);
-        row2.push(<td><Base name={name} base={base}/></td>);
+    for (let j = 0; j < algn.algnB.length; j++) {
+        const index = j;
+        const base = algn.algnB.charAt(j) === '-' || algn.algnB.charAt(j) === 'g' ? 'ga' : algn.algnB.charAt(j);
+        const title = base === "ga" ? "Remove Gap" : "Add Gap";
+        row2.push({base:<Base index={index} base={base}/>, id:index, title:title});
+    }
+        
+    function addGapA(index){
+
+        if(algn.algnA.charAt(index)==='g'){
+            setAlgn({
+                algnA : algn.algnA.substring(0,index) + algn.algnA.substring(index+1),
+                algnB : algn.algnB
+            })
+        }
+        else{
+        setAlgn({
+            algnA : algn.algnA.substring(0,index) + 'g' + algn.algnA.substring(index),
+            algnB : algn.algnB
+        })
+        }        
     }
 
-    const middle = [];
-    for (let k = 0; k < algnA.length; k++) {
-        const char = (algnA.charAt(k) === algnB.charAt(k) &&
-            algnA.charAt(k) !== '-') ? '\u007C' : '';
+    function addGapB(index){
 
-        middle.push(<td><b>{char}</b></td>);
+        if(algn.algnB.charAt(index)==='g'){
+            setAlgn({
+                algnA : algn.algnA,
+                algnB : algn.algnB.substring(0,index) + algn.algnB.substring(index+1)
+            })
+        }
+        else{
+        setAlgn({
+            algnA : algn.algnA,
+            algnB : algn.algnB.substring(0,index) + 'g' + algn.algnB.substring(index)
+        })
+        }        
     }
+
+    const align1 = row1.map(ele => <td key={ele.id}><Tooltip title={ele.title} placement="top" arrow><button onClick={() => addGapA(ele.id)} >{ele.base}</button></Tooltip></td>)
+    const align2 = row2.map(ele => <td key={ele.id}><Tooltip title={ele.title} placement="bottom" arrow><button onClick={() => addGapB(ele.id)} >{ele.base}</button></Tooltip></td>)
 
     return (
-        <div>
+        <div style={{backgroundColor:"#171b32" , height:"300px" , borderRadius:"10px"}}>
+            {/* "#171b32" */}
+            <br/><br/><br/>
             <table>
-                <tr>{row1}</tr>
+                <tbody>
+                    <tr>
+                        <td style={{width:70}}>
+                            <Icon  key='1'><img src={DnaIcon} alt="PairAlign Icon" /></Icon>
+                        </td>
+                        {align1}
+                    </tr>
+                </tbody>
             </table>
             <table>
-                <tr>{middle}</tr>
+                <tbody>
+                    <tr>
+                        <td style={{width:70}}>
+                        <Icon  key='1'><img src={DnaIcon} alt="PairAlign Icon" /></Icon>
+                        </td>
+                        {align2}
+                    </tr>
+                </tbody>
             </table>
-            <table>
-                <tr>{row2}</tr>
-            </table>
-
+            <br/>
+            <br/>
+            {/* <Button variant="contained" color="secondary" type='submit'>Submit</Button> */}
+            <Button
+        variant="contained"
+        color="secondary"
+        endIcon={<Icon>send</Icon>}
+      >
+        Submit
+      </Button>
         </div>
     );
 }
