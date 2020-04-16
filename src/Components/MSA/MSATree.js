@@ -23,7 +23,7 @@ export default function MSATree(props) {
             graph = new G6.TreeGraph({
                 container: ref.current,
                 width: 600,
-                height: 400,
+                height: 300,
                 modes: {
                     default: [
                         {
