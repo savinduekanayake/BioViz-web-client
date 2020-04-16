@@ -1,15 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import MSATree from './MSATree';
+import MSAAlignment from './MSAAlignment';
 
 export default function MSAResult(props) {
-    const alignments=[];
-    props.result.alignments.forEach((element) => {
-        alignments.push(<div>{element}</div>);
-    });
+    // const alignments=[];
+    // props.result.alignments.forEach((element) => {
+    //     alignments.push(<div>{element}</div>);
+    // });
     return (
         <div>
-            {alignments}
+            <MSAAlignment alignments={props.result.alignments}/>
             <br/>
             <MSATree treeData={props.result.graph}/>
 
