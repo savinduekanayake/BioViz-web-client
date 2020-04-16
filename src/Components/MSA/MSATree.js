@@ -1,7 +1,6 @@
 import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import G6 from '@antv/g6';
-import {Button} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
@@ -16,12 +15,15 @@ const useStyles = makeStyles((theme) => ({
 export default function MSATree(props) {
     const classes = useStyles();
     const ref = React.useRef(null);
-    let graph = null;
+    const {treeData, setSelected} = props;
+
 
     useEffect(() => {
+        let graph = null;
         if (!graph) {
             graph = new G6.TreeGraph({
                 container: ref.current,
+                fitView: true,
                 width: 600,
                 height: 300,
                 modes: {
@@ -99,21 +101,24 @@ export default function MSATree(props) {
                     },
                 };
             });
+            graph.on('node:mouseover', (e) => {
+                const id = e.item.defaultCfg.id;
+                setSelected(id);
+            });
+            graph.on('node:mouseleave', (e) => {
+                setSelected(undefined);
+            });
+            graph.on('canvas:dblclick', (e) => {
+                graph.fitView(0);
+            });
         }
-        graph.data(props.treeData);
+        graph.data(treeData);
         graph.render();
-        graph.fitView();
+        graph.fitView(0);
     }, []);
-
-    const handleChangeData = () => {
-        graph.fitView();
-    };
 
     return (
         <div ref={ref} className={classes.tree}>
-            <Button onClick={handleChangeData} type='primary'>
-                Center Graph
-            </Button>
         </div>
     );
 };
@@ -123,5 +128,6 @@ MSATree.propTypes = {
         id: PropTypes.number,
         children: PropTypes.array,
     }),
+    setSelected: PropTypes.func,
 };
 
