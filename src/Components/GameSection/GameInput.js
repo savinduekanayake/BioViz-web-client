@@ -9,9 +9,6 @@ export default function GameInput() {
         <div>
             <GameTextInput/>
             <br/>
-            <br/>
-            <CommonScore/>
-            <br/>
             <Button variant="contained" color="secondary" type='submit'>Submit</Button>
         </div>
     )

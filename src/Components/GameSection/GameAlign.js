@@ -3,13 +3,15 @@ import Base from './Base';
 import Button from '@material-ui/core/Button'
 import Icon from '@material-ui/core/Icon'
 import DnaIcon from '../../assets/icons/dna.svg';
+import { Tooltip , Box } from '@material-ui/core';
+import CommonScore from '../CommonScoreSchema/ScoreSchema';
 
 
 export default function GameAlign() {
 
     const inputAlign = {
-        algnA:"AAGTTTTTTTA",
-        algnB:"AAAAGTTTTTT",    
+        algnA:"AAGTC-GCCCTTTA-AAAAAA",
+        algnB:"AA-AAGTTTT-TTCCCGTTTT",    
     }
     const [algn , setAlgn ] = useState(inputAlign);
 
@@ -17,60 +19,76 @@ export default function GameAlign() {
     for (let i = 0; i < algn.algnA.length; i++) {
         const index = i;
         const base = algn.algnA.charAt(i) === '-' || algn.algnA.charAt(i) === 'g' ? 'ga' : algn.algnA.charAt(i);
-        row1.push({base:<Base index={index} base={base} row={"A"}/>, id:index});
+        const title = base === "ga" ? "Remove Gap" : "Add Gap";
+        row1.push({base:<Base index={index} base={base}/>, id:index, title:title});
     }
    
     const row2 = [];
     for (let j = 0; j < algn.algnB.length; j++) {
         const index = j;
         const base = algn.algnB.charAt(j) === '-' || algn.algnB.charAt(j) === 'g' ? 'ga' : algn.algnB.charAt(j);
-        row2.push({base:<Base index={index} base={base} row={"B"}/>, id:index});
+        const title = base === "ga" ? "Remove Gap" : "Add Gap";
+        row2.push({base:<Base index={index} base={base}/>, id:index, title:title});
     }
         
     function addGapA(index){
 
-        if(algn.algnA.charAt(index)==='g'){
+        if(algn.algnA.charAt(index)==='g' || algn.algnA.charAt(index) === '-'){
             setAlgn({
                 algnA : algn.algnA.substring(0,index) + algn.algnA.substring(index+1),
                 algnB : algn.algnB
             })
+            // remove gap at the given index
+            // update this change in alignA in state object
         }
         else{
-        setAlgn({
-            algnA : algn.algnA.substring(0,index) + 'g' + algn.algnA.substring(index),
-            algnB : algn.algnB
-        })
+            setAlgn({
+                algnA : algn.algnA.substring(0,index) + 'g' + algn.algnA.substring(index),
+                algnB : algn.algnB
+            })
+            // add a gap next to the base element at the given index
+            // update this change in alignA in state object
         }        
     }
 
     function addGapB(index){
 
-        if(algn.algnB.charAt(index)==='g'){
+        if(algn.algnB.charAt(index)==='g' || algn.algnB.charAt(index) === '-'){
             setAlgn({
                 algnA : algn.algnA,
                 algnB : algn.algnB.substring(0,index) + algn.algnB.substring(index+1)
             })
+            // remove gap at the given index
+            // update this change in alignB in state object
         }
         else{
-        setAlgn({
-            algnA : algn.algnA,
-            algnB : algn.algnB.substring(0,index) + 'g' + algn.algnB.substring(index)
-        })
+            setAlgn({
+                algnA : algn.algnA,
+                algnB : algn.algnB.substring(0,index) + 'g' + algn.algnB.substring(index)
+            })
+            // add a gap next to the base element at the given index
+            // update this change in alignB in state object
         }        
     }
 
-    const align1 = row1.map(ele => <td key={ele.id}><button onClick={() => addGapA(ele.id)} >{ele.base}</button></td>)
-    const align2 = row2.map(ele => <td key={ele.id}><button onClick={() => addGapB(ele.id)} >{ele.base}</button></td>)
+    const align1 = row1.map(ele => <td key={ele.id}><Tooltip title={ele.title} placement="top" arrow><Button variant="contained" size="small" style={{minWidth:25 ,paddingLeft:0 , paddingRight:0 , borderRadius:0}} onClick={() => addGapA(ele.id)} >{ele.base}</Button></Tooltip></td>)
+    const align2 = row2.map(ele => <td key={ele.id}><Tooltip title={ele.title} placement="bottom" arrow><Button variant="contained" size="small" style={{minWidth:25 ,paddingLeft:0 , paddingRight:0, borderRadius:0}} onClick={() => addGapB(ele.id)} >{ele.base}</Button></Tooltip></td>)
 
     return (
-        <div style={{backgroundColor:"#171b32" , height:"300px" , borderRadius:"10px"}}>
-            {/* "#171b32" */}
+        <Box boxShadow={3} style={{backgroundColor:"#3a3f57" , height:"470px" , borderRadius:"10px" , padding:10}}>
+            {/* "#171b32" #3a3f57 #171b32 */}
+            <br/>
+            <h2 style={{color:"#ffffff", textShadow: "1px 1px 2px black"}}>GamePlay</h2>
+            <br/><br/>
+            <div style={{marginLeft:55}}>
+            <CommonScore/>
+            </div>
             <br/><br/><br/>
             <table>
                 <tbody>
                     <tr>
-                        <td style={{width:70}}>
-                            <Icon  key='1'><img src={DnaIcon} alt="PairAlign Icon" /></Icon>
+                        <td style={{minWidth:50}}>
+                            <Icon><img src={DnaIcon} alt="seq 1" /></Icon>
                         </td>
                         {align1}
                     </tr>
@@ -79,8 +97,8 @@ export default function GameAlign() {
             <table>
                 <tbody>
                     <tr>
-                        <td style={{width:70}}>
-                        <Icon  key='1'><img src={DnaIcon} alt="PairAlign Icon" /></Icon>
+                        <td style={{minWidth:50}}>
+                            <Icon><img src={DnaIcon} alt="seq 2" /></Icon>
                         </td>
                         {align2}
                     </tr>
@@ -88,15 +106,11 @@ export default function GameAlign() {
             </table>
             <br/>
             <br/>
-            {/* <Button variant="contained" color="secondary" type='submit'>Submit</Button> */}
-            <Button
-        variant="contained"
-        color="secondary"
-        endIcon={<Icon>send</Icon>}
-      >
-        Submit
-      </Button>
-        </div>
+            <Button variant="contained" color="secondary" endIcon={<Icon>send</Icon>}
+                >
+                Submit
+            </Button>
+        </Box>
     );
 }
 

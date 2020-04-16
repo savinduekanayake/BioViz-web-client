@@ -25,6 +25,7 @@ export default function GameTextInput() {
     }
     return (
         <div>
+            <h3>Input Sequence 1</h3>
             <GameFileUpload/>
             <br/>
              <TextField
@@ -38,6 +39,7 @@ export default function GameTextInput() {
             </TextField>
             <br/>
             <br/>
+            <h3>Input Sequence 2</h3>
             <GameFileUpload/>
             <br/>
             <TextField
