@@ -3,8 +3,8 @@ import { Typography, CardContent, Box } from '@material-ui/core'
 import Card from '@material-ui/core/Card'
 import Base from './Base';
 
-export default function GameResult() {
-
+export default function GameResult(props) {
+    const input = props.aligns;
     const alignment = 'GACATCTA-T-AG-A--ATACGAATATACGATACC';
     const score = 150;
     const row = [];
@@ -20,7 +20,10 @@ export default function GameResult() {
     return (
         <Box style={{backgroundColor:"#d9dee1" , height:"300px" , borderRadius:"10px", padding:10}}>
             <br/>
-            <h3 style={{textShadow: "1px 1px 2px #a6a6a7"}}>Result</h3>
+            <h3>Result</h3>
+            {input.alignA}
+            <br/>
+            {input.alignB}
             <br/>
             <h3>Alignment</h3>
             <table style={{marginLeft:"auto", marginRight:"auto"}}>

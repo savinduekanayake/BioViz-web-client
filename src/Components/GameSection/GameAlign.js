@@ -5,15 +5,20 @@ import Icon from '@material-ui/core/Icon'
 import DnaIcon from '../../assets/icons/dna.svg';
 import { Tooltip , Box } from '@material-ui/core';
 import CommonScore from '../CommonScoreSchema/ScoreSchema';
+import GameInstruction from './GameInstruction';
 
 
-export default function GameAlign() {
+export default function GameAlign(props) {
 
-    const inputAlign = {
-        algnA:"AAGTC-GCCCTTTA-AAAAAA",
-        algnB:"AA-AAGTTTT-TTCCCGTTTT",    
+    const inputSeq = {
+        algnA:props.input.inputSeqA,
+        algnB:props.input.inputSeqB    
     }
-    const [algn , setAlgn ] = useState(inputAlign);
+    const [algn , setAlgn ] = useState(inputSeq);
+
+    function sendAlign(){
+        props.fetchAlign({alignA:algn.algnA,alignB:algn.algnB});
+    }
 
     const row1 = [];
     for (let i = 0; i < algn.algnA.length; i++) {
@@ -71,19 +76,26 @@ export default function GameAlign() {
         }        
     }
 
-    const align1 = row1.map(ele => <td key={ele.id}><Tooltip title={ele.title} placement="top" arrow><Button variant="contained" style={{minWidth:25, minHeight:25 , borderRadius:2, padding:4, backgroundColor:"#0a22536e"}} onClick={() => addGapA(ele.id)} >{ele.base}</Button></Tooltip></td>)
-    const align2 = row2.map(ele => <td key={ele.id}><Tooltip title={ele.title} placement="bottom" arrow><Button variant="contained" style={{minWidth:25, borderRadius:2, padding:4, backgroundColor:"#0a22536e"}}  onClick={() => addGapB(ele.id)} >{ele.base}</Button></Tooltip></td>)
-    // #2e3770
+    const align1 = row1.map(ele => <td key={ele.id}><Tooltip title={ele.title} placement="top" arrow><Button variant="contained" size="small" style={{minWidth:25, minHeight:25, padding:4, borderRadius:2, backgroundColor:"#0a22536e"}} onClick={() => addGapA(ele.id)} >{ele.base}</Button></Tooltip></td>)
+    const align2 = row2.map(ele => <td key={ele.id}><Tooltip title={ele.title} placement="bottom" arrow><Button variant="contained" size="small" style={{minWidth:25, minHeight:25, padding:4, borderRadius:2, backgroundColor:"#0a22536e"}} onClick={() => addGapB(ele.id)} >{ele.base}</Button></Tooltip></td>)
+
     return (
         <Box boxShadow={3} style={{backgroundColor:"#0a22536e" , height:"470px" , borderRadius:"10px" , padding:10}}>
             {/* "#171b32" #3a3f57 #171b32 */}
             <br/>
-            <h2 style={{color:"#ffffff", textShadow: "1px 1px 2px #2728b4"}}>GamePlay</h2>
+            <h1 style={{color:"#1e2e51", border:5}}>GamePlay</h1>
+            {props.input.inputSeqA}
+            <br/>
+            {algn.algnA}
+            <br/>
+            {inputSeq.algnA}
             <br/><br/>
             <div style={{marginLeft:55}}>
             <CommonScore/>
             </div>
-            <br/><br/><br/>
+            <br/>
+            <GameInstruction/>
+            <br/>
             <table>
                 <tbody>
                     <tr>
@@ -106,7 +118,7 @@ export default function GameAlign() {
             </table>
             <br/>
             <br/>
-            <Button variant="contained" color="secondary" endIcon={<Icon>send</Icon>}
+            <Button variant="contained" color="secondary" onClick={sendAlign} endIcon={<Icon>send</Icon>}
                 >
                 Submit
             </Button>
