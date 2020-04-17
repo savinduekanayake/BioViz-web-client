@@ -11,10 +11,14 @@ import GameInstruction from './GameInstruction';
 export default function GameAlign(props) {
 
     const inputSeq = {
-        algnA:props.inputA,
-        algnB:props.inputB,    
+        algnA:props.input.inputSeqA,
+        algnB:props.input.inputSeqB    
     }
     const [algn , setAlgn ] = useState(inputSeq);
+
+    function sendAlign(){
+        props.fetchAlign({alignA:algn.algnA,alignB:algn.algnB});
+    }
 
     const row1 = [];
     for (let i = 0; i < algn.algnA.length; i++) {
@@ -80,6 +84,11 @@ export default function GameAlign(props) {
             {/* "#171b32" #3a3f57 #171b32 */}
             <br/>
             <h1 style={{color:"#1e2e51", border:5}}>GamePlay</h1>
+            {props.input.inputSeqA}
+            <br/>
+            {algn.algnA}
+            <br/>
+            {inputSeq.algnA}
             <br/><br/>
             <div style={{marginLeft:55}}>
             <CommonScore/>
@@ -109,7 +118,7 @@ export default function GameAlign(props) {
             </table>
             <br/>
             <br/>
-            <Button variant="contained" color="secondary" endIcon={<Icon>send</Icon>}
+            <Button variant="contained" color="secondary" onClick={sendAlign} endIcon={<Icon>send</Icon>}
                 >
                 Submit
             </Button>

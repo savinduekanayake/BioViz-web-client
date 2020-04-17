@@ -13,11 +13,24 @@ export default function GameSection() {
     const seqA = useSelector((state) => state.GameSeqA);
     const seqB = useSelector((state) => state.GameSeqB);
 
+    const [alignment, setAlignment] = React.useState(undefined);
+    
+
+    function callbackAlign(data){
+        setAlignment({
+            alignA : data.alignA,
+            alignB : data.alignB
+        })
+        console.log(alignment);
+    }
+
     function onSubmit(){
         setInput({
             inputSeqA : seqA,
             inputSeqB : seqB,
+
         })
+        console.log(input);
     }
 
     // function changeInput(){
@@ -37,10 +50,10 @@ export default function GameSection() {
             <br/><br/>
             {/* <Button variant="contained" color="secondary" onClick={changeInput} >Change Input</Button> */}
             {input?
-            input.inputSeqA.length>0 && input.inputSeqB.length>0 ? <GameAlign inputA={input.inputSeqA} inputB={input.inputSeqB}/> :'Input both sequences' :''}
-            <br/>
-            <br/>
-            <GameResult/>
+            input.inputSeqA.length>0 && input.inputSeqB.length>0 ? <GameAlign input={input} fetchAlign={callbackAlign}/> :'Input both sequences' :''}
+            <br/><br/>
+            {alignment? <GameResult aligns={alignment}/>:''}
+            
         </div>
     );
 }
