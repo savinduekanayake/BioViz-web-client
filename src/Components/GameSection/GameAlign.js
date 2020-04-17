@@ -5,6 +5,7 @@ import Icon from '@material-ui/core/Icon'
 import DnaIcon from '../../assets/icons/dna.svg';
 import { Tooltip , Box } from '@material-ui/core';
 import CommonScore from '../CommonScoreSchema/ScoreSchema';
+import GameInstruction from './GameInstruction';
 
 
 export default function GameAlign(props) {
@@ -83,7 +84,9 @@ export default function GameAlign(props) {
             <div style={{marginLeft:55}}>
             <CommonScore/>
             </div>
-            <br/><br/><br/>
+            <br/>
+            <GameInstruction/>
+            <br/>
             <table>
                 <tbody>
                     <tr>
