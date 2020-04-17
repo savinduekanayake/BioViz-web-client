@@ -5,16 +5,13 @@ import GameResult from './GameResult';
 import { Button } from '@material-ui/core';
 import {useSelector} from 'react-redux';
 import {useDispatch} from 'react-redux';
-import { setGameInputA, setGameInputB } from '../../Redux/Actions/Game';
 
 export default function GameSection() {
     const dispatch = useDispatch();
     const [input, setInput] = React.useState(undefined);
+    const [alignment, setAlignment] = React.useState(undefined);
     const seqA = useSelector((state) => state.GameSeqA);
     const seqB = useSelector((state) => state.GameSeqB);
-
-    const [alignment, setAlignment] = React.useState(undefined);
-    
 
     function callbackAlign(data){
         setAlignment({
@@ -26,20 +23,12 @@ export default function GameSection() {
 
     function onSubmit(){
         setInput({
-            inputSeqA : seqA,
-            inputSeqB : seqB,
+            algnA : seqA,
+            algnB : seqB,
 
         })
         console.log(input);
     }
-
-    // function changeInput(){
-    //     setInput({
-    //         undefined
-    //     })
-    //     dispatch(setGameInputA(''));
-    //     dispatch(setGameInputB(''));
-    // }
 
     return (
         <div>
@@ -48,9 +37,8 @@ export default function GameSection() {
             <br/>
             <Button variant="contained" color="secondary" onClick={onSubmit} >Submit</Button>
             <br/><br/>
-            {/* <Button variant="contained" color="secondary" onClick={changeInput} >Change Input</Button> */}
             {input?
-            input.inputSeqA.length>0 && input.inputSeqB.length>0 ? <GameAlign input={input} fetchAlign={callbackAlign}/> :'Input both sequences' :''}
+            input.algnA.length>0 && input.algnB.length>0 ? <GameAlign input={input} fetchAlign={callbackAlign}/> :'Input both sequences' :''}
             <br/><br/>
             {alignment? <GameResult aligns={alignment}/>:''}
             

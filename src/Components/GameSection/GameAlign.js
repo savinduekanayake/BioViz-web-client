@@ -1,4 +1,4 @@
-import React , {useState} from 'react';
+import React , {useState, useEffect} from 'react';
 import Base from './Base';
 import Button from '@material-ui/core/Button'
 import Icon from '@material-ui/core/Icon'
@@ -6,15 +6,20 @@ import DnaIcon from '../../assets/icons/dna.svg';
 import { Tooltip , Box } from '@material-ui/core';
 import CommonScore from '../CommonScoreSchema/ScoreSchema';
 import GameInstruction from './GameInstruction';
+import { resetWarningCache } from 'prop-types';
 
 
 export default function GameAlign(props) {
 
-    const inputSeq = {
-        algnA:props.input.inputSeqA,
-        algnB:props.input.inputSeqB    
-    }
-    const [algn , setAlgn ] = useState(inputSeq);
+    const initialInput = props.input;
+
+    const [algn , setAlgn ] = useState(props.input);
+
+    useEffect(() => {
+        if(props.input !== algn){
+            setAlgn(props.input);
+        }
+    },[props.input]);
 
     function sendAlign(){
         props.fetchAlign({alignA:algn.algnA,alignB:algn.algnB});
@@ -76,6 +81,10 @@ export default function GameAlign(props) {
         }        
     }
 
+    function reset(){
+        setAlgn(initialInput);
+    }
+
     const align1 = row1.map(ele => <td key={ele.id}><Tooltip title={ele.title} placement="top" arrow><Button variant="contained" size="small" style={{minWidth:25, minHeight:25, padding:4, borderRadius:2, backgroundColor:"#0a22536e"}} onClick={() => addGapA(ele.id)} >{ele.base}</Button></Tooltip></td>)
     const align2 = row2.map(ele => <td key={ele.id}><Tooltip title={ele.title} placement="bottom" arrow><Button variant="contained" size="small" style={{minWidth:25, minHeight:25, padding:4, borderRadius:2, backgroundColor:"#0a22536e"}} onClick={() => addGapB(ele.id)} >{ele.base}</Button></Tooltip></td>)
 
@@ -84,11 +93,6 @@ export default function GameAlign(props) {
             {/* "#171b32" #3a3f57 #171b32 */}
             <br/>
             <h1 style={{color:"#1e2e51", border:5}}>GamePlay</h1>
-            {props.input.inputSeqA}
-            <br/>
-            {algn.algnA}
-            <br/>
-            {inputSeq.algnA}
             <br/><br/>
             <div style={{marginLeft:55}}>
             <CommonScore/>
@@ -118,6 +122,7 @@ export default function GameAlign(props) {
             </table>
             <br/>
             <br/>
+            <Button variant="contained" color="secondary" onClick={reset}>Reset</Button>
             <Button variant="contained" color="secondary" onClick={sendAlign} endIcon={<Icon>send</Icon>}
                 >
                 Submit
