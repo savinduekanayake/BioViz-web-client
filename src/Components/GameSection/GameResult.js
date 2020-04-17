@@ -1,35 +1,58 @@
 import React from 'react'
 import { Typography, CardContent, Box } from '@material-ui/core'
 import Card from '@material-ui/core/Card'
-import Base from './Base';
 
 export default function GameResult(props) {
-    const input = props.aligns;
-    const alignment = 'GACATCTA-T-AG-A--ATACGAATATACGATACC';
-    const score = 150;
+    const alignA = props.aligns.alignA;
+    const alignB = props.aligns.alignB;
+    const matchScore = props.aligns.match;
+    const mismatchPenanlty = props.aligns.mismatch;
+    const gapPenalty = props.aligns.gap;
+    const minLength = Math.min(alignA.length,alignB.length);
+    const maxLength = Math.max(alignA.length,alignB.length);
     const row = [];
+    let score = 0;
 
-    for (let i = 0; i < alignment.length; i++) {
-        const index = i;
-        const base = alignment.charAt(i) === '-' || alignment.charAt(i) === 'g' ? 'ga' : alignment.charAt(i);
-        row.push({base:<Base index={index} base={base}/>, id:index});
+    for(let i = 0; i<minLength; i++){
+        if(alignA.charAt(i) === alignB.charAt(i)){
+            if(alignA.charAt(i)==='-' || alignA.charAt(i)==='g'){
+                continue;
+            }
+            score += matchScore;
+            row.push({type:"match", value:matchScore});
+        }
+        else if ((alignA.charAt(i)==='-' || alignA.charAt(i)==='g')||(alignB.charAt(i)==='-' || alignB.charAt(i)==='g')) {
+            score += gapPenalty;
+            row.push({type:"gap", value:gapPenalty});
+        } 
+        else {
+            score += mismatchPenanlty;
+            row.push({type:"mismatch", value:mismatchPenanlty});
+        }
     }
 
-    const align = row.map(ele => <td key={ele.id}>{ele.base}</td>);
+    if(row.length<maxLength){
+        let remain = (maxLength - row.length)-1;
+        score+=(gapPenalty*remain);
+        while (remain>0) {
+            row.push({type:"gap", value:gapPenalty});
+            remain-=1;
+        }
+    }
+
+    const result = row.map(ele => <td>{ele.type}<br/>{ele.value}</td>);
 
     return (
         <Box style={{backgroundColor:"#d9dee1" , height:"300px" , borderRadius:"10px", padding:10}}>
             <br/>
             <h3>Result</h3>
-            {input.alignA}
-            <br/>
-            {input.alignB}
             <br/>
             <h3>Alignment</h3>
             <table style={{marginLeft:"auto", marginRight:"auto"}}>
                 <tbody>
                     <tr>
-                        {align}
+                        RESULT
+                        {result}
                     </tr>
                 </tbody>
             </table>
@@ -39,7 +62,7 @@ export default function GameResult(props) {
             <Card variant="outlined" style={{width:60 , height:100 , display:"inline", marginLeft:10 , backgroundColor:"#e5e6e7"}}>
                 <CardContent style={{display:"inline"}}>
                     <Typography style={{display:"inline"}}>
-                        {score}
+                        SCORE{score}
                     </Typography>
                 </CardContent>
             </Card>

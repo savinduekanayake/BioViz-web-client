@@ -12,22 +12,25 @@ export default function GameSection() {
     const [alignment, setAlignment] = React.useState(undefined);
     const seqA = useSelector((state) => state.GameSeqA);
     const seqB = useSelector((state) => state.GameSeqB);
+    const matchScore = useSelector((state) => state.matchScore);
+    const mismatchPenanlty = useSelector((state) => state.mismatchPenalty);
+    const gapPenalty = useSelector((state) => state.gapPenalty);
 
     function callbackAlign(data){
         setAlignment({
             alignA : data.alignA,
-            alignB : data.alignB
+            alignB : data.alignB,
+            match : matchScore,
+            mismatch : mismatchPenanlty,
+            gap : gapPenalty
         })
-        console.log(alignment);
     }
 
     function onSubmit(){
         setInput({
             algnA : seqA,
             algnB : seqB,
-
         })
-        console.log(input);
     }
 
     return (

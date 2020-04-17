@@ -6,7 +6,6 @@ import DnaIcon from '../../assets/icons/dna.svg';
 import { Tooltip , Box } from '@material-ui/core';
 import CommonScore from '../CommonScoreSchema/ScoreSchema';
 import GameInstruction from './GameInstruction';
-import { resetWarningCache } from 'prop-types';
 
 
 export default function GameAlign(props) {
@@ -85,8 +84,8 @@ export default function GameAlign(props) {
         setAlgn(initialInput);
     }
 
-    const align1 = row1.map(ele => <td key={ele.id}><Tooltip title={ele.title} placement="top" arrow><Button variant="contained" size="small" style={{minWidth:25, minHeight:25, padding:4, borderRadius:2, backgroundColor:"#0a22536e"}} onClick={() => addGapA(ele.id)} >{ele.base}</Button></Tooltip></td>)
-    const align2 = row2.map(ele => <td key={ele.id}><Tooltip title={ele.title} placement="bottom" arrow><Button variant="contained" size="small" style={{minWidth:25, minHeight:25, padding:4, borderRadius:2, backgroundColor:"#0a22536e"}} onClick={() => addGapB(ele.id)} >{ele.base}</Button></Tooltip></td>)
+    const align1 = row1.map(ele => <td key={ele.id}><Tooltip title={ele.title} placement="top" arrow><Button id={"A"+ele.id} variant="contained" size="small" style={{minWidth:25, minHeight:25, padding:4, borderRadius:2, backgroundColor:"#0a22536e"}} onClick={() => addGapA(ele.id)} >{ele.base}</Button></Tooltip></td>)
+    const align2 = row2.map(ele => <td key={ele.id}><Tooltip title={ele.title} placement="bottom" arrow><Button id={"B"+ele.id} variant="contained" size="small" style={{minWidth:25, minHeight:25, padding:4, borderRadius:2, backgroundColor:"#0a22536e"}} onClick={() => addGapB(ele.id)} >{ele.base}</Button></Tooltip></td>)
 
     return (
         <Box boxShadow={3} style={{backgroundColor:"#0a22536e" , height:"470px" , borderRadius:"10px" , padding:10}}>
