@@ -1,19 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {Button} from '@material-ui/core';
+import {useDispatch} from 'react-redux';
 
-export default function GameFileUpload() {
+export default function GameFileUpload(props) {
     let fileReader;
+    const dispatch = useDispatch();
 
-
-    const handleFileRead = (e) => {
+    const handleFileRead = () => {
         const content = fileReader.result;
+        dispatch(props.inputAction(content.trim()));
         console.log(content.trim());
-        // if (props.type === 'MSA') {
-        //     dispatch(props.inputHandler(content.trim(), props.MSAkey));
-        // } else {
-        //     dispatch(props.inputHandler(content.trim()));
-        // }
     };
 
     const handleError = (error) => {
@@ -47,9 +43,3 @@ export default function GameFileUpload() {
         </Button>
     </div>;
 };
-
-// FileUpload.propTypes = {
-//     type: PropTypes.string,
-//     inputHandler: PropTypes.func,
-//     MSAkey: PropTypes.string,
-// };

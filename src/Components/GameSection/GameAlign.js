@@ -7,13 +7,13 @@ import { Tooltip , Box } from '@material-ui/core';
 import CommonScore from '../CommonScoreSchema/ScoreSchema';
 
 
-export default function GameAlign() {
+export default function GameAlign(props) {
 
-    const inputAlign = {
-        algnA:"AAGTC-GCCCTTTA-AAAAAA",
-        algnB:"AA-AAGTTTT-TTCCCGTTTT",    
+    const inputSeq = {
+        algnA:props.inputA,
+        algnB:props.inputB,    
     }
-    const [algn , setAlgn ] = useState(inputAlign);
+    const [algn , setAlgn ] = useState(inputSeq);
 
     const row1 = [];
     for (let i = 0; i < algn.algnA.length; i++) {
@@ -71,14 +71,14 @@ export default function GameAlign() {
         }        
     }
 
-    const align1 = row1.map(ele => <td key={ele.id}><Tooltip title={ele.title} placement="top" arrow><Button variant="contained" size="small" style={{minWidth:25 ,paddingLeft:0 , paddingRight:0 , borderRadius:0}} onClick={() => addGapA(ele.id)} >{ele.base}</Button></Tooltip></td>)
-    const align2 = row2.map(ele => <td key={ele.id}><Tooltip title={ele.title} placement="bottom" arrow><Button variant="contained" size="small" style={{minWidth:25 ,paddingLeft:0 , paddingRight:0, borderRadius:0}} onClick={() => addGapB(ele.id)} >{ele.base}</Button></Tooltip></td>)
+    const align1 = row1.map(ele => <td key={ele.id}><Tooltip title={ele.title} placement="top" arrow><Button variant="contained" size="small" style={{minWidth:25, minHeight:25, padding:4, borderRadius:2, backgroundColor:"#0a22536e"}} onClick={() => addGapA(ele.id)} >{ele.base}</Button></Tooltip></td>)
+    const align2 = row2.map(ele => <td key={ele.id}><Tooltip title={ele.title} placement="bottom" arrow><Button variant="contained" size="small" style={{minWidth:25, minHeight:25, padding:4, borderRadius:2, backgroundColor:"#0a22536e"}} onClick={() => addGapB(ele.id)} >{ele.base}</Button></Tooltip></td>)
 
     return (
-        <Box boxShadow={3} style={{backgroundColor:"#3a3f57" , height:"470px" , borderRadius:"10px" , padding:10}}>
+        <Box boxShadow={3} style={{backgroundColor:"#0a22536e" , height:"470px" , borderRadius:"10px" , padding:10}}>
             {/* "#171b32" #3a3f57 #171b32 */}
             <br/>
-            <h2 style={{color:"#ffffff", textShadow: "1px 1px 2px black"}}>GamePlay</h2>
+            <h1 style={{color:"#1e2e51", border:5}}>GamePlay</h1>
             <br/><br/>
             <div style={{marginLeft:55}}>
             <CommonScore/>

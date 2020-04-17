@@ -6,6 +6,7 @@ import {
     GapPenaltyReducer,
 } from './Score';
 import {MSASeqReducer} from './MSA';
+import { SeqAReducer, SeqBReducer } from './Game';
 
 const allReducers = combineReducers({
     mode: modeReducer,
@@ -16,6 +17,8 @@ const allReducers = combineReducers({
     gapPenalty: GapPenaltyReducer,
     MSASeq: MSASeqReducer,
     pAlgo: PAlgoReducer,
+    GameSeqA: SeqAReducer,
+    GameSeqB: SeqBReducer,
 });
 
 export default allReducers;
