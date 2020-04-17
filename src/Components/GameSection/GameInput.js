@@ -5,6 +5,11 @@ import Button from '@material-ui/core/Button'
 import { colors } from '@material-ui/core'
 
 export default function GameInput() {
+
+    function submit(){
+    }
+
+
     return (
         <div>
             <GameTextInput/>
