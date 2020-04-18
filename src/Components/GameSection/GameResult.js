@@ -21,7 +21,7 @@ export default function GameResult(props) {
             score += matchScore;
             row.push({type:"match", value:matchScore});
         }
-        else if ((alignA.charAt(i)==='-' || alignA.charAt(i)==='g')||(alignB.charAt(i)==='-' || alignB.charAt(i)==='g')) {
+        else if ((alignA.charAt(i)==='-' || alignB.charAt(i)==='-')||(alignA.charAt(i)==='e' || alignB.charAt(i)==='e')) {
             score += gapPenalty;
             row.push({type:"gap", value:gapPenalty});
         } 
@@ -31,14 +31,14 @@ export default function GameResult(props) {
         }
     }
 
-    if(row.length<maxLength){
-        let remain = (maxLength - minLength);
-        score+=(gapPenalty*remain);
-        while (remain>0) {
-            row.push({type:"gap", value:gapPenalty});
-            remain-=1;
-        }
-    }
+    // if(row.length<maxLength){
+    //     let remain = (maxLength - minLength);
+    //     score+=(gapPenalty*remain);
+    //     while (remain>0) {
+    //         row.push({type:"gap", value:gapPenalty});
+    //         remain-=1;
+    //     }
+    // }
 
     const result = row.map(ele => <td>{ele.type}<br/>{ele.value}</td>);
 

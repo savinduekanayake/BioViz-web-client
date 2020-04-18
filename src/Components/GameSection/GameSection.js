@@ -55,13 +55,13 @@ export default function GameSection() {
         }
         // adjust input sequences for same length
         if(seqA.length>seqB.length){
-            const remain = 'r'.repeat(seqA.length-seqB.length)
+            const remain = 'e'.repeat(seqA.length-seqB.length)
             setInput({
                 algnA : seqA,
                 algnB : seqB + remain,
             })
         }else if(seqB.length>seqA.length){
-            const remain = 'r'.repeat(seqB.length-seqA.length)
+            const remain = 'e'.repeat(seqB.length-seqA.length)
             setInput({
                 algnA : seqA + remain,
                 algnB : seqB,

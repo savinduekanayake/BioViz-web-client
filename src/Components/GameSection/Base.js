@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
         color: 'black',
         backgroundColor: 'black',
     },
-    r: {
+    e: {
         color: 'black',
         backgroundColor: 'black',
     }
