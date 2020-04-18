@@ -32,7 +32,7 @@ export default function GameResult(props) {
     }
 
     if(row.length<maxLength){
-        let remain = (maxLength - row.length)-1;
+        let remain = (maxLength - minLength);
         score+=(gapPenalty*remain);
         while (remain>0) {
             row.push({type:"gap", value:gapPenalty});

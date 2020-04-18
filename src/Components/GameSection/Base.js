@@ -29,6 +29,10 @@ const useStyles = makeStyles((theme) => ({
         color: 'black',
         backgroundColor: 'black',
     },
+    r: {
+        color: 'black',
+        backgroundColor: 'black',
+    }
 
 }));
 

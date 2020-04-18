@@ -11,7 +11,6 @@ import GameInstruction from './GameInstruction';
 export default function GameAlign(props) {
 
     const initialInput = props.input;
-
     const [algn , setAlgn ] = useState(props.input);
 
     useEffect(() => {
@@ -20,15 +19,12 @@ export default function GameAlign(props) {
         }
     },[props.input]);
 
-    function sendAlign(){
-        props.fetchAlign({alignA:algn.algnA,alignB:algn.algnB});
-    }
 
     const row1 = [];
     for (let i = 0; i < algn.algnA.length; i++) {
         const index = i;
         const base = algn.algnA.charAt(i) === '-' || algn.algnA.charAt(i) === 'g' ? 'ga' : algn.algnA.charAt(i);
-        const title = base === "ga" ? "Remove Gap" : "Add Gap";
+        const title = base === "ga" ? "Remove Gap" : base==='r'? "end" :"Add Gap";
         row1.push({base:<Base index={index} base={base}/>, id:index, title:title});
     }
    
@@ -40,41 +36,81 @@ export default function GameAlign(props) {
         row2.push({base:<Base index={index} base={base}/>, id:index, title:title});
     }
         
-    function addGapA(index){
-
+    function changeSeqA(index){
+        const lastIndex = algn.algnA.length-1;
+        // REMOVE A GAP
         if(algn.algnA.charAt(index)==='g' || algn.algnA.charAt(index) === '-'){
-            setAlgn({
-                algnA : algn.algnA.substring(0,index) + algn.algnA.substring(index+1),
-                algnB : algn.algnB
-            })
+            if(initialInput.algnA.charAt(lastIndex)==='r'){
+                setAlgn({
+                    algnA : algn.algnA.substring(0,index) + algn.algnA.substring(index+1) + 'r',
+                    algnB : algn.algnB
+                })
+            }else{
+                setAlgn({
+                    algnA : algn.algnA.substring(0,index) + algn.algnA.substring(index+1),
+                    algnB : algn.algnB
+                })
+            }
+            // setAlgn({
+            //     algnA : algn.algnA.substring(0,index) + algn.algnA.substring(index+1),
+            //     algnB : algn.algnB
+            // })
             // remove gap at the given index
             // update this change in alignA in state object
         }
-        else{
-            setAlgn({
-                algnA : algn.algnA.substring(0,index) + 'g' + algn.algnA.substring(index),
-                algnB : algn.algnB
-            })
+        // ADD A GAP
+        else if(algn.algnA.charAt(index)!=='r'){
+            if(algn.algnA.charAt(lastIndex)==='r'){
+                setAlgn({
+                    algnA : algn.algnA.substring(0,index) + 'g' + algn.algnA.substring(index,lastIndex),
+                    algnB : algn.algnB
+                })
+            }else{
+                setAlgn({
+                    algnA : algn.algnA.substring(0,index) + 'g' + algn.algnA.substring(index),
+                    algnB : algn.algnB
+                })
+            }
             // add a gap next to the base element at the given index
             // update this change in alignA in state object
         }        
     }
 
-    function addGapB(index){
-
+    function changeSeqB(index){
+        const lastIndex = algn.algnA.length-1;
+        // REMOVE A GAP
         if(algn.algnB.charAt(index)==='g' || algn.algnB.charAt(index) === '-'){
-            setAlgn({
-                algnA : algn.algnA,
-                algnB : algn.algnB.substring(0,index) + algn.algnB.substring(index+1)
-            })
+            if(initialInput.algnB.charAt(lastIndex)==='r'){
+                setAlgn({
+                    algnA : algn.algnA,
+                    algnB : algn.algnB.substring(0,index) + algn.algnB.substring(index+1) + 'r'
+                })
+            }else{
+                setAlgn({
+                    algnA : algn.algnA,
+                    algnB : algn.algnB.substring(0,index) + algn.algnB.substring(index+1)
+                })
+            }
+            // setAlgn({
+            //     algnA : algn.algnA,
+            //     algnB : algn.algnB.substring(0,index) + algn.algnB.substring(index+1)
+            // })
             // remove gap at the given index
             // update this change in alignB in state object
         }
-        else{
-            setAlgn({
-                algnA : algn.algnA,
-                algnB : algn.algnB.substring(0,index) + 'g' + algn.algnB.substring(index)
-            })
+        // ADD A GAP
+        else if(algn.algnB.charAt(index)!=='r'){
+            if(algn.algnB.charAt(lastIndex)==='r'){
+                setAlgn({
+                    algnA : algn.algnA,
+                    algnB : algn.algnB.substring(0,index) + 'g' + algn.algnB.substring(index,lastIndex)
+                })
+            }else{
+                setAlgn({
+                    algnA : algn.algnA,
+                    algnB : algn.algnB.substring(0,index) + 'g' + algn.algnB.substring(index)
+                })
+            }
             // add a gap next to the base element at the given index
             // update this change in alignB in state object
         }        
@@ -84,9 +120,13 @@ export default function GameAlign(props) {
         setAlgn(initialInput);
     }
 
-    const align1 = row1.map(ele => <td key={ele.id}><Tooltip title={ele.title} placement="top" arrow><Button id={"A"+ele.id} variant="contained" size="small" style={{minWidth:25, minHeight:25, padding:4, borderRadius:2, backgroundColor:"#0a22536e"}} onClick={() => addGapA(ele.id)} >{ele.base}</Button></Tooltip></td>)
-    const align2 = row2.map(ele => <td key={ele.id}><Tooltip title={ele.title} placement="bottom" arrow><Button id={"B"+ele.id} variant="contained" size="small" style={{minWidth:25, minHeight:25, padding:4, borderRadius:2, backgroundColor:"#0a22536e"}} onClick={() => addGapB(ele.id)} >{ele.base}</Button></Tooltip></td>)
+    function sendAlign(){
+        props.fetchAlign({alignA:algn.algnA,alignB:algn.algnB});
+    }
 
+    const align1 = row1.map(ele => <td key={ele.id}><Tooltip title={ele.title} placement="top" arrow><Button id={"A"+ele.id} variant="contained" size="small" style={{minWidth:25, minHeight:25, padding:4, borderRadius:2, backgroundColor:"#0a22536e"}} onClick={() => changeSeqA(ele.id)} >{ele.base}</Button></Tooltip></td>)
+    const align2 = row2.map(ele => <td key={ele.id}><Tooltip title={ele.title} placement="bottom" arrow><Button id={"B"+ele.id} variant="contained" size="small" style={{minWidth:25, minHeight:25, padding:4, borderRadius:2, backgroundColor:"#0a22536e"}} onClick={() => changeSeqB(ele.id)} >{ele.base}</Button></Tooltip></td>)
+   
     return (
         <Box boxShadow={3} style={{backgroundColor:"#0a22536e" , height:"470px" , borderRadius:"10px" , padding:10}}>
             {/* "#171b32" #3a3f57 #171b32 */}

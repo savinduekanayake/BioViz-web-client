@@ -10,6 +10,8 @@ export default function GameSection() {
     const dispatch = useDispatch();
     const [input, setInput] = React.useState(undefined);
     const [alignment, setAlignment] = React.useState(undefined);
+    const [inputErrorA , setMsgA] = React.useState(false);
+    const [inputErrorB , setMsgB] = React.useState(false);
     const seqA = useSelector((state) => state.GameSeqA);
     const seqB = useSelector((state) => state.GameSeqB);
     const matchScore = useSelector((state) => state.matchScore);
@@ -27,21 +29,62 @@ export default function GameSection() {
     }
 
     function onSubmit(){
-        setInput({
-            algnA : seqA,
-            algnB : seqB,
-        })
+        // input validation
+        const array = ['A','C','G','T','-'];
+        let A = 0;
+        let B = 0;
+        for (let i = 0; i < seqA.length; i++) {
+            if(!array.includes(seqA.charAt(i))){
+                setMsgA(true);
+                A = 1;
+                break
+            }
+        }
+        if(A===0 && inputErrorA){
+            setMsgA(false)
+        }
+        for (let j = 0; j < seqB.length; j++) {
+            if(!array.includes(seqB.charAt(j))){
+                setMsgB(true);
+                B = 1;
+                break
+            }   
+        }
+        if(B===0 && inputErrorB){
+            setMsgB(false)
+        }
+        // adjust input sequences for same length
+        if(seqA.length>seqB.length){
+            const remain = 'r'.repeat(seqA.length-seqB.length)
+            setInput({
+                algnA : seqA,
+                algnB : seqB + remain,
+            })
+        }else if(seqB.length>seqA.length){
+            const remain = 'r'.repeat(seqB.length-seqA.length)
+            setInput({
+                algnA : seqA + remain,
+                algnB : seqB,
+            })
+        }else{
+            setInput({
+                algnA : seqA,
+                algnB : seqB,
+            })
+        }    
     }
+       
 
     return (
         <div>
             <h2>Alignment Game</h2>
-            <GameInput/>
+            <GameInput errMsgA={inputErrorA} errMsgB={inputErrorB}/>
             <br/>
             <Button variant="contained" color="secondary" onClick={onSubmit} >Submit</Button>
             <br/><br/>
             {input?
-            input.algnA.length>0 && input.algnB.length>0 ? <GameAlign input={input} fetchAlign={callbackAlign}/> :'Input both sequences' :''}
+            input.algnA.length>0 && input.algnB.length>0 ?
+            (inputErrorA||inputErrorB)?'INVALID INPUT.READ INSTRUCTIONS CAREFULLY TO INPUT THE SEQUENCES':<GameAlign input={input} fetchAlign={callbackAlign}/> :'Input both sequences' :''}
             <br/><br/>
             {alignment? <GameResult aligns={alignment}/>:''}
             

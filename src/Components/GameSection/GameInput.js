@@ -6,18 +6,23 @@ import GameFileUpload from './GameFileUpload'
 import {useSelector} from 'react-redux';
 
 
-export default function GameInput() {
+export default function GameInput(props) {
+
+    const errMsgA = props.errMsgA;
+    const errMsgB = props.errMsgB;
 
     return (
         <div>
             <Grid container direction="column" spacing={3}>
                 <Grid item>
+                <span>Input sequence should contain only 'A' 'C' 'G' 'T' '-' characters</span>
                     <h3>Input Sequence 1</h3>
                     <GameFileUpload inputAction={setGameInputA}
                         value={useSelector((state) => state.GameSeqA)}/>
                     <GameTextInput inputAction={setGameInputA}
                         value={useSelector((state) => state.GameSeqA)}/>
                 </Grid>
+                {errMsgA? <span>Invalid input A</span>:''}
 
                 <Grid item>
                     <h3>Input Sequence 2</h3>
@@ -26,6 +31,7 @@ export default function GameInput() {
                     <GameTextInput inputAction={setGameInputB}
                         value={useSelector((state) => state.GameSeqB)}/>
                 </Grid>
+                {errMsgB? <span>Invalid input B</span>:''}
             </Grid>
         </div>
     )
