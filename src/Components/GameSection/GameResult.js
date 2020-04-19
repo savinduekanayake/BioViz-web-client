@@ -9,7 +9,6 @@ export default function GameResult(props) {
     const mismatchPenanlty = props.aligns.mismatch;
     const gapPenalty = props.aligns.gap;
     const minLength = Math.min(alignA.length,alignB.length);
-    const maxLength = Math.max(alignA.length,alignB.length);
     const row = [];
     let score = 0;
 

@@ -4,10 +4,8 @@ import GameInput from './GameInput';
 import GameResult from './GameResult';
 import { Button } from '@material-ui/core';
 import {useSelector} from 'react-redux';
-import {useDispatch} from 'react-redux';
 
 export default function GameSection() {
-    const dispatch = useDispatch();
     const [input, setInput] = React.useState(undefined);
     const [alignment, setAlignment] = React.useState(undefined);
     const [inputErrorA , setMsgA] = React.useState(false);
@@ -54,13 +52,13 @@ export default function GameSection() {
             setMsgB(false)
         }
         // adjust input sequences for same length
-        if(seqA.length>seqB.length){
+        if(seqB.length>0 && seqA.length>seqB.length){
             const remain = 'e'.repeat(seqA.length-seqB.length)
             setInput({
                 algnA : seqA,
                 algnB : seqB + remain,
             })
-        }else if(seqB.length>seqA.length){
+        }else if(seqA.length>0 && seqB.length>seqA.length){
             const remain = 'e'.repeat(seqB.length-seqA.length)
             setInput({
                 algnA : seqA + remain,
@@ -82,9 +80,14 @@ export default function GameSection() {
             <br/>
             <Button variant="contained" color="secondary" onClick={onSubmit} >Submit</Button>
             <br/><br/>
-            {input?
+            
+            {input? 
+            (inputErrorA||inputErrorB)?'INVALID INPUT.READ INSTRUCTIONS CAREFULLY TO INPUT THE SEQUENCES':
+            (input.algnA==='' || input.algnB==='') ?'Input both sequences':<GameAlign input={input} fetchAlign={callbackAlign}/>:''}
+
+            {/* {input?
             input.algnA.length>0 && input.algnB.length>0 ?
-            (inputErrorA||inputErrorB)?'INVALID INPUT.READ INSTRUCTIONS CAREFULLY TO INPUT THE SEQUENCES':<GameAlign input={input} fetchAlign={callbackAlign}/> :'Input both sequences' :''}
+            (inputErrorA||inputErrorB)?'INVALID INPUT.READ INSTRUCTIONS CAREFULLY TO INPUT THE SEQUENCES':<GameAlign input={input} fetchAlign={callbackAlign}/> :'Input both sequences' :''} */}
             <br/><br/>
             {alignment? <GameResult aligns={alignment}/>:''}
             
