@@ -1,4 +1,6 @@
-export const P1Reducer = (state = '', action)=>{
+import {paInput} from '../../Components/PairAlign/DummyData';
+
+export const P1Reducer = (state = paInput.seqA, action)=>{
     switch (action.type) {
         case 'SET_P1':
             return action.payload;
@@ -8,7 +10,7 @@ export const P1Reducer = (state = '', action)=>{
     }
 };
 
-export const P2Reducer = (state = '', action)=>{
+export const P2Reducer = (state = paInput.seqB, action)=>{
     switch (action.type) {
         case 'SET_P2':
             return action.payload;
