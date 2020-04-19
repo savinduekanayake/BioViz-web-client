@@ -1,6 +1,7 @@
 {
   "name": "bioviz-web-client",
   "version": "0.1.0",
+  "homepage": "https://budvinchathura.github.io/BioViz-web-client/",
   "private": true,
   "dependencies": {
     "@antv/g6": "^3.4.5",
