@@ -1,10 +1,10 @@
-const initialState = [{key: 0, seq: ''}, {key: 1, seq: ''}];
+import {initialData} from '../../Components/MSA/DummyData';
 
-export const MSASeqReducer = (state = initialState, action)=>{
+export const MSASeqReducer = (state = initialData, action) => {
     switch (action.type) {
         case 'ADD_NEW_MSA':
             const prev = [...state];
-            const newKey = prev[prev.length-1].key + 1;
+            const newKey = prev[prev.length - 1].key + 1;
             return [...prev, {key: newKey, seq: ''}];
 
         case 'SET_MSA':
@@ -15,6 +15,16 @@ export const MSASeqReducer = (state = initialState, action)=>{
                 }
             }
             return prev_;
+        case 'REMOVE_MSA':
+            if (state.length === 1) {
+                return state;
+            } else {
+                const new_ = state.filter((element) => {
+                    return element.key !== action.payload.key;
+                });
+                return new_;
+            }
+
 
         default:
             return state;
