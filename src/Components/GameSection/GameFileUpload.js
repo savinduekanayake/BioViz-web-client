@@ -1,6 +1,7 @@
 import React from 'react';
 import {Button} from '@material-ui/core';
 import {useDispatch} from 'react-redux';
+import PropTypes from 'prop-types';
 
 export default function GameFileUpload(props) {
     let fileReader;
@@ -31,7 +32,7 @@ export default function GameFileUpload(props) {
 
     return <div className='upload-expense'>
         <Button variant="contained" color="primary"
-        component="label" size="small">
+            component="label" size="small">
             Upload Text File
         <input type='file'
                 id='file'
@@ -42,4 +43,8 @@ export default function GameFileUpload(props) {
             />
         </Button>
     </div>;
+};
+
+GameFileUpload.propTypes = {
+    inputAction: PropTypes.func,
 };
