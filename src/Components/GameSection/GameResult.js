@@ -15,8 +15,9 @@ export default function GameResult(props) {
 
     for(let i = 0; i<minLength; i++){
         if(alignA.charAt(i) === alignB.charAt(i)){
-            if(alignA.charAt(i)==='-' || alignA.charAt(i)==='g'){
-                continue;
+            if(alignA.charAt(i)==='-' || alignA.charAt(i)==='e'){
+                score += gapPenalty;
+                row.push({type:"gap", value:gapPenalty});
             }
             score += matchScore;
             row.push({type:"match", value:matchScore});
