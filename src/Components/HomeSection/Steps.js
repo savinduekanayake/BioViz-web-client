@@ -75,7 +75,7 @@ export default function ScrollableTabsButtonAuto() {
   return (
     <div className={classes.root}>
 
-      <h2 className={style.heading}>Services</h2>
+      <h2 className={style.heading}>Steps</h2>
       <p className={style.subHeading}>
         Lorem ipsum dolor sit amet consectetur.
       </p>

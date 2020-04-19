@@ -1,6 +1,8 @@
 import React from 'react';
 import {Avatar} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
+
 
 const useStyles = makeStyles((theme) => ({
     avatar: {
@@ -32,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
     e: {
         color: 'black',
         backgroundColor: 'black',
-    }
+    },
 
 }));
 
@@ -40,10 +42,15 @@ export default function Base(props) {
     const classes = useStyles();
     const index = props.index;
     const base = props.base;
-        
-    return(
-            <Avatar variant='square' id={index}
+
+    return (
+        <Avatar variant='square' id={index}
             className={`${classes.avatar} ${classes[base]}`} >
-            {base}</Avatar>   
-        );
+            {base}</Avatar>
+    );
 }
+
+Base.propTypes = {
+    index: PropTypes.number,
+    base: PropTypes.string,
+};

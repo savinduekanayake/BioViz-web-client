@@ -1,8 +1,9 @@
 import {fetchResults} from '../util/fetch';
+import {apiHost} from '../config/config';
 
 
 function pairAign(algorithm = 1) {
-    const url = algorithm === 1 ? 'http://localhost:5000/pair/nw' : 'http://localhost:5000/pair/sw';
+    const url = algorithm === 1 ? apiHost + '/pair/nw' : apiHost + '/pair/sw';
     return (
         async (seqA, seqB, match, mismatch, gap, callback) => {
             const data = {match, mismatch, gap};

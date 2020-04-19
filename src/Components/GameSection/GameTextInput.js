@@ -1,19 +1,19 @@
-import React from 'react'
+import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import {useDispatch} from 'react-redux';
+import PropTypes from 'prop-types';
 
 
 export default function GameTextInput(props) {
+    const dispatch = useDispatch();
 
-    const dispatch = useDispatch();    
-
-    function inputSeq(event){
+    function inputSeq(event) {
         dispatch(props.inputAction(event.target.value.trim()));
     }
 
     return (
         <div>
-             <TextField
+            <TextField
                 multiline
                 rowsMax={4}
                 placeholder='DNA Sequence'
@@ -22,5 +22,10 @@ export default function GameTextInput(props) {
                 onChange={inputSeq} >
             </TextField>
         </div>
-    )
+    );
 }
+
+GameTextInput.propTypes = {
+    inputAction: PropTypes.func,
+    value: PropTypes.string,
+};

@@ -31,9 +31,8 @@ const useStyles = makeStyles((theme) => ({
         height: 255,
         maxWidth: 400,
         overflow: 'hidden',
-        display: 'block',
+        display: 'block center',
         width: '75%',
-        display: 'center',
         borderRadius: 20,
       },
 
