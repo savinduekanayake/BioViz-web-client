@@ -6,6 +6,7 @@ cache:
     - node_modules
 
 before_deploy:
+  - echo "skipping tests"
   - "npm run build"
 
 deploy:
