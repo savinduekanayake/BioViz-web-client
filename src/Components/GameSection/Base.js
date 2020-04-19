@@ -29,6 +29,10 @@ const useStyles = makeStyles((theme) => ({
         color: 'black',
         backgroundColor: 'black',
     },
+    e: {
+        color: 'black',
+        backgroundColor: 'black',
+    }
 
 }));
 
@@ -36,10 +40,10 @@ export default function Base(props) {
     const classes = useStyles();
     const index = props.index;
     const base = props.base;
-    
+        
     return(
             <Avatar variant='square' id={index}
             className={`${classes.avatar} ${classes[base]}`} >
-            {base}</Avatar>    
+            {base}</Avatar>   
         );
 }
