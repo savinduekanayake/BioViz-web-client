@@ -14,9 +14,7 @@ export default function GameAlign(props) {
     const [algn, setAlgn] = useState(props.input);
 
     useEffect(() => {
-        if (props.input !== algn) {
-            setAlgn(props.input);
-        }
+        setAlgn(props.input);
     }, [props.input]);
 
 

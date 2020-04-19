@@ -115,7 +115,7 @@ export default function MSATree(props) {
         graph.data(treeData);
         graph.render();
         graph.fitView(0);
-    }, []);
+    }, [setSelected, treeData]);
 
     return (
         <div ref={ref} className={classes.tree}>
