@@ -156,18 +156,21 @@ export default function GameAlign(props) {
                     backgroundColor: '#0a22536e',
                 }}
                 onClick={() => changeSeqB(ele.id)} >{ele.base}
-            </Button></Tooltip><br/>{ele.id+1}</td>);
+            </Button></Tooltip></td>);
+
+    const indexLine = row1.map((ele) => <td key={ele.id}>
+        <h4 style={{color: '#40455e'}}>{ele.id+1}</h4></td>);
 
     return (
         <Box boxShadow={3}
             style={{
                 backgroundColor: '#0a22536e',
-                height: '470px',
+                // height: '470px',
                 borderRadius: '10px',
                 padding: 10,
+                paddingBottom: 40,
             }}>
             {/* "#171b32" #3a3f57 #171b32 */}
-            <br />
             <h1 style={{color: '#1e2e51', border: 5}}>GamePlay</h1>
             <br /><br />
             <div style={{marginLeft: 55}}>
@@ -175,7 +178,7 @@ export default function GameAlign(props) {
             </div>
             <br />
             <GameInstruction />
-            <br />
+            <br /><br />
             <table>
                 <tbody>
                     <tr>
@@ -193,6 +196,11 @@ export default function GameAlign(props) {
                             <Icon><img src={DnaIcon} alt="seq 2" /></Icon>
                         </td>
                         {align2}
+                    </tr>
+                    <tr>
+                        <td style={{minWidth: 50}}>
+                        </td>
+                        {indexLine}
                     </tr>
                 </tbody>
             </table>
