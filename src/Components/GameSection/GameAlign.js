@@ -6,6 +6,7 @@ import DnaIcon from '../../assets/icons/dna.svg';
 import {Tooltip, Box} from '@material-ui/core';
 import CommonScore from '../CommonScoreSchema/ScoreSchema';
 import GameInstruction from './GameInstruction';
+import PropTypes from 'prop-types';
 
 
 export default function GameAlign(props) {
@@ -13,9 +14,7 @@ export default function GameAlign(props) {
     const [algn, setAlgn] = useState(props.input);
 
     useEffect(() => {
-        if (props.input !== algn) {
-            setAlgn(props.input);
-        }
+        setAlgn(props.input);
     }, [props.input]);
 
 
@@ -23,46 +22,56 @@ export default function GameAlign(props) {
     for (let i = 0; i < algn.algnA.length; i++) {
         const index = i;
         const base = algn.algnA.charAt(i) === '-' ? 'ga' : algn.algnA.charAt(i);
-        const title = base === 'ga' ? 'Remove Gap' : base==='e'? 'end' :'move -->';
-        row1.push({base: <Base index={index} base={base}/>, id: index, title: title});
+        const title = base === 'ga' ? 'Remove Gap' :
+            base === 'e' ? 'end' : 'move -->';
+        row1.push({
+            base: <Base index={index} base={base} />,
+            id: index, title: title,
+        });
     }
 
     const row2 = [];
     for (let j = 0; j < algn.algnB.length; j++) {
         const index = j;
         const base = algn.algnB.charAt(j) === '-' ? 'ga' : algn.algnB.charAt(j);
-        const title = base === 'ga' ? 'Remove Gap' : base==='e'? 'end' :'move -->';
-        row2.push({base: <Base index={index} base={base}/>, id: index, title: title});
+        const title = base === 'ga' ? 'Remove Gap' :
+            base === 'e' ? 'end' : 'move -->';
+        row2.push({
+            base: <Base index={index} base={base} />,
+            id: index, title: title,
+        });
     }
 
     function changeSeqA(index) {
-        const lastIndex = algn.algnA.length-1;
+        const lastIndex = algn.algnA.length - 1;
         // REMOVE A GAP
         if (algn.algnA.charAt(index) === '-') {
-            if (algn.algnB.charAt(lastIndex)==='e') {
+            if (algn.algnB.charAt(lastIndex) === 'e') {
                 setAlgn({
-                    algnA: algn.algnA.substring(0, index) + algn.algnA.substring(index+1),
+                    algnA: algn.algnA.substring(0, index) +
+                        algn.algnA.substring(index + 1),
                     algnB: algn.algnB.substring(0, lastIndex),
                 });
             } else {
                 setAlgn({
-                    algnA: algn.algnA.substring(0, index) + algn.algnA.substring(index+1) + 'e',
+                    algnA: algn.algnA.substring(0, index) +
+                        algn.algnA.substring(index + 1) + 'e',
                     algnB: algn.algnB,
                 });
             }
             // remove gap at the given index
             // update this change in alignA in state object
-        }
-        // ADD A GAP
-        else if (algn.algnA.charAt(index)!=='e') {
-            if (algn.algnA.charAt(lastIndex)==='e') {
+        } else if (algn.algnA.charAt(index) !== 'e') { // ADD A GAP
+            if (algn.algnA.charAt(lastIndex) === 'e') {
                 setAlgn({
-                    algnA: algn.algnA.substring(0, index) + '-' + algn.algnA.substring(index, lastIndex),
+                    algnA: algn.algnA.substring(0, index) + '-' +
+                        algn.algnA.substring(index, lastIndex),
                     algnB: algn.algnB,
                 });
             } else {
                 setAlgn({
-                    algnA: algn.algnA.substring(0, index) + '-' + algn.algnA.substring(index),
+                    algnA: algn.algnA.substring(0, index) + '-' +
+                        algn.algnA.substring(index),
                     algnB: algn.algnB + 'e',
                 });
             }
@@ -72,34 +81,36 @@ export default function GameAlign(props) {
     }
 
     function changeSeqB(index) {
-        const lastIndex = algn.algnA.length-1;
+        const lastIndex = algn.algnA.length - 1;
         // REMOVE A GAP
         if (algn.algnB.charAt(index) === '-') {
-            if (algn.algnA.charAt(lastIndex)==='e') {
+            if (algn.algnA.charAt(lastIndex) === 'e') {
                 setAlgn({
                     algnA: algn.algnA.substring(0, lastIndex),
-                    algnB: algn.algnB.substring(0, index) + algn.algnB.substring(index+1),
+                    algnB: algn.algnB.substring(0, index) +
+                        algn.algnB.substring(index + 1),
                 });
             } else {
                 setAlgn({
                     algnA: algn.algnA,
-                    algnB: algn.algnB.substring(0, index) + algn.algnB.substring(index+1) + 'e',
+                    algnB: algn.algnB.substring(0, index) +
+                        algn.algnB.substring(index + 1) + 'e',
                 });
             }
             // remove gap at the given index
             // update this change in alignB in state object
-        }
-        // ADD A GAP
-        else if (algn.algnB.charAt(index)!=='e') {
-            if (algn.algnB.charAt(lastIndex)==='e') {
+        } else if (algn.algnB.charAt(index) !== 'e') { // ADD A GAP
+            if (algn.algnB.charAt(lastIndex) === 'e') {
                 setAlgn({
                     algnA: algn.algnA,
-                    algnB: algn.algnB.substring(0, index) + '-' + algn.algnB.substring(index, lastIndex),
+                    algnB: algn.algnB.substring(0, index) + '-' +
+                        algn.algnB.substring(index, lastIndex),
                 });
             } else {
                 setAlgn({
                     algnA: algn.algnA + 'e',
-                    algnB: algn.algnB.substring(0, index) + '-' + algn.algnB.substring(index),
+                    algnB: algn.algnB.substring(0, index) + '-' +
+                        algn.algnB.substring(index),
                 });
             }
             // add a gap next to the base element at the given index
@@ -115,21 +126,56 @@ export default function GameAlign(props) {
         props.fetchAlign({alignA: algn.algnA, alignB: algn.algnB});
     }
 
-    const align1 = row1.map((ele) => <td key={ele.id}><Tooltip title={ele.title} placement="top" arrow><Button id={'A'+ele.id} variant="contained" size="small" style={{minWidth: 25, minHeight: 25, padding: 4, borderRadius: 2, backgroundColor: '#0a22536e'}} onClick={() => changeSeqA(ele.id)} >{ele.base}</Button></Tooltip></td>);
-    const align2 = row2.map((ele) => <td key={ele.id}><Tooltip title={ele.title} placement="bottom" arrow><Button id={'B'+ele.id} variant="contained" size="small" style={{minWidth: 25, minHeight: 25, padding: 4, borderRadius: 2, backgroundColor: '#0a22536e'}} onClick={() => changeSeqB(ele.id)} >{ele.base}</Button></Tooltip></td>);
+    const align1 = row1.map(
+        (ele) => <td key={ele.id}>
+            <Tooltip title={ele.title} placement="top" arrow>
+                <Button
+                    id={'A' + ele.id}
+                    variant="contained"
+                    size="small"
+                    style={{
+                        minWidth: 25,
+                        minHeight: 25,
+                        padding: 4,
+                        borderRadius: 2,
+                        backgroundColor: '#0a22536e',
+                    }}
+                    onClick={() => changeSeqA(ele.id)} >{ele.base}
+                </Button>
+            </Tooltip></td>);
+    const align2 = row2.map((ele) => <td key={ele.id}>
+        <Tooltip title={ele.title} placement="bottom" arrow>
+            <Button id={'B' + ele.id}
+                variant="contained"
+                size="small"
+                style={{
+                    minWidth: 25,
+                    minHeight: 25,
+                    padding: 4,
+                    borderRadius: 2,
+                    backgroundColor: '#0a22536e',
+                }}
+                onClick={() => changeSeqB(ele.id)} >{ele.base}
+            </Button></Tooltip><br/>{ele.id+1}</td>);
 
     return (
-        <Box boxShadow={3} style={{backgroundColor: '#0a22536e', height: '470px', borderRadius: '10px', padding: 10}}>
+        <Box boxShadow={3}
+            style={{
+                backgroundColor: '#0a22536e',
+                height: '470px',
+                borderRadius: '10px',
+                padding: 10,
+            }}>
             {/* "#171b32" #3a3f57 #171b32 */}
-            <br/>
+            <br />
             <h1 style={{color: '#1e2e51', border: 5}}>GamePlay</h1>
-            <br/><br/>
+            <br /><br />
             <div style={{marginLeft: 55}}>
-            <CommonScore/>
+                <CommonScore />
             </div>
-            <br/>
-            <GameInstruction/>
-            <br/>
+            <br />
+            <GameInstruction />
+            <br />
             <table>
                 <tbody>
                     <tr>
@@ -150,15 +196,28 @@ export default function GameAlign(props) {
                     </tr>
                 </tbody>
             </table>
-            <br/>
-            <br/>
-            <Button variant="contained" color="secondary" onClick={reset}>Reset</Button>
-            <Button variant="contained" color="secondary" onClick={sendAlign} endIcon={<Icon>send</Icon>}
-                >
+            <br />
+            <br />
+            <Button
+                variant="contained"
+                color="secondary"
+                onClick={reset}>
+                Reset
+            </Button>
+            <Button
+                variant="contained"
+                color="secondary"
+                onClick={sendAlign} endIcon={<Icon>send</Icon>}
+            >
                 Submit
             </Button>
         </Box>
     );
 }
+
+GameAlign.propTypes = {
+    input: PropTypes.string,
+    fetchAlign: PropTypes.func,
+};
 
 

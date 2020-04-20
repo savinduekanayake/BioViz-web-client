@@ -27,6 +27,7 @@ export default function GameSection() {
     }
 
     function onSubmit() {
+        setAlignment(undefined);
         // input validation
         const array = ['A', 'C', 'G', 'T', '-'];
         let A = 0;
@@ -85,7 +86,6 @@ export default function GameSection() {
                 Submit
             </Button>
             <br /><br />
-
             {input ?
                 (inputErrorA || inputErrorB) ?
                     'INVALID INPUT.' +
@@ -95,13 +95,6 @@ export default function GameSection() {
                         <GameAlign
                         input={input}
                         fetchAlign={callbackAlign} /> : ''}
-
-            {/* {input?
-            input.algnA.length>0 && input.algnB.length>0 ?
-            (inputErrorA||inputErrorB)?
-            'INVALID INPUT.READ INSTRUCTIONS CAREFULLY TO INPUT THE SEQUENCES':
-            <GameAlign input={input} fetchAlign={callbackAlign}/> :
-            'Input both sequences' :''} */}
             <br /><br />
             {alignment ? <GameResult aligns={alignment} /> : ''}
 
