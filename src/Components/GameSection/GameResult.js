@@ -1,10 +1,7 @@
 import React from 'react';
 import {Box} from '@material-ui/core';
 import PropTypes from 'prop-types';
-// import CheckIcon from '@material-ui/icons/Check';
-// import ClearIcon from '@material-ui/icons/Clear';
 import MinimizeIcon from '@material-ui/icons/Minimize';
-// import DragHandleIcon from '@material-ui/icons/DragHandle';
 import DoneOutlineRoundedIcon from '@material-ui/icons/DoneOutlineRounded';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import {makeStyles} from '@material-ui/core/styles';
@@ -23,13 +20,31 @@ const useStyles = makeStyles((theme) => ({
         color: 'green',
     },
     label: {
-        color: '#1a2155de',
+        color: '#7984d3de',
     },
     score: {
-        color: '#153463de',
+        color: '#c7ba78de',
     },
     sc: {
-        color: '#484954',
+        color: '#d3d6f0',
+    },
+    box: {
+        backgroundColor: '#141938',
+        color: '#e9e3e3de',
+        borderRadius: '10px',
+        padding: 10,
+        paddingBottom: 40,
+    },
+    table: {
+        marginLeft: 'auto',
+        marginRight: 'auto',
+    },
+    tablerow: {
+        width: 1500,
+        overflowX: 'scroll',
+        display: 'block',
+        marginLeft: 'auto',
+        marginRight: 'auto',
     },
 }));
 
@@ -62,25 +77,28 @@ export default function GameResult(props) {
         } else {
             score += mismatchPenanlty;
             mismatchSc += mismatchPenanlty;
-            row.push({type: <CloseRoundedIcon style={{color: '#312f2f'}} />,
+            row.push({type: <CloseRoundedIcon style={{color: '#9b8989'}} />,
              index: i+1});
         }
     }
 
     const result = row.map(
         (ele) => <td key={ele.index}>{ele.type}
-            <h5 style={{color: '#40455e'}}>{ele.index}</h5></td>);
+            <h4 style={{color: '#868dac'}}>{ele.index}</h4></td>);
 
     return (
-        <Box style={{
-            backgroundColor: '#d9dee1',
-            borderRadius: '10px',
-            padding: 10,
-            paddingBottom: 40,
-        }}>
+        <Box className={classes.box}>
             <br />
             <h2>Result</h2>
-            <table style={{marginLeft: 'auto', marginRight: 'auto'}}>
+            <h3>Alignment Status</h3>
+            <table className={classes.tablerow}>
+                <tbody>
+                    <tr>
+                        {result}
+                    </tr>
+                </tbody>
+            </table>
+            <table className={classes.table}>
                 <tbody>
                     <tr className={classes.label}>
                         <td><h4>Match</h4></td>
@@ -88,28 +106,18 @@ export default function GameResult(props) {
                             style={{color: '#787d94'}} /></td>
                         <td style={{minWidth: 15}}></td>
                         <td><h4>Mismatch</h4></td>
-                        <td><CloseRoundedIcon style={{color: '#312f2f'}} /></td>
+                        <td><CloseRoundedIcon style={{color: '#9b8989'}} /></td>
                         <td style={{minWidth: 15}}></td>
                         <td><h4>Gap</h4></td>
-                        <td><MinimizeIcon style={{color: '#000000de'}} /></td>
+                        <td><MinimizeIcon style={{color: '#e9e3e3de'}} /></td>
                     </tr>
                 </tbody>
             </table>
-            <br />
-            <h3>Alignment Status</h3>
-            <table style={{marginLeft: 'auto', marginRight: 'auto'}}>
-                <tbody>
-                    <tr>
-                        {result}
-                    </tr>
-                </tbody>
-            </table>
-            <br />
-            <h3>Total Score</h3>
-            <table style={{marginLeft: 'auto', marginRight: 'auto'}}>
+            <h3>Alignment Score</h3>
+            <table className={classes.table}>
                 <tbody>
                     <tr className={classes.score}>
-                        <td><h3>Score</h3></td>
+                        <td><h3>Total Score</h3></td>
                             <td style={{minWidth: 5}}></td>
                         <td><h3 className={classes.sc}>{score}</h3></td>
                             <td style={{minWidth: 30}}></td>

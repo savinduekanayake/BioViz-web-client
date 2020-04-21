@@ -3,13 +3,11 @@ import {Avatar} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 
-
 const useStyles = makeStyles((theme) => ({
     avatar: {
         height: '20px',
         width: '20px',
         fontSize: '12px',
-
     },
     A: {
         color: 'white',

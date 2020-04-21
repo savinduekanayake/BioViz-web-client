@@ -88,10 +88,10 @@ export default function GameSection() {
             <br /><br />
             {input ?
                 (inputErrorA || inputErrorB) ?
-                    'INVALID INPUT.' +
-                    'READ INSTRUCTIONS CAREFULLY TO INPUT THE SEQUENCES' :
+                    <h3 style={{color: '#ea0909'}}>INVALID INPUT.
+                    READ INSTRUCTIONS CAREFULLY TO INPUT THE SEQUENCES</h3> :
                     (input.algnA === '' || input.algnB === '') ?
-                        'Input both sequences' :
+                    <h3 style={{color: '#ea0909'}}>INPUT BOTH SEQUENCES</h3> :
                         <GameAlign
                         input={input}
                         fetchAlign={callbackAlign} /> : ''}

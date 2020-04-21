@@ -10,7 +10,6 @@ export default function GameFileUpload(props) {
     const handleFileRead = () => {
         const content = fileReader.result;
         dispatch(props.inputAction(content.trim()));
-        console.log(content.trim());
     };
 
     const handleError = (error) => {
