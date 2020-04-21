@@ -17,3 +17,10 @@ export const removeMSA = (key)=>{
         payload: {key},
     };
 };
+
+export const setMSAAlgo = (algo)=>{
+    return {
+        type: 'SET_MSA_ALGO',
+        payload: algo,
+    };
+};
