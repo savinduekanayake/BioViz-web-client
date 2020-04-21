@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     box: {
         backgroundColor: '#00000020',
         borderRadius: '10px',
-        padding: 10,
+        padding: 30,
         paddingBottom: 40,
     },
 }));
@@ -178,7 +178,7 @@ export default function GameAlign(props) {
             <br />
             <GameInstruction />
             <br /><br />
-            <table style={{width: 1500, overflowX: 'auto', display: 'block'}}>
+            <table style={{width: 1400, overflowX: 'auto', display: 'block'}}>
                 <tbody>
                     <tr>
                         <td style={{minWidth: 50}}>

@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: '#141938',
         color: '#e9e3e3de',
         borderRadius: '10px',
-        padding: 10,
+        padding: 30,
         paddingBottom: 40,
     },
     table: {
@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
         marginRight: 'auto',
     },
     tablerow: {
-        width: 1500,
+        width: 1400,
         overflowX: 'scroll',
         display: 'block',
         marginLeft: 'auto',

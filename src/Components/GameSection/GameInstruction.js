@@ -80,12 +80,15 @@ export default function GameInstruction() {
                 <DialogContent dividers>
                     <Typography gutterBottom>
                         <ul>
-                            <li>Click on an item in the
-                                sequence to add a gap next to it.</li>
-                            <li>You can remove a gap
-                                by clicking on the relevent gap.</li>
-                            <li>Align two sequences
-                                by adding gaps at relevent positions</li>
+                            <li>Click on an element in the sequence
+                                 to move the whole sequence starting
+                                  from that point, to the right.</li>
+                            <li>Try to avoid unnecessary gaps
+                                 in the middle of the sequences.</li>
+                            <li>Trailing gaps cannot be removed.</li>
+                            <li>Make matches as much as possible.</li>
+                            <li>Change Match,Mismatch and Gap scores
+                                 to get higher score.</li>
                         </ul>
                     </Typography>
                 </DialogContent>
