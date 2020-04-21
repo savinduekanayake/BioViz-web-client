@@ -37,7 +37,7 @@ export default function PWCoreDetails() {
         1. Smith Waterman
       </Typography>
       <Typography variant="subtitle1" gutterBottom>
-        2. needleman wunsch
+        2. Needleman Wunsch
       </Typography>
 
         <br />
