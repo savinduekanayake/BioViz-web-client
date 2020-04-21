@@ -15,10 +15,10 @@ const useStyles = makeStyles((theme) => ({
         minHeight: 25,
         padding: 4,
         borderRadius: 2,
-        backgroundColor: '#0a22536e',
+        backgroundColor: '#00000020',
     },
     box: {
-        backgroundColor: '#0a22536e',
+        backgroundColor: '#00000020',
         borderRadius: '10px',
         padding: 10,
         paddingBottom: 40,
