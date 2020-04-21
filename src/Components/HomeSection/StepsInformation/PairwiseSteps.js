@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     root: {
         width: '80%',
         marginTop: 80,
-        marginLeft: 130,
+        marginLeft: '11%',
         marginBottom: 150,
     },
     button: {
