@@ -15,6 +15,9 @@ import style from '../assets/css/image.module.css';
 // should add images according to MSA steps
 import image1 from '../assets/img/Steps/MSA.png';
 
+// pages
+import MSADetails from '../Details/MSADetails';
+
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '80%',
@@ -40,6 +43,9 @@ const useStyles = makeStyles((theme) => ({
         width: '100%',
         borderRadius: 20,
       },
+    details: {
+        marginTop: 50,
+    },
 }),
 );
 
@@ -152,6 +158,9 @@ export default function VerticalLinearStepper() {
                 </Paper>
 
             )}
+            <div className={classes.details}>
+                <MSADetails />
+            </div>
         </div>
     );
 }

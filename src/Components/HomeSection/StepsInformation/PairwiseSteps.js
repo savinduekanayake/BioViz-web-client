@@ -15,13 +15,14 @@ import style from '../assets/css/image.module.css';
 // should add images according to Pairwise steps
 import image1 from '../assets/img/Steps/pw.png';
 
+import PairwaiseDetails from '../Details/PairwiseDetails';
 
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '80%',
         marginTop: 80,
         marginLeft: '11%',
-        marginBottom: 150,
+        marginBottom: 100,
     },
     button: {
         marginTop: theme.spacing(1),
@@ -40,6 +41,9 @@ const useStyles = makeStyles((theme) => ({
         display: 'block center',
         width: '100%',
         borderRadius: 20,
+      },
+      details: {
+          marginTop: 50,
       },
 }),
 );
@@ -155,6 +159,9 @@ export default function VerticalLinearStepper() {
                 </Paper>
 
             )}
+            <div className={classes.details}>
+                <PairwaiseDetails />
+            </div>
         </div>
     );
 }
