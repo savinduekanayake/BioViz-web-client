@@ -1,10 +1,55 @@
 import React from 'react';
-import {Typography, CardContent, Box} from '@material-ui/core';
-import Card from '@material-ui/core/Card';
+import {Box} from '@material-ui/core';
 import PropTypes from 'prop-types';
+import MinimizeIcon from '@material-ui/icons/Minimize';
+import DoneOutlineRoundedIcon from '@material-ui/icons/DoneOutlineRounded';
+import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
+import {makeStyles} from '@material-ui/core/styles';
 
+const useStyles = makeStyles((theme) => ({
+    A: {
+        color: 'red',
+    },
+    C: {
+        color: 'blue',
+    },
+    G: {
+        color: 'purple',
+    },
+    T: {
+        color: 'green',
+    },
+    label: {
+        color: '#7984d3de',
+    },
+    score: {
+        color: '#c7ba78de',
+    },
+    sc: {
+        color: '#d3d6f0',
+    },
+    box: {
+        backgroundColor: '#141938',
+        color: '#e9e3e3de',
+        borderRadius: '10px',
+        padding: 10,
+        paddingBottom: 40,
+    },
+    table: {
+        marginLeft: 'auto',
+        marginRight: 'auto',
+    },
+    tablerow: {
+        width: 1500,
+        overflowX: 'scroll',
+        display: 'block',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+    },
+}));
 
 export default function GameResult(props) {
+    const classes = useStyles();
     const alignA = props.aligns.alignA;
     const alignB = props.aligns.alignB;
     const matchScore = props.aligns.match;
@@ -13,62 +58,83 @@ export default function GameResult(props) {
     const minLength = Math.min(alignA.length, alignB.length);
     const row = [];
     let score = 0;
+    let matchSc = 0;
+    let mismatchSc = 0;
+    let gapSc = 0;
+
 
     for (let i = 0; i < minLength; i++) {
         if ((alignA.charAt(i) === '-' || alignB.charAt(i) === '-') ||
             (alignA.charAt(i) === 'e' || alignB.charAt(i) === 'e')) {
             score += gapPenalty;
-            row.push({type: 'gap', value: gapPenalty});
+            gapSc += gapPenalty;
+            row.push({type: <MinimizeIcon />, index: i+1});
         } else if (alignA.charAt(i) === alignB.charAt(i)) {
             score += matchScore;
-            row.push({type: 'match', value: matchScore});
+            matchSc += matchScore;
+            row.push({type: <DoneOutlineRoundedIcon
+                 className={classes[alignA.charAt(i)]} />, index: i+1});
         } else {
             score += mismatchPenanlty;
-            row.push({type: 'mismatch', value: mismatchPenanlty});
+            mismatchSc += mismatchPenanlty;
+            row.push({type: <CloseRoundedIcon style={{color: '#9b8989'}} />,
+             index: i+1});
         }
     }
 
     const result = row.map(
-        (ele, indx) => <td key={indx}>{ele.type}<br />{ele.value}</td>);
+        (ele) => <td key={ele.index}>{ele.type}
+            <h4 style={{color: '#868dac'}}>{ele.index}</h4></td>);
 
     return (
-        <Box style={{
-            backgroundColor: '#d9dee1',
-            height: '300px',
-            borderRadius: '10px',
-            padding: 10,
-        }}>
+        <Box className={classes.box}>
             <br />
-            <h3>Result</h3>
-            <br />
-            <h3>Alignment</h3>
-            <table style={{marginLeft: 'auto', marginRight: 'auto'}}>
+            <h2>Result</h2>
+            <h3>Alignment Status</h3>
+            <table className={classes.tablerow}>
                 <tbody>
                     <tr>
-                        RESULT
                         {result}
                     </tr>
                 </tbody>
             </table>
-            <div style={{height: 100}}>
-                <br /><br />
-                <h3 style={{display: 'inline'}}>Score</h3>
-                <Card
-                    variant="outlined"
-                    style={{
-                        width: 60,
-                        height: 100,
-                        display: 'inline',
-                        marginLeft: 10,
-                        backgroundColor: '#e5e6e7',
-                    }}>
-                    <CardContent style={{display: 'inline'}}>
-                        <Typography style={{display: 'inline'}}>
-                            SCORE{score}
-                        </Typography>
-                    </CardContent>
-                </Card>
-            </div>
+            <table className={classes.table}>
+                <tbody>
+                    <tr className={classes.label}>
+                        <td><h4>Match</h4></td>
+                        <td><DoneOutlineRoundedIcon
+                            style={{color: '#787d94'}} /></td>
+                        <td style={{minWidth: 15}}></td>
+                        <td><h4>Mismatch</h4></td>
+                        <td><CloseRoundedIcon style={{color: '#9b8989'}} /></td>
+                        <td style={{minWidth: 15}}></td>
+                        <td><h4>Gap</h4></td>
+                        <td><MinimizeIcon style={{color: '#e9e3e3de'}} /></td>
+                    </tr>
+                </tbody>
+            </table>
+            <h3>Alignment Score</h3>
+            <table className={classes.table}>
+                <tbody>
+                    <tr className={classes.score}>
+                        <td><h3>Total Score</h3></td>
+                            <td style={{minWidth: 5}}></td>
+                        <td><h3 className={classes.sc}>{score}</h3></td>
+                            <td style={{minWidth: 30}}></td>
+                        <td><h3>Match Score</h3></td>
+                            <td style={{minWidth: 2}}></td>
+                        <td><h3 className={classes.sc}>{matchSc}</h3></td>
+                            <td style={{minWidth: 30}}></td>
+                        <td><h3>Mismatch Penalty</h3></td>
+                            <td style={{minWidth: 5}}></td>
+                        <td><h3 className={classes.sc}>{mismatchSc}</h3></td>
+                            <td style={{minWidth: 30}}></td>
+                        <td><h3>Gap Penalty</h3></td>
+                            <td style={{minWidth: 5}}></td>
+                        <td><h3 className={classes.sc}>{gapSc}</h3></td>
+                    </tr>
+                </tbody>
+            </table>
         </Box>
 
     );

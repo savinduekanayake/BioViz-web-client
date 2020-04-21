@@ -15,16 +15,19 @@ export default function GameInput(props) {
         <div>
             <Grid container direction="column" spacing={3}>
                 <Grid item>
-                    <span>
-                        Input sequence should contain only A C G T - characters
-                    </span>
+                    <h4 style={{color: '#141938'}}>
+                        Input sequence should only contain A C G T characters
+                        <br/>Use `-` to indicate any gaps in the sequence
+                        <br/>Make sure to input both sequences
+                    </h4>
                     <h3>Input Sequence 1</h3>
                     <GameFileUpload inputAction={setGameInputA}
                         value={useSelector((state) => state.GameSeqA)} />
                     <GameTextInput inputAction={setGameInputA}
                         value={useSelector((state) => state.GameSeqA)} />
                 </Grid>
-                {errMsgA ? <span>Invalid input A</span> : ''}
+                {errMsgA ? <h3 style={{color: '#ea0909'}}>
+                    Input sequence 1 is invalid</h3> : ''}
 
                 <Grid item>
                     <h3>Input Sequence 2</h3>
@@ -33,13 +36,14 @@ export default function GameInput(props) {
                     <GameTextInput inputAction={setGameInputB}
                         value={useSelector((state) => state.GameSeqB)} />
                 </Grid>
-                {errMsgB ? <span>Invalid input B</span> : ''}
+                {errMsgB ? <h3 style={{color: '#ea0909'}}>
+                    Input sequence 2 is invalid</h3> : ''}
             </Grid>
         </div>
     );
 }
 
 GameInput.propTypes = {
-    errMsgA: PropTypes.string,
-    errMsgB: PropTypes.string,
+    errMsgA: PropTypes.bool,
+    errMsgB: PropTypes.bool,
 };
