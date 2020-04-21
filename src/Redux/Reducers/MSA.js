@@ -30,3 +30,13 @@ export const MSASeqReducer = (state = initialData, action) => {
             return state;
     }
 };
+
+export const MSAAlgoReducer = (state = '1', action)=>{
+    switch (action.type) {
+        case 'SET_MSA_ALGO':
+            return action.payload;
+
+        default:
+            return state;
+    }
+};

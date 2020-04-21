@@ -34,6 +34,11 @@ const useStyles = makeStyles((theme) => ({
             background: '#eee',
         },
     },
+    matrix: {
+        borderWidth: 1,
+        borderStyle: 'solid',
+        padding: 10,
+    },
 }));
 
 
@@ -121,7 +126,7 @@ export default function Matrix(props) {
     };
 
     return (
-        <div>
+        <div className={classes.matrix}>
             <Grid container direction="row" spacing={1}>
                 <Grid item>
                     <div style={{height: 35}}>&nbsp;</div>

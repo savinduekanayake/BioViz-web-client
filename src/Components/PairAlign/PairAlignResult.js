@@ -54,8 +54,10 @@ export default function PairAlignResult(props) {
                         <KeyboardArrowRightIcon/>
                     </IconButton>
                 </Grid>
+                <Grid item>
+                    {matrix}
+                </Grid>
             </Grid>
-            {matrix}
 
         </div>
     );

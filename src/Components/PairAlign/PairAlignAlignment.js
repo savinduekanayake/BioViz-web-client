@@ -82,7 +82,7 @@ export default function PairAlignAlignment(props) {
                 itemCount={totalLen}
                 itemSize={20}
                 layout="horizontal"
-                width={300}
+                width={Math.min(500, 20*totalLen)}
             >
                 {makeSegment}
             </FixedSizeList>

@@ -16,7 +16,7 @@ import SingleService from './SingleService';
 
 const services = [
      {
-        title: 'Analize DNA Sequence',
+        title: 'Analyze DNA Sequence',
      description: 'Lorem ipsum dolor sit amet consectetur.',
      image: image1,
     },
