@@ -41,6 +41,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SingleService({title, description, image}) {
     const classes = useStyles();
+
+
     return (
         <div>
 
@@ -51,7 +53,7 @@ export default function SingleService({title, description, image}) {
                         <img className={style.image} src={image} alt='' />
                         <h3 className={style.title}>{title}</h3>
                         <ViewMore
-                            title={'View more..'}
+                            title={'More details..'}
                             description={description} />
                     </div>
                 </Paper>
