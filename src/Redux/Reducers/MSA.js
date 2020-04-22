@@ -40,3 +40,19 @@ export const MSAAlgoReducer = (state = '1', action)=>{
             return state;
     }
 };
+
+export const MSAOrderReducer = (state = [], action)=>{
+    switch (action.type) {
+        case 'SET_MSA_ORDER':
+            return action.payload;
+        case 'SET_MODE':
+        case 'ADD_NEW_MSA':
+        case 'SET_MSA':
+        case 'REMOVE_MSA':
+        case 'SET_MSA_ALGO':
+            return [];
+
+        default:
+            return state;
+    }
+};

@@ -5,7 +5,7 @@ import {
     MatchScoreReducer, MisMatchPenaltyReducer,
     GapPenaltyReducer,
 } from './Score';
-import {MSASeqReducer, MSAAlgoReducer} from './MSA';
+import {MSASeqReducer, MSAAlgoReducer, MSAOrderReducer} from './MSA';
 import {SeqAReducer, SeqBReducer} from './Game';
 
 const allReducers = combineReducers({
@@ -18,6 +18,7 @@ const allReducers = combineReducers({
     MSASeq: MSASeqReducer,
     pAlgo: PAlgoReducer,
     msaAlgo: MSAAlgoReducer,
+    msaOrder: MSAOrderReducer,
     GameSeqA: SeqAReducer,
     GameSeqB: SeqBReducer,
 });
