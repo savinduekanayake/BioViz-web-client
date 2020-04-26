@@ -15,7 +15,7 @@ const useStyles = makeStyles(() => ({
         borderRadius: 2,
     },
     box: {
-        backgroundColor: '#00000020',
+        backgroundColor: '#0a225338',
         borderRadius: '10px',
         padding: 30,
         paddingBottom: 40,
@@ -57,47 +57,51 @@ export default function GameAlign(props) {
     }
 
     function changeSeqA(index) {
+                // change seqA in state object 'align'
         const lastIndex = align.seqA.length - 1;
-        // REMOVE A GAP
-        if (align.seqA.charAt(index) === '-') {
+        if (align.seqA.charAt(index) === '-') { //  REMOVE A GAP
             if (align.seqB.charAt(lastIndex) === 'e') {
+                //  'e'-trailing gaps, only one seq has 'e's at a time
+                //  if there is a gap at end of the seqB remove '-' from seqA
+                //  and remove last 'e' of seqB to keep equal lengths
                 setAlign({
                     seqA: align.seqA.substring(0, index) +
                         align.seqA.substring(index + 1),
                     seqB: align.seqB.substring(0, lastIndex),
                 });
             } else {
+                //  remove '-' from seqA and add 'e' to the end of seqA
+                //  to keep equal lengths in 2 sequences
                 setAlign({
                     seqA: align.seqA.substring(0, index) +
                         align.seqA.substring(index + 1) + 'e',
                     seqB: align.seqB,
                 });
             }
-            // remove gap at the given index
-            // update this change in alignA in state object
         } else if (align.seqA.charAt(index) !== 'e') { // ADD A GAP
             if (align.seqA.charAt(lastIndex) === 'e') {
+                //  if there is a gap at end of the seqA, add '-'
+                //  and remove that 'e' in seqA
                 setAlign({
                     seqA: align.seqA.substring(0, index) + '-' +
                         align.seqA.substring(index, lastIndex),
                     seqB: align.seqB,
                 });
             } else {
+                //  add '-' to seqA and 'e' to end of seqB to keep equal lengths
                 setAlign({
                     seqA: align.seqA.substring(0, index) + '-' +
                         align.seqA.substring(index),
                     seqB: align.seqB + 'e',
                 });
             }
-            // add a gap next to the base element at the given index
-            // update this change in alignA in state object
         }
     }
 
     function changeSeqB(index) {
+                // change seqB in state object 'align'
         const lastIndex = align.seqA.length - 1;
-        // REMOVE A GAP
-        if (align.seqB.charAt(index) === '-') {
+        if (align.seqB.charAt(index) === '-') { // REMOVE A GAP
             if (align.seqA.charAt(lastIndex) === 'e') {
                 setAlign({
                     seqA: align.seqA.substring(0, lastIndex),
@@ -111,8 +115,6 @@ export default function GameAlign(props) {
                         align.seqB.substring(index + 1) + 'e',
                 });
             }
-            // remove gap at the given index
-            // update this change in alignB in state object
         } else if (align.seqB.charAt(index) !== 'e') { // ADD A GAP
             if (align.seqB.charAt(lastIndex) === 'e') {
                 setAlign({
@@ -127,8 +129,6 @@ export default function GameAlign(props) {
                         align.seqB.substring(index),
                 });
             }
-            // add a gap next to the base element at the given index
-            // update this change in alignB in state object
         }
     }
 

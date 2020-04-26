@@ -78,19 +78,17 @@ export default function GameInstruction() {
                     How to Play
                 </DialogTitle>
                 <DialogContent dividers>
-                    <Typography gutterBottom>
                         <ul>
-                            <li>Click on an element in the sequence
+                            <li><h3>Click on an element in the sequence
                                  to move the whole sequence starting
-                                  from that point, to the right.</li>
-                            <li>Try to avoid unnecessary gaps
-                                 in the middle of the sequences.</li>
-                            <li>Trailing gaps cannot be removed.</li>
-                            <li>Make matches as much as possible.</li>
-                            <li>Change the Match,Mismatch and Gap scores
-                                 to get a higher score.</li>
+                                  from that point, to the right.</h3></li>
+                            <li><h3>Try to avoid unnecessary gaps
+                                 in the middle of the sequences.</h3></li>
+                            <li><h3>Trailing gaps cannot be removed.</h3></li>
+                            <li><h3>Make matches as much as possible.</h3></li>
+                            <li><h3>Change the Match,Mismatch and Gap scores
+                                 to get a higher score.</h3></li>
                         </ul>
-                    </Typography>
                 </DialogContent>
                 <DialogActions>
                     <Button autoFocus onClick={handleClose} color="primary">

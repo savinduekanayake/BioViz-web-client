@@ -57,12 +57,14 @@ export default function GameSection() {
         // adjust input sequences for same length
         if (inputB.length > 0 && inputA.length > inputB.length) {
             const remain = 'e'.repeat(inputA.length - inputB.length);
+            // add trailing gaps 'e', to end of inputB
             setInput({
                 seqA: inputA,
                 seqB: inputB + remain,
             });
         } else if (inputA.length > 0 && inputB.length > inputA.length) {
             const remain = 'e'.repeat(inputB.length - inputA.length);
+            // add trailing gaps 'e', to end of inputA
             setInput({
                 seqA: inputA + remain,
                 seqB: inputB,
