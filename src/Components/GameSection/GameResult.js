@@ -6,7 +6,7 @@ import DoneOutlineRoundedIcon from '@material-ui/icons/DoneOutlineRounded';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import {makeStyles} from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
     A: {
         color: 'red',
     },
@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
         marginRight: 'auto',
     },
     tablerow: {
-        width: 1400,
+        maxWidth: 1400,
         overflowX: 'scroll',
         display: 'block',
         marginLeft: 'auto',
@@ -88,7 +88,6 @@ export default function GameResult(props) {
 
     return (
         <Box className={classes.box}>
-            <br />
             <h2>Result</h2>
             <h3>Alignment Status</h3>
             <table className={classes.tablerow}>

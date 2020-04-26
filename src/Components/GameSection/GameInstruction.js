@@ -87,8 +87,8 @@ export default function GameInstruction() {
                                  in the middle of the sequences.</li>
                             <li>Trailing gaps cannot be removed.</li>
                             <li>Make matches as much as possible.</li>
-                            <li>Change Match,Mismatch and Gap scores
-                                 to get higher score.</li>
+                            <li>Change the Match,Mismatch and Gap scores
+                                 to get a higher score.</li>
                         </ul>
                     </Typography>
                 </DialogContent>
