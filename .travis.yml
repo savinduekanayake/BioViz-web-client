@@ -3,7 +3,6 @@ node_js:
   - "stable"
 cache:
   directories:
-    - npm test
     - node_modules
 script:
   - npm run build
