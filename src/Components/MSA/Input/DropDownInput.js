@@ -72,6 +72,7 @@ export default function DropDownInput(props) {
             <Grid container direction='row'>
                 <Grid item>
                     <FormControl
+                        disabled={props.disabledStatus}
                         error={errorStatus}
                         className={classes.formControl}>
                         <Select value={seq1} onChange={onChangeSeq1}>
@@ -86,6 +87,7 @@ export default function DropDownInput(props) {
                 </Grid>
                 <Grid item>
                     <FormControl
+                        disabled={props.disabledStatus}
                         error={errorStatus}
                         className={classes.formControl}>
                         <Select value={seq2} onChange={onChangeSeq2}>
@@ -99,6 +101,7 @@ export default function DropDownInput(props) {
                 </Grid>
                 <Grid item>
                     <Button
+                        disabled={props.disabledStatus}
                         variant="outlined"
                         onClick={onSubmitPair}
                         className={classes.submitButton}
@@ -113,4 +116,5 @@ export default function DropDownInput(props) {
 DropDownInput.propTypes = {
     availableSet: PropTypes.instanceOf(Set),
     onSubmitPair: PropTypes.func,
+    disabledStatus: PropTypes.bool,
 };
