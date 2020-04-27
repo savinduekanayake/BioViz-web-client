@@ -1,20 +1,24 @@
 import {fetchResults} from '../util/fetch';
 import {apiHost} from '../config/config';
 
+export const fetchMSAProgressive = async function(
+    sequences, order, match, mismatch, gap, callback) {
+    const url = apiHost + '/msa/progressive';
+    const data = {sequences, match, mismatch, gap};
+    const formattedOrder = order.map((element) => {
+        return [element[0], element[1]];
+    });
+    data.order = formattedOrder;
+    await fetchResults(url, data, callback, () => {
+        callback(undefined);
+    });
+};
 
-function msa(algorithm = 1) {
-    const url = algorithm === 1 ? apiHost+'/msa/progressive' :
-     apiHost+'/msa/progressive-optimal';
-    return (
-        async (sequences, match, mismatch, gap, callback) => {
-            const data = {sequences, match, mismatch, gap};
-            await fetchResults(url, data, callback, () => {
-                callback(undefined);
-            });
-        }
-    );
-}
-
-export const fetchMSAProgressive = msa(1);
-
-export const fetchMSAProgressiveOptimal = msa(2);
+export const fetchMSAProgressiveOptimal = async function(
+    sequences, match, mismatch, gap, callback) {
+    const url = apiHost + '/msa/progressive-optimal';
+    const data = {sequences, match, mismatch, gap};
+    await fetchResults(url, data, callback, () => {
+        callback(undefined);
+    });
+};

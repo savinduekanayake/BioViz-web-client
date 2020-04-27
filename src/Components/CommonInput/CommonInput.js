@@ -16,7 +16,7 @@ export default function CommonInput(props) {
     };
 
     const cancelButton = props.type === 'MSA' ?
-        <IconButton onClick={onclickCancelButton}>
+        <IconButton onClick={onclickCancelButton} testid='MSASeqCloseButton'>
             <HighlightOffIcon color="error" />
         </IconButton> : '';
     return (

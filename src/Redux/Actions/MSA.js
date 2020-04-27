@@ -24,3 +24,10 @@ export const setMSAAlgo = (algo)=>{
         payload: algo,
     };
 };
+
+export const setMSAOrder = (order)=>{
+    return {
+        type: 'SET_MSA_ORDER',
+        payload: order,
+    };
+};
