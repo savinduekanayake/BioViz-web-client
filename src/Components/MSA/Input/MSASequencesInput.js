@@ -31,8 +31,8 @@ export default function MSASequencesInput() {
             <Grid
             container
             direction="column"
-            spacing={1}
-            style={{width: '95%', paddingLeft: 100, paddingRight: 100}}
+            spacing={0}
+            style={{width: '95%'}}
             >
                 {inputs}
                 <Grid item>
