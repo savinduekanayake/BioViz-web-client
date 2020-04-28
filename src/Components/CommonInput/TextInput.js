@@ -21,10 +21,11 @@ export default function TextInput(props) {
 
         <div>
             <TextField
+            fullWidth
                 multiline
                 rowsMax={4}
-                placeholder='DNA Sequence'
-                style={{width: '100%'}}
+                placeholder='Type your genome sequence'
+                label='Type your genome sequence'
                 value={DNAseq}
                 onChange={onInputChange}>
 
