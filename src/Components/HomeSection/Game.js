@@ -162,7 +162,6 @@ export default function TransferList() {
 
   const checkResult = () => {
     if (left === pairwise && right === msa) {
-
         return (
             <Snackbar />
         );
