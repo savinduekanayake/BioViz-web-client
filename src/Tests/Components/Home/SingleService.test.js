@@ -30,6 +30,14 @@ describe('Testing the SingleService component', () => {
         expect(wrapper.find('img').length).toEqual(1);
     });
 
+    it('render SingleService component with right values', () => {
+        const wrapper = mount(
+            <Provider store={store}><SingleService {...service}/></Provider>,
+        );
+        expect(wrapper).toBeTruthy();
+        expect(wrapper.find('img').length).toEqual(1);
+    });
+
     it('verify pass prop value title to SingleService component', () => {
         const wrapper = mount(
             <Provider store={store}><SingleService {...service} /></Provider>,

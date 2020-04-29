@@ -8,9 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
 // pages
-import ParwiseSteps from './StepsInformation/PairwiseSteps';
-import MSASteps from './StepsInformation/MSASteps';
-import GameSteps from './StepsInformation/GameSteps';
+import StepByStep from './StepByStep';
 
 // import css modules
 import style from './assets/css/image.module.css';
@@ -18,6 +16,69 @@ import style from './assets/css/image.module.css';
 // icons
 import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
 
+// images
+import msaImage from './assets/img/Steps/MSA.png';
+import pwImage from './assets/img/Steps/pw.png';
+import gameImage from './assets/img/Steps/game.jpg';
+
+
+const pairwiseData = {
+  image: pwImage,
+  title1: `Select the BioInformatic Pairwise Alignment`,
+  title2: `Enter your DNA sequences`,
+  title3: `Enter your variables`,
+  title4: `Click enter to results`,
+  step1: `First click the menu icon. 
+          Then you can see some menu items in leftside. 
+          After that click 'PairAlign' to visit Pairwise Alignment.`,
+  step2: `There are two inputs.
+          You need to enter your two DNA sequences. 
+          You can either upload ".txt" file or type the sequence.`,
+  step3: `There are default values for 'match' 'mismatch' and 'gap'. 
+          If you willing to change the values 
+          you can enter new values for relavent variables.`,
+  step4: `If you are finished the all above steps just click 
+        'Enter' to get the result. This may can get few 
+          secounds to visualize the result.`,
+};
+
+const MSAData = {
+  image: msaImage,
+  title1: `Select the BioInformatic MSA Alignment`,
+  title2: `Enter your DNA sequences`,
+  title3: `Enter your variables`,
+  title4: `Click enter to results`,
+  step1: `First click the menu icon. Then you can see some menu
+        items in leftside. After that click 'MSA' to visit
+        Multiple Sequence Alignment.`,
+  step2: `There are two inputs in default. 
+        You can add new input according to your requirments.
+        You need to enter your DNA sequences. You can either upload 
+        ".txt" file or type the sequence.`,
+   step3: `There are default values for 'match' 'mismatch' and 'gap'. 
+        If you willing to change the values 
+        you can enter new values for relavent variables.`,
+  step4: `If you are finished the all above steps just click 
+      'Enter' to get the result. This may can get few 
+      secounds to visualize the result.`,
+};
+
+const gameData = {
+  image: gameImage,
+  title1: `Select the Gameplay`,
+  title2: `Read the instruction`,
+  title3: `Enter your answer`,
+  title4: `Click enter to get score`,
+  step1: `First click the menu icon. 
+        Then you can see some menu items in leftside. After that click 
+        'Alignment Game' to play Alignment Game.`,
+  step2: `Read the instruction...`,
+  step3: `There are defaultly set values of 
+         'mismatch' and 'gap'. You need to enter your answers.`,
+  step4: `If you are finished the all above steps just 
+        click 'Enter' to get the result. This may can get 
+        few secounds to visualize the score.`,
+};
 
 function TabPanel(props) {
   const {children, value, index, ...other} = props;
@@ -99,15 +160,15 @@ export default function ScrollableTabsButtonAuto() {
       </AppBar>
 
       <TabPanel value={value} index={0}>
-        <ParwiseSteps />
+        <StepByStep {...pairwiseData} />
       </TabPanel>
 
       <TabPanel value={value} index={1}>
-        <MSASteps />
+      <StepByStep {...MSAData} />
       </TabPanel>
 
       <TabPanel value={value} index={2}>
-        <GameSteps />
+      <StepByStep {...gameData} />
       </TabPanel>
 
     </div>

@@ -7,15 +7,12 @@ import StepContent from '@material-ui/core/StepContent';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-
+import PropTypes from 'prop-types';
 
 // import css modules
-import style from '../assets/css/image.module.css';
+import style from './assets/css/image.module.css';
 
-// should add images according to Pairwise steps
-import image1 from '../assets/img/Steps/pw.png';
-
-import PairwaiseDetails from '../Details/PairwiseDetails';
+import PairwaiseDetails from './Details/PairwiseDetails';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -48,39 +45,8 @@ const useStyles = makeStyles((theme) => ({
 }),
 );
 
-function getSteps() {
-    return [
-        'Select a BioInformatic Pairwaise Alignment',
-        'Enter your DNA sequences', 'Enter your variables',
-        'Click enter to results',
-    ];
-}
-
-function getStepContent(step) {
-    switch (step) {
-        case 0:
-            return `First click the menu icon. 
-            Then you can see some menu items in leftside. 
-            After that click 'PairAlign' to visit Pairwise Alignment.`;
-        case 1:
-            return `There are two inputs.
-            You need to enter your two DNA sequences. 
-            You can either upload ".txt" file or type the sequence.`;
-        case 2:
-            return `There are default values for 'match' 'mismatch' and 'gap'. 
-            If you willing to change the values 
-            you can enter new values for relavent variables.`;
-        case 3:
-            return `If you are finished the all above steps 
-            just click 'Enter' to get the result.
-            This may can get few secounds to visualize the result.`;
-        default:
-            return 'Unknown step';
-    }
-}
-
-
-export default function VerticalLinearStepper() {
+// eslint-disable-next-line max-len
+export default function VerticalLinearStepper({image, title1, title2, title3, title4, step1, step2, step3, step4}) {
     const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(0);
     const steps = getSteps();
@@ -97,6 +63,29 @@ export default function VerticalLinearStepper() {
         setActiveStep(0);
     };
 
+    function getSteps() {
+        return [
+            `${title1}`,
+            `${title2}`,
+            `${title3}`,
+            `${title4}`,
+        ];
+    }
+    function getStepContent(step) {
+        switch (step) {
+            case 0:
+                return `${step1}`;
+            case 1:
+                return `${step2}`;
+            case 2:
+                return `${step3}`;
+            case 3:
+                return `${step4}`;
+            default:
+                return 'Unknown step';
+        }
+    }
+
     return (
         <div className={classes.root}>
 
@@ -111,7 +100,7 @@ export default function VerticalLinearStepper() {
                                 <div>
                                     <img
                                         className={style.img}
-                                        src={image1} alt=''
+                                        src={image} alt=''
                                     />
 
                                     <Typography>
@@ -165,3 +154,14 @@ export default function VerticalLinearStepper() {
         </div>
     );
 }
+VerticalLinearStepper.propTypes = {
+    image: PropTypes.node,
+    title1: PropTypes.string,
+    title2: PropTypes.string,
+    title3: PropTypes.string,
+    title4: PropTypes.string,
+    step1: PropTypes.string,
+    step2: PropTypes.string,
+    step3: PropTypes.string,
+    step4: PropTypes.string,
+  };
