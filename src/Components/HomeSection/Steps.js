@@ -23,6 +23,7 @@ import gameImage from './assets/img/Steps/game.jpg';
 
 
 const pairwiseData = {
+  HeadTitle: 'Pairwise',
   image: pwImage,
   title1: `Select the BioInformatic Pairwise Alignment`,
   title2: `Enter your DNA sequences`,
@@ -43,6 +44,7 @@ const pairwiseData = {
 };
 
 const MSAData = {
+  HeadTitle: 'MSA',
   image: msaImage,
   title1: `Select the BioInformatic MSA Alignment`,
   title2: `Enter your DNA sequences`,
@@ -64,6 +66,7 @@ const MSAData = {
 };
 
 const gameData = {
+  HeadTitle: 'Gameplay',
   image: gameImage,
   title1: `Select the Gameplay`,
   title2: `Read the instruction`,

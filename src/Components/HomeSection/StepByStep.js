@@ -13,6 +13,7 @@ import PropTypes from 'prop-types';
 import style from './assets/css/image.module.css';
 
 import PairwaiseDetails from './Details/PairwiseDetails';
+import MSADetails from './Details/MSADetails';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -46,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
 );
 
 // eslint-disable-next-line max-len
-export default function VerticalLinearStepper({image, title1, title2, title3, title4, step1, step2, step3, step4}) {
+export default function VerticalLinearStepper({HeadTitle, image, title1, title2, title3, title4, step1, step2, step3, step4}) {
     const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(0);
     const steps = getSteps();
@@ -89,7 +90,7 @@ export default function VerticalLinearStepper({image, title1, title2, title3, ti
     return (
         <div className={classes.root}>
 
-            <h2>Pairwise</h2>
+            <h2>{HeadTitle}</h2>
 
             <Stepper activeStep={activeStep} orientation="vertical">
                 {steps.map((label, index) => (
@@ -149,12 +150,15 @@ export default function VerticalLinearStepper({image, title1, title2, title3, ti
 
             )}
             <div className={classes.details}>
-                <PairwaiseDetails />
+
+                 {/* eslint-disable-next-line max-len */}
+                {`${HeadTitle}` === 'Pairwise' ?<PairwaiseDetails testId = 'testPWDetails' /> : `${HeadTitle}` === 'MSA' ?<MSADetails testId = 'testPWDetails' /> : ''}
             </div>
         </div>
     );
 }
 VerticalLinearStepper.propTypes = {
+    HeadTitle: PropTypes.string,
     image: PropTypes.node,
     title1: PropTypes.string,
     title2: PropTypes.string,
