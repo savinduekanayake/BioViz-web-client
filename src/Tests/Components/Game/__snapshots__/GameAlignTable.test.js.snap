@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GameAlignTable Component matches snapshot 1`] = `
+<div>
+  <table
+    className="makeStyles-iconTable-2"
+  >
+    <tbody>
+      <tr>
+        <td
+          style={
+            Object {
+              "minWidth": 50,
+            }
+          }
+        >
+          <span
+            aria-hidden={true}
+            className="material-icons MuiIcon-root"
+          >
+            <img
+              alt="seq 1"
+              src="dna.svg"
+            />
+          </span>
+        </td>
+      </tr>
+      <tr>
+        <td
+          style={
+            Object {
+              "minWidth": 50,
+            }
+          }
+        >
+          <span
+            aria-hidden={true}
+            className="material-icons MuiIcon-root"
+          >
+            <img
+              alt="seq 2"
+              src="dna.svg"
+            />
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <table
+    className="makeStyles-table-1"
+  >
+    <tbody>
+      <tr>
+        A
+        G
+        T
+      </tr>
+      <tr>
+        C
+        G
+        A
+      </tr>
+      <tr>
+        1
+        2
+        3
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;

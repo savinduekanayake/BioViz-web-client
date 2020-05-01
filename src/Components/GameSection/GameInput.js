@@ -26,7 +26,7 @@ export default function GameInput(props) {
                     <GameTextInput inputAction={setGameInputA}
                         value={useSelector((state) => state.GameSeqA)} />
                 </Grid>
-                {errMsgA ? <h3 style={{color: '#ea0909'}}>
+                {errMsgA ? <h3 testid='seq1Err' style={{color: '#ea0909'}}>
                     Input sequence 1 is invalid</h3> : ''}
 
                 <Grid item>
@@ -36,7 +36,7 @@ export default function GameInput(props) {
                     <GameTextInput inputAction={setGameInputB}
                         value={useSelector((state) => state.GameSeqB)} />
                 </Grid>
-                {errMsgB ? <h3 style={{color: '#ea0909'}}>
+                {errMsgB ? <h3 testid='seq2Err' style={{color: '#ea0909'}}>
                     Input sequence 2 is invalid</h3> : ''}
             </Grid>
         </div>

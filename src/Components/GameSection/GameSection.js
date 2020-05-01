@@ -10,6 +10,7 @@ export default function GameSection() {
     const [alignment, setAlignment] = React.useState(undefined);
     const [inputErrorA, setMsgA] = React.useState(false);
     const [inputErrorB, setMsgB] = React.useState(false);
+    const [scoreErr, setErrMsg] = React.useState(false);
     const inputA = useSelector((state) => state.GameSeqA);
     const inputB = useSelector((state) => state.GameSeqB);
     const matchScore = useSelector((state) => state.matchScore);
@@ -17,18 +18,26 @@ export default function GameSection() {
     const gapPenalty = useSelector((state) => state.gapPenalty);
 
     function callbackAlign(data) {
-        setAlignment({
-            alignA: data.alignA,
-            alignB: data.alignB,
-            match: matchScore,
-            mismatch: mismatchPenanlty,
-            gap: gapPenalty,
-        });
+        if (matchScore>0 && (mismatchPenanlty<0 && gapPenalty<0)) {
+            // input score validation
+            setAlignment({
+                alignA: data.alignA,
+                alignB: data.alignB,
+                match: matchScore,
+                mismatch: mismatchPenanlty,
+                gap: gapPenalty,
+            });
+            if (scoreErr===true) {
+                setErrMsg(false);
+            }
+        } else {
+            setErrMsg(true);
+        }
     }
 
     function onSubmit() {
         setAlignment(undefined);
-        // input validation
+        // input sequences validation
         const array = ['A', 'C', 'G', 'T', '-'];
         let A = 0; // no invalid characters in inputA
         let B = 0; // no invalid characters in inputB
@@ -83,7 +92,8 @@ export default function GameSection() {
             <GameInput errMsgA={inputErrorA} errMsgB={inputErrorB} />
             <br />
             <Button
-                variant="contained"
+                testid='submitBtn'
+                variant="outlined"
                 color="secondary"
                 onClick={onSubmit} >
                 Submit
@@ -91,16 +101,21 @@ export default function GameSection() {
             <br /><br />
             {input ?
                 (inputErrorA || inputErrorB) ?
-                    <h3 style={{color: '#ea0909'}}>INVALID INPUT.
+                    <h3 testid={'invalidInput'}
+                    style={{color: '#ea0909'}}>INVALID INPUT.
                     READ INSTRUCTIONS CAREFULLY TO INPUT THE SEQUENCES</h3> :
                     (input.seqA === '' || input.seqB === '') ?
                     <h3 style={{color: '#ea0909'}}>INPUT BOTH SEQUENCES</h3> :
                         <GameAlign
                         input={input}
-                        fetchAlign={callbackAlign} /> : ''}
+                        fetchAlign={callbackAlign} /> :
+                         <div testid={'inputNotSet'}/>}
             <br />
-            {alignment ? <GameResult aligns={alignment} /> : ''}
-
+            {scoreErr?
+             <h3 style={{color: '#ea0909'}}>INVALID SCORING SCHEMA.
+                                SUBMIT AGAIN WITH VALID SCORE/PENALTY</h3>:
+                alignment ? <GameResult aligns={alignment} />:
+                <div testid={'alignmentNotSet'}/>}
         </div>
     );
 }

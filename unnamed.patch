@@ -1,0 +1,390 @@
+Index: src/Components/GameSection/GameAlign.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/Components/GameSection/GameAlign.js	(revision dbafed48546547019892eefa3127f5f1c12307f5)
++++ src/Components/GameSection/GameAlign.js	(date 1588207526314)
+@@ -141,11 +141,11 @@
+     }
+ 
+     const align1 = row1.map(
+-        (ele) => <td key={ele.id}>
++        (ele) => <td key={ele.id} testid={'outputSeqA'}>
+             <Tooltip title={ele.title} placement="top"
+              className={classes.seq} arrow>
+                 <Button
+-                    id={'A' + ele.id}
++                    testid={'A' + ele.id}
+                     variant="contained"
+                     size="small"
+                     style={{backgroundColor: '#0a22536e'}}
+@@ -153,7 +153,7 @@
+                 </Button>
+             </Tooltip></td>);
+ 
+-    const align2 = row2.map((ele) => <td key={ele.id}>
++    const align2 = row2.map((ele) => <td key={ele.id} testid={'outputSeqB'}>
+         <Tooltip title={ele.title} placement="bottom"
+              className={classes.seq} arrow>
+             <Button id={'B' + ele.id}
+@@ -171,6 +171,7 @@
+             <GamePlay align1={align1} align2={align2} indexLine={indexLine}/>
+             <br /><br />
+             <Button
++                id='resetBtn'
+                 style={{marginRight: 50}}
+                 variant="contained"
+                 color="secondary"
+@@ -189,7 +190,10 @@
+ }
+ 
+ GameAlign.propTypes = {
+-    input: PropTypes.object,
++    input: PropTypes.shape({
++        seqA: PropTypes.string,
++        seqB: PropTypes.string,
++    }),
+     fetchAlign: PropTypes.func,
+ };
+ 
+Index: src/Components/GameSection/GameInstruction.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/Components/GameSection/GameInstruction.js	(revision dbafed48546547019892eefa3127f5f1c12307f5)
++++ src/Components/GameSection/GameInstruction.js	(date 1588207307419)
+@@ -80,7 +80,7 @@
+                 <DialogContent dividers>
+                         <ul>
+                             <li><h3>Click on an element in the sequence
+-                                 to move the whole sequence starting
++                                 to move the sub sequence starting
+                                   from that point, to the right.</h3></li>
+                             <li><h3>Try to avoid unnecessary gaps
+                                  in the middle of the sequences.</h3></li>
+Index: src/Components/GameSection/GameResult.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/Components/GameSection/GameResult.js	(revision dbafed48546547019892eefa3127f5f1c12307f5)
++++ src/Components/GameSection/GameResult.js	(date 1588235748377)
+@@ -66,15 +66,18 @@
+     for (let i = 0; i < minLength; i++) {
+         if ((alignA.charAt(i) === '-' || alignB.charAt(i) === '-') ||
+             (alignA.charAt(i) === 'e' || alignB.charAt(i) === 'e')) {
++                // if gap in the middle or end
+             score += gapPenalty;
+             gapSc += gapPenalty;
+             row.push({type: <MinimizeIcon />, index: i+1});
+         } else if (alignA.charAt(i) === alignB.charAt(i)) {
++                // if 2 elements are matching
+             score += matchScore;
+             matchSc += matchScore;
+             row.push({type: <DoneOutlineRoundedIcon
+                  className={classes[alignA.charAt(i)]} />, index: i+1});
+         } else {
++                // if 2 elements mismatch
+             score += mismatchPenanlty;
+             mismatchSc += mismatchPenanlty;
+             row.push({type: <CloseRoundedIcon style={{color: '#9b8989'}} />,
+Index: src/Components/GameSection/GameInput.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/Components/GameSection/GameInput.js	(revision dbafed48546547019892eefa3127f5f1c12307f5)
++++ src/Components/GameSection/GameInput.js	(date 1588216321685)
+@@ -26,7 +26,7 @@
+                     <GameTextInput inputAction={setGameInputA}
+                         value={useSelector((state) => state.GameSeqA)} />
+                 </Grid>
+-                {errMsgA ? <h3 style={{color: '#ea0909'}}>
++                {errMsgA ? <h3 testid='seq1Err' style={{color: '#ea0909'}}>
+                     Input sequence 1 is invalid</h3> : ''}
+ 
+                 <Grid item>
+@@ -36,7 +36,7 @@
+                     <GameTextInput inputAction={setGameInputB}
+                         value={useSelector((state) => state.GameSeqB)} />
+                 </Grid>
+-                {errMsgB ? <h3 style={{color: '#ea0909'}}>
++                {errMsgB ? <h3 testid='seq2Err' style={{color: '#ea0909'}}>
+                     Input sequence 2 is invalid</h3> : ''}
+             </Grid>
+         </div>
+Index: src/Tests/Components/Game/GameInput.test.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/Tests/Components/Game/GameInput.test.js	(date 1588216844475)
++++ src/Tests/Components/Game/GameInput.test.js	(date 1588216844475)
+@@ -0,0 +1,29 @@
++import React from 'react';
++React.useLayoutEffect = React.useEffect;
++import {mount} from 'enzyme';
++import {findByAttr} from '../../helper';
++import GameInput from '../../../Components/GameSection/GameInput';
++import {Provider} from 'react-redux';
++import configureStore from 'redux-mock-store';
++
++const mockStore = configureStore();
++
++describe('GameAlign Component', () => {
++    const store = mockStore({});
++    const testProp = {
++        errMsgA: false,
++        errMsgB: true,
++    };
++    const wrapper = mount(<Provider store={store}>
++        <GameInput {...testProp}></GameInput></Provider>);
++
++    it('should not display error when error msg false', () =>{
++        const errA = findByAttr(wrapper, 'testid', 'seq1Err');
++        expect(errA.length).toBe(0);
++    });
++
++    it('should display error when error msg true', () =>{
++        const errB = findByAttr(wrapper, 'testid', 'seq2Err');
++        expect(errB.length).toBe(1);
++    });
++});
+Index: src/Components/CommonScoreSchema/NumberInput.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/Components/CommonScoreSchema/NumberInput.js	(revision dbafed48546547019892eefa3127f5f1c12307f5)
++++ src/Components/CommonScoreSchema/NumberInput.js	(date 1588206879052)
+@@ -53,7 +53,7 @@
+ }
+ 
+ NumberInput.propTypes = {
+-    inputSelector: PropTypes.func,
++    inputSelector: PropTypes.string,
+     inputHandler: PropTypes.func,
+     acceptedType: PropTypes.string,
+     label: PropTypes.string,
+Index: src/Tests/Components/Game/GameSection.test.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/Tests/Components/Game/GameSection.test.js	(date 1588252847219)
++++ src/Tests/Components/Game/GameSection.test.js	(date 1588252847219)
+@@ -0,0 +1,53 @@
++import React from 'react';
++React.useLayoutEffect = React.useEffect;
++import {mount} from 'enzyme';
++import {findByAttr} from '../../helper';
++import GameSection from '../../../Components/GameSection/GameSection';
++import {Provider} from 'react-redux';
++import configureStore from 'redux-mock-store';
++import { act } from 'react-dom/test-utils';
++
++const mockStore = configureStore();
++
++describe('GameSection Component', () => {
++    const store = mockStore({GameSeqA: 'AAACCGTAA', GameSeqB: 'CCAAGGTTA'});
++    const wrapper = mount( <Provider store={store}>
++        <GameSection></GameSection></Provider>);
++    // const setState = jest.fn();
++    // const useStateSpy = jest.spyOn(React, 'useState');
++    // useStateSpy.mockImplementation((init) => [init, setState]);
++
++    it('submit should assign to state', () => {
++        // const inputA = 'AAACCGTAA';
++        // const inputB = 'CCAAGGTTA';
++
++        // const expectedState = {
++        //     seqA: 'AAACCGTAA',
++        //     seqB: 'CCAAGGTTA',
++        // };
++        //  findByAttr(wrapper, 'testid', 'A3').hostNodes().props().onClick();
++         // expect(setState).toHaveBeenCalledWith(3);
++         act(() => {
++            findByAttr(wrapper, 'testid',
++            'submitBtn').hostNodes().props().onClick();
++         });
++        // const gameAlign = findByAttr(wrapper,
++        //              'testid', 'gameAlign').hostNodes();
++        // expect(gameAlign.length).toBe(1);
++        const err1 = findByAttr(wrapper, 'testid', 'inputNotSet').hostNodes();
++        expect(err1.length).toBe(0);
++    });
++
++    // it('should assign state on submit', () => {
++    //     const gameAlign = findByAttr(wrapper,
++    //     'testid', 'gameAlign').hostNodes();
++    //     expect(gameAlign.length).toBe(1);
++    // });
++
++    // it('should render GameAlign for valid input', () => {
++    //     const gameAlign = findByAttr(wrapper,
++    //          'testid', 'gameAlign').hostNodes();
++    //     expect(gameAlign.length).toBe(1);
++    // });
++});
++
+Index: src/Tests/Components/Game/GameAlign.test.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/Tests/Components/Game/GameAlign.test.js	(date 1588210180724)
++++ src/Tests/Components/Game/GameAlign.test.js	(date 1588210180724)
+@@ -0,0 +1,50 @@
++import React from 'react';
++React.useLayoutEffect = React.useEffect;
++import {mount} from 'enzyme';
++import {findByAttr} from '../../helper';
++import GameAlign from '../../../Components/GameSection/GameAlign';
++import {Provider} from 'react-redux';
++import configureStore from 'redux-mock-store';
++
++const mockStore = configureStore();
++
++describe('GameAlign Component', () => {
++    const store = mockStore({});
++    const testProp = {
++        input: {
++            seqA: 'AACGTGGCCCA',
++            seqB: 'CCGAATTA---',
++        },
++    };
++    const wrapper = mount(<Provider store={store}>
++        <GameAlign {...testProp}></GameAlign></Provider>);
++    // const setState = jest.fn();
++    // const useStateSpy = jest.spyOn(React, 'useState');
++    // useStateSpy.mockImplementation((init) => [init, setState]);
++
++    // it('should assign input to the state',
++    //  () => {
++    //     const expectedState = {
++    //         seqA: 'AAC-GTGGCCCA',
++    //         seqB: 'CCGAATTA----',
++    //     };
++    //     // const btn = findByAttr(wrapper, 'id', 'resetBtn').hostNodes();
++    //     // expect(btn.length).toBe(1);
++    //     // findByAttr(wrapper, 'testid', 'A3').hostNodes().props().onClick();
++    //     // expect(setState).toHaveBeenCalledWith(3);
++    //     const btn = findByAttr(wrapper, 'testid', 'A3').hostNodes();
++    //     expect(btn.length).toBe(1);
++    // });
++
++    it('output seq A should have elements corresponding to input seqA',
++     () => {
++        const optSeqA = findByAttr(wrapper, 'testid', 'outputSeqA').hostNodes();
++        expect(optSeqA.length).toBe(testProp.input.seqA.length);
++    });
++
++    it('output seq B should have elements corresponding to input seqB',
++     () => {
++        const optSeqB = findByAttr(wrapper, 'testid', 'outputSeqB').hostNodes();
++        expect(optSeqB.length).toBe(testProp.input.seqB.length);
++    });
++});
+Index: src/Components/GameSection/GameSection.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/Components/GameSection/GameSection.js	(revision dbafed48546547019892eefa3127f5f1c12307f5)
++++ src/Components/GameSection/GameSection.js	(date 1588252991130)
+@@ -10,6 +10,7 @@
+     const [alignment, setAlignment] = React.useState(undefined);
+     const [inputErrorA, setMsgA] = React.useState(false);
+     const [inputErrorB, setMsgB] = React.useState(false);
++    const [scoreErr, setErrMsg] = React.useState(false);
+     const inputA = useSelector((state) => state.GameSeqA);
+     const inputB = useSelector((state) => state.GameSeqB);
+     const matchScore = useSelector((state) => state.matchScore);
+@@ -17,18 +18,26 @@
+     const gapPenalty = useSelector((state) => state.gapPenalty);
+ 
+     function callbackAlign(data) {
+-        setAlignment({
+-            alignA: data.alignA,
+-            alignB: data.alignB,
+-            match: matchScore,
+-            mismatch: mismatchPenanlty,
+-            gap: gapPenalty,
+-        });
++        if (matchScore>0 && (mismatchPenanlty<0 && gapPenalty<0)) {
++            // input score validation
++            setAlignment({
++                alignA: data.alignA,
++                alignB: data.alignB,
++                match: matchScore,
++                mismatch: mismatchPenanlty,
++                gap: gapPenalty,
++            });
++            if (scoreErr===true) {
++                setErrMsg(false);
++            }
++        } else {
++            setErrMsg(true);
++        }
+     }
+ 
+     function onSubmit() {
+         setAlignment(undefined);
+-        // input validation
++        // input sequences validation
+         const array = ['A', 'C', 'G', 'T', '-'];
+         let A = 0; // no invalid characters in inputA
+         let B = 0; // no invalid characters in inputB
+@@ -74,6 +83,9 @@
+                 seqA: inputA,
+                 seqB: inputB,
+             });
++            console.log(inputA);
++            console.log(inputB);
++            console.log(input);
+         }
+     }
+ 
+@@ -83,6 +95,7 @@
+             <GameInput errMsgA={inputErrorA} errMsgB={inputErrorB} />
+             <br />
+             <Button
++                testid='submitBtn'
+                 variant="contained"
+                 color="secondary"
+                 onClick={onSubmit} >
+@@ -96,11 +109,14 @@
+                     (input.seqA === '' || input.seqB === '') ?
+                     <h3 style={{color: '#ea0909'}}>INPUT BOTH SEQUENCES</h3> :
+                         <GameAlign
++                        testid='gameAlign'
+                         input={input}
+-                        fetchAlign={callbackAlign} /> : ''}
++                        fetchAlign={callbackAlign} /> :
++                         <h3 testid='inputNotSet'></h3>}
+             <br />
+-            {alignment ? <GameResult aligns={alignment} /> : ''}
+-
++            {scoreErr?
++             <h3 style={{color: '#ea0909'}}>Invalid Scoring schema</h3>:
++                alignment ? <GameResult aligns={alignment} />:''}
+         </div>
+     );
+ }
+Index: src/Tests/Components/Common/CommoInput.test.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/Tests/Components/Common/CommoInput.test.js	(revision dbafed48546547019892eefa3127f5f1c12307f5)
++++ src/Tests/Components/Common/CommoInput.test.js	(date 1588149873635)
+@@ -39,7 +39,6 @@
+                 <CommonInput {...testProps2} />
+             </Provider>,
+         );
+-        //   console.log(wrapper.debug());
+         const closeButton = findByAttr(wrapper,
+             'testid',
+             'MSASeqCloseButton').hostNodes();
