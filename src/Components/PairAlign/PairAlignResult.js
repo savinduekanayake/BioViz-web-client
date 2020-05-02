@@ -5,6 +5,7 @@ import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
 import PairAlignAlignment from './PairAlignAlignment';
 import Matrix from './Matrix/Matrix';
 import {Grid, IconButton} from '@material-ui/core';
+import PlayableResut from './PlayableResut';
 
 
 export default function PairAlignResult(props) {
@@ -38,6 +39,8 @@ export default function PairAlignResult(props) {
     const matrix = <Matrix input={props.input}
         result={props.result}
         selected={selectedAlignment} />;
+    const playableResult = <PlayableResut input={props.input}
+        result={props.result}/>;
     return (
         <div>
             <Grid container direction='row'>
@@ -58,6 +61,7 @@ export default function PairAlignResult(props) {
                     {matrix}
                 </Grid>
             </Grid>
+            {playableResult}
 
         </div>
     );

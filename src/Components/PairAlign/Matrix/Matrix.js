@@ -58,11 +58,13 @@ export default function Matrix(props) {
     });
 
     const scrollToPath = () => {
-        gridRef.current.scrollToItem({
-            align: 'center',
-            columnIndex: path[path.length - 1][1],
-            rowIndex: path[path.length - 1][0],
-        });
+        if (path.length>0) {
+            gridRef.current.scrollToItem({
+                align: 'center',
+                columnIndex: path[path.length - 1][1],
+                rowIndex: path[path.length - 1][0],
+            });
+        }
     };
     useEffect(() => {
         scrollToPath();
@@ -112,7 +114,9 @@ export default function Matrix(props) {
 
 
         return (
-            <div style={style}
+            <div style={style} onClick={()=>{
+props.onClickCell(rIdx, cIdx);
+}}
                 className={`${classes.cell} ${inPath ? classes.inpath : ''}`}>
                 {cell}
             </div>
@@ -195,6 +199,9 @@ export default function Matrix(props) {
 
     );
 }
+Matrix.defaultProps = {
+    onClickCell: ()=>{},
+};
 
 Matrix.propTypes = {
     input: PropTypes.shape({
@@ -210,5 +217,6 @@ Matrix.propTypes = {
             })),
     }),
     selected: PropTypes.number,
+    onClickCell: PropTypes.func,
 };
 
