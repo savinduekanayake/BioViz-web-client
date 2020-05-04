@@ -9,6 +9,7 @@ export default function PlayableResut(props) {
     const initialModifiedResult = {};
 
     initialModifiedResult.score_matrix = props.result.score_matrix;
+    initialModifiedResult.direction_matrix = props.result.direction_matrix;
     initialModifiedResult.alignments = [{path: []}];
     const [modifiedResult, setmodifiedResult] = useState(initialModifiedResult);
     const [directionPath, setdirectionPath] = useState([]);
@@ -39,7 +40,6 @@ export default function PlayableResut(props) {
         const newPath = (r.alignments[0].path).concat([[rIdx, cIdx]]);
         r.alignments[0].path = newPath;
         setmodifiedResult({...r});
-        console.log(r);
     };
 
     const removeFromPath = () => {
@@ -149,6 +149,9 @@ PlayableResut.propTypes = {
     }),
     result: PropTypes.shape({
         score_matrix: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)),
+        direction_matrix: PropTypes.arrayOf(
+            PropTypes.arrayOf(
+                PropTypes.arrayOf(PropTypes.number))),
         alignments: PropTypes.arrayOf(
             PropTypes.shape({
                 path: PropTypes.arrayOf(

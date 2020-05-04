@@ -14,24 +14,26 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         justifyContent: 'center',
         verticalAlign: 'middle',
+        borderWidth: 1,
+        borderStyle: 'solid',
 
     },
     inpath: {
-        backgroundColor: 'red',
+        backgroundColor: 'lightgreen',
     },
     hideScroll: {
         '&::-webkit-scrollbar': {
-            width: '0.5em',
+            width: '0.2em',
             height: '0.2em',
         },
         '&::-webkit-scrollbar-button': {
-            background: '#ccc',
+            background: '#aaa',
         },
         '&::-webkit-scrollbar-track-piece': {
-            background: '#888',
+            background: '#000',
         },
         '&::-webkit-scrollbar-thumb': {
-            background: '#eee',
+            background: '#fff',
         },
     },
     matrix: {
@@ -40,6 +42,8 @@ const useStyles = makeStyles((theme) => ({
         padding: 10,
     },
 }));
+
+const cellSize = 40;
 
 
 export default function Matrix(props) {
@@ -51,6 +55,7 @@ export default function Matrix(props) {
     const inputLenA = props.input.seqA.length;
     const inputLenB = props.input.seqB.length;
     const scoreMatrix = props.result.score_matrix;
+    const directionMatrix = props.result.direction_matrix;
     const path = props.result.alignments[props.selected].path;
     const pathSet = new Set();
     path.forEach((p) => {
@@ -58,7 +63,7 @@ export default function Matrix(props) {
     });
 
     const scrollToPath = () => {
-        if (path.length>0) {
+        if (path.length > 0) {
             gridRef.current.scrollToItem({
                 align: 'center',
                 columnIndex: path[path.length - 1][1],
@@ -73,7 +78,7 @@ export default function Matrix(props) {
     const makeHeaderCell = ({columnIndex, style}) => {
         const cIdx = columnIndex;
         const headerCell = cIdx === 0 ? '' :
-        <HeaderCell value={props.input.seqB[cIdx - 1]} index={cIdx} />;
+            <HeaderCell value={props.input.seqB[cIdx - 1]} index={cIdx} />;
         return (
             <div style={style} className={classes.cell}>
                 {headerCell}
@@ -89,7 +94,7 @@ export default function Matrix(props) {
     const makeLeftHeaderCell = ({rowIndex, style}) => {
         const rIdx = rowIndex;
         const leftHeaderCell = rIdx === 0 ? '' :
-        <LeftHeaderCell value={props.input.seqA[rIdx - 1]} index={rIdx} />;
+            <LeftHeaderCell value={props.input.seqA[rIdx - 1]} index={rIdx} />;
         return (
             <div style={style} className={classes.cell}>
                 {leftHeaderCell}
@@ -107,16 +112,18 @@ export default function Matrix(props) {
         const rIdx = rowIndex;
 
 
-        const cell = <Cell value={scoreMatrix[rIdx][cIdx]} />;
+        const cell = <Cell
+            value={scoreMatrix[rIdx][cIdx]}
+            directions={directionMatrix[rIdx][cIdx]} />;
         const inPath = pathSet.has(
             `${rIdx}${cIdx}${(rIdx) * (cIdx)}`,
         );
 
 
         return (
-            <div style={style} onClick={()=>{
-props.onClickCell(rIdx, cIdx);
-}}
+            <div style={style} onClick={() => {
+                props.onClickCell(rIdx, cIdx);
+            }}
                 className={`${classes.cell} ${inPath ? classes.inpath : ''}`}>
                 {cell}
             </div>
@@ -133,16 +140,16 @@ props.onClickCell(rIdx, cIdx);
         <div className={classes.matrix}>
             <Grid container direction="row" spacing={1}>
                 <Grid item>
-                    <div style={{height: 35}}>&nbsp;</div>
-                    <br/>
+                    <div style={{height: cellSize}}>&nbsp;</div>
+                    <br />
                     <FixedSizeGrid
                         className="Grid"
                         columnCount={1}
-                        columnWidth={30}
+                        columnWidth={cellSize}
                         height={300}
                         rowCount={inputLenA + 1}
-                        rowHeight={35}
-                        width={30}
+                        rowHeight={cellSize}
+                        width={cellSize}
                         ref={leftHeaderRef}
                         style={{
                             overflowX: 'hidden',
@@ -157,10 +164,10 @@ props.onClickCell(rIdx, cIdx);
                     <FixedSizeGrid
                         className="Grid"
                         columnCount={inputLenB + 1}
-                        columnWidth={30}
-                        height={35}
+                        columnWidth={cellSize}
+                        height={cellSize}
                         rowCount={1}
-                        rowHeight={35}
+                        rowHeight={cellSize}
                         width={300}
                         ref={headerRef}
                         style={{
@@ -176,13 +183,13 @@ props.onClickCell(rIdx, cIdx);
                     <FixedSizeGrid
                         className={classes.hideScroll}
                         columnCount={inputLenB + 1}
-                        columnWidth={30}
+                        columnWidth={cellSize}
                         height={300}
                         rowCount={inputLenA + 1}
-                        rowHeight={35}
+                        rowHeight={cellSize}
                         width={300}
                         ref={gridRef}
-                        onScroll={({scrollLeft, scrollTop}) =>{
+                        onScroll={({scrollLeft, scrollTop}) => {
                             headerRef.current.scrollTo({scrollLeft});
                             leftHeaderRef.current.scrollTo({scrollTop});
                         }
@@ -200,7 +207,7 @@ props.onClickCell(rIdx, cIdx);
     );
 }
 Matrix.defaultProps = {
-    onClickCell: ()=>{},
+    onClickCell: () => { },
 };
 
 Matrix.propTypes = {
@@ -210,6 +217,9 @@ Matrix.propTypes = {
     }),
     result: PropTypes.shape({
         score_matrix: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)),
+        direction_matrix: PropTypes.arrayOf(
+            PropTypes.arrayOf(
+                PropTypes.arrayOf(PropTypes.number))),
         alignments: PropTypes.arrayOf(
             PropTypes.shape({
                 path: PropTypes.arrayOf(

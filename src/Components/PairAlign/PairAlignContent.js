@@ -7,7 +7,7 @@ import PairAlignResult from './PairAlignResult';
 import LoadingOverlay from './LoadingOverlay';
 
 export default function PairAlignContent() {
-    const [result, setResult] = React.useState(undefined);
+    const [result, setResult] = React.useState(false);
     const [loading, setloading] = React.useState(false);
     const seqA = useSelector((state) => state.P1);
     const seqB = useSelector((state) => state.P2);
