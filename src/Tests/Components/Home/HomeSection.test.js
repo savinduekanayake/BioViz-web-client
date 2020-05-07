@@ -31,11 +31,15 @@ describe('Testing the Services component', () => {
 
     it('check render HomeSection component', () => {
         expect(wrapper).toBeTruthy();
+    });
+
+    it('check render Services component', () => {
+        expect(wrapper).toBeTruthy();
         const ServicesComponent = wrapper.find(Services);
         expect(ServicesComponent.length).toBe(1);
     });
 
-    it('check render HomeSection component', () => {
+    it('check render Steps component', () => {
         const wrapper = mount(
             <Provider store={store}><HomeSection /></Provider>,
         );
@@ -44,7 +48,7 @@ describe('Testing the Services component', () => {
         expect(StepsComponent.length).toBe(1);
     });
 
-    it('check render HomeSection component', () => {
+    it('check render DialogScreen component', () => {
         const wrapper = mount(
             <Provider store={store}><HomeSection /></Provider>,
         );

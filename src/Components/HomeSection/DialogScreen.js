@@ -39,14 +39,15 @@ export default function FullScreenDialog() {
 
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+      <Button variant="outlined" color="primary" onClick={handleClickOpen}
+        testid='buttonId'>
         Knowlege Game
       </Button>
-      <Dialog fullScreen open={open}
+      <Dialog fullScreen open={open} testid='dialogId'
         onClose={handleClose} TransitionComponent={Transition}>
         <AppBar className={classes.appBar}>
-          <Toolbar>
-            <IconButton edge="start"
+          <Toolbar testid='toolbarId'>
+            <IconButton edge="start" testid='iconButtonId'
                 color="inherit" onClick={handleClose} aria-label="close">
               <CloseIcon />
             </IconButton>
