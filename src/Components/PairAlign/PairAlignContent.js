@@ -20,7 +20,7 @@ export default function PairAlignContent() {
         console.log(data);
         setloading(false);
         if (data) {
-            setResult({result: data.result, input: {seqA, seqB}});
+            setResult({result: data.result, input: {seqA, seqB, match, mismatch, gap}});
         }
     };
 
