@@ -19,7 +19,6 @@ export default function HomeSection() {
             {/* <Test /> */}
             {/* <Game /> */}
             <DialogScreen />
-            {/* <SingleService /> */}
         </div>
     );
 }
