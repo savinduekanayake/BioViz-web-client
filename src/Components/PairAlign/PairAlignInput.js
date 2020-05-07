@@ -2,15 +2,17 @@ import React from 'react';
 import {setP1Input, setP2Input} from '../../Redux/Actions/PairAlign';
 import CommonInput from '../CommonInput/CommonInput';
 import Grid from '@material-ui/core/Grid';
-import CommonScore from '../CommonScoreSchema/ScoreSchema';
+// import CommonScore from '../CommonScoreSchema/ScoreSchema';
 import {useSelector} from 'react-redux';
 import AlgoSelector from './AlgoSelector';
+import Score from '../CommonScoreSchema/Score';
+import {Box} from '@material-ui/core';
 
 
 export default function PairAlignInput() {
     return (
         <div>
-            <Grid container direction="column" spacing={3}>
+            <Grid container direction="column" spacing={2}>
                 <Grid item>
                     <CommonInput inputHandler={setP1Input}
                         value={useSelector((state) => state.P1)}
@@ -24,10 +26,14 @@ export default function PairAlignInput() {
                         type="PA" />
                 </Grid>
                 <Grid item>
-                    <CommonScore />
+                    <Box boxShadow={3} padding={5}>
+                        <AlgoSelector />
+                    </Box>
                 </Grid>
                 <Grid item>
-                    <AlgoSelector/>
+                    <Box boxShadow={3} padding={5}>
+                        <Score />
+                    </Box>
                 </Grid>
 
 
