@@ -134,7 +134,7 @@ export default function VerticalLinearStepper({HeadTitle, image, title1, title2,
             </Stepper>
             {activeStep === steps.length && (
                 <Paper square elevation={0} className={classes.resetContainer}>
-                    <Typography>
+                    <Typography component={'span'}>
                         All steps completed - you&apos;re finished
                     </Typography>
                     <Button onClick={handleReset} className={classes.button}>

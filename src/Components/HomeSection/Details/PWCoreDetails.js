@@ -29,24 +29,24 @@ export default function PWCoreDetails() {
 
       <br />
 
-      <Typography variant="h5" gutterBottom>
+      <Typography component={'span'} variant="h5" gutterBottom>
         Types of pairwise alignment
       </Typography>
 
-      <Typography variant="subtitle1" gutterBottom>
+      <Typography component={'span'} variant="subtitle1" gutterBottom>
         1. Smith Waterman
       </Typography>
-      <Typography variant="subtitle1" gutterBottom>
+      <Typography component={'span'} variant="subtitle1" gutterBottom>
         2. Needleman Wunsch
       </Typography>
 
         <br />
 
-      <Typography variant="h6" gutterBottom>
+      <Typography component={'span'} variant="h6" gutterBottom>
         Smith Waterman
       </Typography>
 
-      <Typography variant="body2" gutterBottom>
+      <Typography component={'span'} variant="body2" gutterBottom>
         body2. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
          Quos blanditiis tenetur
         unde suscipit, quam beatae rerum inventore consectetur,
@@ -54,11 +54,11 @@ export default function PWCoreDetails() {
         dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
       </Typography>
 
-      <Typography variant="h6" gutterBottom>
+      <Typography component={'span'} variant="h6" gutterBottom>
         Needleman
       </Typography>
 
-      <Typography variant="body2" gutterBottom>
+      <Typography component={'span'} variant="body2" gutterBottom>
         body2. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
          Quos blanditiis tenetur
         unde suscipit, quam beatae rerum inventore consectetur,

@@ -65,13 +65,13 @@ export default function PairwiseDetails() {
         <ExpansionPanelSummary
             aria-controls="panel1d-content" id="panel1d-header"
         >
-            <Typography>
+            <Typography component={'span'}>
                 Want to know about MSA alignment? Click here
             </Typography>
         </ExpansionPanelSummary>
 
         <ExpansionPanelDetails>
-          <Typography >
+          <Typography component={'span'} >
             {/* Details of MSA in MSACoreDetails component*/}
             <MSACoreDetails />
 

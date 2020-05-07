@@ -15,11 +15,11 @@ export default function MSACoreDetails() {
   return (
     <div className={classes.root}>
 
-      <Typography variant="h4" gutterBottom>
+      <Typography component={'span'} variant="h4" gutterBottom>
         What is MSA Alignment
       </Typography>
 
-      <Typography variant="body1" gutterBottom>
+      <Typography component={'span'} variant="body1" gutterBottom>
         body1. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
          Quos blanditiis tenetur
         unde suscipit, quam beatae rerum inventore consectetur,
@@ -29,27 +29,27 @@ export default function MSACoreDetails() {
 
       <br />
 
-      <Typography variant="h5" gutterBottom>
+      <Typography component={'span'} variant="h5" gutterBottom>
         Types of pairwise alignment
       </Typography>
 
-      <Typography variant="subtitle1" gutterBottom>
+      <Typography component={'span'} variant="subtitle1" gutterBottom>
         1. Progressive
       </Typography>
       <Typography variant="subtitle1" gutterBottom>
         2. Progressive Optimal
       </Typography>
-      <Typography variant="subtitle1" gutterBottom>
+      <Typography component={'span'} variant="subtitle1" gutterBottom>
         3. Needleman Wunsch Progressive
       </Typography>
 
         <br />
 
-      <Typography variant="h6" gutterBottom>
+      <Typography component={'span'} variant="h6" gutterBottom>
         Progressive
       </Typography>
 
-      <Typography variant="body2" gutterBottom>
+      <Typography component={'span'} variant="body2" gutterBottom>
         body2. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
          Quos blanditiis tenetur
         unde suscipit, quam beatae rerum inventore consectetur,
@@ -57,11 +57,11 @@ export default function MSACoreDetails() {
         dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
       </Typography>
 
-      <Typography variant="h6" gutterBottom>
+      <Typography component={'span'} variant="h6" gutterBottom>
         Progressive Optimal
       </Typography>
 
-      <Typography variant="body2" gutterBottom>
+      <Typography component={'span'} variant="body2" gutterBottom>
         body2. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
          Quos blanditiis tenetur
         unde suscipit, quam beatae rerum inventore consectetur,
@@ -69,11 +69,11 @@ export default function MSACoreDetails() {
         dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
       </Typography>
 
-      <Typography variant="h6" gutterBottom>
+      <Typography component={'span'} variant="h6" gutterBottom>
         Needleman Wunsch Progressive
       </Typography>
 
-      <Typography variant="body2" gutterBottom>
+      <Typography component={'span'} variant="body2" gutterBottom>
         body2. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
          Quos blanditiis tenetur
         unde suscipit, quam beatae rerum inventore consectetur,
