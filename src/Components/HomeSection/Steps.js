@@ -144,8 +144,8 @@ export default function ScrollableTabsButtonAuto() {
         Lorem ipsum dolor sit amet consectetur.
       </p>
 
-      <AppBar position="static" color="default">
-        <Tabs
+      <AppBar position="static" color="default" testid='appBarId'>
+        <Tabs testid='tabsId'
           value={value}
           onChange={handleChange}
           indicatorColor="primary"
@@ -154,24 +154,24 @@ export default function ScrollableTabsButtonAuto() {
           aria-label="scrollable auto tabs example"
           centered
         >
-          <Tab label="Pairwise Alignment" {...a11yProps(0)} />
-          <Tab label="MSA Alignment" {...a11yProps(1)} />
-          <Tab label="Game Play"
+          <Tab testid='tabsId1' label="Pairwise Alignment" {...a11yProps(0)} />
+          <Tab testid='tabsId2' label="MSA Alignment" {...a11yProps(1)} />
+          <Tab testid='tabsId3' label="Game Play"
             icon={<SportsEsportsIcon />} {...a11yProps(2)} />
 
         </Tabs>
       </AppBar>
 
-      <TabPanel value={value} index={0}>
-        <StepByStep {...pairwiseData} />
+      <TabPanel value={value} index={0} testid='tabPanelId1'>
+        <StepByStep {...pairwiseData} testid='tabPstepByStepId1'/>
       </TabPanel>
 
-      <TabPanel value={value} index={1}>
-      <StepByStep {...MSAData} />
+      <TabPanel value={value} index={1} testid='tabPanelId2'>
+      <StepByStep {...MSAData} testid='tabPstepByStepId2' />
       </TabPanel>
 
-      <TabPanel value={value} index={2}>
-      <StepByStep {...gameData} />
+      <TabPanel value={value} index={2} testid='tabPanelId3'>
+      <StepByStep {...gameData} testid='tabPstepByStepId3' />
       </TabPanel>
 
     </div>
