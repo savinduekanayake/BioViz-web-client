@@ -152,7 +152,7 @@ export default function VerticalLinearStepper({HeadTitle, image, title1, title2,
             <div className={classes.details}>
 
                  {/* eslint-disable-next-line max-len */}
-                {`${HeadTitle}` === 'Pairwise' ?<PairwaiseDetails testId = 'testPWDetails' /> : `${HeadTitle}` === 'MSA' ?<MSADetails testId = 'testPWDetails' /> : ''}
+                {`${HeadTitle}` === 'Pairwise' ?<PairwaiseDetails testid = 'testPWDetails' /> : `${HeadTitle}` === 'MSA' ?<MSADetails testid = 'testPWDetails' /> : ''}
             </div>
         </div>
     );

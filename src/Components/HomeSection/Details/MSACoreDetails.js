@@ -15,7 +15,8 @@ export default function MSACoreDetails() {
   return (
     <div className={classes.root}>
 
-      <Typography component={'span'} variant="h4" gutterBottom>
+      <Typography component={'span'} variant="h4"
+        gutterBottom testid='typographyHeaderId'>
         What is MSA Alignment
       </Typography>
 

@@ -15,11 +15,12 @@ export default function PWCoreDetails() {
   return (
     <div className={classes.root}>
 
-      <Typography variant="h4" gutterBottom>
+      <Typography component={'span'} variant="h4"
+        gutterBottom testid='typographyHeaderId'>
         What is Pairwise Alignment
       </Typography>
 
-      <Typography variant="body1" gutterBottom>
+      <Typography component={'span'} variant="body1" gutterBottom>
         body1. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
          Quos blanditiis tenetur
         unde suscipit, quam beatae rerum inventore consectetur,

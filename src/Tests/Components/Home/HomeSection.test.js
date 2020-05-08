@@ -14,7 +14,7 @@ import DialogScreen from '../../../Components/HomeSection/DialogScreen';
 
 const mockStore = configureStore();
 
-describe('Testing the Services component', () => {
+describe('Testing the HomeSection component', () => {
     let wrapper;
 
     beforeEach(() => {

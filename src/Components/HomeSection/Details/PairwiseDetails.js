@@ -59,10 +59,11 @@ export default function PairwiseDetails() {
   return (
     <div>
       <ExpansionPanel
+        testid='expansionPanelId'
         square expanded={expanded === 'panel2'}
         onChange={handleChange('panel2')}
         >
-        <ExpansionPanelSummary
+        <ExpansionPanelSummary testid='expansionPanelSummaryId'
             aria-controls="panel1d-content" id="panel1d-header"
         >
             <Typography component={'span'}>
@@ -70,7 +71,7 @@ export default function PairwiseDetails() {
             </Typography>
         </ExpansionPanelSummary>
 
-        <ExpansionPanelDetails>
+        <ExpansionPanelDetails testid='expansionPanelDetailsId'>
           <Typography component={'span'}>
             {/* Details of PW in PWCoreDetails component*/}
             <PWCoreDetails />

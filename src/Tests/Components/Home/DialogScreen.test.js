@@ -13,7 +13,7 @@ import Game from '../../../Components/HomeSection/Game';
 
 const mockStore = configureStore();
 
-describe('Testing the Services component', () => {
+describe('Testing the DialogScreen component', () => {
     let wrapper;
 
     beforeEach(() => {

@@ -132,7 +132,8 @@ export default function TransferList() {
         subheader={`${numberOfChecked(items)}/${items.length} selected`}
       />
       <Divider />
-      <List className={classes.list} dense component="div" role="list" testid='listId'>
+      <List className={classes.list} dense component="div" role="list"
+        testid='listId'>
         {items.map((value) => {
           const labelId = `transfer-list-all-item-${value}-label`;
 
