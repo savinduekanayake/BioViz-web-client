@@ -9,7 +9,7 @@ import {findByAttr} from '../../helper';
 
 
 import DialogScreen from '../../../Components/HomeSection/DialogScreen';
-
+import Game from '../../../Components/HomeSection/Game';
 
 const mockStore = configureStore();
 
@@ -111,5 +111,12 @@ describe('Testing the Services component', () => {
             'testid',
             'iconButtonId').hostNodes();
         expect(IconButtonComponent.length).toBe(1);
+    });
+
+    it('Find game component', () => {
+        expect(wrapper).toBeTruthy();
+
+        const GameComponent = wrapper.find(<Game />);
+        expect(GameComponent).toBeTruthy();
     });
 });

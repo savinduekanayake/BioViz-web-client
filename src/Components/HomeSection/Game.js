@@ -112,11 +112,12 @@ export default function TransferList() {
   };
 
   const customList = (title, items) => (
-    <Card>
-      <CardHeader
+    <Card testid='cardId'>
+      <CardHeader testid='cardHeaderId'
         className={classes.cardHeader}
         avatar={
           <Checkbox
+            testid='checkBoxId'
             onClick={handleToggleAll(items)}
             checked=
             {numberOfChecked(items) === items.length && items.length !== 0}
@@ -131,18 +132,19 @@ export default function TransferList() {
         subheader={`${numberOfChecked(items)}/${items.length} selected`}
       />
       <Divider />
-      <List className={classes.list} dense component="div" role="list">
+      <List className={classes.list} dense component="div" role="list" testid='listId'>
         {items.map((value) => {
           const labelId = `transfer-list-all-item-${value}-label`;
 
           return (
             <ListItem
+                testid='listItemId'
                 key={value}
                 role="listitem"
                 button
                 onClick={handleToggle(value)}
             >
-              <ListItemIcon>
+              <ListItemIcon >
                 <Checkbox
                   checked={checked.indexOf(value) !== -1}
                   tabIndex={-1}
