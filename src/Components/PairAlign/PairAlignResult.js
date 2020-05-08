@@ -10,6 +10,7 @@ import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
 import Report from '../CommonReport/Report';
 import {makeStyles} from '@material-ui/core/styles';
+import ExtendedMatrix from './Matrix/ExtendedMatrix';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -53,15 +54,29 @@ export default function PairAlignResult(props) {
         setReportOpen(false);
     };
 
+    let matrix;
+    let playableResult;
+    if (props.input.scoringMethod === 'BASIC') {
+        matrix = <Matrix input={props.input}
+            result={props.result}
+            selected={selectedAlignment} />;
+        playableResult = <PlayableResut input={props.input}
+            result={props.result} />;
+    } else {
+        matrix = <ExtendedMatrix
+            input={props.input}
+            result={props.result}
+            selected={selectedAlignment}
+        />;
+        playableResult = null;
+    }
 
-    const matrix = <Matrix input={props.input}
-        result={props.result}
-        selected={selectedAlignment} />;
-    const playableResult = <PlayableResut input={props.input}
-        result={props.result} />;
     return (
         <div>
             <Grid container direction='row'>
+                <Grid item>
+                    {matrix}
+                </Grid>
                 <Grid item xs={1}>
                     <IconButton onClick={onNext}>
                         <KeyboardArrowLeftIcon />
@@ -75,9 +90,7 @@ export default function PairAlignResult(props) {
                         <KeyboardArrowRightIcon />
                     </IconButton>
                 </Grid>
-                <Grid item>
-                    {matrix}
-                </Grid>
+
                 <Grid item>
                     <Button variant="outlined" onClick={handleReportOpen}>
                         Generate Report
@@ -92,8 +105,8 @@ export default function PairAlignResult(props) {
                     >
                         <Report
                             sequences={[props.input.seqA, props.input.seqB]}
-                            scores = {{match, mismatch, gap}}
-                            result = {props.result}
+                            scores={{match, mismatch, gap}}
+                            result={props.result}
                         />
                     </Modal>
                 </Grid>
@@ -115,6 +128,7 @@ PairAlignResult.propTypes = {
         ),
     }),
     input: PropTypes.shape({
+        scoringMethod: PropTypes.string,
         seqA: PropTypes.string,
         seqB: PropTypes.string,
         match: PropTypes.number,
