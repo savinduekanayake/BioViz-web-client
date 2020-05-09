@@ -51,8 +51,9 @@ export default function SingleService({title, description, image}) {
 
                     <div className={classes.DivDecoration}>
                         <img className={style.image} src={image} alt='' />
-                        <h3 className={style.title}>{title}</h3>
+                        <h3 className={style.title} >{title}</h3>
                         <ViewMore
+                            testid='viewMoreId'
                             title={'More details..'}
                             description={description} />
                     </div>
@@ -67,5 +68,5 @@ export default function SingleService({title, description, image}) {
 SingleService.propTypes = {
     title: PropTypes.string,
     description: PropTypes.string,
-    image: PropTypes.isRequired,
+    image: PropTypes.node,
   };

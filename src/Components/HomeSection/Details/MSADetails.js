@@ -59,19 +59,20 @@ export default function PairwiseDetails() {
   return (
     <div>
       <ExpansionPanel
+        testid='expansionPanelId'
         square expanded={expanded === 'panel2'}
         onChange={handleChange('panel2')}
         >
-        <ExpansionPanelSummary
+        <ExpansionPanelSummary testid='expansionPanelSummaryId'
             aria-controls="panel1d-content" id="panel1d-header"
         >
-            <Typography>
+            <Typography component={'span'}>
                 Want to know about MSA alignment? Click here
             </Typography>
         </ExpansionPanelSummary>
 
-        <ExpansionPanelDetails>
-          <Typography >
+        <ExpansionPanelDetails testid='expansionPanelDetailsId'>
+          <Typography component={'span'} >
             {/* Details of MSA in MSACoreDetails component*/}
             <MSACoreDetails />
 
