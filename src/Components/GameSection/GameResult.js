@@ -66,15 +66,18 @@ export default function GameResult(props) {
     for (let i = 0; i < minLength; i++) {
         if ((alignA.charAt(i) === '-' || alignB.charAt(i) === '-') ||
             (alignA.charAt(i) === 'e' || alignB.charAt(i) === 'e')) {
+                // if gap in the middle or end
             score += gapPenalty;
             gapSc += gapPenalty;
             row.push({type: <MinimizeIcon />, index: i+1});
         } else if (alignA.charAt(i) === alignB.charAt(i)) {
+                // if 2 elements are matching
             score += matchScore;
             matchSc += matchScore;
             row.push({type: <DoneOutlineRoundedIcon
                  className={classes[alignA.charAt(i)]} />, index: i+1});
         } else {
+                // if 2 elements mismatch
             score += mismatchPenanlty;
             mismatchSc += mismatchPenanlty;
             row.push({type: <CloseRoundedIcon style={{color: '#9b8989'}} />,

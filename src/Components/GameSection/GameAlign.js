@@ -3,9 +3,11 @@ import Base from './Base';
 import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
 import {Tooltip, Box} from '@material-ui/core';
+import RotateLeftIcon from '@material-ui/icons/RotateLeft';
 import {makeStyles} from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import GamePlay from './GamePlay';
+import GameAlignTable from './GameAlignTable';
 
 const useStyles = makeStyles(() => ({
     seq: {
@@ -19,6 +21,15 @@ const useStyles = makeStyles(() => ({
         borderRadius: '10px',
         padding: 30,
         paddingBottom: 40,
+    },
+    resetBtn: {
+        marginRight: 20,
+        color: '#1e2e51',
+        fontWeight: 'bolder',
+    },
+    submitBtn: {
+        color: '#1e2e51',
+        fontWeight: 'bolder',
     },
 }));
 
@@ -40,7 +51,7 @@ export default function GameAlign(props) {
             base === 'e' ? 'end' : 'move -->';
         row1.push({
             base: <Base index={index} base={base} />,
-            id: index, title: title,
+            id: index, title: title, label: align.seqA.charAt(i),
         });
     }
 
@@ -52,7 +63,7 @@ export default function GameAlign(props) {
             base === 'e' ? 'end' : 'move -->';
         row2.push({
             base: <Base index={index} base={base} />,
-            id: index, title: title,
+            id: index, title: title, label: align.seqB.charAt(j),
         });
     }
 
@@ -141,26 +152,29 @@ export default function GameAlign(props) {
     }
 
     const align1 = row1.map(
-        (ele) => <td key={ele.id}>
+        (ele) => <td key={ele.id} testid={'outputSeqA'}>
             <Tooltip title={ele.title} placement="top"
              className={classes.seq} arrow>
                 <Button
-                    id={'A' + ele.id}
+                    testid={'A' + ele.id}
                     variant="contained"
                     size="small"
                     style={{backgroundColor: '#0a22536e'}}
-                    onClick={() => changeSeqA(ele.id)} >{ele.base}
+                    onClick={() => changeSeqA(ele.id)}
+                    label={ele.label} >{ele.base}
                 </Button>
             </Tooltip></td>);
 
-    const align2 = row2.map((ele) => <td key={ele.id}>
+    const align2 = row2.map((ele) => <td key={ele.id} testid={'outputSeqB'}>
         <Tooltip title={ele.title} placement="bottom"
              className={classes.seq} arrow>
-            <Button id={'B' + ele.id}
+            <Button
+                testid={'B' + ele.id}
                 variant="contained"
                 size="small"
                 style={{backgroundColor: '#0a22536e'}}
-                onClick={() => changeSeqB(ele.id)} >{ele.base}
+                onClick={() => changeSeqB(ele.id)}
+                label={ele.label} >{ele.base}
             </Button></Tooltip></td>);
 
     const indexLine = row1.map((ele) => <td key={ele.id}>
@@ -168,18 +182,24 @@ export default function GameAlign(props) {
 
     return (
         <Box boxShadow={3} className={classes.box}>
-            <GamePlay align1={align1} align2={align2} indexLine={indexLine}/>
+            <GamePlay/>
+            <br /><br />
+            <GameAlignTable align1={align1} align2={align2}
+             indexLine={indexLine}/>
+            <div testid={'checkState'} value={align}/>
             <br /><br />
             <Button
-                style={{marginRight: 50}}
-                variant="contained"
-                color="secondary"
-                onClick={reset}>
+                testid='resetBtn'
+                className={classes.resetBtn}
+                variant="outlined"
+                color="primary"
+                onClick={reset} endIcon={<RotateLeftIcon/>}>
                 Reset
             </Button>
             <Button
-                variant="contained"
-                color="secondary"
+                variant="outlined"
+                className={classes.submitBtn}
+                color="primary"
                 onClick={sendAlign} endIcon={<Icon>send</Icon>}
             >
                 Submit
@@ -189,7 +209,10 @@ export default function GameAlign(props) {
 }
 
 GameAlign.propTypes = {
-    input: PropTypes.object,
+    input: PropTypes.shape({
+        seqA: PropTypes.string,
+        seqB: PropTypes.string,
+    }),
     fetchAlign: PropTypes.func,
 };
 

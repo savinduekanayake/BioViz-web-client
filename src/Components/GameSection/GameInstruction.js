@@ -80,7 +80,7 @@ export default function GameInstruction() {
                 <DialogContent dividers>
                         <ul>
                             <li><h3>Click on an element in the sequence
-                                 to move the whole sequence starting
+                                 to move the sub sequence starting
                                   from that point, to the right.</h3></li>
                             <li><h3>Try to avoid unnecessary gaps
                                  in the middle of the sequences.</h3></li>
