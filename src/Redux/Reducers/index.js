@@ -1,4 +1,4 @@
-import {modeReducer} from './Mode';
+import {modeReducer, genomeTypeReducer} from './Mode';
 import {P1Reducer, P2Reducer, PAlgoReducer} from './PairAlign';
 import {combineReducers} from 'redux';
 import {
@@ -8,12 +8,15 @@ import {
     GapExtendPenaltyReducer,
     ScoringMethodReducer,
     TracebackPriorityReducer,
+    SimilarityMatrixNameReducer,
+    DNASimilarityMatrixReducer,
 } from './Score';
 import {MSASeqReducer, MSAAlgoReducer, MSAOrderReducer} from './MSA';
 import {SeqAReducer, SeqBReducer} from './Game';
 
 const allReducers = combineReducers({
     mode: modeReducer,
+    genomeType: genomeTypeReducer,
     P1: P1Reducer,
     P2: P2Reducer,
     matchScore: MatchScoreReducer,
@@ -23,6 +26,8 @@ const allReducers = combineReducers({
     gapExtendPenalty: GapExtendPenaltyReducer,
     scoringMethod: ScoringMethodReducer,
     tracebackPriority: TracebackPriorityReducer,
+    similarityMatrixName: SimilarityMatrixNameReducer,
+    DNASimilarityMatrix: DNASimilarityMatrixReducer,
     MSASeq: MSASeqReducer,
     pAlgo: PAlgoReducer,
     msaAlgo: MSAAlgoReducer,

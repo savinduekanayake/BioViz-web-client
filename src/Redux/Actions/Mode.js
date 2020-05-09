@@ -5,4 +5,9 @@ export const setMode = (mode)=>{
     };
 };
 
-
+export const setGenomeType = (genomeType)=>{
+    return {
+        type: 'SET_GENOME_TYPE',
+        payload: genomeType,
+    };
+};

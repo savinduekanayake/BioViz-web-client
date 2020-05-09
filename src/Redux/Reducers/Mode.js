@@ -8,3 +8,12 @@ export const modeReducer = (state = 0, action)=>{
     }
 };
 
+export const genomeTypeReducer = (state = 'DNA', action)=>{
+    switch (action.type) {
+        case 'SET_GENOME_TYPE':
+            return action.payload;
+
+        default:
+            return state;
+    }
+};
