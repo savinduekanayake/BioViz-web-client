@@ -33,10 +33,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: 'black',
     },
     emptyRow: {
-        '& tr': {
-            height: '20px',
-
-        },
+        height: '25px',
     },
 
 }));
@@ -51,18 +48,37 @@ export default function PairAlignAlignment(props) {
     const makeSegment = ({index, style}) => {
         const classA = algnA.charAt(index) === '-' ? 'ga' : algnA.charAt(index);
         const classB = algnB.charAt(index) === '-' ? 'ga' : algnB.charAt(index);
+
+        const upper = <Avatar variant="square"
+            className={`${classes.avatar} ${classes[classA]}`}>
+            {algnA.charAt(index)}</Avatar>;
+
+
+        const lower = <Avatar variant="square"
+            className={`${classes.avatar} ${classes[classB]}`}>
+            {algnB.charAt(index)}</Avatar>;
+
         const middle = (algnA.charAt(index) === algnB.charAt(index) &&
             algnA.charAt(index) !== '-') ? '\u007C' : '';
+
         return (
             <div style={style}>
-                <table className={classes.emptyRow}>
-                    <tr><Avatar variant="square"
-                        className={`${classes.avatar} ${classes[classA]}`}>
-                        {algnA.charAt(index)}</Avatar></tr>
-                    <tr><b>{middle}</b></tr>
-                    <tr> <Avatar variant="square"
-                        className={`${classes.avatar} ${classes[classB]}`}>
-                        {algnB.charAt(index)}</Avatar></tr>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                {upper}
+                            </td>
+                        </tr>
+                        <tr className={classes.emptyRow}>
+                            <td><b>{middle}</b></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                {lower}
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
 
 
@@ -82,7 +98,7 @@ export default function PairAlignAlignment(props) {
                 itemCount={totalLen}
                 itemSize={20}
                 layout="horizontal"
-                width={Math.min(500, 20*totalLen)}
+                width={Math.min(500, 20 * totalLen)}
             >
                 {makeSegment}
             </FixedSizeList>
@@ -92,8 +108,7 @@ export default function PairAlignAlignment(props) {
 
 PairAlignAlignment.propTypes = {
     alignment: PropTypes.shape({
-            algn_a: PropTypes.string,
-            algn_b: PropTypes.string,
-        }),
-    index: PropTypes.number,
+        algn_a: PropTypes.string,
+        algn_b: PropTypes.string,
+    }),
 };

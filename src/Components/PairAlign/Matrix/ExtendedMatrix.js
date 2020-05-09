@@ -1,11 +1,11 @@
 import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
-import Cell from './Cell';
 import HeaderCell from './HeaderCell';
 import {FixedSizeGrid} from 'react-window';
 import {makeStyles} from '@material-ui/core/styles';
 import LeftHeaderCell from './LeftHeaderCell';
 import {Grid} from '@material-ui/core';
+import ExtendedCell from './ExtendedCell';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -14,17 +14,16 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         justifyContent: 'center',
         verticalAlign: 'middle',
-        borderWidth: 1,
+        borderWidth: 2,
         borderStyle: 'solid',
-
     },
     inpath: {
         backgroundColor: 'lightgreen',
     },
     hideScroll: {
         '&::-webkit-scrollbar': {
-            width: '0.2em',
-            height: '0.2em',
+            width: '0.5em',
+            height: '0.5em',
         },
         '&::-webkit-scrollbar-button': {
             background: '#aaa',
@@ -44,9 +43,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const cellSize = 40;
+const matrixSize = 500;
 
-
-export default function Matrix(props) {
+export default function ExtendedMatrix(props) {
     const headerRef = React.createRef();
     const leftHeaderRef = React.createRef();
     const classes = useStyles();
@@ -59,7 +58,7 @@ export default function Matrix(props) {
     const path = props.result.alignments[props.selected].path;
     const pathSet = new Set();
     path.forEach((p) => {
-        pathSet.add(`${p[0]}${p[1]}${p[0] * p[1]}`);
+        pathSet.add(`${p[0]}|${p[1]}|${p[2]}`);
     });
 
     const scrollToPath = () => {
@@ -110,21 +109,28 @@ export default function Matrix(props) {
     const makeCell = ({columnIndex, rowIndex, style}) => {
         const cIdx = columnIndex;
         const rIdx = rowIndex;
+        let inPathSegment;
+        for (let index = 0; index < 3; index++) {
+            if (pathSet.has(`${rIdx}|${cIdx}|${index}`)) {
+                inPathSegment = index;
+                break;
+            }
+        }
 
 
-        const cell = <Cell
-            value={scoreMatrix[rIdx][cIdx]}
-            directions={directionMatrix[rIdx][cIdx]} />;
-        const inPath = pathSet.has(
-            `${rIdx}${cIdx}${(rIdx) * (cIdx)}`,
-        );
+        const cell = <ExtendedCell
+            scores={scoreMatrix[rIdx][cIdx]}
+            directions={directionMatrix[rIdx][cIdx]}
+            cellSize={cellSize}
+            inPathSegment={inPathSegment}/>;
+        // const inPath = pathSet.has(
+        //     `${rIdx}|${cIdx}${(rIdx) * (cIdx)}`,
+        // );
 
 
         return (
-            <div style={style} onClick={() => {
-                props.onClickCell(rIdx, cIdx);
-            }}
-                className={`${classes.cell} ${inPath ? classes.inpath : ''}`}>
+            <div style={style}
+                className={`${classes.cell}`}>
                 {cell}
             </div>
         );
@@ -146,9 +152,9 @@ export default function Matrix(props) {
                         className="Grid"
                         columnCount={1}
                         columnWidth={cellSize}
-                        height={300}
+                        height={matrixSize}
                         rowCount={inputLenA + 1}
-                        rowHeight={cellSize}
+                        rowHeight={cellSize*3}
                         width={cellSize}
                         ref={leftHeaderRef}
                         style={{
@@ -164,11 +170,11 @@ export default function Matrix(props) {
                     <FixedSizeGrid
                         className="Grid"
                         columnCount={inputLenB + 1}
-                        columnWidth={cellSize}
+                        columnWidth={cellSize*3}
                         height={cellSize}
                         rowCount={1}
                         rowHeight={cellSize}
-                        width={300}
+                        width={matrixSize}
                         ref={headerRef}
                         style={{
                             overflowX: 'hidden',
@@ -183,11 +189,11 @@ export default function Matrix(props) {
                     <FixedSizeGrid
                         className={classes.hideScroll}
                         columnCount={inputLenB + 1}
-                        columnWidth={cellSize}
-                        height={300}
+                        columnWidth={cellSize*3}
+                        height={matrixSize}
                         rowCount={inputLenA + 1}
-                        rowHeight={cellSize}
-                        width={300}
+                        rowHeight={cellSize*3}
+                        width={matrixSize}
                         ref={gridRef}
                         onScroll={({scrollLeft, scrollTop}) => {
                             headerRef.current.scrollTo({scrollLeft});
@@ -206,11 +212,9 @@ export default function Matrix(props) {
 
     );
 }
-Matrix.defaultProps = {
-    onClickCell: () => { },
-};
 
-Matrix.propTypes = {
+
+ExtendedMatrix.propTypes = {
     input: PropTypes.shape({
         seqA: PropTypes.string,
         seqB: PropTypes.string,
@@ -227,6 +231,5 @@ Matrix.propTypes = {
             })),
     }),
     selected: PropTypes.number,
-    onClickCell: PropTypes.func,
 };
 

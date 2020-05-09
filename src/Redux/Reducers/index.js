@@ -4,6 +4,10 @@ import {combineReducers} from 'redux';
 import {
     MatchScoreReducer, MisMatchPenaltyReducer,
     GapPenaltyReducer,
+    GapOpenPenaltyReducer,
+    GapExtendPenaltyReducer,
+    ScoringMethodReducer,
+    TracebackPriorityReducer,
 } from './Score';
 import {MSASeqReducer, MSAAlgoReducer, MSAOrderReducer} from './MSA';
 import {SeqAReducer, SeqBReducer} from './Game';
@@ -15,6 +19,10 @@ const allReducers = combineReducers({
     matchScore: MatchScoreReducer,
     mismatchPenalty: MisMatchPenaltyReducer,
     gapPenalty: GapPenaltyReducer,
+    gapOpenPenalty: GapOpenPenaltyReducer,
+    gapExtendPenalty: GapExtendPenaltyReducer,
+    scoringMethod: ScoringMethodReducer,
+    tracebackPriority: TracebackPriorityReducer,
     MSASeq: MSASeqReducer,
     pAlgo: PAlgoReducer,
     msaAlgo: MSAAlgoReducer,
