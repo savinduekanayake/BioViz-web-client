@@ -37,6 +37,6 @@ export default function TextInput(props) {
 TextInput.propTypes = {
     type: PropTypes.string,
     inputHandler: PropTypes.func,
-    MSAkey: PropTypes.string,
+    MSAkey: PropTypes.number,
     value: PropTypes.string,
 };

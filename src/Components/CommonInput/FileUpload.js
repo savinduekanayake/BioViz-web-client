@@ -53,5 +53,5 @@ export default function FileUpload(props) {
 FileUpload.propTypes = {
     type: PropTypes.string,
     inputHandler: PropTypes.func,
-    MSAkey: PropTypes.string,
+    MSAkey: PropTypes.number,
 };

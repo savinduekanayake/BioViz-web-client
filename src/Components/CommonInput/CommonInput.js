@@ -65,7 +65,7 @@ CommonInput.propTypes = {
     inputHandler: PropTypes.func,
     closeHandler: PropTypes.func,
     title: PropTypes.string,
-    MSAkey: PropTypes.string,
+    MSAkey: PropTypes.number,
     value: PropTypes.string,
     type: PropTypes.string,
 };

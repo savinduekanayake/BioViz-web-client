@@ -78,5 +78,5 @@ export default function APIinput(props) {
 APIinput.propTypes = {
     inputHandler: PropTypes.func,
     type: PropTypes.string,
-    MSAkey: PropTypes.string,
+    MSAkey: PropTypes.number,
 };
