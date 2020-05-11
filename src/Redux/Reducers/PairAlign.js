@@ -20,7 +20,7 @@ export const P2Reducer = (state = paInput.seqB, action)=>{
     }
 };
 
-export const PAlgoReducer = (state = '1', action)=>{
+export const PAlgoReducer = (state = 'GLOBAL', action)=>{
     switch (action.type) {
         case 'SET_P_ALGO':
             return action.payload;

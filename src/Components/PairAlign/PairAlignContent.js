@@ -46,7 +46,7 @@ export default function PairAlignContent() {
     const onSubmit = () => {
         setResult(undefined);
         setloading(true);
-        if (algo === '1') {
+        if (algo === 'GLOBAL') {
             if (scoringMethod === 'BASIC') {
                 fetchNW(seqA, seqB, match, mismatch, gap, onReceive);
             } else {
