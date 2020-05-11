@@ -11,6 +11,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Radio from '@material-ui/core/Radio';
 import {setPAlgo} from '../../../Redux/Actions/PairAlign';
 import allReducers from '../../../Redux/Reducers';
+import {act} from 'react-dom/test-utils';
 
 const mockStore = configureStore();
 
@@ -42,39 +43,36 @@ describe('PairAlign algorithm selector', () => {
         );
         const algoSelector = wrapper.find(RadioGroup);
 
-        algoSelector.last().prop('onChange')({target: {name: 'algorithm', value: 'LOCAL'}});
+        algoSelector.last().prop('onChange')(
+            {target: {name: 'algorithm', value: 'LOCAL'}},
+        );
         expect(store.getActions().length).toBe(1);
         expect((store.getActions()[0])).toMatchObject(setPAlgo('LOCAL'));
-        algoSelector.last().prop('onChange')({target: {name: 'algorithm', value: 'GLOBAL'}});
+
+        algoSelector.last().prop('onChange')(
+            {target: {name: 'algorithm', value: 'GLOBAL'}},
+        );
         expect(store.getActions().length).toBe(2);
         expect((store.getActions()[1])).toMatchObject(setPAlgo('GLOBAL'));
     });
 
     test('active radio button changes on state change', async () => {
+        const inputs = ['LOCAL', 'GLOBAL', 'LOCAL',
+            'LOCAL', 'GLOBAL', 'GLOBAL'];
         let wrapper = mount(
             <Provider store={trueStore}><AlgoSelector /></Provider>,
         );
         let algoSelector = wrapper.find(RadioGroup);
+        for (let i = 0; i < inputs.length; i++) {
+            act(()=>{
+                algoSelector.last().prop('onChange')(
+                    {target: {name: 'algorithm', value: inputs[i]}},
+                );
+            });
 
-        algoSelector.last().prop('onChange')({target: {name: 'algorithm', value: 'LOCAL'}});
-        wrapper = await wrapper.update();
-        algoSelector = wrapper.find(RadioGroup);
-        expect(algoSelector.last().props().value).toBe('LOCAL');
-
-
-        algoSelector.last().prop('onChange')({target: {name: 'algorithm', value: 'GLOBAL'}});
-        wrapper = await wrapper.update();
-        algoSelector = wrapper.find(RadioGroup);
-        expect(algoSelector.last().props().value).toBe('GLOBAL');
-
-        algoSelector.last().prop('onChange')({target: {name: 'algorithm', value: 'GLOBAL'}});
-        wrapper =await wrapper.update();
-        algoSelector = wrapper.find(RadioGroup);
-        expect(algoSelector.last().props().value).toBe('GLOBAL');
-
-        algoSelector.last().prop('onChange')({target: {name: 'algorithm', value: 'LOCAL'}});
-        wrapper = await wrapper.update();
-        algoSelector = wrapper.find(RadioGroup);
-        expect(algoSelector.last().props().value).toBe('LOCAL');
+            wrapper = await wrapper.update();
+            algoSelector = wrapper.find(RadioGroup);
+            expect(algoSelector.last().props().value).toBe(inputs[i]);
+        }
     });
 });
