@@ -101,6 +101,42 @@ describe('Testing the Steps component', () => {
             'tabPanelId3').hostNodes();
         expect(TabPanel3Component.length).toBe(1);
     });
+
+    it('render the both div h2 root element in Steps component', () => {
+        const OneStepByStepComponent = wrapper.find(StepByStep);
+        expect(OneStepByStepComponent).toBeTruthy();
+
+        const h2Tags = wrapper.find('div h2');
+        expect(h2Tags.length).toBe(2);
+    });
+
+    it('render the both root div p element in Steps component', () => {
+        const OneStepByStepComponent = wrapper.find(StepByStep);
+        expect(OneStepByStepComponent).toBeTruthy();
+
+        const pTags = wrapper.find('div p');
+        expect(pTags.length).toBe(2);
+    });
+
+    it('try to render the hiden insde components(Typography) in Steps component', () => {
+        const OneStepByStepComponent = wrapper.find(StepByStep);
+        expect(OneStepByStepComponent).toBeTruthy();
+
+        const TypographyrComponent = findByAttr(wrapper,
+            'testid',
+            'typography2Id').hostNodes();
+        expect(TypographyrComponent.length).toBe(0);
+    });
+
+    it('try to render the insde components(Box) in Steps component', () => {
+        const OneStepByStepComponent = wrapper.find(StepByStep);
+        expect(OneStepByStepComponent).toBeTruthy();
+
+        const BoxComponent = findByAttr(wrapper,
+            'testid',
+            'boxId').hostNodes();
+        expect(BoxComponent.length).toBe(1);
+    });
 });
 
 

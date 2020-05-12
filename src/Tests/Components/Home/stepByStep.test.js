@@ -2,10 +2,10 @@
 /* eslint-disable no-undef */
 import React from 'react';
 React.useLayoutEffect = React.useEffect;
-import { Provider } from 'react-redux';
+import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
-import { mount } from 'enzyme';
-import { findByAttr } from '../../helper';
+import {mount} from 'enzyme';
+import {findByAttr} from '../../helper';
 
 // page
 import StepByStep from '../../../Components/HomeSection/StepByStep';
