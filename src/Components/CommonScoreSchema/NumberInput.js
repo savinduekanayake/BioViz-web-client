@@ -53,7 +53,7 @@ export default function NumberInput(props) {
 }
 
 NumberInput.propTypes = {
-    inputSelector: PropTypes.func,
+    inputSelector: PropTypes.string,
     inputHandler: PropTypes.func,
     acceptedType: PropTypes.string,
     label: PropTypes.string,
