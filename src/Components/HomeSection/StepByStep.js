@@ -92,11 +92,12 @@ export default function VerticalLinearStepper({HeadTitle, image, title1, title2,
 
             <h2>{HeadTitle}</h2>
 
-            <Stepper activeStep={activeStep} orientation="vertical">
+            <Stepper activeStep={activeStep} orientation="vertical"
+                testid='stepperId'>
                 {steps.map((label, index) => (
-                    <Step key={label}>
-                        <StepLabel>{label}</StepLabel>
-                        <StepContent>
+                    <Step key={label} testid='stepId'>
+                        <StepLabel testid='stepLabelId'>{label}</StepLabel>
+                        <StepContent testid='stepContentId'>
                             <div className={classes.actionsContainer}>
                                 <div>
                                     <img
@@ -104,18 +105,18 @@ export default function VerticalLinearStepper({HeadTitle, image, title1, title2,
                                         src={image} alt=''
                                     />
 
-                                    <Typography>
+                                    <Typography testid='typographyId'>
                                         {getStepContent(index)}
                                     </Typography>
 
-                                    <Button
+                                    <Button testid='buttonId'
                                         disabled={activeStep === 0}
                                         onClick={handleBack}
                                         className={classes.button}
                                     >
                                         Back
                                     </Button>
-                                    <Button
+                                    <Button testid='finishButtonId'
                                         variant="contained"
                                         color="primary"
                                         onClick={handleNext}
@@ -133,15 +134,17 @@ export default function VerticalLinearStepper({HeadTitle, image, title1, title2,
                 ))}
             </Stepper>
             {activeStep === steps.length && (
-                <Paper square elevation={0} className={classes.resetContainer}>
-                    <Typography component={'span'}>
+                <Paper square elevation={0} className={classes.resetContainer}
+                    testid='paperId'>
+                    <Typography component={'span'} testid='finishTypographyId'>
                         All steps completed - you&apos;re finished
                     </Typography>
-                    <Button onClick={handleReset} className={classes.button}>
+                    <Button onClick={handleReset} className={classes.button}
+                        testid='resetButtonId'>
                         Reset
                     </Button>
 
-                    <Button
+                    <Button testid='finalButtonId'
                         variant="outlined"
                         color="secondary"
                     >Go To Pairwise Alignment

@@ -131,7 +131,7 @@ export default function TransferList() {
         title={title}
         subheader={`${numberOfChecked(items)}/${items.length} selected`}
       />
-      <Divider />
+      <Divider testid='dividerId' />
       <List className={classes.list} dense component="div" role="list"
         testid='listId'>
         {items.map((value) => {
@@ -145,8 +145,8 @@ export default function TransferList() {
                 button
                 onClick={handleToggle(value)}
             >
-              <ListItemIcon >
-                <Checkbox
+              <ListItemIcon testid='listItemIconId'>
+                <Checkbox testid='checkBox2Id'
                   checked={checked.indexOf(value) !== -1}
                   tabIndex={-1}
                   disableRipple

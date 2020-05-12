@@ -76,4 +76,31 @@ describe('Testing the Game component', () => {
             'listItemId').hostNodes();
         expect(ListItemComponent.length).toBe(6);
     });
+
+    it('render the insde components(ListItemIcon) in Game component', () => {
+        expect(wrapper).toBeTruthy();
+
+        const ListIteIconmComponent = findByAttr(wrapper,
+            'testid',
+            'listItemIconId').hostNodes();
+        expect(ListIteIconmComponent.length).toBe(6);
+    });
+
+    it('render the insde components(CheckBox-inside) in Game component', () => {
+        expect(wrapper).toBeTruthy();
+
+        const CheckBoxComponent = findByAttr(wrapper,
+            'testid',
+            'checkBox2Id').hostNodes();
+        expect(CheckBoxComponent.length).toBe(6);
+    });
+
+    it('render the insde components(Divider) in Game component', () => {
+        expect(wrapper).toBeTruthy();
+
+        const DividerComponent = findByAttr(wrapper,
+            'testid',
+            'dividerId').hostNodes();
+        expect(DividerComponent.length).toBe(2);
+    });
 });
