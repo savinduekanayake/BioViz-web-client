@@ -2,25 +2,29 @@ import React from 'react';
 import PairAlignInput from './PairAlignInput';
 import Button from '@material-ui/core/Button';
 import {useSelector} from 'react-redux';
-import {fetchNW, fetchSW} from '../../API/PairAlign';
+import {fetchNW, fetchSW, fetchNWExtended, fetchSWExtended} from '../../API/PairAlign';
 import PairAlignResult from './PairAlignResult';
 import LoadingOverlay from './LoadingOverlay';
 
 export default function PairAlignContent() {
-    const [result, setResult] = React.useState(undefined);
+    const [result, setResult] = React.useState(false);
     const [loading, setloading] = React.useState(false);
     const seqA = useSelector((state) => state.P1);
     const seqB = useSelector((state) => state.P2);
     const match = useSelector((state) => state.matchScore);
     const mismatch = useSelector((state) => state.mismatchPenalty);
     const gap = useSelector((state) => state.gapPenalty);
+    const gapOpen = useSelector((state) => state.gapOpenPenalty);
+    const gapExtend = useSelector((state) => state.gapExtendPenalty);
+    const scoringMethod = useSelector((state) => state.scoringMethod);
+    const tracebackPriority = useSelector((state) => state.tracebackPriority);
     const algo = useSelector((state) => state.pAlgo);
 
     const onReceive = (data) => {
         console.log(data);
         setloading(false);
         if (data) {
-            setResult({result: data.result, input: {seqA, seqB}});
+            setResult({result: data.result, input: {seqA, seqB, match, mismatch, gap, gapOpen, gapExtend, scoringMethod}});
         }
     };
 
@@ -28,9 +32,17 @@ export default function PairAlignContent() {
         setResult(undefined);
         setloading(true);
         if (algo === '1') {
-            fetchNW(seqA, seqB, match, mismatch, gap, onReceive);
+            if (scoringMethod==='BASIC') {
+                fetchNW(seqA, seqB, match, mismatch, gap, onReceive);
+            } else {
+                fetchNWExtended(seqA, seqB, match, mismatch, gapOpen, gapExtend, tracebackPriority, onReceive);
+            }
         } else {
-            fetchSW(seqA, seqB, match, mismatch, gap, onReceive);
+            if (scoringMethod==='BASIC') {
+                fetchSW(seqA, seqB, match, mismatch, gap, onReceive);
+            } else {
+                fetchSWExtended(seqA, seqB, match, mismatch, gapOpen, gapExtend, tracebackPriority, onReceive);
+            }
         }
     };
 

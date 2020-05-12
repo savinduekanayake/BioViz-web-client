@@ -48,7 +48,7 @@ MSAResult.propTypes = {
         }),
         profiles: PropTypes.arrayOf(
             PropTypes.oneOfType(
-                PropTypes.string, PropTypes.array,
+                [PropTypes.string, PropTypes.array],
             ),
         ),
     }),

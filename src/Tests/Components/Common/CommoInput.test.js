@@ -13,13 +13,13 @@ describe('Common Input', () => {
     const store = mockStore({/* any required initial state */ });
     const testProps1 = {
         title: 'some title',
-        MSAkey: '0',
+        MSAkey: 0,
         value: 'AGCATC',
         type: 'MSA',
     };
     const testProps2 = {
         title: 'kjbkjb',
-        MSAkey: '0',
+        MSAkey: 0,
         value: 'AGCATC',
     };
 

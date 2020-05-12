@@ -3,14 +3,14 @@ import Avatar from '@material-ui/core/Avatar';
 import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import AddIcon from '@material-ui/icons/Add';
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import {makeStyles} from '@material-ui/core/styles';
 import DropDownInput from './DropDownInput';
 import PropTypes from 'prop-types';
 import {useDispatch} from 'react-redux';
 import {setMSAOrder} from '../../../Redux/Actions/MSA';
 import msaOrderValidate from '../../../Validators/MSA/MSAOrderValidator';
+import HelpModal from './HelpModal';
+import PairingOrderList from './PairingOrderList';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -84,31 +84,6 @@ export default function MSAOrderInput(props) {
         );
     }
 
-    const pairingOrderComponent = pairingOrder.map((element) => {
-        return (
-            <div key={element[2]}>
-                <table>
-                    <tr>
-                        <td>
-                            {makeAvatar(element[0])}
-                        </td>
-                        <td>
-                            <AddIcon />
-                        </td>
-                        <td>
-                            {makeAvatar(element[1])}
-                        </td>
-                        <td>
-                            <ArrowForwardIcon />
-                        </td>
-                        <td>
-                            {makeAvatar(element[2])}
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        );
-    });
     const available = [];
     availableSet.forEach((element) => {
         available.push(
@@ -126,6 +101,7 @@ export default function MSAOrderInput(props) {
             Input your desired order to align the sequences,
             one pair of sequences/profiles per one line.
             <br />
+            <HelpModal/>
             <br />
             <br />
             Currently available for pairing
@@ -151,7 +127,8 @@ export default function MSAOrderInput(props) {
             >
                 <Grid item xs={4}>
                     Your Pair Aligns Will Appear Here
-                    {pairingOrderComponent}
+                    {/* {pairingOrderComponent} */}
+                    <PairingOrderList pairingOrder={pairingOrder}/>
                     <br />
                     {pairingOrder.length > 0 ?
                         <Button

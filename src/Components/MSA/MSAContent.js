@@ -57,6 +57,7 @@ export default function MSAContent() {
     };
     return (
         <div>
+            <h2>MSA Mode</h2>
             <MSAInput/>
             <Button
                 variant="outlined"

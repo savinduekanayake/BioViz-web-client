@@ -6,6 +6,8 @@ import Services from './Services';
 import Steps from './Steps';
 // import Feedback from './Feedback';
 
+import DialogScreen from './DialogScreen';
+// import SingleService from './SingleService';
 
 export default function HomeSection() {
     return (
@@ -15,6 +17,8 @@ export default function HomeSection() {
             <Steps />
             {/* <Feedback /> */}
             {/* <Test /> */}
+            {/* <Game /> */}
+            <DialogScreen />
         </div>
     );
 }
