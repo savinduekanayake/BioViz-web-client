@@ -166,22 +166,24 @@ export default function TransferList() {
   const checkResult = () => {
     if (left === pairwise && right === msa) {
         return (
-            <Snackbar />
+            <Snackbar testid='snackbarId' />
         );
     }
   };
 
   return (
-    <Grid container
+    <Grid container testid='gridId'
         spacing={2}
         justify="center"
         alignItems="center"
         className={classes.root}
     >
-      <Grid item>{customList('Pairwise Alignment', left)}</Grid>
-      <Grid item>
-        <Grid container direction="column" alignItems="center">
-          <Button
+      <Grid item testid='gridItemId1'>
+        {customList('Pairwise Alignment', left)}</Grid>
+      <Grid item testid='gridItemId2'>
+        <Grid container direction="column" alignItems="center"
+          testid='gridContainerId'>
+          <Button testid='buttonId1'
             variant="outlined"
             size="small"
             className={classes.button}
@@ -191,10 +193,10 @@ export default function TransferList() {
           >
             &gt;
           </Button>
-          <Button
+          <Button testid='buttonId2'
             onClick = {checkResult}
             >Submit</Button>
-          <Button
+          <Button testid='buttonId3'
             variant="outlined"
             size="small"
             className={classes.button}
@@ -206,7 +208,8 @@ export default function TransferList() {
           </Button>
         </Grid>
       </Grid>
-      <Grid item>{customList('MSA Alignment', right)}</Grid>
+      <Grid item testid='gridItemId3'>
+        {customList('MSA Alignment', right)}</Grid>
 
     </Grid>
   );

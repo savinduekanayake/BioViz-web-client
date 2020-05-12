@@ -103,4 +103,85 @@ describe('Testing the Game component', () => {
             'dividerId').hostNodes();
         expect(DividerComponent.length).toBe(2);
     });
+
+    it('render the insde components(Grid) in Game component', () => {
+        expect(wrapper).toBeTruthy();
+
+        const GridComponent = findByAttr(wrapper,
+            'testid',
+            'gridId').hostNodes();
+        expect(GridComponent.length).toBe(1);
+    });
+
+    it('render the insde components(GridItem1) in Game component', () => {
+        expect(wrapper).toBeTruthy();
+
+        const GridItemComponent = findByAttr(wrapper,
+            'testid',
+            'gridItemId1').hostNodes();
+        expect(GridItemComponent.length).toBe(1);
+    });
+
+    it('render the insde components(GridItem2) in Game component', () => {
+        expect(wrapper).toBeTruthy();
+
+        const GridItemComponent = findByAttr(wrapper,
+            'testid',
+            'gridItemId2').hostNodes();
+        expect(GridItemComponent.length).toBe(1);
+    });
+
+    it('render the insde components(GridItem3) in Game component', () => {
+        expect(wrapper).toBeTruthy();
+
+        const GridItemComponent = findByAttr(wrapper,
+            'testid',
+            'gridItemId3').hostNodes();
+        expect(GridItemComponent.length).toBe(1);
+    });
+
+    it('render the insde components(Grid Container) in Game component', () => {
+        expect(wrapper).toBeTruthy();
+
+        const GridContainerComponent = findByAttr(wrapper,
+            'testid',
+            'gridContainerId').hostNodes();
+        expect(GridContainerComponent.length).toBe(1);
+    });
+
+    it('render the insde components(Button1) in Game component', () => {
+        expect(wrapper).toBeTruthy();
+
+        const ButtonComponent = findByAttr(wrapper,
+            'testid',
+            'buttonId1').hostNodes();
+        expect(ButtonComponent.length).toBe(1);
+    });
+
+    it('render the insde components(Button2) in Game component', () => {
+        expect(wrapper).toBeTruthy();
+
+        const ButtonComponent = findByAttr(wrapper,
+            'testid',
+            'buttonId2').hostNodes();
+        expect(ButtonComponent.length).toBe(1);
+    });
+
+    it('render the insde components(Button3) in Game component', () => {
+        expect(wrapper).toBeTruthy();
+
+        const ButtonComponent = findByAttr(wrapper,
+            'testid',
+            'buttonId3').hostNodes();
+        expect(ButtonComponent.length).toBe(1);
+    });
+
+    it('try to render the hiden insde components(Snackbar) in Game component', () => {
+        expect(wrapper).toBeTruthy();
+
+        const SnackbarComponent = findByAttr(wrapper,
+            'testid',
+            'snackbarId').hostNodes();
+        expect(SnackbarComponent.length).toBe(0);
+    });
 });
