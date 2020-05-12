@@ -16,8 +16,10 @@ export default function GamePlay() {
         <div>
         <h1 className={classes.title}>GamePlay</h1>
         <br /><br />
-        <div style={{marginLeft: 55}}>
+        <div style={{textAlign: 'center'}}>
+            <div style={{display: 'inline-block'}}>
             <CommonScore />
+            </div>
         </div>
         <br />
         <GameInstruction />

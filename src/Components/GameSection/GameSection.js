@@ -110,7 +110,6 @@ export default function GameSection() {
                         input={input}
                         fetchAlign={callbackAlign} /> :
                          <div testid={'inputNotSet'}/>}
-            <br />
             {scoreErr?
              <h3 style={{color: '#ea0909'}}>INVALID SCORING SCHEMA.
                                 SUBMIT AGAIN WITH VALID SCORE/PENALTY</h3>:

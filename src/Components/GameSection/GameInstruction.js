@@ -25,7 +25,8 @@ const styles = (theme) => ({
 const DialogTitle = withStyles(styles)((props) => {
     const {children, classes, onClose, ...other} = props;
     return (
-        <MuiDialogTitle disableTypography className={classes.root} {...other}>
+        <MuiDialogTitle disableTypography className={classes.root} {...other}
+        testid={'DialogTitle'}>
             <Typography variant="h6">{children}</Typography>
             {onClose ? (
                 <IconButton
@@ -65,6 +66,7 @@ export default function GameInstruction() {
     return (
         <div>
             <Button
+            style={{color: '#1e2e51', fontWeight: 'bolder'}}
             variant="outlined"
             color="primary"
             onClick={handleClickOpen}>

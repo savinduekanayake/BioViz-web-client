@@ -31,7 +31,7 @@ export default function GameFileUpload(props) {
 
     return <div className='upload-expense'>
         <Button variant="contained" color="primary"
-            component="label" size="small">
+            component="label" size="small" testid={'uploadbtn'}>
             Upload Text File
         <input type='file'
                 id='file'
