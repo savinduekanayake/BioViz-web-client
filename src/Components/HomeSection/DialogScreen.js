@@ -45,18 +45,21 @@ export default function FullScreenDialog() {
       </Button>
       <Dialog fullScreen open={open} testid='dialogId'
         onClose={handleClose} TransitionComponent={Transition}>
-        <AppBar className={classes.appBar}>
+        <AppBar className={classes.appBar} testid='appBarId'>
           <Toolbar testid='toolbarId'>
             <IconButton edge="start" testid='iconButtonId'
-                color="inherit" onClick={handleClose} aria-label="close">
+                color="inherit" onClick={handleClose} aria-label="close" >
               <CloseIcon />
             </IconButton>
-            <Typography variant="h6" className={classes.title}>
+            <Typography variant="h6" className={classes.title} testid='typographyId'>
               Test your knowledge of alignment
             </Typography>
-            <Button autoFocus color="inherit" onClick={handleClose}>
-              close
-            </Button>
+            <Button
+              autoFocus
+              color="inherit"
+              onClick={handleClose}
+              testid='InnerButtonId'
+              >Close</Button>
           </Toolbar>
         </AppBar>
         <Game />
