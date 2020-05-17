@@ -270,7 +270,7 @@ describe('Testing the StepByStep component', () => {
         expect(FinishButton.length).toBe(0);
     });
 
-    it('try to render the insde components(Paper) in StepByStep component befor finish steps', () => {
+    it('try to render the insde components(Paper) in StepByStep component before finish steps', () => {
         const wrapper = mount(
             <Provider store={store}><StepByStep {...TestData} /></Provider>,
         );
@@ -280,6 +280,16 @@ describe('Testing the StepByStep component', () => {
             'testid',
             'paperId').hostNodes();
         expect(PaperComponent.length).toBe(0);
+    });
+
+    it('try to render the insde components(image) in StepByStep component before finish steps', () => {
+        const wrapper = mount(
+            <Provider store={store}><StepByStep {...TestData} /></Provider>,
+        );
+        expect(wrapper).toBeTruthy();
+
+        const image = wrapper.find('img');
+        expect(image.length).toBe(1);
     });
 
     it('try to render the insde components(Reset Button) in StepByStep component before finish steps', () => {
@@ -306,7 +316,33 @@ describe('Testing the StepByStep component', () => {
         expect(FinishTypographyComponent.length).toBe(0);
     });
 
-    it('run the steps by simulating clicking the next button', () => {
+    it('run the steps by simulating clicking the next button and clicking the back button', () => {
+        const wrapper = mount(
+            <Provider store={store}><StepByStep {...TestData} /></Provider>,
+        );
+        expect(wrapper).toBeTruthy();
+
+        const ButtonComponent1 = findByAttr(wrapper,
+            'testid',
+            'nextButtonId').hostNodes();
+        ButtonComponent1.simulate('click');
+        wrapper.unmount();
+    });
+
+    it('run the steps by simulating clicking the back button', () => {
+        const wrapper = mount(
+            <Provider store={store}><StepByStep {...TestData} /></Provider>,
+        );
+        expect(wrapper).toBeTruthy();
+
+        const ButtonComponent = findByAttr(wrapper,
+            'testid',
+            'backButtonId').hostNodes();
+        expect(ButtonComponent.length).toBe(1);
+        ButtonComponent.simulate('click');
+    });
+
+    it('run the steps by simulating clicking next button and finaly clicking the reset button', () => {
         const wrapper = mount(
             <Provider store={store}><StepByStep {...TestData} /></Provider>,
         );
@@ -320,16 +356,56 @@ describe('Testing the StepByStep component', () => {
         const ButtonComponent2 = findByAttr(wrapper,
             'testid',
             'nextButtonId').hostNodes();
-        ButtonComponent2.simulate('click');
+        ButtonComponent2.at(1).simulate('click');
 
         const ButtonComponent3 = findByAttr(wrapper,
             'testid',
             'nextButtonId').hostNodes();
-        ButtonComponent3.simulate('click');
+        ButtonComponent3.at(1).simulate('click');
 
-        const FinishButtonComponent = findByAttr(wrapper,
+        const ButtonComponent4 = findByAttr(wrapper,
             'testid',
             'nextButtonId').hostNodes();
-        expect(FinishButtonComponent.length).toBe(1);
+        ButtonComponent4.at(1).simulate('click');
+
+        const ResetButtonComponent = findByAttr(wrapper,
+            'testid',
+            'resetButtonId').hostNodes();
+        expect(ResetButtonComponent.length).toBe(1);
+        ResetButtonComponent.simulate('click');
     });
+
+    it('run the steps by simulating clicking next button and finaly clicking the Final button', () => {
+        const wrapper = mount(
+            <Provider store={store}><StepByStep {...TestData} /></Provider>,
+        );
+        expect(wrapper).toBeTruthy();
+
+        const ButtonComponent1 = findByAttr(wrapper,
+            'testid',
+            'nextButtonId').hostNodes();
+        ButtonComponent1.simulate('click');
+
+        const ButtonComponent2 = findByAttr(wrapper,
+            'testid',
+            'nextButtonId').hostNodes();
+        ButtonComponent2.at(1).simulate('click');
+
+        const ButtonComponent3 = findByAttr(wrapper,
+            'testid',
+            'nextButtonId').hostNodes();
+        ButtonComponent3.at(1).simulate('click');
+
+        const ButtonComponent4 = findByAttr(wrapper,
+            'testid',
+            'nextButtonId').hostNodes();
+        ButtonComponent4.at(1).simulate('click');
+
+        const ButtonComponent = findByAttr(wrapper,
+            'testid',
+            'finalButtonId').hostNodes();
+        expect(ButtonComponent.length).toBe(1);
+        ButtonComponent.simulate('click');
+    });
+
 });
