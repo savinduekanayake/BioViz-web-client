@@ -184,4 +184,68 @@ describe('Testing the Game component', () => {
             'snackbarId').hostNodes();
         expect(SnackbarComponent.length).toBe(0);
     });
+
+    it('try to simulate submitt button', () => {
+        expect(wrapper).toBeTruthy();
+
+        const SubmitButtonComponent = findByAttr(wrapper,
+            'testid',
+            'buttonId2').hostNodes();
+        expect(SubmitButtonComponent.length).toBe(1);
+        SubmitButtonComponent.simulate('click');
+    });
+
+    it('select a CheckBox-uper in Game component', () => {
+        expect(wrapper).toBeTruthy();
+
+        const CheckBoxComponent = findByAttr(wrapper,
+            'testid',
+            'checkBoxId').hostNodes();
+        expect(CheckBoxComponent.length).toBe(2);
+        CheckBoxComponent.at(1).simulate('click');
+    });
+
+    it('select a CheckBox-details in Game component', () => {
+        expect(wrapper).toBeTruthy();
+
+        const CheckBoxComponent = findByAttr(wrapper,
+            'testid',
+            'checkBox2Id').hostNodes();
+        expect(CheckBoxComponent.length).toBe(6);
+        CheckBoxComponent.at(1).simulate('click');
+    });
+
+    it('simulate components(CheckBox-inside) transfer left side to right side in Game component', () => {
+        expect(wrapper).toBeTruthy();
+
+        const CheckBoxComponent = findByAttr(wrapper,
+            'testid',
+            'checkBox2Id').hostNodes();
+        expect(CheckBoxComponent.length).toBe(6);
+        CheckBoxComponent.at(1).simulate('click');
+
+        // eslint-disable-next-line camelcase
+        const ButtonComponent_TransferRight = findByAttr(wrapper,
+            'testid',
+            'buttonId1').hostNodes();
+        expect(ButtonComponent_TransferRight.length).toBe(1);
+        ButtonComponent_TransferRight.simulate('click');
+    });
+
+    it('simulate components(CheckBox-inside) transfer right side to left side in Game component', () => {
+        expect(wrapper).toBeTruthy();
+
+        const CheckBoxComponent = findByAttr(wrapper,
+            'testid',
+            'checkBox2Id').hostNodes();
+        expect(CheckBoxComponent.length).toBe(6);
+        CheckBoxComponent.at(1).simulate('click');
+
+        // eslint-disable-next-line camelcase
+        const ButtonComponent_TransferLeftt = findByAttr(wrapper,
+            'testid',
+            'buttonId3').hostNodes();
+        expect(ButtonComponent_TransferLeftt.length).toBe(1);
+        ButtonComponent_TransferLeftt.simulate('click');
+    });
 });

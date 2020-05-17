@@ -407,5 +407,4 @@ describe('Testing the StepByStep component', () => {
         expect(ButtonComponent.length).toBe(1);
         ButtonComponent.simulate('click');
     });
-
 });
