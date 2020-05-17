@@ -64,5 +64,29 @@ describe('Testing the PairwiseDetails component', () => {
         const MSACoreDetailsComponent = wrapper.find(MSACoreDetails);
         expect(MSACoreDetailsComponent).toBeTruthy();
     });
+
+    it('render the PWCoreDetails Component in PairwiseDetails component', () => {
+        const TypographyCompponent = findByAttr(wrapper,
+            'testid',
+            'typographyId1').hostNodes();
+        expect(TypographyCompponent.length).toBe(1);
+    });
+
+    it('render the PWCoreDetails Component in MSADetails component', () => {
+        const TypographyCompponent = findByAttr(wrapper,
+            'testid',
+            'typographyId2').hostNodes();
+        expect(TypographyCompponent.length).toBe(1);
+    });
+
+    it('render the insde components(ExpansionPanelSummary) in MSADetails component', () => {
+        expect(wrapper).toBeTruthy();
+
+        const ExpansionPanelSummary = findByAttr(wrapper,
+            'testid',
+            'expansionPanelSummaryId').hostNodes();
+        expect(ExpansionPanelSummary.length).toBe(1);
+        expect(ExpansionPanelSummary.text()).toBe('Want to know about MSA alignment? Click here');
+    });
 });
 

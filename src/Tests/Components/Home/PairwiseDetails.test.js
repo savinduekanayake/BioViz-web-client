@@ -64,5 +64,29 @@ describe('Testing the PairwiseDetails component', () => {
         const PWCoreDetailsComponent = wrapper.find(PWCoreDetails);
         expect(PWCoreDetailsComponent).toBeTruthy();
     });
+
+    it('render the PWCoreDetails Component in PairwiseDetails component', () => {
+        const TypographyCompponent = findByAttr(wrapper,
+            'testid',
+            'typographyId1').hostNodes();
+        expect(TypographyCompponent.length).toBe(2);
+    });
+
+    it('render the PWCoreDetails Component in PairwiseDetails component', () => {
+        const TypographyCompponent = findByAttr(wrapper,
+            'testid',
+            'typographyId2').hostNodes();
+        expect(TypographyCompponent.length).toBe(0);
+    });
+
+    it('render the insde components(ExpansionPanelSummary) in PairwiseDetails component', () => {
+        expect(wrapper).toBeTruthy();
+
+        const ExpansionPanelSummary = findByAttr(wrapper,
+            'testid',
+            'expansionPanelSummaryId').hostNodes();
+        expect(ExpansionPanelSummary.length).toBe(1);
+        expect(ExpansionPanelSummary.text()).toBe('Want to know about Pairwise alignment? Click here');
+    });
 });
 
