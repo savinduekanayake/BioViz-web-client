@@ -51,8 +51,9 @@ export default function FullScreenDialog() {
                 color="inherit" onClick={handleClose} aria-label="close" >
               <CloseIcon />
             </IconButton>
-            <Typography variant="h6" className={classes.title} testid='typographyId'>
-              Test your knowledge of alignment
+            <Typography variant="h6" className={classes.title}
+              testid='typographyId'>
+                Test your knowledge of alignment
             </Typography>
             <Button
               autoFocus

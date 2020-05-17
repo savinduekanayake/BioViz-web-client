@@ -162,12 +162,25 @@ export default function TransferList() {
     </Card>
   );
 
+  const rightAnswer = {
+    message: 'Congrats! Your anser is right.',
+    answer: true,
+  };
+
+  const wrongAnswer = {
+    message: 'Try again! Your anser is wrong.',
+    answer: true,
+  };
 
   const checkResult = () => {
     if (left === pairwise && right === msa) {
         return (
-            <Snackbar testid='snackbarId' />
+          <Snackbar {...rightAnswer} testid='snackbarId' />
         );
+    } else {
+      return (
+        <Snackbar {...wrongAnswer} testid='snackbarIdwrong' />
+      );
     }
   };
 

@@ -109,14 +109,14 @@ export default function VerticalLinearStepper({HeadTitle, image, title1, title2,
                                         {getStepContent(index)}
                                     </Typography>
 
-                                    <Button testid='buttonId'
+                                    <Button testid='backButtonId'
                                         disabled={activeStep === 0}
                                         onClick={handleBack}
                                         className={classes.button}
                                     >
                                         Back
                                     </Button>
-                                    <Button testid='finishButtonId'
+                                    <Button testid='nextButtonId'
                                         variant="contained"
                                         color="primary"
                                         onClick={handleNext}

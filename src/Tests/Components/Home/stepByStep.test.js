@@ -230,11 +230,11 @@ describe('Testing the StepByStep component', () => {
 
         const ButtonComponent = findByAttr(wrapper,
             'testid',
-            'buttonId').hostNodes();
+            'nextButtonId').hostNodes();
         expect(ButtonComponent.length).toBe(1);
     });
 
-    it('render the insde components(Button) in StepByStep component', () => {
+    it('render the insde components(Back Button) in StepByStep component', () => {
         const wrapper = mount(
             <Provider store={store}><StepByStep {...TestData} /></Provider>,
         );
@@ -242,11 +242,11 @@ describe('Testing the StepByStep component', () => {
 
         const ButtonComponent = findByAttr(wrapper,
             'testid',
-            'buttonId').hostNodes();
+            'backButtonId').hostNodes();
         expect(ButtonComponent.length).toBe(1);
     });
 
-    it('try to render the insde components(Finish Button) in StepByStep component', () => {
+    it('try to render the insde components(Next Button) in StepByStep component', () => {
         const wrapper = mount(
             <Provider store={store}><StepByStep {...TestData} /></Provider>,
         );
@@ -254,7 +254,7 @@ describe('Testing the StepByStep component', () => {
 
         const FinishButtonComponent = findByAttr(wrapper,
             'testid',
-            'finishButtonId').hostNodes();
+            'nextButtonId').hostNodes();
         expect(FinishButtonComponent.length).toBe(1);
     });
 
@@ -314,22 +314,22 @@ describe('Testing the StepByStep component', () => {
 
         const ButtonComponent1 = findByAttr(wrapper,
             'testid',
-            'buttonId').hostNodes();
+            'nextButtonId').hostNodes();
         ButtonComponent1.simulate('click');
 
         const ButtonComponent2 = findByAttr(wrapper,
             'testid',
-            'buttonId').hostNodes();
+            'nextButtonId').hostNodes();
         ButtonComponent2.simulate('click');
 
         const ButtonComponent3 = findByAttr(wrapper,
             'testid',
-            'buttonId').hostNodes();
+            'nextButtonId').hostNodes();
         ButtonComponent3.simulate('click');
 
         const FinishButtonComponent = findByAttr(wrapper,
             'testid',
-            'finishButtonId').hostNodes();
+            'nextButtonId').hostNodes();
         expect(FinishButtonComponent.length).toBe(1);
     });
 });
