@@ -38,6 +38,8 @@ export default function PairAlignContent() {
                 result: data.result, input: {
                     seqA, seqB, match,
                     mismatch, gap, gapOpen, gapExtend, scoringMethod,
+                    tracebackPriority, similarityMatrixName,
+                    DNASimilarityMatrix, genomeType,
                 },
             });
         }
@@ -74,8 +76,9 @@ export default function PairAlignContent() {
             <PairAlignInput />
             <br />
             <Button
-                variant="outlined"
-                color="secondary"
+                variant="contained"
+                color="primary"
+                fullWidth
                 onClick={onSubmit}>
                 Submit
             </Button>
@@ -83,10 +86,10 @@ export default function PairAlignContent() {
             {loading ? <LoadingOverlay /> : ''}
 
             <br />{result ?
-                <div> <PairAlignResult
+                <Box boxShadow={3} padding={2}> <PairAlignResult
                     input={result.input}
                     result={result.result} />
-                </div> :
+                </Box> :
                 ''}
 
         </div>

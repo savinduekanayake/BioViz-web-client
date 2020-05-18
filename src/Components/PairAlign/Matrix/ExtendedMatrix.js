@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const cellSize = 40;
-const matrixSize = 500;
+const matrixSize = 400;
 
 export default function ExtendedMatrix(props) {
     const headerRef = React.createRef();

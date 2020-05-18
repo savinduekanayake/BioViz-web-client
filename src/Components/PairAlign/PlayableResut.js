@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import Matrix from './Matrix/Matrix';
 import PairAlignAlignment from './PairAlignAlignment';
 import {getTracebackAlignment} from '../../util/traceback';
-import {Grid, Button} from '@material-ui/core';
+import {Grid, Button, Divider} from '@material-ui/core';
 import PropTypes from 'prop-types';
 
 export default function PlayableResut(props) {
@@ -115,23 +115,33 @@ export default function PlayableResut(props) {
 
 
     return (
-        <div>
-            <Grid container spacing={2}>
+        <div style={{marginTop: 30}}>
+            <Divider />
+            <h3>Try your own path in DP matrix</h3>
+            <Grid align="center"
+                justify="center"
+                container spacing={2}>
                 <Grid item>
                     Select your own path.
                     <br />
                     Click on a cell to add to / remove from path
+                    <br />
                     <br />
                     <Matrix
                         input={props.input}
                         result={modifiedResult}
                         selected={0}
                         onClickCell={editPath} />
-                </Grid>
-                <Grid item>
+                    <br />
                     <Button onClick={resetAllPath}>Reset Your Path</Button>
                 </Grid>
-                <Grid item>
+                <Divider
+                    orientation="vertical"
+                    flexItem
+                    style={{marginLeft: 20}} />
+                <Grid item xs={6}>
+                    <h4>Generated alignment will appear here</h4>
+                    <br />
                     {alignment}
                 </Grid>
             </Grid>
