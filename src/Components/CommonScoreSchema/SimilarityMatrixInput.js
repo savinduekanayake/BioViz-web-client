@@ -27,8 +27,8 @@ export default function SimilarityMatrixInput() {
 
     const genomeType = useSelector((state) => state.genomeType);
 
-    const proteinMatrices = ['BLOSSUM30', 'BLOSSUM45',
-        'BLOSSUM50', 'BLOSSUM60', 'BLOSSUM90'];
+    const proteinMatrices = ['BLOSUM30', 'BLOSUM45',
+        'BLOSUM50', 'BLOSUM60', 'BLOSUM90'];
     const menuItems = [];
     menuItems.push(<MenuItem value={'DEFAULT'}>Default</MenuItem>);
     if (genomeType === 'DNA') {
