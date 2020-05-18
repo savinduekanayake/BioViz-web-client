@@ -2,22 +2,20 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import {useDispatch} from 'react-redux';
 import PropTypes from 'prop-types';
-import {useSelector} from 'react-redux';
 
 export default function GameTextInput(props) {
     const dispatch = useDispatch();
-    const inputA = useSelector((state) => state.GameSeqA);
-    let T = 0;
+    // const [functest, setfuncval] = React.useState(false);
 
     function inputSeq(event) {
-        T = 1;
-        console.log('correct');
+        // console.log('correct');
+        // setfuncval(true);
+        // console.log(functest);
         dispatch(props.inputAction(event.target.value.trim()));
     }
 
     return (
-        <div testid={'testA'} testvalue={inputA}>
-            {T===0?<div testid={'finddiv'} />:''}
+        <div>
             <TextField
                 testid={'inputfield'}
                 multiline
@@ -27,6 +25,7 @@ export default function GameTextInput(props) {
                 value={props.value}
                 onChange={inputSeq} >
             </TextField>
+            {/* {functest? <div testid={'testfunc'}></div>:''} */}
         </div>
     );
 }

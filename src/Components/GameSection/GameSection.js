@@ -105,7 +105,8 @@ export default function GameSection() {
                     style={{color: '#ea0909'}}>INVALID INPUT.
                     READ INSTRUCTIONS CAREFULLY TO INPUT THE SEQUENCES</h3> :
                     (input.seqA === '' || input.seqB === '') ?
-                    <h3 style={{color: '#ea0909'}}>INPUT BOTH SEQUENCES</h3> :
+                    <h3 testid={'inputmissed'}
+                     style={{color: '#ea0909'}}>INPUT BOTH SEQUENCES</h3> :
                         <GameAlign
                         input={input}
                         fetchAlign={callbackAlign} /> :

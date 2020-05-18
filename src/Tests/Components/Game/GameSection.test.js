@@ -45,10 +45,21 @@ describe('GameSection Component', () => {
                             <GameSection></GameSection></Provider>);
             findByAttr(wrapper, 'testid',
                         'submitBtn').hostNodes().simulate('click');
-            const errMsg = findByAttr(wrapper, 'testid',
+            const errMsg1 = findByAttr(wrapper, 'testid',
                         'invalidInput').hostNodes();
-            expect(errMsg.length).toBe(1);
+            expect(errMsg1.length).toBe(1);
         });
+
+        // it('should render error message when one/two input missing', () => {
+        //     const store = mockStore({GameSeqA: 'AACCGQC', GameSeqB: ''});
+        //     const wrapper = mount( <Provider store={store}>
+        //                     <GameSection></GameSection></Provider>);
+        //     findByAttr(wrapper, 'testid',
+        //                 'submitBtn').hostNodes().simulate('click');
+        //     const errMsg2 = findByAttr(wrapper, 'testid',
+        //                 'inputmissed').hostNodes();
+        //     expect(errMsg2.length).toBe(1);
+        // });
 
         it('should not render Game when input is not set', () => {
             const store = mockStore({});

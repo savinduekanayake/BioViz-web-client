@@ -5,13 +5,13 @@ import {findByAttr} from '../../helper';
 import GameFileUpload from '../../../Components/GameSection/GameFileUpload';
 import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
-import {setGameInputA, setGameInputB} from '../../../Redux/Actions/Game';
+import {setGameInputA} from '../../../Redux/Actions/Game';
 
 const mockStore = configureStore();
 
 describe('GameFileUplod Component', () => {
     const store = mockStore({});
-    const testProp = { // trailing gaps('e') in seqA
+    const testProp = {
         inputAction: setGameInputA,
     };
 
@@ -23,4 +23,22 @@ it('render upload button', ()=>{
     'uploadbtn').hostNodes();
    expect(btn.length).toBe(1);
 });
+
+it('should simulate onchange function', ()=>{
+    const file = new File(['GGACCT'], 'inputseq.txt', {
+        type: 'file',
+      });
+    findByAttr(wrapper, 'id',
+    'file').hostNodes().at(0).props().
+        onChange({target: {files: [file]}});
+    });
+
+it('should log error for invalid input', ()=>{
+    const file = new File(['TTCCA'], 'inputseq.png', {
+        type: 'file',
+      });
+    findByAttr(wrapper, 'id',
+    'file').hostNodes().at(0).props().
+        onChange({target: {files: [file]}});
+    });
 });
