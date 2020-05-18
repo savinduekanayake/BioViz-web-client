@@ -11,7 +11,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 
-// import Snackbar from './Snackbar';
+import Snackbar from './Snackbar';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -162,27 +162,26 @@ export default function TransferList() {
     </Card>
   );
 
-  // const rightAnswer = {
-  //   message: 'Congrats! Your anser is right.',
-  //   answer: true,
-  // };
+  const rightAnswer = {
+    message: 'Congrats! Your anser is right.',
+  };
 
-  // const wrongAnswer = {
-  //   message: 'Try again! Your anser is wrong.',
-  //   answer: true,
-  // };
+  const wrongAnswer = {
+    message: 'Try again! Your anser is wrong.',
+  };
 
   // eslint-disable-next-line max-len
   const checkResult = () => { // +++++++++++++++++++++++++++NOT COMPLETED++++++++++++++++++++++++++++++++
+     // snack bar is not working! . doesn't know why. but alert is working----
     if (left.length === pairwise.length && right.length === msa.length) {
         return (
-          // <Snackbar {...rightAnswer} testid='snackbarId' />
-          alert('Congrats!\n Your answer is right.')
+          <Snackbar {...rightAnswer} testid='snackbarId' />
+          // alert('Congrats!\n Your answer is right.')
         );
     } else {
       return (
-        alert('Try again!')
-        // <Snackbar {...wrongAnswer} testid='snackbarIdwrong' />
+        // alert('Try again!')
+        <Snackbar {...wrongAnswer} testid='snackbarIdwrong' />
       );
     }
   };
