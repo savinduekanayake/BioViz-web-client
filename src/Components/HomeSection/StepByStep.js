@@ -83,6 +83,7 @@ export default function VerticalLinearStepper({HeadTitle, image, title1, title2,
             case 3:
                 return `${step4}`;
             default:
+                /* istanbul ignore next */
                 return 'Unknown step';
         }
     }
