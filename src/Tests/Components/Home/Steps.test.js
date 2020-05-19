@@ -138,6 +138,18 @@ describe('Testing the Steps component', () => {
             'boxId').hostNodes();
         expect(BoxComponent.length).toBe(1);
     });
+
+    it('click the Tab components in Steps component', () => {
+        const OneStepByStepComponent = wrapper.find(StepByStep);
+        expect(OneStepByStepComponent).toBeTruthy();
+
+        const Tab1Component = findByAttr(wrapper,
+            'testid',
+            'tabsId1').hostNodes();
+        expect(Tab1Component.length).toBe(1);
+
+        Tab1Component.simulate('click');
+    });
 });
 
 
