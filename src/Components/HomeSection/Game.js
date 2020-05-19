@@ -39,9 +39,9 @@ function intersection(a, b) {
   return a.filter((value) => b.indexOf(value) !== -1);
 }
 
-function union(a, b) {
-  return [...a, ...not(b, a)];
-}
+// function union(a, b) {
+//   return [...a, ...not(b, a)];
+// }
 
 export default function TransferList() {
   const classes = useStyles();
@@ -82,7 +82,8 @@ export default function TransferList() {
 
     if (currentIndex === -1) {
       newChecked.push(value);
-    } else {
+    }
+    else {
       newChecked.splice(currentIndex, 1);
     }
 
@@ -91,13 +92,13 @@ export default function TransferList() {
 
   const numberOfChecked = (items) => intersection(checked, items).length;
 
-  const handleToggleAll = (items) => () => {
-    if (numberOfChecked(items) === items.length) {
-      setChecked(not(checked, items));
-    } else {
-      setChecked(union(checked, items));
-    }
-  };
+  // const handleToggleAll = (items) => () => {
+  //   if (numberOfChecked(items) === items.length) {
+  //     setChecked(not(checked, items));
+  //   } else {
+  //     setChecked(union(checked, items));
+  //   }
+  // };
 
   const handleCheckedRight = () => {
     setRight(right.concat(leftChecked));
@@ -115,19 +116,19 @@ export default function TransferList() {
     <Card testid='cardId'>
       <CardHeader testid='cardHeaderId'
         className={classes.cardHeader}
-        avatar={
-          <Checkbox
-            testid='checkBoxId'
-            onClick={handleToggleAll(items)}
-            checked=
-            {numberOfChecked(items) === items.length && items.length !== 0}
-            indeterminate=
-            {numberOfChecked(items) !== items.length &&
-                numberOfChecked(items) !== 0}
-            disabled={items.length === 0}
-            inputProps={{'aria-label': 'all items selected'}}
-          />
-        }
+        // avatar={
+        //   <Checkbox
+        //     testid='checkBoxId'
+        //     onClick={handleToggleAll(items)}
+        //     checked=
+        //     {numberOfChecked(items) === items.length && items.length !== 0}
+        //     indeterminate=
+        //     {numberOfChecked(items) !== items.length &&
+        //         numberOfChecked(items) !== 0}
+        //     disabled={items.length === 0}
+        //     inputProps={{'aria-label': 'all items selected'}}
+        //   />
+        // }
         title={title}
         subheader={`${numberOfChecked(items)}/${items.length} selected`}
       />
@@ -173,15 +174,15 @@ export default function TransferList() {
   // eslint-disable-next-line max-len
   const checkResult = () => { // +++++++++++++++++++++++++++NOT COMPLETED++++++++++++++++++++++++++++++++
      // snack bar is not working! . doesn't know why. but alert is working----
-    if (left.length === pairwise.length && right.length === msa.length) {
+    if (left.length === pairwise.length) {
         return (
-          <Snackbar {...rightAnswer} testid='snackbarId' />
-          // alert('Congrats!\n Your answer is right.')
+          // <Snackbar {...rightAnswer} testid='snackbarId' />
+          window.alert('Congrats!\n Your answer is right.')
         );
     } else {
       return (
-        // alert('Try again!')
-        <Snackbar {...wrongAnswer} testid='snackbarIdwrong' />
+        window.alert('Try again!')
+        // <Snackbar {...wrongAnswer} testid='snackbarIdwrong' />
       );
     }
   };

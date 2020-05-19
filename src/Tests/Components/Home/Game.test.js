@@ -50,14 +50,14 @@ describe('Testing the Game component', () => {
         expect(CardHeaderComponent.length).toBe(2);
     });
 
-    it('render the insde components(CheckBox) in Game component', () => {
-        expect(wrapper).toBeTruthy();
+    // it('render the insde components(CheckBox) in Game component', () => {
+    //     expect(wrapper).toBeTruthy();
 
-        const CheckBoxComponent = findByAttr(wrapper,
-            'testid',
-            'checkBoxId').hostNodes();
-        expect(CheckBoxComponent.length).toBe(2);
-    });
+    //     const CheckBoxComponent = findByAttr(wrapper,
+    //         'testid',
+    //         'checkBoxId').hostNodes();
+    //     expect(CheckBoxComponent.length).toBe(2);
+    // });
 
     it('render the insde components(List) in Game component', () => {
         expect(wrapper).toBeTruthy();
@@ -158,15 +158,6 @@ describe('Testing the Game component', () => {
         expect(ButtonComponent.length).toBe(1);
     });
 
-    it('render the insde components(Button2) in Game component', () => {
-        expect(wrapper).toBeTruthy();
-
-        const ButtonComponent = findByAttr(wrapper,
-            'testid',
-            'buttonId2').hostNodes();
-        expect(ButtonComponent.length).toBe(1);
-    });
-
     it('render the insde components(Button3) in Game component', () => {
         expect(wrapper).toBeTruthy();
 
@@ -185,7 +176,10 @@ describe('Testing the Game component', () => {
         expect(SnackbarComponent.length).toBe(0);
     });
 
-    it('try to simulate submitt button', () => {
+    it('try to simulate submit button', () => {
+        const jsdomAlert = window.alert; // remember the jsdom alert
+        window.alert = () => {}; // provide an empty implementation for window.alert
+
         expect(wrapper).toBeTruthy();
 
         const SubmitButtonComponent = findByAttr(wrapper,
@@ -193,17 +187,19 @@ describe('Testing the Game component', () => {
             'buttonId2').hostNodes();
         expect(SubmitButtonComponent.length).toBe(1);
         SubmitButtonComponent.simulate('click');
+
+        window.alert = jsdomAlert; // restore the jsdom alert
     });
 
-    it('select a CheckBox-uper in Game component', () => {
-        expect(wrapper).toBeTruthy();
+    // it('select a CheckBox-uper in Game component', () => {
+    //     expect(wrapper).toBeTruthy();
 
-        const CheckBoxComponent = findByAttr(wrapper,
-            'testid',
-            'checkBoxId').hostNodes();
-        expect(CheckBoxComponent.length).toBe(2);
-        CheckBoxComponent.at(1).simulate('click');
-    });
+    //     const CheckBoxComponent = findByAttr(wrapper,
+    //         'testid',
+    //         'checkBoxId').hostNodes();
+    //     expect(CheckBoxComponent.length).toBe(2);
+    //     CheckBoxComponent.at(1).simulate('click');
+    // });
 
     it('select a CheckBox-details in Game component', () => {
         expect(wrapper).toBeTruthy();
@@ -239,7 +235,7 @@ describe('Testing the Game component', () => {
             'testid',
             'checkBox2Id').hostNodes();
         expect(CheckBoxComponent.length).toBe(6);
-        CheckBoxComponent.at(1).simulate('click');
+        CheckBoxComponent.at(5).simulate('click');
 
         // eslint-disable-next-line camelcase
         const ButtonComponent_TransferLeftt = findByAttr(wrapper,
@@ -247,5 +243,82 @@ describe('Testing the Game component', () => {
             'buttonId3').hostNodes();
         expect(ButtonComponent_TransferLeftt.length).toBe(1);
         ButtonComponent_TransferLeftt.simulate('click');
+    });
+
+    it('simulate all CheckBox transfer left side to right side in Game component', () => {
+        expect(wrapper).toBeTruthy();
+
+        const CheckBoxComponent = findByAttr(wrapper,
+            'testid',
+            'checkBox2Id').hostNodes();
+        expect(CheckBoxComponent.length).toBe(6);
+        CheckBoxComponent.at(0).simulate('click');
+        CheckBoxComponent.at(1).simulate('click');
+        CheckBoxComponent.at(2).simulate('click');
+        CheckBoxComponent.at(3).simulate('click');
+        CheckBoxComponent.at(4).simulate('click');
+        CheckBoxComponent.at(5).simulate('click');
+
+        // eslint-disable-next-line camelcase
+        const ButtonComponent_TransferRight = findByAttr(wrapper,
+            'testid',
+            'buttonId1').hostNodes();
+        expect(ButtonComponent_TransferRight.length).toBe(1);
+        ButtonComponent_TransferRight.simulate('click');
+    });
+
+    // it('select a CheckBox-uper in Game component', () => {
+    //     expect(wrapper).toBeTruthy();
+
+    //     const CheckBoxComponent = findByAttr(wrapper,
+    //         'testid',
+    //         'checkBoxId').hostNodes();
+    //     expect(CheckBoxComponent.length).toBe(2);
+    //     CheckBoxComponent.at(0).simulate('click');
+
+    //     // eslint-disable-next-line camelcase
+    //     const ButtonComponent_TransferRight = findByAttr(wrapper,
+    //         'testid',
+    //         'buttonId1').hostNodes();
+    //     expect(ButtonComponent_TransferRight.length).toBe(1);
+    //     ButtonComponent_TransferRight.simulate('click');
+    // });
+
+    it('simulate select and unselect', () => {
+        expect(wrapper).toBeTruthy();
+
+        const CheckBoxComponent = findByAttr(wrapper,
+            'testid',
+            'checkBox2Id').hostNodes();
+        expect(CheckBoxComponent.length).toBe(6);
+        CheckBoxComponent.at(4).simulate('click');
+        CheckBoxComponent.at(4).simulate('click');
+    });
+
+    it('simulate right answer', () => {
+        expect(wrapper).toBeTruthy();
+        const jsdomAlert = window.alert; // remember the jsdom alert
+        window.alert = () => {}; // provide an empty implementation for window.alert
+
+        const CheckBoxComponent = findByAttr(wrapper,
+            'testid',
+            'checkBox2Id').hostNodes();
+        expect(CheckBoxComponent.length).toBe(6);
+        CheckBoxComponent.at(3).simulate('click');
+
+        // eslint-disable-next-line camelcase
+        const ButtonComponent_TransferLeft = findByAttr(wrapper,
+            'testid',
+            'buttonId3').hostNodes();
+        expect(ButtonComponent_TransferLeft.length).toBe(1);
+        ButtonComponent_TransferLeft.simulate('click');
+
+        const SubmitButtont = findByAttr(wrapper,
+            'testid',
+            'buttonId2').hostNodes();
+        expect(SubmitButtont.length).toBe(1);
+        SubmitButtont.simulate('click');
+
+        window.alert = jsdomAlert; // restore the jsdom alert
     });
 });
