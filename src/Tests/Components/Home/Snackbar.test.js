@@ -96,7 +96,7 @@ describe('Testing the SingleService component', () => {
         ButtonComponent.simulate('click');
     });
 
-    it('render IconButton component correctly', () => {
+    it('sumulate the IconButton component by clicking', () => {
         const wrapper = mount(
             <Provider store={store}><Snackbar {...rigthMessage} /></Provider>,
         );

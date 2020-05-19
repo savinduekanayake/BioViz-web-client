@@ -35,7 +35,8 @@ export default function SimpleSnackbar({message}) {
           <React.Fragment>
             <Button
                 testid='buttonId'
-                color="secondary" size="small" onClick={handleClose}>
+                color="secondary" size="small"
+                onClick={handleClose}>
               close
             </Button>
             <IconButton
