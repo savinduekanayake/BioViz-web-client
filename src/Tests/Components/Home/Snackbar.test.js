@@ -107,4 +107,16 @@ describe('Testing the SingleService component', () => {
         expect(IconButtonComponent.length).toBe(1);
         IconButtonComponent.simulate('click');
     });
+
+    it('render SnackBar component correctly', () => {
+        const wrapper = mount(
+            <Provider store={store}><Snackbar {...rigthMessage} /></Provider>,
+        );
+        expect(wrapper).toBeTruthy();
+        const SnackBarComponent = findByAttr(wrapper,
+            'testid',
+            'snackbarId').hostNodes();
+        expect(SnackBarComponent.length).toBe(1);
+        wrapper.simulate('click');
+    });
 });
