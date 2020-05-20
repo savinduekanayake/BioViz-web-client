@@ -53,6 +53,7 @@ export default function PairwiseDetails() {
   const [expanded, setExpanded] = React.useState('panel1');
 
   const handleChange = (panel) => (event, newExpanded) => {
+    /* istanbul ignore next */
     setExpanded(newExpanded ? panel : false);
   };
 

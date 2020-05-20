@@ -412,37 +412,4 @@ describe('Testing the StepByStep component', () => {
         expect(ButtonComponent.length).toBe(1);
         ButtonComponent.simulate('click');
     });
-
-    // it('run the steps by simulating clicking next button and finaly clicking the Final button', () => {
-    //     const wrapper = mount(
-    //         <Provider store={store}><StepByStep {...TestData} /></Provider>,
-    //     );
-    //     expect(wrapper).toBeTruthy();
-
-    //     const ButtonComponent1 = findByAttr(wrapper,
-    //         'testid',
-    //         'nextButtonId').hostNodes();
-    //     ButtonComponent1.simulate('click');
-
-    //     const ButtonComponent2 = findByAttr(wrapper,
-    //         'testid',
-    //         'nextButtonId').hostNodes();
-    //     ButtonComponent2.at(1).simulate('click');
-
-    //     const ButtonComponent3 = findByAttr(wrapper,
-    //         'testid',
-    //         'nextButtonId').hostNodes();
-    //     ButtonComponent3.at(1).simulate('click');
-
-    //     const ButtonComponent4 = findByAttr(wrapper,
-    //         'testid',
-    //         'nextButtonId').hostNodes();
-    //     ButtonComponent4.at(1).simulate('click');
-
-    //     const ButtonComponent = findByAttr(wrapper,
-    //         'testid',
-    //         'nextButtonId').hostNodes();
-    //     // expect(ButtonComponent.length).toBe(1);
-    //     ButtonComponent.simulate('click');
-    // });
 });

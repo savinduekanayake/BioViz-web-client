@@ -88,5 +88,15 @@ describe('Testing the PairwiseDetails component', () => {
         expect(ExpansionPanelSummary.length).toBe(1);
         expect(ExpansionPanelSummary.text()).toBe('Want to know about MSA alignment? Click here');
     });
+
+    it('simulate onChange of ExpansionPanel in MSADetails component', () => {
+        expect(wrapper).toBeTruthy();
+
+        const ExpansionPanel = findByAttr(wrapper,
+            'testid',
+            'expansionPanelId').hostNodes();
+        expect(ExpansionPanel.length).toBe(1);
+        ExpansionPanel.simulate('change');
+    });
 });
 
