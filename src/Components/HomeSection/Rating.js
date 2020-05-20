@@ -88,7 +88,7 @@ export default function CustomizedSlider() {
     <div className={classes.margin}>
       <IOSSlider
         testid='IOSSliderId'
-        aria-label="ios slider" defaultValue={25} marks={marks} valueLabelDisplay="on" />
+        aria-label="ios slider" defaultValue={75} marks={marks} valueLabelDisplay="on" />
     </div>
   );
 }

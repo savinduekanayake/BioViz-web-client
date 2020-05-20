@@ -38,9 +38,10 @@ function createData(name, rate) {
 }
 
 const rows = [
-  createData('Frozen yoghurt', <Rating />),
-  createData('Ice cream sandwich', <Rating />),
-  createData('Eclair', <Rating />),
+  createData('Atraction of website', <Rating />),
+  createData('Satistification of fuctionalities', <Rating />),
+  createData('Satistification of visualizing the result', <Rating />),
+  createData('Satistification of response time', <Rating />),
 ];
 
 
@@ -70,7 +71,8 @@ export default function Feedback() {
                 <TableCell testid='tableCellId3' component="th" scope="row">
                   {row.name}
                 </TableCell>
-                <TableCell testid='tableCellId4' align="right">{row.rate}</TableCell>
+                <TableCell
+                  testid='tableCellId4' align="right">{row.rate}</TableCell>
               </TableRow>
             ))}
           </TableBody>

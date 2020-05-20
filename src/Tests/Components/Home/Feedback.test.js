@@ -69,7 +69,7 @@ describe('Testing the Steps component', () => {
             'tableId').hostNodes();
         expect(TableComponent.length).toBe(1);
     });
-//
+
     it('render the TableHead in Feadback component', () => {
         expect(wrapper).toBeTruthy();
 
@@ -114,7 +114,7 @@ describe('Testing the Steps component', () => {
             'tableBodyId').hostNodes();
         expect(TableComponent.length).toBe(1);
     });
-//
+
     it('render the TableRow2 in Feadback component', () => {
         expect(wrapper).toBeTruthy();
 
