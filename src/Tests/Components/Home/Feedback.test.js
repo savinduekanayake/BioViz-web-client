@@ -121,7 +121,7 @@ describe('Testing the Steps component', () => {
         const TableRowComponent = findByAttr(wrapper,
             'testid',
             'tableRowId2').hostNodes();
-        expect(TableRowComponent.length).toBe(3);
+        expect(TableRowComponent.length).toBe(4);
     });
 
     it('render the tableCell(facilities) in Feadback component', () => {
@@ -130,7 +130,7 @@ describe('Testing the Steps component', () => {
         const TableCellComponent = findByAttr(wrapper,
             'testid',
             'tableCellId3').hostNodes();
-        expect(TableCellComponent.length).toBe(3);
+        expect(TableCellComponent.length).toBe(4);
     });
 
     it('render the tableCell(facilities-data) in Feadback component', () => {
@@ -139,6 +139,6 @@ describe('Testing the Steps component', () => {
         const TableCellComponent = findByAttr(wrapper,
             'testid',
             'tableCellId3').hostNodes();
-        expect(TableCellComponent.length).toBe(3);
+        expect(TableCellComponent.length).toBe(4);
     });
 });
