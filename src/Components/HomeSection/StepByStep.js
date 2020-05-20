@@ -14,6 +14,7 @@ import style from './assets/css/image.module.css';
 
 import PairwaiseDetails from './Details/PairwiseDetails';
 import MSADetails from './Details/MSADetails';
+import DialogScreen from './DialogScreen';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -156,7 +157,7 @@ export default function VerticalLinearStepper({HeadTitle, image, title1, title2,
             <div className={classes.details}>
 
                  {/* eslint-disable-next-line max-len */}
-                {`${HeadTitle}` === 'Pairwise' ?<PairwaiseDetails testid = 'testPWDetails' /> : `${HeadTitle}` === 'MSA' ?<MSADetails testid = 'testPWDetails' /> : ''}
+                {`${HeadTitle}` === 'Pairwise' ?<PairwaiseDetails testid = 'testPWDetails' /> : `${HeadTitle}` === 'MSA' ?<MSADetails testid = 'testPWDetails' /> : <DialogScreen />}
             </div>
         </div>
     );
