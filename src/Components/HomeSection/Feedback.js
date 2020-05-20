@@ -49,32 +49,33 @@ export default function Feedback() {
 
   return (
     <div className={classes.root}>
-    <h2 className={style.heading}>Give us feedback</h2>
-    <p className={style.subHeading}>
-          Lorem ipsum dolor sit amet consectetur.</p>
+      <h2 className={style.heading}>Give us feedback</h2>
+      <p className={style.subHeading}>
+            Lorem ipsum dolor sit amet consectetur.</p>
 
-    <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="caption table">
-        <caption>We are happy to get your feedback.</caption>
-        <TableHead>
-          <TableRow>
-            <TableCell>Facilities</TableCell>
-            <TableCell align="right">Ratings</TableCell>
+      <TableContainer testid='tableContainerId' component={Paper}>
+        <Table
+          testid='tableId' className={classes.table} aria-label="caption table">
+          <caption>We are happy to get your feedback.</caption>
+          <TableHead testid='tableHeadId'>
+            <TableRow testid='tableRowId'>
+              <TableCell testid='tableCellId1'>Facilities</TableCell>
+              <TableCell testid='tableCellId2' align="right">Ratings</TableCell>
 
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.name}>
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell align="right">{row.rate}</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          </TableHead>
+          <TableBody testid='tableBodyId'>
+            {rows.map((row) => (
+              <TableRow testid='tableRowId2' key={row.name}>
+                <TableCell testid='tableCellId3' component="th" scope="row">
+                  {row.name}
+                </TableCell>
+                <TableCell testid='tableCellId4' align="right">{row.rate}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </div>
   );
 }
