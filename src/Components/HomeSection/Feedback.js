@@ -14,7 +14,7 @@ import style from './assets/css/image.module.css';
 
 // pages
 // import Ratings from './Ratings';
-import Slider from './Slider';
+import Rating from './Rating';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -38,9 +38,9 @@ function createData(name, rate) {
 }
 
 const rows = [
-  createData('Frozen yoghurt', <Slider />),
-  createData('Ice cream sandwich', <Slider />),
-  createData('Eclair', <Slider />),
+  createData('Frozen yoghurt', <Rating />),
+  createData('Ice cream sandwich', <Rating />),
+  createData('Eclair', <Rating />),
 ];
 
 

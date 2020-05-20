@@ -11,22 +11,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function ValueLabelComponent(props) {
-  const {children, open, value} = props;
-
-  return (
-    <Tooltip open={open} enterTouchDelay={0} placement="top" title={value}>
-      {children}
-    </Tooltip>
-  );
-}
-
-ValueLabelComponent.propTypes = {
-  children: PropTypes.element.isRequired,
-  open: PropTypes.bool.isRequired,
-  value: PropTypes.number.isRequired,
-};
-
 const iOSBoxShadow =
   '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.13),0 0 0 1px rgba(0,0,0,0.02)';
 
@@ -104,7 +88,9 @@ export default function CustomizedSlider() {
 
   return (
     <div className={classes.margin}>
-      <IOSSlider aria-label="ios slider" defaultValue={25} marks={marks} valueLabelDisplay="on" />
+      <IOSSlider
+        testid='IOSSliderId'
+        aria-label="ios slider" defaultValue={25} marks={marks} valueLabelDisplay="on" />
     </div>
   );
 }
