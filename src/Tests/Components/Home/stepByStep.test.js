@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 /* eslint-disable no-undef */
 import React from 'react';
 React.useLayoutEffect = React.useEffect;
@@ -90,7 +89,8 @@ describe('Testing the StepByStep component', () => {
         expect(text.text()).toBe(TestData.HeadTitle);
     });
 
-    it('verify pass prop value title1,title2,title3,title4 to StepByStep component', () => {
+    it(`verify pass prop value 
+        title1,title2,title3,title4 to StepByStep component`, () => {
         const wrapper = mount(
             <Provider store={store}><StepByStep {...TestData} /></Provider>,
         );
@@ -104,7 +104,8 @@ describe('Testing the StepByStep component', () => {
         expect(text4).toBe(TestData.title4);
     });
 
-    it('verify pass prop value step1,step2,step3,step4 and HeadTitle to StepByStep component', () => {
+    it(`verify pass prop value 
+        step1,step2,step3,step4 and HeadTitle to StepByStep component`, () => {
         const wrapper = mount(
             <Provider store={store}><StepByStep {...TestData} /></Provider>,
         );
@@ -198,7 +199,8 @@ describe('Testing the StepByStep component', () => {
         expect(StepLabelComponent.length).toBe(4);
     });
 
-    it('render the insde components(StepContent) in StepByStep component', () => {
+    it(`render the insde components(StepContent) 
+        in StepByStep component`, () => {
         const wrapper = mount(
             <Provider store={store}><StepByStep {...TestData} /></Provider>,
         );
@@ -210,7 +212,8 @@ describe('Testing the StepByStep component', () => {
         expect(StepContentComponent.length).toBe(4);
     });
 
-    it('render the insde components(Typography) in StepByStep component', () => {
+    it(`render the insde components(Typography) 
+        in StepByStep component`, () => {
         const wrapper = mount(
             <Provider store={store}><StepByStep {...TestData} /></Provider>,
         );
@@ -234,7 +237,8 @@ describe('Testing the StepByStep component', () => {
         expect(ButtonComponent.length).toBe(1);
     });
 
-    it('render the insde components(Back Button) in StepByStep component', () => {
+    it(`render the insde components(Back Button) 
+        in StepByStep component`, () => {
         const wrapper = mount(
             <Provider store={store}><StepByStep {...TestData} /></Provider>,
         );
@@ -246,7 +250,8 @@ describe('Testing the StepByStep component', () => {
         expect(ButtonComponent.length).toBe(1);
     });
 
-    it('try to render the insde components(Next Button) in StepByStep component', () => {
+    it(`try to render the insde components(Next Button) 
+        in StepByStep component`, () => {
         const wrapper = mount(
             <Provider store={store}><StepByStep {...TestData} /></Provider>,
         );
@@ -258,7 +263,8 @@ describe('Testing the StepByStep component', () => {
         expect(FinishButtonComponent.length).toBe(1);
     });
 
-    it('try to render the insde components(Final Button to other page) in StepByStep component', () => {
+    it(`try to render the insde components(Final Button to other page) 
+        in StepByStep component`, () => {
         const wrapper = mount(
             <Provider store={store}><StepByStep {...TestData} /></Provider>,
         );
@@ -270,7 +276,8 @@ describe('Testing the StepByStep component', () => {
         expect(FinishButton.length).toBe(0);
     });
 
-    it('try to render the insde components(Paper) in StepByStep component before finish steps', () => {
+    it(`try to render the insde components(Paper) 
+        in StepByStep component before finish steps`, () => {
         const wrapper = mount(
             <Provider store={store}><StepByStep {...TestData} /></Provider>,
         );
@@ -282,7 +289,8 @@ describe('Testing the StepByStep component', () => {
         expect(PaperComponent.length).toBe(0);
     });
 
-    it('try to render the insde components(image) in StepByStep component before finish steps', () => {
+    it(`try to render the insde components(image) 
+        in StepByStep component before finish steps`, () => {
         const wrapper = mount(
             <Provider store={store}><StepByStep {...TestData} /></Provider>,
         );
@@ -292,7 +300,8 @@ describe('Testing the StepByStep component', () => {
         expect(image.length).toBe(1);
     });
 
-    it('try to render the insde components(Reset Button) in StepByStep component before finish steps', () => {
+    it(`try to render the insde components(Reset Button) 
+        in StepByStep component before finish steps`, () => {
         const wrapper = mount(
             <Provider store={store}><StepByStep {...TestData} /></Provider>,
         );
@@ -304,7 +313,8 @@ describe('Testing the StepByStep component', () => {
         expect(ResetButtonComponent.length).toBe(0);
     });
 
-    it('try to render the insde components(finish Typography) in StepByStep component before finish steps', () => {
+    it(`try to render the insde components(finish Typography) 
+        in StepByStep component before finish steps`, () => {
         const wrapper = mount(
             <Provider store={store}><StepByStep {...TestData} /></Provider>,
         );
@@ -329,7 +339,8 @@ describe('Testing the StepByStep component', () => {
         wrapper.unmount();
     });
 
-    it('run the steps by simulating clicking next button then clicking the back button', () => {
+    it(`run the steps by simulating clicking next button 
+        then clicking the back button`, () => {
         const wrapper = mount(
             <Provider store={store}><StepByStep {...TestData} /></Provider>,
         );
@@ -347,7 +358,8 @@ describe('Testing the StepByStep component', () => {
         ButtonComponent.at(1).simulate('click');
     });
 
-    it('run the steps by simulating clicking next button and finaly clicking the reset button', () => {
+    it(`run the steps by simulating clicking next button and 
+        finaly clicking the reset button`, () => {
         const wrapper = mount(
             <Provider store={store}><StepByStep {...TestData} /></Provider>,
         );
@@ -380,7 +392,8 @@ describe('Testing the StepByStep component', () => {
         ResetButtonComponent.simulate('click');
     });
 
-    it('run the steps by simulating clicking next button and finaly clicking the Final button', () => {
+    it(`run the steps by simulating clicking next button 
+        and finaly clicking the Final button`, () => {
         const wrapper = mount(
             <Provider store={store}><StepByStep {...TestData} /></Provider>,
         );

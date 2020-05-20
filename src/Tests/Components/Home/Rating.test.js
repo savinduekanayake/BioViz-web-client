@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 /* eslint-disable no-undef */
 import React from 'react';
 React.useLayoutEffect = React.useEffect;

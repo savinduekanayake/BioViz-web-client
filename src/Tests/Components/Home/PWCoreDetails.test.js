@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 /* eslint-disable no-undef */
 import React from 'react';
 React.useLayoutEffect = React.useEffect;
@@ -7,7 +6,8 @@ import configureStore from 'redux-mock-store';
 import {mount} from 'enzyme';
 import {findByAttr} from '../../helper';
 
-import PWCoreDetails from '../../../Components/HomeSection/Details/PWCoreDetails';
+import PWCoreDetails
+    from '../../../Components/HomeSection/Details/PWCoreDetails';
 
 
 const mockStore = configureStore();
@@ -31,7 +31,8 @@ describe('Testing the PWCoreDetails component', () => {
         expect(wrapper).toBeTruthy();
     });
 
-    it('render the insde components(Typography) in PWCoreDetails component', () => {
+    it(`render the insde components(Typography) 
+        in PWCoreDetails component`, () => {
         expect(wrapper).toBeTruthy();
 
         const TypographyComponent = findByAttr(wrapper,

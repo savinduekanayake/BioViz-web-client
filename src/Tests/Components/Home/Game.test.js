@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 /* eslint-disable no-undef */
 import React from 'react';
 React.useLayoutEffect = React.useEffect;
@@ -167,7 +166,8 @@ describe('Testing the Game component', () => {
         expect(ButtonComponent.length).toBe(1);
     });
 
-    it('try to render the hiden insde components(Snackbar) in Game component', () => {
+    it(`try to render the hiden insde
+        components(Snackbar) in Game component`, () => {
         expect(wrapper).toBeTruthy();
 
         const SnackbarComponent = findByAttr(wrapper,
@@ -177,8 +177,10 @@ describe('Testing the Game component', () => {
     });
 
     it('try to simulate submit button', () => {
-        const jsdomAlert = window.alert; // remember the jsdom alert
-        window.alert = () => {}; // provide an empty implementation for window.alert
+        // remember the jsdom alert
+        const jsdomAlert = window.alert;
+        // provide an empty implementation for window.alert
+        window.alert = () => {};
 
         expect(wrapper).toBeTruthy();
 
@@ -211,7 +213,8 @@ describe('Testing the Game component', () => {
         CheckBoxComponent.at(1).simulate('click');
     });
 
-    it('simulate components(CheckBox-inside) transfer left side to right side in Game component', () => {
+    it(`simulate components(CheckBox-inside)
+        transfer left side to right side in Game component`, () => {
         expect(wrapper).toBeTruthy();
 
         const CheckBoxComponent = findByAttr(wrapper,
@@ -228,7 +231,8 @@ describe('Testing the Game component', () => {
         ButtonComponent_TransferRight.simulate('click');
     });
 
-    it('simulate components(CheckBox-inside) transfer right side to left side in Game component', () => {
+    it(`simulate components(CheckBox-inside)
+        transfer right side to left side in Game component`, () => {
         expect(wrapper).toBeTruthy();
 
         const CheckBoxComponent = findByAttr(wrapper,
@@ -245,7 +249,8 @@ describe('Testing the Game component', () => {
         ButtonComponent_TransferLeftt.simulate('click');
     });
 
-    it('simulate all CheckBox transfer left side to right side in Game component', () => {
+    it(`simulate all CheckBox transfer
+        left side to right side in Game component`, () => {
         expect(wrapper).toBeTruthy();
 
         const CheckBoxComponent = findByAttr(wrapper,
@@ -297,9 +302,10 @@ describe('Testing the Game component', () => {
 
     it('simulate right answer', () => {
         expect(wrapper).toBeTruthy();
-        const jsdomAlert = window.alert; // remember the jsdom alert
-        window.alert = () => {}; // provide an empty implementation for window.alert
-
+        // remember the jsdom alert
+        const jsdomAlert = window.alert;
+        // provide an empty implementation for window.alert
+        window.alert = () => {};
         const CheckBoxComponent = findByAttr(wrapper,
             'testid',
             'checkBox2Id').hostNodes();

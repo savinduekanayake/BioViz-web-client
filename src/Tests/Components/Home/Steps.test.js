@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 /* eslint-disable no-undef */
 import React from 'react';
 React.useLayoutEffect = React.useEffect;
@@ -119,7 +118,8 @@ describe('Testing the Steps component', () => {
         expect(pTags.length).toBe(2);
     });
 
-    it('try to render the hiden insde components(Typography) in Steps component', () => {
+    it(`try to render the hiden insde 
+        components(Typography) in Steps component`, () => {
         const OneStepByStepComponent = wrapper.find(StepByStep);
         expect(OneStepByStepComponent).toBeTruthy();
 
