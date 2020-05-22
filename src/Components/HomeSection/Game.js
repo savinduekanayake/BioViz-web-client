@@ -82,8 +82,7 @@ export default function TransferList() {
 
     if (currentIndex === -1) {
       newChecked.push(value);
-    }
-    else {
+    } else {
       newChecked.splice(currentIndex, 1);
     }
 
@@ -171,17 +170,21 @@ export default function TransferList() {
     message: 'Try again! Your anser is wrong.',
   };
 
+  const instruction = {
+    message: 'Select and move the rows into relavant alignment.',
+  };
+
   // eslint-disable-next-line max-len
   const checkResult = () => { // +++++++++++++++++++++++++++NOT COMPLETED++++++++++++++++++++++++++++++++
      // snack bar is not working! . doesn't know why. but alert is working----
-    if (left.length === pairwise.length) {
+    if (left.length === pairwise.length && right.length === msa.length) {
         return (
-          // <Snackbar {...rightAnswer} testid='snackbarId' />
-          window.alert('Congrats!\n Your answer is right.')
+          // <Snackbar {...rightAnswer} testid='snackbarIdright' />
+          window.alert(rightAnswer.message)
         );
     } else {
       return (
-        window.alert('Try again!')
+        window.alert(wrongAnswer.message)
         // <Snackbar {...wrongAnswer} testid='snackbarIdwrong' />
       );
     }
@@ -224,6 +227,7 @@ export default function TransferList() {
           </Button>
         </Grid>
       </Grid>
+      <Snackbar {...instruction} testid='snackbarId' />
       <Grid item testid='gridItemId3'>
         {customList('MSA Alignment', right)}</Grid>
 

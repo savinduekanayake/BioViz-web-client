@@ -181,21 +181,21 @@ describe('Testing the DialogScreen component', () => {
     });
 
 
-    it(`check render IconButton inside
-        DialogScreen component after click the button`, () => {
-        expect(wrapper).toBeTruthy();
+    // it(`check render IconButton inside
+    //     DialogScreen component after click the button`, () => {
+    //     expect(wrapper).toBeTruthy();
 
-        const ButtonComponent = findByAttr(wrapper,
-            'testid',
-            'buttonId').hostNodes();
-        expect(ButtonComponent.length).toBe(1);
-        ButtonComponent.simulate('click');
+    //     const ButtonComponent = findByAttr(wrapper,
+    //         'testid',
+    //         'buttonId').hostNodes();
+    //     expect(ButtonComponent.length).toBe(1);
+    //     ButtonComponent.simulate('click');
 
-        const IconButtonComponent = findByAttr(wrapper,
-            'testid',
-            'iconButtonId').hostNodes();
-        expect(IconButtonComponent.length).toBe(1);
-    });
+    //     const IconButtonComponent = findByAttr(wrapper,
+    //         'testid',
+    //         'iconButtonId').hostNodes();
+    //     expect(IconButtonComponent.length).toBe(1);
+    // });
 
     it('Find game component', () => {
         expect(wrapper).toBeTruthy();
@@ -223,10 +223,5 @@ describe('Testing the DialogScreen component', () => {
             'InnerButtonId').hostNodes();
         expect(closeButtonComponent.length).toBe(1);
         closeButtonComponent.simulate('click');
-
-        const DialogComponent2 = findByAttr(wrapper,
-            'testid',
-            'buttonId').hostNodes();
-        expect(DialogComponent2.length).toBe(1);
     });
 });

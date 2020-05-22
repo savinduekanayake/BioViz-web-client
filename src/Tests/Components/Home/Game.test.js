@@ -166,14 +166,14 @@ describe('Testing the Game component', () => {
         expect(ButtonComponent.length).toBe(1);
     });
 
-    it(`try to render the hiden insde
+    it(`try to render the insde
         components(Snackbar) in Game component`, () => {
         expect(wrapper).toBeTruthy();
 
         const SnackbarComponent = findByAttr(wrapper,
             'testid',
             'snackbarId').hostNodes();
-        expect(SnackbarComponent.length).toBe(0);
+        expect(SnackbarComponent.length).toBe(1);
     });
 
     it('try to simulate submit button', () => {
