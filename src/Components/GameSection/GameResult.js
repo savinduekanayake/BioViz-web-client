@@ -103,24 +103,15 @@ export default function GameResult(props) {
             <table className={classes.table}>
                 <tbody>
                     <tr className={classes.label}>
+                        <td><h4>Match</h4></td>
                         <td><DoneOutlineRoundedIcon
                             style={{color: '#787d94'}} /></td>
-                        <td><h4>No of Matches</h4></td>
-                        <td style={{minWidth: 5}}></td>
-                        <td><h3 className={classes.sc}>
-                            {matchSc/matchScore}</h3></td>
                         <td style={{minWidth: 15}}></td>
+                        <td><h4>Mismatch</h4></td>
                         <td><CloseRoundedIcon style={{color: '#9b8989'}} /></td>
-                        <td><h4>No of Mismatches</h4></td>
-                        <td style={{minWidth: 5}}></td>
-                        <td><h3 className={classes.sc}>
-                            {mismatchSc/mismatchPenanlty}</h3></td>
                         <td style={{minWidth: 15}}></td>
+                        <td><h4>Gap</h4></td>
                         <td><MinimizeIcon style={{color: '#e9e3e3de'}} /></td>
-                        <td><h4>No of Gaps</h4></td>
-                        <td style={{minWidth: 5}}></td>
-                        <td><h3 className={classes.sc}>
-                            {gapSc/gapPenalty}</h3></td>
                     </tr>
                 </tbody>
             </table>

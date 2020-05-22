@@ -9,6 +9,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import GamePlay from './GamePlay';
 import GameAlignTable from './GameAlignTable';
+import GameLable from './GameLable';
 
 const useStyles = makeStyles(() => ({
     seq: {
@@ -26,7 +27,7 @@ const useStyles = makeStyles(() => ({
         backgroundColor: '#1e2e51',
     },
     gameplay: {
-        backgroundColor: '#b7c0d138', // #0a225338
+        backgroundColor: '#b7c0d138',
         borderRadius: '10px',
         padding: 20,
     },
@@ -60,21 +61,37 @@ export default function GameAlign(props) {
 
     const indexLine = [];
     const row1 = [];
+    const row2 = [];
+    let match = 0;
+    let mismatch = 0;
+    let gap = 0;
     for (let i = 0; i < align.seqA.length; i++) {
         const index = i;
-        const base = align.seqA.charAt(i) === '-' ? 'ga' : align.seqA.charAt(i);
-        const title = base === 'ga' ? 'Remove Gap' :
-            base === 'e' ? 'end' : 'move -->';
+        const baseA = align.seqA.charAt(i) === '-' ? 'ga': align.seqA.charAt(i);
+        const titleA = baseA === 'ga' ? 'Remove Gap' :
+            baseA === 'e' ? 'end' : 'move -->';
+        const baseB = align.seqB.charAt(i) === '-' ? 'ga': align.seqB.charAt(i);
+        const titleB = baseB === 'ga' ? 'Remove Gap' :
+            baseB === 'e' ? 'end' : 'move -->';
         let T = 0;
-        if (base!=='ga' && align.seqA.charAt(i)===align.seqB.charAt(i)) {
+        if ((align.seqA.charAt(i) === '-' || align.seqB.charAt(i) === '-') ||
+        (align.seqA.charAt(i) === 'e' || align.seqB.charAt(i) === 'e')) {
+            // if gap in the middle or end
+            gap+=1;
+        } else if (align.seqA.charAt(i) === align.seqB.charAt(i)) {
+            // if 2 elements are matching
+            match+=1;
             T = 1;
+        } else {
+            // if 2 elements mismatch
+            mismatch+=1;
         }
         indexLine.push(
             <td key={index}><h4 style={{color: '#40455e'}}>{index+1}</h4></td>,
         );
         row1.push(
             <td key={index} testid={'outputSeqA'}>
-                <Tooltip title={title} placement="top" arrow>
+                <Tooltip title={titleA} placement="top" arrow>
                     <span>
                     <Button
                         className={T===1? classes.match:classes.seq}
@@ -82,29 +99,17 @@ export default function GameAlign(props) {
                         variant="contained"
                         size="small"
                         onClick={() => changeSeqA(index)}
-                        disabled={base==='e'?true:false}
-                        style={base==='e'? {backgroundColor: '#0a22536e'} : {}}
+                        disabled={baseA==='e'?true:false}
+                        style={baseA==='e'? {backgroundColor: '#0a22536e'} : {}}
                         label={align.seqA.charAt(i)} >
-                            <Base index={index} base={base} />
+                            <Base index={index} base={baseA} />
                     </Button>
                     </span>
                 </Tooltip></td>,
             );
-    }
-
-    const row2 = [];
-    for (let j = 0; j < align.seqB.length; j++) {
-        const index = j;
-        const base = align.seqB.charAt(j) === '-' ? 'ga' : align.seqB.charAt(j);
-        const title = base === 'ga' ? 'Remove Gap' :
-            base === 'e' ? 'end' : 'move -->';
-        let T = 0;
-        if (base!=='ga' && align.seqA.charAt(j)===align.seqB.charAt(j)) {
-            T = 1;
-        }
         row2.push(
             <td key={index} testid={'outputSeqB'}>
-            <Tooltip title={title} placement="bottom" arrow>
+            <Tooltip title={titleB} placement="bottom" arrow>
                 <span>
                     <Button
                         className={T===1?classes.match:classes.seq}
@@ -112,10 +117,10 @@ export default function GameAlign(props) {
                         variant="contained"
                         size="small"
                         onClick={() => changeSeqB(index)}
-                        disabled={base==='e'?true:false}
-                        style={base==='e'? {backgroundColor: '#0a22536e'} : {}}
-                        label={align.seqB.charAt(j)} >
-                            <Base index={index} base={base} />
+                        disabled={baseB==='e'?true:false}
+                        style={baseB==='e'? {backgroundColor: '#0a22536e'} : {}}
+                        label={align.seqB.charAt(i)} >
+                            <Base index={index} base={baseB} />
                     </Button>
                 </span>
             </Tooltip></td>,
@@ -201,6 +206,7 @@ export default function GameAlign(props) {
     }
 
     function reset() {
+        setPrev(true);
         setAlign(initialInput);
     }
 
@@ -231,6 +237,8 @@ export default function GameAlign(props) {
                 indexLine={indexLine}/>
                 <div testid={'checkState'} value={align}/>
                 <br /><br />
+                <GameLable match={match} mismatch={mismatch} gap={gap}/>
+                <br/><br/>
                 <Button
                     testid=''
                     className={classes.resetBtn}
