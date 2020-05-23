@@ -1,3 +1,10 @@
+## Build Status
+
+master : [![Build Status](https://travis-ci.com/budvinchathura/BioViz-web-client.svg?token=MrWYUxkB9g7vRW7phgp8&branch=master)](https://travis-ci.com/budvinchathura/BioViz-web-client)
+
+develop : [![Build Status](https://travis-ci.com/budvinchathura/BioViz-web-client.svg?token=MrWYUxkB9g7vRW7phgp8&branch=develop)](https://travis-ci.com/budvinchathura/BioViz-web-client)
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
