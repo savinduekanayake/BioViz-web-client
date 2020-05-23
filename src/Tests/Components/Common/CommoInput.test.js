@@ -39,7 +39,6 @@ describe('Common Input', () => {
                 <CommonInput {...testProps2} />
             </Provider>,
         );
-        //   console.log(wrapper.debug());
         const closeButton = findByAttr(wrapper,
             'testid',
             'MSASeqCloseButton').hostNodes();

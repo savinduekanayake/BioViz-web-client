@@ -10,7 +10,7 @@ const mockStore = configureStore();
 
 describe('GameAlign Component', () => {
     const store = mockStore({});
-    const testProp = {
+    const testProp= {
         errMsgA: false,
         errMsgB: true,
     };
