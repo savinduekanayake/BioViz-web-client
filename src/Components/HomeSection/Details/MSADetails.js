@@ -53,6 +53,7 @@ export default function PairwiseDetails() {
   const [expanded, setExpanded] = React.useState('panel1');
 
   const handleChange = (panel) => (event, newExpanded) => {
+    /* istanbul ignore next */
     setExpanded(newExpanded ? panel : false);
   };
 
@@ -66,13 +67,13 @@ export default function PairwiseDetails() {
         <ExpansionPanelSummary testid='expansionPanelSummaryId'
             aria-controls="panel1d-content" id="panel1d-header"
         >
-            <Typography component={'span'}>
+            <Typography component={'span'} testid='typographyId1'>
                 Want to know about MSA alignment? Click here
             </Typography>
         </ExpansionPanelSummary>
 
         <ExpansionPanelDetails testid='expansionPanelDetailsId'>
-          <Typography component={'span'} >
+          <Typography component={'span'} testid='typographyId2'>
             {/* Details of MSA in MSACoreDetails component*/}
             <MSACoreDetails />
 

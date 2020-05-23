@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 /* eslint-disable no-undef */
 import React from 'react';
 React.useLayoutEffect = React.useEffect;
@@ -41,7 +40,28 @@ describe('Testing the DialogScreen component', () => {
         expect(ButtonComponent.length).toBe(1);
     });
 
-    it('check render Dialog inside  DialogScreen component before click the button', () => {
+    it(`check render AppBar inside 
+        DialogScreen component before click the button`, () => {
+        expect(wrapper).toBeTruthy();
+
+        const AppBarComponent = findByAttr(wrapper,
+            'testid',
+            'appBarId').hostNodes();
+        expect(AppBarComponent.length).toBe(0);
+    });
+
+    it(`check render Typography inside
+        DialogScreen component before click the button`, () => {
+        expect(wrapper).toBeTruthy();
+
+        const TypographyComponent = findByAttr(wrapper,
+            'testid',
+            'typographyId').hostNodes();
+        expect(TypographyComponent.length).toBe(0);
+    });
+
+    it(`check render Dialog inside 
+        DialogScreen component before click the button`, () => {
         expect(wrapper).toBeTruthy();
 
         const DialogComponent = findByAttr(wrapper,
@@ -50,7 +70,8 @@ describe('Testing the DialogScreen component', () => {
         expect(DialogComponent.length).toBe(0);
     });
 
-    it('check render Toolbar inside DialogScreen component before click the button', () => {
+    it(`check render Toolbar inside
+        DialogScreen component before click the button`, () => {
         expect(wrapper).toBeTruthy();
 
         const ToolbarComponent = findByAttr(wrapper,
@@ -59,7 +80,8 @@ describe('Testing the DialogScreen component', () => {
         expect(ToolbarComponent.length).toBe(0);
     });
 
-    it('check render IconButton inside DialogScreen component after click the button', () => {
+    it(`check render IconButton inside
+        DialogScreen component before click the button`, () => {
         expect(wrapper).toBeTruthy();
 
         const IconButtonComponent = findByAttr(wrapper,
@@ -68,7 +90,18 @@ describe('Testing the DialogScreen component', () => {
         expect(IconButtonComponent.length).toBe(0);
     });
 
-    it('check render Dialog inside  DialogScreen component after click the button', () => {
+    it(`check render CloseButton inside
+        DialogScreen component before click the button`, () => {
+        expect(wrapper).toBeTruthy();
+
+        const TypographyComponent = findByAttr(wrapper,
+            'testid',
+            'InnerButtonId').hostNodes();
+        expect(TypographyComponent.length).toBe(0);
+    });
+
+    it(`check render Dialog inside 
+        DialogScreen component after click the button`, () => {
         expect(wrapper).toBeTruthy();
 
         const ButtonComponent = findByAttr(wrapper,
@@ -83,7 +116,8 @@ describe('Testing the DialogScreen component', () => {
         expect(DialogComponent.length).toBe(1);
     });
 
-    it('check render Toolbar inside DialogScreen component after click the button', () => {
+    it(`check render Toolbar inside
+        DialogScreen component after click the button`, () => {
         expect(wrapper).toBeTruthy();
 
         const ButtonComponent = findByAttr(wrapper,
@@ -98,7 +132,8 @@ describe('Testing the DialogScreen component', () => {
         expect(ToolbarComponent.length).toBe(1);
     });
 
-    it('check render IconButton inside DialogScreen component after click the button', () => {
+    it(`check render AppBar inside
+        DialogScreen component after click the button`, () => {
         expect(wrapper).toBeTruthy();
 
         const ButtonComponent = findByAttr(wrapper,
@@ -107,16 +142,86 @@ describe('Testing the DialogScreen component', () => {
         expect(ButtonComponent.length).toBe(1);
         ButtonComponent.simulate('click');
 
-        const IconButtonComponent = findByAttr(wrapper,
+        const AppBarComponent = findByAttr(wrapper,
             'testid',
-            'iconButtonId').hostNodes();
-        expect(IconButtonComponent.length).toBe(1);
+            'appBarId').hostNodes();
+        expect(AppBarComponent.length).toBe(1);
     });
+
+    it(`check render Typography inside
+        DialogScreen component after click the button`, () => {
+        expect(wrapper).toBeTruthy();
+
+        const ButtonComponent = findByAttr(wrapper,
+            'testid',
+            'buttonId').hostNodes();
+        expect(ButtonComponent.length).toBe(1);
+        ButtonComponent.simulate('click');
+
+        const TypographyComponent = findByAttr(wrapper,
+            'testid',
+            'typographyId').hostNodes();
+        expect(TypographyComponent.length).toBe(1);
+    });
+
+    it(`check render InnerButton inside
+        DialogScreen component after click the button`, () => {
+        expect(wrapper).toBeTruthy();
+
+        const ButtonComponent = findByAttr(wrapper,
+            'testid',
+            'buttonId').hostNodes();
+        expect(ButtonComponent.length).toBe(1);
+        ButtonComponent.simulate('click');
+
+        const TypographyComponent = findByAttr(wrapper,
+            'testid',
+            'InnerButtonId').hostNodes();
+        expect(TypographyComponent.length).toBe(1);
+    });
+
+
+    // it(`check render IconButton inside
+    //     DialogScreen component after click the button`, () => {
+    //     expect(wrapper).toBeTruthy();
+
+    //     const ButtonComponent = findByAttr(wrapper,
+    //         'testid',
+    //         'buttonId').hostNodes();
+    //     expect(ButtonComponent.length).toBe(1);
+    //     ButtonComponent.simulate('click');
+
+    //     const IconButtonComponent = findByAttr(wrapper,
+    //         'testid',
+    //         'iconButtonId').hostNodes();
+    //     expect(IconButtonComponent.length).toBe(1);
+    // });
 
     it('Find game component', () => {
         expect(wrapper).toBeTruthy();
 
         const GameComponent = wrapper.find(<Game />);
         expect(GameComponent).toBeTruthy();
+    });
+
+    it('check open and close DialogScreen correctly', () => {
+        expect(wrapper).toBeTruthy();
+
+        const ButtonComponent = findByAttr(wrapper,
+            'testid',
+            'buttonId').hostNodes();
+        expect(ButtonComponent.length).toBe(1);
+        ButtonComponent.simulate('click');
+
+        const DialogComponent1 = findByAttr(wrapper,
+            'testid',
+            'dialogId').hostNodes();
+        expect(DialogComponent1.length).toBe(1);
+
+        const closeButtonComponent = findByAttr(wrapper,
+            'testid',
+            'InnerButtonId').hostNodes();
+        expect(closeButtonComponent.length).toBe(1);
+        closeButtonComponent.simulate('click');
     });
 });

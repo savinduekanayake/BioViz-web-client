@@ -59,7 +59,6 @@ describe('Testing the ViewMore component', () => {
         const wrapper = mount(
             <Provider store={store}><ViewMore {...props} /></Provider>,
         );
-        // this below line don't kwow to write
         const text = wrapper.find('div.MuiExpansionPanelSummary-content p');
         expect(text.text()).toBe(props.title);
     });

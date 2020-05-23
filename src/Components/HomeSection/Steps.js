@@ -87,7 +87,7 @@ function TabPanel(props) {
   const {children, value, index, ...other} = props;
 
   return (
-    <Typography component={'span'}
+    <Typography component={'span'} testid='typography2Id'
       // component="div"
       role="tabpanel"
       hidden={value !== index}
@@ -95,7 +95,7 @@ function TabPanel(props) {
       aria-labelledby={`scrollable-auto-tab-${index}`}
       {...other}
     >
-      {value === index && <Box p={3}>{children}</Box>}
+      {value === index && <Box testid='boxId' p={3}>{children}</Box>}
     </Typography>
   );
 }

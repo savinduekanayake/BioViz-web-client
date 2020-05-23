@@ -48,12 +48,4 @@ describe('Testing the HomeSection component', () => {
         expect(StepsComponent.length).toBe(1);
     });
 
-    it('check render DialogScreen component', () => {
-        const wrapper = mount(
-            <Provider store={store}><HomeSection /></Provider>,
-        );
-        expect(wrapper).toBeTruthy();
-        const DialogScreenComponent = wrapper.find(DialogScreen);
-        expect(DialogScreenComponent.length).toBe(1);
-    });
 });

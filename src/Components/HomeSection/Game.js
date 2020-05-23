@@ -39,9 +39,9 @@ function intersection(a, b) {
   return a.filter((value) => b.indexOf(value) !== -1);
 }
 
-function union(a, b) {
-  return [...a, ...not(b, a)];
-}
+// function union(a, b) {
+//   return [...a, ...not(b, a)];
+// }
 
 export default function TransferList() {
   const classes = useStyles();
@@ -91,13 +91,13 @@ export default function TransferList() {
 
   const numberOfChecked = (items) => intersection(checked, items).length;
 
-  const handleToggleAll = (items) => () => {
-    if (numberOfChecked(items) === items.length) {
-      setChecked(not(checked, items));
-    } else {
-      setChecked(union(checked, items));
-    }
-  };
+  // const handleToggleAll = (items) => () => {
+  //   if (numberOfChecked(items) === items.length) {
+  //     setChecked(not(checked, items));
+  //   } else {
+  //     setChecked(union(checked, items));
+  //   }
+  // };
 
   const handleCheckedRight = () => {
     setRight(right.concat(leftChecked));
@@ -115,23 +115,23 @@ export default function TransferList() {
     <Card testid='cardId'>
       <CardHeader testid='cardHeaderId'
         className={classes.cardHeader}
-        avatar={
-          <Checkbox
-            testid='checkBoxId'
-            onClick={handleToggleAll(items)}
-            checked=
-            {numberOfChecked(items) === items.length && items.length !== 0}
-            indeterminate=
-            {numberOfChecked(items) !== items.length &&
-                numberOfChecked(items) !== 0}
-            disabled={items.length === 0}
-            inputProps={{'aria-label': 'all items selected'}}
-          />
-        }
+        // avatar={
+        //   <Checkbox
+        //     testid='checkBoxId'
+        //     onClick={handleToggleAll(items)}
+        //     checked=
+        //     {numberOfChecked(items) === items.length && items.length !== 0}
+        //     indeterminate=
+        //     {numberOfChecked(items) !== items.length &&
+        //         numberOfChecked(items) !== 0}
+        //     disabled={items.length === 0}
+        //     inputProps={{'aria-label': 'all items selected'}}
+        //   />
+        // }
         title={title}
         subheader={`${numberOfChecked(items)}/${items.length} selected`}
       />
-      <Divider />
+      <Divider testid='dividerId' />
       <List className={classes.list} dense component="div" role="list"
         testid='listId'>
         {items.map((value) => {
@@ -145,8 +145,8 @@ export default function TransferList() {
                 button
                 onClick={handleToggle(value)}
             >
-              <ListItemIcon >
-                <Checkbox
+              <ListItemIcon testid='listItemIconId'>
+                <Checkbox testid='checkBox2Id'
                   checked={checked.indexOf(value) !== -1}
                   tabIndex={-1}
                   disableRipple
@@ -162,26 +162,47 @@ export default function TransferList() {
     </Card>
   );
 
+  const rightAnswer = {
+    message: 'Congrats! Your anser is right.',
+  };
 
-  const checkResult = () => {
-    if (left === pairwise && right === msa) {
+  const wrongAnswer = {
+    message: 'Try again! Your anser is wrong.',
+  };
+
+  const instruction = {
+    message: 'Select and move the rows into relavant alignment.',
+  };
+
+  // eslint-disable-next-line max-len
+  const checkResult = () => { // +++++++++++++++++++++++++++NOT COMPLETED++++++++++++++++++++++++++++++++
+     // snack bar is not working! . doesn't know why. but alert is working----
+    if (left.length === pairwise.length && right.length === msa.length) {
         return (
-            <Snackbar />
+          // <Snackbar {...rightAnswer} testid='snackbarIdright' />
+          window.alert(rightAnswer.message)
         );
+    } else {
+      return (
+        window.alert(wrongAnswer.message)
+        // <Snackbar {...wrongAnswer} testid='snackbarIdwrong' />
+      );
     }
   };
 
   return (
-    <Grid container
+    <Grid container testid='gridId'
         spacing={2}
         justify="center"
         alignItems="center"
         className={classes.root}
     >
-      <Grid item>{customList('Pairwise Alignment', left)}</Grid>
-      <Grid item>
-        <Grid container direction="column" alignItems="center">
-          <Button
+      <Grid item testid='gridItemId1'>
+        {customList('Pairwise Alignment', left)}</Grid>
+      <Grid item testid='gridItemId2'>
+        <Grid container direction="column" alignItems="center"
+          testid='gridContainerId'>
+          <Button testid='buttonId1'
             variant="outlined"
             size="small"
             className={classes.button}
@@ -191,10 +212,10 @@ export default function TransferList() {
           >
             &gt;
           </Button>
-          <Button
+          <Button testid='buttonId2'
             onClick = {checkResult}
             >Submit</Button>
-          <Button
+          <Button testid='buttonId3'
             variant="outlined"
             size="small"
             className={classes.button}
@@ -206,7 +227,9 @@ export default function TransferList() {
           </Button>
         </Grid>
       </Grid>
-      <Grid item>{customList('MSA Alignment', right)}</Grid>
+      <Snackbar {...instruction} testid='snackbarId' />
+      <Grid item testid='gridItemId3'>
+        {customList('MSA Alignment', right)}</Grid>
 
     </Grid>
   );

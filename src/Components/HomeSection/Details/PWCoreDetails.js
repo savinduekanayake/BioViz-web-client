@@ -2,6 +2,8 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
 
+import Divider from '@material-ui/core/Divider';
+
 const useStyles = makeStyles({
   root: {
     width: '100%',
@@ -18,6 +20,8 @@ export default function PWCoreDetails() {
       <Typography component={'span'} variant="h4"
         gutterBottom testid='typographyHeaderId'>
         What is Pairwise Alignment
+        <br />
+        <Divider />
       </Typography>
 
       <Typography component={'span'} variant="body1" gutterBottom>
@@ -25,26 +29,31 @@ export default function PWCoreDetails() {
          Quos blanditiis tenetur
         unde suscipit, quam beatae rerum inventore consectetur,
          neque doloribus, cupiditate numquam
-        dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
+        dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.<br />
       </Typography>
 
       <br />
 
       <Typography component={'span'} variant="h5" gutterBottom>
         Types of pairwise alignment
+        <br />
       </Typography>
 
       <Typography component={'span'} variant="subtitle1" gutterBottom>
         1. Smith Waterman
+        <br />
       </Typography>
       <Typography component={'span'} variant="subtitle1" gutterBottom>
         2. Needleman Wunsch
+        <br />
       </Typography>
 
-        <br />
+      <br />
 
       <Typography component={'span'} variant="h6" gutterBottom>
+
         Smith Waterman
+        <br />
       </Typography>
 
       <Typography component={'span'} variant="body2" gutterBottom>
@@ -53,10 +62,14 @@ export default function PWCoreDetails() {
         unde suscipit, quam beatae rerum inventore consectetur,
          neque doloribus, cupiditate numquam
         dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
+        <br />
       </Typography>
+
+      <br />
 
       <Typography component={'span'} variant="h6" gutterBottom>
         Needleman
+        <br />
       </Typography>
 
       <Typography component={'span'} variant="body2" gutterBottom>
@@ -65,6 +78,7 @@ export default function PWCoreDetails() {
         unde suscipit, quam beatae rerum inventore consectetur,
          neque doloribus, cupiditate numquam
         dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
+        <br />
       </Typography>
 
     </div>
