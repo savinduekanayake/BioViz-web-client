@@ -30,11 +30,13 @@ const useStyles = (theme) => ({
     },
 });
 
+const DNAbases = ['A', 'G', 'C', 'T'];
 
-class Report extends Component {
+class PairAlignReport extends Component {
     constructor(props) {
         super(props);
         this.downloadTxtFile = this.downloadTxtFile.bind(this);
+        this.sequences = [this.props.input.seqA, this.props.input.seqB];
     }
 
     downloadTxtFile() {
@@ -59,16 +61,48 @@ class Report extends Component {
             date.getMinutes() + ':' +
             date.getSeconds();
 
-        const inputSequences = this.props.sequences.map((seq, index) => {
+        const inputSequences = this.sequences.map((seq, index) => {
             return <><br />{`> ${index}`}<br />{seq}<br /></>;
         });
         const line = <hr className={classes.line} />;
+        let scores;
+        if (this.props.input.scoringMethod === 'BASIC') {
+            scores = <>
+                Match Score : {this.props.input.match}<br />
+        Mismatch Penalty : {this.props.input.mismatch}<br />
+        Gap Penalty : {this.props.input.gap}<br />
+            </>;
+        } else {
+            scores = <>
+                Match Score : {this.props.input.match}<br />
+        Mismatch Penalty : {this.props.input.mismatch}<br />
+        Gap Open Penalty : {this.props.input.gapOpen}<br />
+        Gap Extend Penalty : {this.props.input.gapExtend}<br />
+            </>;
+        }
 
-        const scores = <>
-            Match Score : {this.props.scores.match}<br />
-        Mismatch Penalty : {this.props.scores.mismatch}<br />
-        Gap Penalty : {this.props.scores.gap}<br />
-        </>;
+        let DNASimilarityScores = null;
+
+        if (this.props.input.genomeType === 'DNA' &&
+            this.props.input.similarityMatrixName === 'CUSTOM' &&
+            this.props.input.scoringMethod === 'EXTENDED') {
+            DNASimilarityScores = [];
+            DNAbases.forEach((base1) => {
+                DNAbases.forEach((base2) => {
+                    const pair = base1.concat(base2);
+                    if (this.props.input.DNASimilarityMatrix.hasOwnProperty(
+                        pair)) {
+                        DNASimilarityScores.push(
+                            <>
+                                {pair} : {
+                                    this.props.input.DNASimilarityMatrix[pair]}
+                                <br />
+                            </>);
+                    }
+                });
+            });
+        }
+
 
         const alignmets = this.props.result.alignments.map((element, index) => {
             return <><br />Alignment {index}<br />
@@ -103,10 +137,16 @@ class Report extends Component {
                     </div>
                     {line}
                     <br />
-            Scoring method : Basic
-                <div>
+            Scoring method : {this.props.input.scoringMethod}
+                    <br />
+                    <div>
                         {scores}
                     </div>
+                    <br />
+            Similarity Matrix : {this.props.input.similarityMatrixName}
+                    <br />
+                    {DNASimilarityScores}
+                    <br />
                     {line}
                     <br />
 
@@ -119,7 +159,7 @@ class Report extends Component {
         );
     }
 }
-Report.propTypes = {
+PairAlignReport.propTypes = {
     classes: PropTypes.func,
     result: PropTypes.shape({
         alignments: PropTypes.arrayOf(
@@ -129,11 +169,18 @@ Report.propTypes = {
             }),
         ),
     }),
-    sequences: PropTypes.arrayOf(PropTypes.string),
-    scores: PropTypes.shape({
+    input: PropTypes.shape({
+        scoringMethod: PropTypes.string,
+        similarityMatrixName: PropTypes.string,
+        genomeType: PropTypes.string,
+        seqA: PropTypes.string,
+        seqB: PropTypes.string,
         match: PropTypes.number,
         mismatch: PropTypes.number,
         gap: PropTypes.number,
+        gapOpen: PropTypes.number,
+        gapExtend: PropTypes.number,
+        DNASimilarityMatrix: PropTypes.shape,
     }),
 };
-export default withStyles(useStyles)(Report);
+export default withStyles(useStyles)(PairAlignReport);

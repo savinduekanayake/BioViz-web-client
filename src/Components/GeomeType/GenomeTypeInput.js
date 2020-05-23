@@ -5,31 +5,27 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import {useDispatch, useSelector} from 'react-redux';
-import {setPAlgo} from '../../Redux/Actions/PairAlign';
+import {setGenomeType} from '../../Redux/Actions/Mode';
 
 
-export default function AlgoSelector() {
+export default function GenomeTypeInput() {
     const dispatch = useDispatch();
 
     const handleChange = (event)=>{
-        dispatch(setPAlgo(event.target.value));
+        dispatch(setGenomeType(event.target.value));
     };
 
-    const value = useSelector((state) => state.pAlgo);
+    const value = useSelector((state) => state.genomeType);
     return (
         <div>
             <FormControl component="fieldset">
-            <FormLabel component="legend">Select Algorithm</FormLabel>
-            <RadioGroup aria-label="algorithm"
-                value={value} name='algorithm' onChange={handleChange}>
+            <FormLabel component="legend">Select Genome Type</FormLabel>
+            <RadioGroup aria-label="genome-type"
+                value={value} name='genome-type' onChange={handleChange}>
                 <FormControlLabel
-                    value='GLOBAL'
-                    control={<Radio />}
-                    label="Needleman Wunsch" />
+                    value='DNA' control={<Radio />} label="DNA" />
                 <FormControlLabel
-                    value='LOCAL'
-                    control={<Radio />}
-                    label="Smith Waterman" />
+                    value='PROTEIN' control={<Radio />} label="Protein" />
 
             </RadioGroup>
             </FormControl>
