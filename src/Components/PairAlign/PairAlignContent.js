@@ -10,13 +10,14 @@ import PairAlignResult from './PairAlignResult';
 import LoadingOverlay from './LoadingOverlay';
 import GenomeTypeInput from '../GeomeType/GenomeTypeInput';
 import {Box} from '@material-ui/core';
+import {getSubstring} from '../../util/substring';
 
 export default function PairAlignContent() {
     const [result, setResult] = React.useState(false);
     const [loading, setloading] = React.useState(false);
     const genomeType = useSelector((state) => state.genomeType);
-    const seqA = useSelector((state) => state.P1);
-    const seqB = useSelector((state) => state.P2);
+    const seqA = getSubstring(useSelector((state) => state.P1));
+    const seqB = getSubstring(useSelector((state) => state.P2));
     const match = useSelector((state) => state.matchScore);
     const mismatch = useSelector((state) => state.mismatchPenalty);
     const gap = useSelector((state) => state.gapPenalty);

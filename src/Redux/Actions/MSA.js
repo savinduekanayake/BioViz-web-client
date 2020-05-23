@@ -11,6 +11,20 @@ export const setMSAInput = (seq, key)=>{
     };
 };
 
+export const setMSAInputRange = (range, key)=>{
+    return {
+        type: 'SET_MSA_RANGE',
+        payload: {range, key},
+    };
+};
+
+export const setMSAInputName = (name, key)=>{
+    return {
+        type: 'SET_MSA_NAME',
+        payload: {name, key},
+    };
+};
+
 export const removeMSA = (key)=>{
     return {
         type: 'REMOVE_MSA',

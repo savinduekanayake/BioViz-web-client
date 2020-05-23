@@ -6,6 +6,8 @@ import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import {IconButton, Grid} from '@material-ui/core';
 import {useDispatch} from 'react-redux';
 import APIinput from './APIinput';
+import RangeSelector from './RangeSelector';
+import NameInput from './NameInput';
 
 
 export default function CommonInput(props) {
@@ -24,6 +26,10 @@ export default function CommonInput(props) {
         <div>
 
             <h3>{props.title} {cancelButton}</h3>
+            <div style={{marginBottom: 30}}>
+                <NameInput/>
+            </div>
+
             <Grid
                 container
                 spacing={6}
@@ -55,6 +61,15 @@ export default function CommonInput(props) {
                         type={props.type} />
                 </Grid>
             </Grid>
+            <div style={{textAlign: 'center'}}>
+                <RangeSelector
+                rangeInputHandler={props.rangeInputHandler}
+                MSAkey={props.MSAkey}
+                range={props.range}
+                type={props.type}
+                sequenceLength={props.value.length}
+                />
+            </div>
 
 
         </div>
@@ -63,9 +78,11 @@ export default function CommonInput(props) {
 
 CommonInput.propTypes = {
     inputHandler: PropTypes.func,
+    rangeInputHandler: PropTypes.func,
     closeHandler: PropTypes.func,
     title: PropTypes.string,
     MSAkey: PropTypes.number,
     value: PropTypes.string,
     type: PropTypes.string,
+    range: PropTypes.arrayOf(PropTypes.number),
 };
