@@ -5,10 +5,14 @@ import {makeStyles} from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
     tree: {
-        borderWidth: 4,
+        borderWidth: 2,
         borderStyle: 'solid',
         width: 600,
         height: 400,
+    },
+    sampleTree: {
+        width: 600,
+        height: 200,
     },
 }));
 
@@ -16,6 +20,7 @@ export default function MSATree(props) {
     const classes = useStyles();
     const ref = React.useRef(null);
     const {treeData, setSelected} = props;
+    const treeType = props.type;
 
 
     useEffect(() => {
@@ -25,7 +30,7 @@ export default function MSATree(props) {
                 container: ref.current,
                 fitView: true,
                 width: 600,
-                height: 300,
+                height: treeType === 'sample' ? 200 : 400,
                 modes: {
                     default: [
                         {
@@ -105,9 +110,9 @@ export default function MSATree(props) {
                 const id = e.item.defaultCfg.id;
                 setSelected(id);
             });
-            graph.on('node:mouseleave', (e) => {
-                setSelected(undefined);
-            });
+            // graph.on('node:mouseleave', (e) => {
+            //     setSelected(undefined);
+            // });
             graph.on('canvas:dblclick', (e) => {
                 graph.fitView(0);
             });
@@ -115,10 +120,11 @@ export default function MSATree(props) {
         graph.data(treeData);
         graph.render();
         graph.fitView(0);
-    }, [setSelected, treeData]);
+    }, [setSelected, treeData, treeType]);
 
     return (
-        <div ref={ref} className={classes.tree}>
+        <div ref={ref} className={`${classes.tree} 
+        ${props.type === 'sample' ? classes.sampleTree : ''}`}>
         </div>
     );
 };
@@ -129,5 +135,6 @@ MSATree.propTypes = {
         children: PropTypes.array,
     }),
     setSelected: PropTypes.func,
+    type: PropTypes.string,
 };
 

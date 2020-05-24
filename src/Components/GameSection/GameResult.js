@@ -6,7 +6,7 @@ import DoneOutlineRoundedIcon from '@material-ui/icons/DoneOutlineRounded';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import {makeStyles} from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
     A: {
         color: 'red',
     },
@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: '#141938',
         color: '#e9e3e3de',
         borderRadius: '10px',
-        padding: 10,
+        padding: 30,
         paddingBottom: 40,
     },
     table: {
@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
         marginRight: 'auto',
     },
     tablerow: {
-        width: 1500,
+        maxWidth: 1300,
         overflowX: 'scroll',
         display: 'block',
         marginLeft: 'auto',
@@ -66,15 +66,18 @@ export default function GameResult(props) {
     for (let i = 0; i < minLength; i++) {
         if ((alignA.charAt(i) === '-' || alignB.charAt(i) === '-') ||
             (alignA.charAt(i) === 'e' || alignB.charAt(i) === 'e')) {
+                // if gap in the middle or end
             score += gapPenalty;
             gapSc += gapPenalty;
             row.push({type: <MinimizeIcon />, index: i+1});
         } else if (alignA.charAt(i) === alignB.charAt(i)) {
+                // if 2 elements are matching
             score += matchScore;
             matchSc += matchScore;
             row.push({type: <DoneOutlineRoundedIcon
                  className={classes[alignA.charAt(i)]} />, index: i+1});
         } else {
+                // if 2 elements mismatch
             score += mismatchPenanlty;
             mismatchSc += mismatchPenanlty;
             row.push({type: <CloseRoundedIcon style={{color: '#9b8989'}} />,
@@ -88,7 +91,6 @@ export default function GameResult(props) {
 
     return (
         <Box className={classes.box}>
-            <br />
             <h2>Result</h2>
             <h3>Alignment Status</h3>
             <table className={classes.tablerow}>
@@ -119,19 +121,24 @@ export default function GameResult(props) {
                     <tr className={classes.score}>
                         <td><h3>Total Score</h3></td>
                             <td style={{minWidth: 5}}></td>
-                        <td><h3 className={classes.sc}>{score}</h3></td>
+                        <td><h3 className={classes.sc}
+                            testid={'score'} value={score}>{score}</h3></td>
                             <td style={{minWidth: 30}}></td>
                         <td><h3>Match Score</h3></td>
                             <td style={{minWidth: 2}}></td>
-                        <td><h3 className={classes.sc}>{matchSc}</h3></td>
+                        <td><h3 className={classes.sc}
+                        testid={'matchSc'} value={matchSc}>{matchSc}</h3></td>
                             <td style={{minWidth: 30}}></td>
                         <td><h3>Mismatch Penalty</h3></td>
                             <td style={{minWidth: 5}}></td>
-                        <td><h3 className={classes.sc}>{mismatchSc}</h3></td>
+                        <td><h3 className={classes.sc}
+                        testid={'mismatchSc'} value={mismatchSc}>
+                            {mismatchSc}</h3></td>
                             <td style={{minWidth: 30}}></td>
                         <td><h3>Gap Penalty</h3></td>
                             <td style={{minWidth: 5}}></td>
-                        <td><h3 className={classes.sc}>{gapSc}</h3></td>
+                        <td><h3 className={classes.sc}
+                            testid={'gapSc'} value={gapSc}>{gapSc}</h3></td>
                     </tr>
                 </tbody>
             </table>

@@ -6,6 +6,11 @@ import Grid from '@material-ui/core/Grid';
 import {makeStyles} from '@material-ui/core/styles';
 import DropDownInput from './DropDownInput';
 import PropTypes from 'prop-types';
+import {useDispatch} from 'react-redux';
+import {setMSAOrder} from '../../../Redux/Actions/MSA';
+import msaOrderValidate from '../../../Validators/MSA/MSAOrderValidator';
+import HelpModal from './HelpModal';
+import PairingOrderList from './PairingOrderList';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -15,10 +20,18 @@ const useStyles = makeStyles((theme) => ({
     submitButton: {
         color: 'green',
     },
+    avatar: {
+        color: 'white',
+        backgroundColor: 'red',
+        width: 25,
+        height: 25,
+        fontSize: 15,
+    },
 }));
 
 export default function MSAOrderInput(props) {
     const classes = useStyles();
+    const dispatch = useDispatch();
     useEffect(() => {
         const currentSequences = Array(
             props.sequences.length).fill().map((_, i) => i + 1,
@@ -50,25 +63,32 @@ export default function MSAOrderInput(props) {
         setnextProfileIndex(nextProfileIndex + 1);
     };
 
+    const onCheckPairs = () => {
+        if (msaOrderValidate(pairingOrder, currentSequences.length)) {
+            dispatch(setMSAOrder(pairingOrder));
+        } else {
+            console.log('error in pairing');
+        }
+    };
+
     const onReset = () => {
         setavailableSet(new Set(currentSequences));
         setpairingOrder(new Array(0));
         setnextProfileIndex(props.sequences.length + 1);
+        dispatch(setMSAOrder([]));
     };
 
-
-    const pairingOrderComponent = pairingOrder.map((element) => {
+    function makeAvatar(character) {
         return (
-            <div key={element[2]}>
-                {element[0]} + {element[1]} {'->'} {element[2]}
-            </div>
+            <Avatar className={classes.avatar}>{character}</Avatar>
         );
-    });
+    }
+
     const available = [];
     availableSet.forEach((element) => {
         available.push(
             <Grid item key={element}>
-                <Avatar>{element}</Avatar>
+                {makeAvatar(element)}
             </Grid>,
         );
     });
@@ -81,6 +101,7 @@ export default function MSAOrderInput(props) {
             Input your desired order to align the sequences,
             one pair of sequences/profiles per one line.
             <br />
+            <HelpModal/>
             <br />
             <br />
             Currently available for pairing
@@ -92,7 +113,8 @@ export default function MSAOrderInput(props) {
                 justify="center"
                 alignItems="center"
                 className={classes.availableIconsGrid}>
-                {available}
+                {pairingOrder.length < currentSequences.length - 1 ?
+                    available : <Grid item>-None-</Grid>}
             </Grid>
             <br />
             <Grid container
@@ -103,22 +125,33 @@ export default function MSAOrderInput(props) {
                 alignItems="center"
 
             >
-                <Grid item>
-                    Your Pair Aligns
-                    {pairingOrderComponent}
+                <Grid item xs={4}>
+                    Your Pair Aligns Will Appear Here
+                    {/* {pairingOrderComponent} */}
+                    <PairingOrderList pairingOrder={pairingOrder}/>
                     <br />
-                    <Button
-                        variant='outlined'
-                        onClick={onReset}>
-                        Reset Alignments
-                    </Button>
+                    {pairingOrder.length > 0 ?
+                        <Button
+                            variant='outlined'
+                            onClick={onReset}>
+                            Reset Pairings
+                        </Button> :
+                        ''}
                 </Grid>
-                <Grid item>
+                <Grid item xs={4}>
                     <DropDownInput
                         availableSet={availableSet}
-                        onSubmitPair={onSubmitPair} />
+                        onSubmitPair={onSubmitPair}
+                        disabledStatus={
+                            pairingOrder.length === currentSequences.length - 1
+                        } />
                 </Grid>
             </Grid>
+            <div>
+                <Button onClick={onCheckPairs}>
+                    Check Pairing Validity
+                </Button>
+            </div>
 
 
         </div>

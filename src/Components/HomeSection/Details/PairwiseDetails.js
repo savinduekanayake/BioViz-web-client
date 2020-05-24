@@ -53,25 +53,27 @@ export default function PairwiseDetails() {
   const [expanded, setExpanded] = React.useState('panel1');
 
   const handleChange = (panel) => (event, newExpanded) => {
+    /* istanbul ignore next */
     setExpanded(newExpanded ? panel : false);
   };
 
   return (
     <div>
       <ExpansionPanel
+        testid='expansionPanelId'
         square expanded={expanded === 'panel2'}
         onChange={handleChange('panel2')}
         >
-        <ExpansionPanelSummary
+        <ExpansionPanelSummary testid='expansionPanelSummaryId'
             aria-controls="panel1d-content" id="panel1d-header"
         >
-            <Typography>
+            <Typography component={'span'} testid='typographyId1'>
                 Want to know about Pairwise alignment? Click here
             </Typography>
         </ExpansionPanelSummary>
 
-        <ExpansionPanelDetails>
-          <Typography >
+        <ExpansionPanelDetails testid='expansionPanelDetailsId'>
+          <Typography component={'span'} testid='typographyId1'>
             {/* Details of PW in PWCoreDetails component*/}
             <PWCoreDetails />
 

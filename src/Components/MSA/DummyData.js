@@ -1,10 +1,28 @@
-export const initialData = [{key: 0, seq: 'TCGAATTCCAAGACTAATAGACAGAAACAA'},
-{key: 1, seq: 'GTATTAAGATAAGACACAACAACAAAATTT'},
-{key: 2, seq: 'CAAATACGTCTAACGCATAATTTGATAAAG'},
-{key: 3, seq: 'GTAAACAAATACCCACCTGTCAATAATAGA'},
-{key: 4, seq: 'TGAAAACACATAAGCTCAATTATTTAATAG'},
-{key: 5, seq: 'GTAGGACAAAATACACCCAGTATTAAAAAA'},
-
+export const initialData = [
+    {
+        key: 0, seq: 'TCGAATTCCAAGACTAATAGACAGAAACAA',
+        range: [5, 30], name: 'sequence 1',
+    },
+    {
+        key: 1, seq: 'GTATTAAGATAAGACACAACAACAAAATTT',
+        range: [5, 30], name: 'sequence 2',
+    },
+    {
+        key: 2, seq: 'CAAATACGTCTAACGCATAATTTGATAAAG',
+        range: [5, 30], name: 'sequence 3',
+    },
+    {
+        key: 3, seq: 'GTAAACAAATACCCACCTGTCAATAATAGA',
+        range: [5, 30], name: 'sequence 4',
+    },
+    {
+        key: 4, seq: 'TGAAAACACATAAGCTCAATTATTTAATAG',
+        range: [5, 30], name: 'sequence 5',
+    },
+    {
+        key: 5, seq: 'GTAGGACAAAATACACCCAGTATTAAAAAA',
+        range: [5, 30], name: 'sequence 6',
+    },
 ];
 
 // export const initialData = [

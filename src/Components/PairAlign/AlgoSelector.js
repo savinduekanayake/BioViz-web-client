@@ -23,9 +23,13 @@ export default function AlgoSelector() {
             <RadioGroup aria-label="algorithm"
                 value={value} name='algorithm' onChange={handleChange}>
                 <FormControlLabel
-                    value='1' control={<Radio />} label="Needleman Wunsch" />
+                    value='GLOBAL'
+                    control={<Radio />}
+                    label="Needleman Wunsch" />
                 <FormControlLabel
-                    value='2' control={<Radio />} label="Smith Waterman" />
+                    value='LOCAL'
+                    control={<Radio />}
+                    label="Smith Waterman" />
 
             </RadioGroup>
             </FormControl>

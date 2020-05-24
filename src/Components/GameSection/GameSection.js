@@ -10,42 +10,53 @@ export default function GameSection() {
     const [alignment, setAlignment] = React.useState(undefined);
     const [inputErrorA, setMsgA] = React.useState(false);
     const [inputErrorB, setMsgB] = React.useState(false);
-    const seqA = useSelector((state) => state.GameSeqA);
-    const seqB = useSelector((state) => state.GameSeqB);
+    const [scoreErr, setErrMsg] = React.useState(false);
+    const inputA = useSelector((state) => state.GameSeqA);
+    const inputB = useSelector((state) => state.GameSeqB);
     const matchScore = useSelector((state) => state.matchScore);
     const mismatchPenanlty = useSelector((state) => state.mismatchPenalty);
     const gapPenalty = useSelector((state) => state.gapPenalty);
 
     function callbackAlign(data) {
-        setAlignment({
-            alignA: data.alignA,
-            alignB: data.alignB,
-            match: matchScore,
-            mismatch: mismatchPenanlty,
-            gap: gapPenalty,
-        });
+        if (matchScore>0 && (mismatchPenanlty<0 && gapPenalty<0)) {
+            // input score validation
+            setAlignment({
+                alignA: data.alignA,
+                alignB: data.alignB,
+                match: matchScore,
+                mismatch: mismatchPenanlty,
+                gap: gapPenalty,
+            });
+            if (scoreErr===true) {
+                setErrMsg(false);
+            }
+        } else {
+            setErrMsg(true);
+        }
     }
 
     function onSubmit() {
         setAlignment(undefined);
-        // input validation
+        // input sequences validation
         const array = ['A', 'C', 'G', 'T', '-'];
-        let A = 0;
-        let B = 0;
-        for (let i = 0; i < seqA.length; i++) {
-            if (!array.includes(seqA.charAt(i))) {
+        let A = 0; // no invalid characters in inputA
+        let B = 0; // no invalid characters in inputB
+        for (let i = 0; i < inputA.length; i++) {
+            if (!array.includes(inputA.charAt(i))) {
                 setMsgA(true);
-                A = 1;
+                A = 1; // invalid character in inputA
                 break;
             }
         }
         if (A === 0 && inputErrorA) {
             setMsgA(false);
+            // set error msg A to false if there are no invalid characters
+            // in current inputA and if there was a error in previous inputA
         }
-        for (let j = 0; j < seqB.length; j++) {
-            if (!array.includes(seqB.charAt(j))) {
+        for (let j = 0; j < inputB.length; j++) {
+            if (!array.includes(inputB.charAt(j))) {
                 setMsgB(true);
-                B = 1;
+                B = 1; // invalid character in inputB
                 break;
             }
         }
@@ -53,26 +64,27 @@ export default function GameSection() {
             setMsgB(false);
         }
         // adjust input sequences for same length
-        if (seqB.length > 0 && seqA.length > seqB.length) {
-            const remain = 'e'.repeat(seqA.length - seqB.length);
+        if (inputB.length > 0 && inputA.length > inputB.length) {
+            const remain = 'e'.repeat(inputA.length - inputB.length);
+            // add trailing gaps 'e', to end of inputB
             setInput({
-                algnA: seqA,
-                algnB: seqB + remain,
+                seqA: inputA,
+                seqB: inputB + remain,
             });
-        } else if (seqA.length > 0 && seqB.length > seqA.length) {
-            const remain = 'e'.repeat(seqB.length - seqA.length);
+        } else if (inputA.length > 0 && inputB.length > inputA.length) {
+            const remain = 'e'.repeat(inputB.length - inputA.length);
+            // add trailing gaps 'e', to end of inputA
             setInput({
-                algnA: seqA + remain,
-                algnB: seqB,
+                seqA: inputA + remain,
+                seqB: inputB,
             });
         } else {
             setInput({
-                algnA: seqA,
-                algnB: seqB,
+                seqA: inputA,
+                seqB: inputB,
             });
         }
     }
-
 
     return (
         <div>
@@ -80,7 +92,8 @@ export default function GameSection() {
             <GameInput errMsgA={inputErrorA} errMsgB={inputErrorB} />
             <br />
             <Button
-                variant="contained"
+                testid='submitBtn'
+                variant="outlined"
                 color="secondary"
                 onClick={onSubmit} >
                 Submit
@@ -88,16 +101,21 @@ export default function GameSection() {
             <br /><br />
             {input ?
                 (inputErrorA || inputErrorB) ?
-                    <h3 style={{color: '#ea0909'}}>INVALID INPUT.
+                    <h3 testid={'invalidInput'}
+                    style={{color: '#ea0909'}}>INVALID INPUT.
                     READ INSTRUCTIONS CAREFULLY TO INPUT THE SEQUENCES</h3> :
-                    (input.algnA === '' || input.algnB === '') ?
-                    <h3 style={{color: '#ea0909'}}>INPUT BOTH SEQUENCES</h3> :
+                    (input.seqA === '' || input.seqB === '') ?
+                    <h3 testid={'inputmissed'}
+                     style={{color: '#ea0909'}}>INPUT BOTH SEQUENCES</h3> :
                         <GameAlign
                         input={input}
-                        fetchAlign={callbackAlign} /> : ''}
-            <br /><br />
-            {alignment ? <GameResult aligns={alignment} /> : ''}
-
+                        fetchAlign={callbackAlign} /> :
+                         <div testid={'inputNotSet'}/>}
+            {scoreErr?
+             <h3 style={{color: '#ea0909'}}>INVALID SCORING SCHEMA.
+                                SUBMIT AGAIN WITH VALID SCORE/PENALTY</h3>:
+                alignment ? <GameResult aligns={alignment} />:
+                <div testid={'alignmentNotSet'}/>}
         </div>
     );
 }

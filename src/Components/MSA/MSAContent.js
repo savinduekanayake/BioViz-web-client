@@ -2,10 +2,13 @@ import React from 'react';
 import MSAInput from './MSAInput';
 import {useSelector} from 'react-redux';
 import Button from '@material-ui/core/Button';
+import Box from '@material-ui/core/Box';
 
-import {fetchMSAProgressiveOptimal} from '../../API/MSA';
+import {fetchMSAProgressiveOptimal, fetchMSAProgressive} from '../../API/MSA';
 import MSAResult from './MSAResult';
 import LoadingOverlay from './LoadingOverlay';
+import msaOrderValidate from '../../Validators/MSA/MSAOrderValidator';
+import {getSubstring} from '../../util/substring';
 
 
 export default function MSAContent() {
@@ -15,8 +18,11 @@ export default function MSAContent() {
     const match = useSelector((state) => state.matchScore);
     const mismatch = useSelector((state) => state.mismatchPenalty);
     const gap = useSelector((state) => state.gapPenalty);
+    const msaAlgo = useSelector((state) => state.msaAlgo);
+    const msaOrder = useSelector((state) => state.msaOrder);
 
-    const sequences = sequences_.map((element)=> element.seq);
+
+    const sequences = sequences_.map((element) => getSubstring(element));
 
 
     const onReceive = (data) => {
@@ -28,22 +34,47 @@ export default function MSAContent() {
     };
 
     const onSubmit = () => {
-        setResult(undefined);
-        setloading(true);
-        fetchMSAProgressiveOptimal(sequences, match, mismatch, gap, onReceive);
+        if (msaAlgo === '2') {
+            if (msaOrderValidate(msaOrder, sequences.length)) {
+                setResult(undefined);
+                setloading(true);
+                fetchMSAProgressive(
+                    sequences,
+                    msaOrder,
+                    match,
+                    mismatch,
+                    gap,
+                    onReceive);
+            }
+        } else {
+            setResult(undefined);
+            setloading(true);
+            fetchMSAProgressiveOptimal(
+                sequences,
+                match,
+                mismatch,
+                gap,
+                onReceive);
+        }
     };
     return (
         <div>
-            <MSAInput/>
+            <h2>MSA Mode</h2>
+            <MSAInput />
             <Button
-                variant="outlined"
-                color="secondary"
+                variant="contained"
+                fullWidth
+                color="primary"
                 onClick={onSubmit}>
                 Submit
             </Button>
-            {loading? <LoadingOverlay/>:''}
-            <br/>
-            {result? <div><MSAResult result={result.result}/></div> :''}
+            {loading ? <LoadingOverlay /> : ''}
+            <br />
+            {result ?
+                <Box boxShadow={3} padding={3} marginTop={7}>
+                    <div><MSAResult result={result.result} /></div>
+                </Box> :
+                ''}
 
         </div>
     );

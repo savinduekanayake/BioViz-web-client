@@ -25,7 +25,8 @@ const styles = (theme) => ({
 const DialogTitle = withStyles(styles)((props) => {
     const {children, classes, onClose, ...other} = props;
     return (
-        <MuiDialogTitle disableTypography className={classes.root} {...other}>
+        <MuiDialogTitle disableTypography className={classes.root} {...other}
+        testid={'DialogTitle'}>
             <Typography variant="h6">{children}</Typography>
             {onClose ? (
                 <IconButton
@@ -65,6 +66,7 @@ export default function GameInstruction() {
     return (
         <div>
             <Button
+            style={{color: '#1e2e51', fontWeight: 'bolder'}}
             variant="outlined"
             color="primary"
             onClick={handleClickOpen}>
@@ -78,16 +80,17 @@ export default function GameInstruction() {
                     How to Play
                 </DialogTitle>
                 <DialogContent dividers>
-                    <Typography gutterBottom>
                         <ul>
-                            <li>Click on an item in the
-                                sequence to add a gap next to it.</li>
-                            <li>You can remove a gap
-                                by clicking on the relevent gap.</li>
-                            <li>Align two sequences
-                                by adding gaps at relevent positions</li>
+                            <li><h3>Click on an element in the sequence
+                                 to move the sub sequence starting
+                                  from that point, to the right.</h3></li>
+                            <li><h3>Try to avoid unnecessary gaps
+                                 in the middle of the sequences.</h3></li>
+                            <li><h3>Trailing gaps cannot be removed.</h3></li>
+                            <li><h3>Make matches as much as possible.</h3></li>
+                            <li><h3>Change the Match,Mismatch and Gap scores
+                                 to get a higher score.</h3></li>
                         </ul>
-                    </Typography>
                 </DialogContent>
                 <DialogActions>
                     <Button autoFocus onClick={handleClose} color="primary">

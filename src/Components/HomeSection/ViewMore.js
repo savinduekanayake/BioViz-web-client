@@ -25,21 +25,26 @@ export default function ViewMore({title, description}) {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-      <ExpansionPanel>
-        <ExpansionPanelSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <Typography className={classes.heading}>{title}</Typography>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          <Typography className={style.subTitle}>
-            {description}
-          </Typography>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
+    <div className='view' >
+      <div className={classes.root} >
+        <ExpansionPanel>
+          <ExpansionPanelSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+          >
+            <Typography
+              className={classes.heading}
+              testid='ViewMore_title'>{title}
+            </Typography>
+          </ExpansionPanelSummary>
+          <ExpansionPanelDetails>
+            <Typography className={style.subTitle}>
+              {description}
+            </Typography>
+          </ExpansionPanelDetails>
+        </ExpansionPanel>
+      </div>
     </div>
   );
 }

@@ -4,8 +4,7 @@ import Divider from '@material-ui/core/Divider';
 // pages
 import Services from './Services';
 import Steps from './Steps';
-// import Feedback from './Feedback';
-
+import Feedback from './Feedback';
 
 export default function HomeSection() {
     return (
@@ -13,8 +12,7 @@ export default function HomeSection() {
             <Services />
             <Divider />
             <Steps />
-            {/* <Feedback /> */}
-            {/* <Test /> */}
+            <Feedback />
         </div>
     );
 }
