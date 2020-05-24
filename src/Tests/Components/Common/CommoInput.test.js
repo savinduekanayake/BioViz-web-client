@@ -16,11 +16,13 @@ describe('Common Input', () => {
         MSAkey: 0,
         value: 'AGCATC',
         type: 'MSA',
+        range: [1, 4],
     };
     const testProps2 = {
         title: 'kjbkjb',
         MSAkey: 0,
         value: 'AGCATC',
+        range: [2, 5],
     };
 
     it('Renders as MSA input', () => {

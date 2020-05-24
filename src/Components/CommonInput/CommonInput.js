@@ -6,6 +6,8 @@ import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import {IconButton, Grid} from '@material-ui/core';
 import {useDispatch} from 'react-redux';
 import APIinput from './APIinput';
+import RangeSelector from './RangeSelector';
+import NameInput from './NameInput';
 
 
 export default function CommonInput(props) {
@@ -24,6 +26,15 @@ export default function CommonInput(props) {
         <div>
 
             <h3>{props.title} {cancelButton}</h3>
+            <div style={{marginBottom: 30}}>
+                <NameInput
+                nameInputHandler={props.nameInputHandler}
+                MSAkey={props.MSAkey}
+                type={props.type}
+                sequenceName={props.sequenceName}
+                />
+            </div>
+
             <Grid
                 container
                 spacing={6}
@@ -33,6 +44,7 @@ export default function CommonInput(props) {
                 <Grid item>
                     <FileUpload
                         inputHandler={props.inputHandler}
+                        nameInputHandler={props.nameInputHandler}
                         MSAkey={props.MSAkey}
 
                         value={props.value}
@@ -55,6 +67,15 @@ export default function CommonInput(props) {
                         type={props.type} />
                 </Grid>
             </Grid>
+            <div style={{textAlign: 'center'}}>
+                <RangeSelector
+                rangeInputHandler={props.rangeInputHandler}
+                MSAkey={props.MSAkey}
+                range={props.range}
+                type={props.type}
+                sequenceLength={props.value.length}
+                />
+            </div>
 
 
         </div>
@@ -63,9 +84,13 @@ export default function CommonInput(props) {
 
 CommonInput.propTypes = {
     inputHandler: PropTypes.func,
+    rangeInputHandler: PropTypes.func,
+    nameInputHandler: PropTypes.func,
     closeHandler: PropTypes.func,
     title: PropTypes.string,
     MSAkey: PropTypes.number,
     value: PropTypes.string,
     type: PropTypes.string,
+    sequenceName: PropTypes.string,
+    range: PropTypes.arrayOf(PropTypes.number),
 };

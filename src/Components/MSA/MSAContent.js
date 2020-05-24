@@ -8,6 +8,7 @@ import {fetchMSAProgressiveOptimal, fetchMSAProgressive} from '../../API/MSA';
 import MSAResult from './MSAResult';
 import LoadingOverlay from './LoadingOverlay';
 import msaOrderValidate from '../../Validators/MSA/MSAOrderValidator';
+import {getSubstring} from '../../util/substring';
 
 
 export default function MSAContent() {
@@ -21,7 +22,7 @@ export default function MSAContent() {
     const msaOrder = useSelector((state) => state.msaOrder);
 
 
-    const sequences = sequences_.map((element) => element.seq);
+    const sequences = sequences_.map((element) => getSubstring(element));
 
 
     const onReceive = (data) => {

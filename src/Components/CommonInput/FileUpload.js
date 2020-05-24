@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Button} from '@material-ui/core';
 import {useDispatch} from 'react-redux';
+import {parseFASTA} from '../../util/FASTA';
 
 
 export default function FileUpload(props) {
@@ -9,12 +10,17 @@ export default function FileUpload(props) {
     const dispatch = useDispatch();
 
 
-    const handleFileRead = (e) => {
+    const handleFileRead = async (e) => {
         const content = fileReader.result;
+        const parsedData = await parseFASTA(content);
+
         if (props.type === 'MSA') {
-            dispatch(props.inputHandler(content.trim(), props.MSAkey));
+            dispatch(props.inputHandler(parsedData.sequence, props.MSAkey));
+            dispatch(props.nameInputHandler(parsedData.description,
+                props.MSAkey));
         } else {
-            dispatch(props.inputHandler(content.trim()));
+            dispatch(props.inputHandler(parsedData.sequence));
+            dispatch(props.nameInputHandler(parsedData.description));
         }
     };
 
@@ -24,14 +30,16 @@ export default function FileUpload(props) {
     };
 
     const handleFileChosen = (file) => {
-        fileReader = new FileReader();
-        fileReader.onerror = handleError;
-        fileReader.onloadend = handleFileRead;
-        const extension = file.name.split('.').pop().toLowerCase();
-        if (extension === 'txt') {
-            fileReader.readAsText(file);
-        } else {
-            console.log('invalid file type');
+        if (file) {
+            fileReader = new FileReader();
+            fileReader.onerror = handleError;
+            fileReader.onloadend = handleFileRead;
+            const extension = file.name.split('.').pop().toLowerCase();
+            if (extension === 'txt') {
+                fileReader.readAsText(file);
+            } else {
+                console.log('invalid file type');
+            }
         }
     };
 
@@ -53,5 +61,6 @@ export default function FileUpload(props) {
 FileUpload.propTypes = {
     type: PropTypes.string,
     inputHandler: PropTypes.func,
+    nameInputHandler: PropTypes.func,
     MSAkey: PropTypes.number,
 };
