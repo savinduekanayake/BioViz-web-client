@@ -44,6 +44,7 @@ export default function CommonInput(props) {
                 <Grid item>
                     <FileUpload
                         inputHandler={props.inputHandler}
+                        nameInputHandler={props.nameInputHandler}
                         MSAkey={props.MSAkey}
 
                         value={props.value}
