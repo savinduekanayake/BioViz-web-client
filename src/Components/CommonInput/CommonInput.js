@@ -27,7 +27,12 @@ export default function CommonInput(props) {
 
             <h3>{props.title} {cancelButton}</h3>
             <div style={{marginBottom: 30}}>
-                <NameInput/>
+                <NameInput
+                nameInputHandler={props.nameInputHandler}
+                MSAkey={props.MSAkey}
+                type={props.type}
+                sequenceName={props.sequenceName}
+                />
             </div>
 
             <Grid
@@ -79,10 +84,12 @@ export default function CommonInput(props) {
 CommonInput.propTypes = {
     inputHandler: PropTypes.func,
     rangeInputHandler: PropTypes.func,
+    nameInputHandler: PropTypes.func,
     closeHandler: PropTypes.func,
     title: PropTypes.string,
     MSAkey: PropTypes.number,
     value: PropTypes.string,
     type: PropTypes.string,
+    sequenceName: PropTypes.string,
     range: PropTypes.arrayOf(PropTypes.number),
 };

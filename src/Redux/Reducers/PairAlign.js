@@ -14,6 +14,11 @@ export const P1Reducer = (state = paInput.seqA, action)=>{
             prev1__.range = action.payload;
             return prev1__;
 
+        case 'SET_P1_NAME':
+            const prev1___ = {...state};
+            prev1___.name = action.payload;
+            return prev1___;
+
         default:
             return state;
     }
@@ -32,6 +37,11 @@ export const P2Reducer = (state = paInput.seqB, action)=>{
             const prev2__ = {...state};
             prev2__.range = action.payload;
             return prev2__;
+
+        case 'SET_P2_NAME':
+            const prev2___ = {...state};
+            prev2___.name = action.payload;
+            return prev2___;
         default:
             return state;
     }

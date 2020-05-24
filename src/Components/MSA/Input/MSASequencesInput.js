@@ -4,8 +4,8 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 
 import {useSelector, useDispatch} from 'react-redux';
-import {addNewMSA, setMSAInput,
-    removeMSA, setMSAInputRange} from '../../../Redux/Actions/MSA';
+import {addNewMSA, setMSAInput, removeMSA,
+     setMSAInputRange, setMSAInputName} from '../../../Redux/Actions/MSA';
 
 export default function MSASequencesInput() {
     const dispatch = useDispatch();
@@ -23,9 +23,11 @@ export default function MSASequencesInput() {
             <CommonInput
                 inputHandler={setMSAInput}
                 rangeInputHandler={setMSAInputRange}
+                nameInputHandler={setMSAInputName}
                 closeHandler={removeMSA}
                 value={element.seq}
                 range={element.range}
+                sequenceName={element.name}
                 MSAkey={element.key} title={title} type='MSA' />
         </Grid>);
     });

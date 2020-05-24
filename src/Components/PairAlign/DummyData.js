@@ -4477,11 +4477,13 @@ export const paInput = {
         seq: 'CAACGGCAGCTCACGAGGCCTAACCATATCACGCGA'+
         'GTGGCAAGTCACATTCCTGAGTCTCAACGAGTCAATTTCTAGACACATAGGGTC',
         range: [5, 30],
+        name: 'sequence a',
     },
     seqB: {
         seq: 'ACTCAAGGCGGTCCTCAAATATGCCTGCCACAGCTAC'+
     'ACAGGTGTCTATTAAGTCGAGCGTACTCGTTCCACCGGCGCCGTAAAAACCGG',
         range: [5, 30],
+        name: 'sequence b',
     },
 
 

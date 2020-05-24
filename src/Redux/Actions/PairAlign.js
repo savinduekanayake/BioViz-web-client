@@ -12,6 +12,14 @@ export const setP1Range = (input)=>{
     };
 };
 
+export const setP1Name = (input)=>{
+    return {
+        type: 'SET_P1_NAME',
+        payload: input,
+    };
+};
+
+
 export const setP2Input = (input)=>{
     return {
         type: 'SET_P2',
@@ -22,6 +30,13 @@ export const setP2Input = (input)=>{
 export const setP2Range = (input)=>{
     return {
         type: 'SET_P2_RANGE',
+        payload: input,
+    };
+};
+
+export const setP2Name = (input)=>{
+    return {
+        type: 'SET_P2_NAME',
         payload: input,
     };
 };
