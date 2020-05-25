@@ -9,6 +9,7 @@ const useStyles = makeStyles((theme) => ({
         borderStyle: 'solid',
         width: 600,
         height: 400,
+        margin: 'auto',
     },
     sampleTree: {
         width: 600,
@@ -21,6 +22,8 @@ export default function MSATree(props) {
     const ref = React.useRef(null);
     const {treeData, setSelected} = props;
     const treeType = props.type;
+    const htmlId = props.type === 'sample' ? 'MSA-tree-sample' :
+        'MSA-tree-result';
 
 
     useEffect(() => {
@@ -123,7 +126,7 @@ export default function MSATree(props) {
     }, [setSelected, treeData, treeType]);
 
     return (
-        <div ref={ref} className={`${classes.tree} 
+        <div ref={ref} id={htmlId} className={`${classes.tree} 
         ${props.type === 'sample' ? classes.sampleTree : ''}`}>
         </div>
     );

@@ -14,34 +14,61 @@ export default function MSAResult(props) {
     if (selectedProfile) {
         const heading = <p>Intermediate Profile ({`${selectedProfile}`})</p>;
         if (selectedProfile <= nInputSequences) {
-            intermediateProf =<>{heading} <MSAAlignment
+            intermediateProf = <>{heading} <MSAAlignment
                 alignments={[props.result.profiles[selectedProfile]]} /></>;
         } else {
-            intermediateProf =<>{heading} <MSAAlignment
+            intermediateProf = <>{heading} <MSAAlignment
                 alignments={props.result.profiles[selectedProfile]} /></>;
         }
     }
+
+    const onClickDownload = () => {
+        const canvas = document.getElementById(
+            'MSA-tree-result').getElementsByTagName('canvas')[0];
+
+
+        const link = document.createElement('a');
+        link.setAttribute('download', 'tree.png');
+        link.setAttribute('href',
+            canvas.toDataURL('image/png').replace('image/png',
+                'image/octet-stream'));
+        link.click();
+    };
+
     return (
         <div>
 
             <br />
-            <Grid container direction='row' spacing={1}>
-                <Grid item xs={5}>
+            <Grid container direction='row' spacing={0}>
+                <Grid item xs={12} lg={5}>
                     <h3>Tree</h3>
                     <br />
                     Hover on nodes to view intermediate profiles.
                     Double click on canvas to recenter the graph.
-                    <br/>
-                    <MSATree
-                        treeData={props.result.graph}
-                        setSelected={setselectedProfile} />
+                    <br />
+                    <div style={{textAlign: 'right'}}>
+                        <Button
+                            variant="outlined"
+                            onClick={onClickDownload}
+                            size="small">
+                            Print this
+                        </Button>
+                    </div>
+                    <br />
+                    <div>
+                        <MSATree
+                            treeData={props.result.graph}
+                            setSelected={setselectedProfile} />
+                    </div>
                 </Grid>
 
                 <Divider
                     orientation="vertical"
                     flexItem
-                    style={{marginLeft: 25, marginRight: 10}} />
-                <Grid item container direction='column' xs={5}>
+                    style={{marginLeft: 15}} />
+                <Grid item container direction='column' xs={12} lg={5}
+                    align="center"
+                    alignItems="center">
                     <Grid item >
                         <h3>Final Alignment</h3>
                         <br />
@@ -56,14 +83,15 @@ export default function MSAResult(props) {
                 </Grid>
 
                 <Divider orientation="vertical" flexItem />
-                <Grid item>
-                <h3>Report</h3>
+                <Grid item xs={12} lg={'auto'} align="center"
+                    alignItems="center" justify="center">
+                    <h3>Report</h3>
                     <br />
-                    <div style={{textAlign: 'left', marginBottom: 10}}>
+                    <div style={{marginBottom: 10}}>
                         Identity : {props.result.identity.toFixed(5)}
                         <br />
                     </div>
-                    <Button variant="outlined">
+                    <Button variant="outlined" size="small">
                         Generate Report
                     </Button>
                 </Grid>
