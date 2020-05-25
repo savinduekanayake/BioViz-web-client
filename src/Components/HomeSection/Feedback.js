@@ -15,7 +15,7 @@ import SaveIcon from '@material-ui/icons/Save';
 // import css modules
 import style from './assets/css/image.module.css';
 
-// pages
+// import HomeSections component
 // import Snackbar from './Snackbar';
 import Rating from './Rating';
 
@@ -87,6 +87,7 @@ export default function Feedback() {
       </TableContainer>
 
       <Button
+        testid='saveButtonId'
         variant="contained"
         color="primary"
         size="large"

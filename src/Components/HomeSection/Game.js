@@ -11,6 +11,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 
+// import HomeSections component
 import Snackbar from './Snackbar';
 
 const useStyles = makeStyles((theme) => ({
@@ -174,8 +175,8 @@ export default function TransferList() {
     message: 'Select and move the rows into relavant alignment.',
   };
 
-  // eslint-disable-next-line max-len
-  const checkResult = () => { // +++++++++++++++++++++++++++NOT COMPLETED++++++++++++++++++++++++++++++++
+
+  const checkResult = () => {
      // snack bar is not working! . doesn't know why. but alert is working----
     if (left.length === pairwise.length && right.length === msa.length) {
         return (
