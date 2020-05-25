@@ -8,12 +8,15 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
+import Button from '@material-ui/core/Button';
+import SaveIcon from '@material-ui/icons/Save';
+
 
 // import css modules
 import style from './assets/css/image.module.css';
 
 // pages
-// import Ratings from './Ratings';
+// import Snackbar from './Snackbar';
 import Rating from './Rating';
 
 
@@ -29,6 +32,10 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     marginTop: 50,
     paddingBottom: 50,
+  },
+  position: {
+    marginTop: '20px',
+    marginLeft: '85%',
   },
 }));
 
@@ -78,6 +85,16 @@ export default function Feedback() {
           </TableBody>
         </Table>
       </TableContainer>
+
+      <Button
+        variant="contained"
+        color="primary"
+        size="large"
+        className={classes.button, classes.position}
+        startIcon={<SaveIcon />}
+      >
+        Save
+      </Button>
     </div>
   );
 }
