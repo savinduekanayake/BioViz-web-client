@@ -5,7 +5,7 @@ import {makeStyles} from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
     tree: {
-        borderWidth: 4,
+        borderWidth: 2,
         borderStyle: 'solid',
         width: 600,
         height: 400,
@@ -110,9 +110,9 @@ export default function MSATree(props) {
                 const id = e.item.defaultCfg.id;
                 setSelected(id);
             });
-            graph.on('node:mouseleave', (e) => {
-                setSelected(undefined);
-            });
+            // graph.on('node:mouseleave', (e) => {
+            //     setSelected(undefined);
+            // });
             graph.on('canvas:dblclick', (e) => {
                 graph.fitView(0);
             });

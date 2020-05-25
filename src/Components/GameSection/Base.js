@@ -5,9 +5,9 @@ import PropTypes from 'prop-types';
 
 const useStyles = makeStyles((theme) => ({
     avatar: {
-        height: '20px',
-        width: '20px',
-        fontSize: '12px',
+        height: '25px',
+        width: '25px',
+        fontSize: '14px',
     },
     A: {
         color: 'white',

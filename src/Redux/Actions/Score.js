@@ -47,3 +47,17 @@ export const setTracebackPriority = (input)=>{
         payload: input,
     };
 };
+
+export const setSimilarityMatrixName = (input)=>{
+    return {
+        type: 'SET_SIMILARITY_MATRIX_NAME',
+        payload: input,
+    };
+};
+
+export const editDNASimilarityMatrix = (identifier, value)=>{
+    return {
+        type: 'EDIT_DNA_SIMILARIY_MATRIX',
+        payload: {identifier, value},
+    };
+};

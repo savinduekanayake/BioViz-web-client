@@ -4473,10 +4473,20 @@ export const nwResult = {
     },
   };
 export const paInput = {
-    seqA: 'CAACGGCAGCTCACGAGGCCTAACCATATCACGCGA'+
-    'GTGGCAAGTCACATTCCTGAGTCTCAACGAGTCAATTTCTAGACACATAGGGTC',
-    seqB: 'ACTCAAGGCGGTCCTCAAATATGCCTGCCACAGCTAC'+
+    seqA: {
+        seq: 'CAACGGCAGCTCACGAGGCCTAACCATATCACGCGA'+
+        'GTGGCAAGTCACATTCCTGAGTCTCAACGAGTCAATTTCTAGACACATAGGGTC',
+        range: [5, 30],
+        name: 'sequence a',
+    },
+    seqB: {
+        seq: 'ACTCAAGGCGGTCCTCAAATATGCCTGCCACAGCTAC'+
     'ACAGGTGTCTATTAAGTCGAGCGTACTCGTTCCACCGGCGCCGTAAAAACCGG',
+        range: [5, 30],
+        name: 'sequence b',
+    },
+
+
 };
 // export const paInput = {
 //     seqA: 'AAAA',

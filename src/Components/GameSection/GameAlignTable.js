@@ -6,7 +6,7 @@ import {makeStyles} from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() => ({
     table: {
-        maxWidth: 1400,
+        maxWidth: 1300,
         overflowX: 'auto',
         display: 'block',
     },

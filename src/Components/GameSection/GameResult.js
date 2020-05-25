@@ -40,7 +40,7 @@ const useStyles = makeStyles(() => ({
         marginRight: 'auto',
     },
     tablerow: {
-        maxWidth: 1400,
+        maxWidth: 1300,
         overflowX: 'scroll',
         display: 'block',
         marginLeft: 'auto',
@@ -121,19 +121,24 @@ export default function GameResult(props) {
                     <tr className={classes.score}>
                         <td><h3>Total Score</h3></td>
                             <td style={{minWidth: 5}}></td>
-                        <td><h3 className={classes.sc}>{score}</h3></td>
+                        <td><h3 className={classes.sc}
+                            testid={'score'} value={score}>{score}</h3></td>
                             <td style={{minWidth: 30}}></td>
                         <td><h3>Match Score</h3></td>
                             <td style={{minWidth: 2}}></td>
-                        <td><h3 className={classes.sc}>{matchSc}</h3></td>
+                        <td><h3 className={classes.sc}
+                        testid={'matchSc'} value={matchSc}>{matchSc}</h3></td>
                             <td style={{minWidth: 30}}></td>
                         <td><h3>Mismatch Penalty</h3></td>
                             <td style={{minWidth: 5}}></td>
-                        <td><h3 className={classes.sc}>{mismatchSc}</h3></td>
+                        <td><h3 className={classes.sc}
+                        testid={'mismatchSc'} value={mismatchSc}>
+                            {mismatchSc}</h3></td>
                             <td style={{minWidth: 30}}></td>
                         <td><h3>Gap Penalty</h3></td>
                             <td style={{minWidth: 5}}></td>
-                        <td><h3 className={classes.sc}>{gapSc}</h3></td>
+                        <td><h3 className={classes.sc}
+                            testid={'gapSc'} value={gapSc}>{gapSc}</h3></td>
                     </tr>
                 </tbody>
             </table>

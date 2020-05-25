@@ -74,7 +74,7 @@ function MSAAlignment(props) {
                 height={20*(props.alignments.length+1)}
                 rowCount={props.alignments.length}
                 rowHeight={20}
-                width={600}
+                width={560}
             >
                 {makeBase}
             </FixedSizeGrid>

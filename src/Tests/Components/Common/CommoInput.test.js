@@ -16,11 +16,13 @@ describe('Common Input', () => {
         MSAkey: 0,
         value: 'AGCATC',
         type: 'MSA',
+        range: [1, 4],
     };
     const testProps2 = {
         title: 'kjbkjb',
         MSAkey: 0,
         value: 'AGCATC',
+        range: [2, 5],
     };
 
     it('Renders as MSA input', () => {
@@ -39,7 +41,6 @@ describe('Common Input', () => {
                 <CommonInput {...testProps2} />
             </Provider>,
         );
-        //   console.log(wrapper.debug());
         const closeButton = findByAttr(wrapper,
             'testid',
             'MSASeqCloseButton').hostNodes();
