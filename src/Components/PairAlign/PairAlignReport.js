@@ -37,6 +37,8 @@ class PairAlignReport extends Component {
         super(props);
         this.downloadTxtFile = this.downloadTxtFile.bind(this);
         this.sequences = [this.props.input.seqA, this.props.input.seqB];
+        this.sequenceNames = [this.props.input.seqAname,
+            this.props.input.seqBname];
     }
 
     downloadTxtFile() {
@@ -62,7 +64,9 @@ class PairAlignReport extends Component {
             date.getSeconds();
 
         const inputSequences = this.sequences.map((seq, index) => {
-            return <><br />{`> ${index}`}<br />{seq}<br /></>;
+            return <>
+                <br />{`>${this.sequenceNames[index]}`}<br />{seq}<br />
+            </>;
         });
         const line = <hr className={classes.line} />;
         let scores;
@@ -105,10 +109,10 @@ class PairAlignReport extends Component {
 
 
         const alignmets = this.props.result.alignments.map((element, index) => {
-            return <><br />Alignment {index}<br />
-                {'> 0'}<br />
+            return <><br />Alignment {index + 1}<br />
+                {`>${this.sequenceNames[0]}`}<br />
                 {element.algn_a}<br />
-                {'> 1'}<br />
+                {`>${this.sequenceNames[1]}`}<br />
                 {element.algn_b}<br />
                 {`Identity : ${element.identity}`}<br />
                 <br />
@@ -174,7 +178,9 @@ PairAlignReport.propTypes = {
         similarityMatrixName: PropTypes.string,
         genomeType: PropTypes.string,
         seqA: PropTypes.string,
+        seqAname: PropTypes.string,
         seqB: PropTypes.string,
+        seqBname: PropTypes.string,
         match: PropTypes.number,
         mismatch: PropTypes.number,
         gap: PropTypes.number,
