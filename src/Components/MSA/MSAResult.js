@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useRef} from 'react';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
@@ -6,17 +6,43 @@ import Divider from '@material-ui/core/Divider';
 
 import MSATree from './MSATree';
 import MSAAlignment from './MSAAlignment';
+import {Modal} from '@material-ui/core';
+import {makeStyles} from '@material-ui/core/styles';
+
+import MSAReport from './MSAReport';
+
+const useStyles = makeStyles((theme) => ({
+    reportModal: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+}));
 
 export default function MSAResult(props) {
+    const classes = useStyles();
+    const divRef = useRef(null);
+
+    useEffect(() => {
+        divRef.current.scrollIntoView({behavior: 'smooth'});
+    }, [props.result]);
+
     const [selectedProfile, setselectedProfile] = React.useState(undefined);
+    const [reportOpen, setReportOpen] = React.useState(false);
     const nInputSequences = props.result.alignments.length;
     let intermediateProf = null;
     if (selectedProfile) {
-        const heading = <p>Intermediate Profile ({`${selectedProfile}`})</p>;
         if (selectedProfile <= nInputSequences) {
+            const heading = <p>
+                Input Sequence
+                ({`${props.input.sequencesNames[selectedProfile - 1]}`})
+                </p>;
             intermediateProf = <>{heading} <MSAAlignment
                 alignments={[props.result.profiles[selectedProfile]]} /></>;
         } else {
+            const heading = <p>
+                Intermediate Profile ({`${selectedProfile}`})
+                </p>;
             intermediateProf = <>{heading} <MSAAlignment
                 alignments={props.result.profiles[selectedProfile]} /></>;
         }
@@ -34,9 +60,16 @@ export default function MSAResult(props) {
                 'image/octet-stream'));
         link.click();
     };
+    const handleReportOpen = () => {
+        setReportOpen(true);
+    };
+
+    const handleReportClose = () => {
+        setReportOpen(false);
+    };
 
     return (
-        <div>
+        <div ref={divRef}>
 
             <br />
             <Grid container direction='row' spacing={0}>
@@ -57,8 +90,10 @@ export default function MSAResult(props) {
                     <br />
                     <div>
                         <MSATree
+                            type='result'
                             treeData={props.result.graph}
-                            setSelected={setselectedProfile} />
+                            setSelected={setselectedProfile}
+                            sequencesNames={props.input.sequencesNames} />
                     </div>
                 </Grid>
 
@@ -83,17 +118,30 @@ export default function MSAResult(props) {
                 </Grid>
 
                 <Divider orientation="vertical" flexItem />
-                <Grid item xs={12} lg={'auto'} align="center"
-                    alignItems="center" justify="center">
+                <Grid item xs={12} lg={'auto'} align="center">
                     <h3>Report</h3>
                     <br />
                     <div style={{marginBottom: 10}}>
                         Identity : {props.result.identity.toFixed(5)}
                         <br />
                     </div>
-                    <Button variant="outlined" size="small">
+                    <Button variant="outlined" size="small"
+                        onClick={handleReportOpen}>
                         Generate Report
                     </Button>
+                    <Modal
+                        open={reportOpen}
+                        className={classes.reportModal}
+                        onClose={handleReportClose}
+                        aria-labelledby="report-modal-title"
+                        aria-describedby="report-modal-description"
+
+                    >
+                        <MSAReport
+                            input={props.input}
+                            result={props.result}
+                        />
+                    </Modal>
                 </Grid>
             </Grid>
 
@@ -115,6 +163,9 @@ MSAResult.propTypes = {
             ),
         ),
         identity: PropTypes.number,
+    }),
+    input: PropTypes.shape({
+        sequencesNames: PropTypes.arrayOf(PropTypes.string),
     }),
 
 };
