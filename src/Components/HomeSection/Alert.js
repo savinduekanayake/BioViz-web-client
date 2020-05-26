@@ -88,20 +88,28 @@ export default function CustomizedDialogs({title, description}) {
         Save
       </Button>
       <Dialog
+        testid='dialogId'
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
         open={open}
         >
-        <DialogTitle id="customized-dialog-title" onClose={handleClose}>
+        <DialogTitle
+            testid='dialogTitleId'
+            id="customized-dialog-title"
+            onClose={handleClose}
+            >
           {title}
         </DialogTitle>
-        <DialogContent dividers>
-          <Typography gutterBottom>
+        <DialogContent testid='dialogContentId' dividers>
+          <Typography testid='typographyId' gutterBottom>
             {description}
           </Typography>
         </DialogContent>
-        <DialogActions>
-          <Button autoFocus onClick={handleClose} color="primary">
+        <DialogActions testid='dialogActionsId'>
+          <Button
+            testid='closeButtonId'
+            autoFocus onClick={handleClose}
+            color="primary">
             Close
           </Button>
         </DialogActions>
