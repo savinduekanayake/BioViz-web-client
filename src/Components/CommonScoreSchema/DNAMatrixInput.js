@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const getIdentifier = function(a, b) {
-    if (a<b) {
+    if (a < b) {
         return b.concat(a);
     } else {
         return a.concat(b);
@@ -32,7 +32,7 @@ export default function DNAMatrixInput() {
     const dispatch = useDispatch();
     const matrix = useSelector((state) => state.DNASimilarityMatrix);
 
-    const onChange = (e)=>{
+    const onChange = (e) => {
         const val = Math.floor(Number(e.target.value));
         if (Number.isInteger(val)) {
             dispatch(editDNASimilarityMatrix(e.target.id, val));
@@ -45,16 +45,19 @@ export default function DNAMatrixInput() {
     for (let i = 0; i < bases.length + 1; i++) {
         const row = [];
         for (let j = 0; j < bases.length + 1; j++) {
+            const key = `${i}${j}`;
             if (i === 0 && j === 0) {
-                row.push(<th className={classes.cell}>...</th>);
+                row.push(<th key={key} className={classes.cell}>...</th>);
             } else if (i === 0) {
-                row.push(<th className={classes.cell}>{bases[j - 1]}</th>);
-            } else if (j === 0) {
-                row.push(<th className={classes.cell}>{bases[i - 1]}</th>);
-            } else {
-                const identifier = getIdentifier(bases[i-1], bases[j-1]);
                 row.push(
-                    <td className={classes.cell}>
+                    <th key={key} className={classes.cell}>{bases[j - 1]}</th>);
+            } else if (j === 0) {
+                row.push(
+                    <th key={key} className={classes.cell}>{bases[i - 1]}</th>);
+            } else {
+                const identifier = getIdentifier(bases[i - 1], bases[j - 1]);
+                row.push(
+                    <td key={key} className={classes.cell}>
                         <TextField
                             id={identifier}
                             size="small"
@@ -66,7 +69,7 @@ export default function DNAMatrixInput() {
                 );
             }
         }
-        tableBody.push(<tr>{row}</tr>);
+        tableBody.push(<tr key={i}>{row}</tr>);
     }
 
     return (
