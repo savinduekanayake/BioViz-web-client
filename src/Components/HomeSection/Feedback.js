@@ -8,15 +8,12 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
-import Button from '@material-ui/core/Button';
-import SaveIcon from '@material-ui/icons/Save';
-
 
 // import css modules
 import style from './assets/css/image.module.css';
 
 // import HomeSections component
-// import Snackbar from './Snackbar';
+import Alert from './Alert';
 import Rating from './Rating';
 
 
@@ -50,6 +47,11 @@ const rows = [
   createData('Satistification of visualizing the result', <Rating />),
   createData('Satistification of response time', <Rating />),
 ];
+
+const details = {
+  title: 'Thank you!',
+  description: 'This help us to imorove our website better in the future.',
+};
 
 
 export default function Feedback() {
@@ -86,16 +88,10 @@ export default function Feedback() {
         </Table>
       </TableContainer>
 
-      <Button
-        testid='saveButtonId'
-        variant="contained"
-        color="primary"
-        size="large"
-        className={classes.button, classes.position}
-        startIcon={<SaveIcon />}
-      >
-        Save
-      </Button>
+      <div className={classes.position}>
+        <Alert {...details} />
+      </div>
+
     </div>
   );
 }

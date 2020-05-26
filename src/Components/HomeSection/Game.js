@@ -13,6 +13,7 @@ import Divider from '@material-ui/core/Divider';
 
 // import HomeSections component
 import Snackbar from './Snackbar';
+// import Alert from './Alert';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
 function not(a, b) {
   return a.filter((value) => b.indexOf(value) === -1);
 }
@@ -47,6 +49,7 @@ function intersection(a, b) {
 export default function TransferList() {
   const classes = useStyles();
   const [checked, setChecked] = React.useState([]);
+  // const [answer, setAnswer] = React.useState(false);
 
   // update the sentences
   const [left, setLeft] = React.useState(
@@ -164,29 +167,41 @@ export default function TransferList() {
   );
 
   const rightAnswer = {
-    message: 'Congrats! Your anser is right.',
+    message: 'Congrats!\n Your anser is right.',
   };
 
   const wrongAnswer = {
-    message: 'Try again! Your anser is wrong.',
+    message: 'Try again!\n Your anser is wrong.',
   };
 
   const instruction = {
     message: 'Select and move the rows into relavant alignment.',
   };
 
+  // const rightAnswerAlert = {
+  //   title: 'Congrats!',
+  //   description: 'Your anser is right.',
+  // };
+
+  // const wrongAnswerAlert = {
+  //   title: 'Try again!',
+  //   description: 'Your anser is wrong.',
+  // };
+
 
   const checkResult = () => {
      // snack bar is not working! . doesn't know why. but alert is working----
     if (left.length === pairwise.length && right.length === msa.length) {
         return (
-          // <Snackbar {...rightAnswer} testid='snackbarIdright' />
           window.alert(rightAnswer.message)
+          // setAnswer(true)
+          // <Alert onClick = {checkResult} {...rightAnswerAlert} />
         );
     } else {
       return (
         window.alert(wrongAnswer.message)
-        // <Snackbar {...wrongAnswer} testid='snackbarIdwrong' />
+        // setAnswer(false)
+        // <Alert onClick = {checkResult} {...wrongAnswerAlert} />
       );
     }
   };
@@ -213,9 +228,17 @@ export default function TransferList() {
           >
             &gt;
           </Button>
-          <Button testid='buttonId2'
+
+           <Button testid='buttonId2'
             onClick = {checkResult}
             >Submit</Button>
+
+            {/* {answer?
+              <Alert onClick = {checkResult} {...rightAnswerAlert} /> :
+                <Alert onClick = {checkResult} {...wrongAnswerAlert} />
+            } */}
+
+
           <Button testid='buttonId3'
             variant="outlined"
             size="small"
