@@ -165,7 +165,7 @@ PlayableResut.propTypes = {
         alignments: PropTypes.arrayOf(
             PropTypes.shape({
                 path: PropTypes.arrayOf(
-                    PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number))),
+                    PropTypes.arrayOf(PropTypes.number)),
             })),
     }),
 

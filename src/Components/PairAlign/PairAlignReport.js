@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import {withStyles} from '@material-ui/core/styles';
 
 import PropTypes from 'prop-types';
@@ -64,9 +64,9 @@ class PairAlignReport extends Component {
             date.getSeconds();
 
         const inputSequences = this.sequences.map((seq, index) => {
-            return <>
+            return <Fragment key={index}>
                 <br />{`>${this.sequenceNames[index]}`}<br />{seq}<br />
-            </>;
+            </Fragment>;
         });
         const line = <hr className={classes.line} />;
         let scores;
@@ -97,11 +97,11 @@ class PairAlignReport extends Component {
                     if (this.props.input.DNASimilarityMatrix.hasOwnProperty(
                         pair)) {
                         DNASimilarityScores.push(
-                            <>
+                            <Fragment key={pair}>
                                 {pair} : {
                                     this.props.input.DNASimilarityMatrix[pair]}
                                 <br />
-                            </>);
+                            </Fragment>);
                     }
                 });
             });
@@ -109,14 +109,14 @@ class PairAlignReport extends Component {
 
 
         const alignmets = this.props.result.alignments.map((element, index) => {
-            return <><br />Alignment {index + 1}<br />
+            return <Fragment key={index}><br />Alignment {index + 1}<br />
                 {`>${this.sequenceNames[0]}`}<br />
                 {element.algn_a}<br />
                 {`>${this.sequenceNames[1]}`}<br />
                 {element.algn_b}<br />
                 {`Identity : ${element.identity}`}<br />
                 <br />
-            </>;
+            </Fragment>;
         });
 
 
@@ -164,7 +164,7 @@ class PairAlignReport extends Component {
     }
 }
 PairAlignReport.propTypes = {
-    classes: PropTypes.func,
+    classes: PropTypes.object,
     result: PropTypes.shape({
         alignments: PropTypes.arrayOf(
             PropTypes.shape({
@@ -186,7 +186,20 @@ PairAlignReport.propTypes = {
         gap: PropTypes.number,
         gapOpen: PropTypes.number,
         gapExtend: PropTypes.number,
-        DNASimilarityMatrix: PropTypes.shape,
+        DNASimilarityMatrix: (props, propName, componentName) => {
+            const keys = Object.keys(props[propName]);
+            for (let index = 0; index < keys.length; index++) {
+                if (!(DNAbases.includes(keys[index][0]) &&
+                        DNAbases.includes(keys[index][1]))) {
+                    return new Error(
+                        'Invalid key `' + keys[index] + '` supplied to ' +
+                        '`' + componentName +
+                        '`; expected to match with two characters in' +
+                        DNAbases + '.',
+                    );
+                }
+            }
+        },
     }),
 };
 export default withStyles(useStyles)(PairAlignReport);

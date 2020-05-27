@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 
@@ -56,7 +56,7 @@ export default function ExtendedCell(props) {
             inPathColor : colors[index];
 
         const cell = (
-            <>
+            <Fragment key={index}>
                 <tr
                     style={{
                         height: props.cellSize / 2,
@@ -94,7 +94,7 @@ export default function ExtendedCell(props) {
                         {directionMatrices.join(' ')}
                     </td>
                 </tr>
-            </>
+            </Fragment>
 
         );
 

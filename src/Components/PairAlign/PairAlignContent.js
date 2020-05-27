@@ -73,7 +73,7 @@ export default function PairAlignContent() {
     return (
         <div>
             <h2>PairAlign Mode</h2>
-            <Box boxShadow={3} padding={5}>
+            <Box boxShadow={3} padding={5} marginBottom={3}>
                 <GenomeTypeInput />
             </Box>
             <PairAlignInput />
