@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import SaveIcon from '@material-ui/icons/Save';
 import {makeStyles} from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
+import VisibilityIcon from '@material-ui/icons/Visibility';
 
 const styles = (theme) => ({
   root: {
@@ -63,7 +64,7 @@ const DialogActions = withStyles((theme) => ({
 }))(MuiDialogActions);
 
 
-export default function CustomizedDialogs({title, description}) {
+export default function CustomizedDialogs({viewResult, title, description}) {
     const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -76,7 +77,21 @@ export default function CustomizedDialogs({title, description}) {
 
   return (
     <div>
-      <Button
+
+    {
+      viewResult?
+        <Button
+        testid='saveButtonId'
+        variant="contained"
+        color="primary"
+        size="large"
+        className={classes.button}
+        startIcon={<VisibilityIcon />}
+        onClick={handleClickOpen}
+      >
+        view Result
+        </Button> :
+        <Button
         testid='saveButtonId'
         variant="contained"
         color="primary"
@@ -84,9 +99,10 @@ export default function CustomizedDialogs({title, description}) {
         className={classes.button}
         startIcon={<SaveIcon />}
         onClick={handleClickOpen}
-      >
+        >
         Save
-      </Button>
+        </Button>
+    }
       <Dialog
         testid='dialogId'
         onClose={handleClose}
@@ -119,6 +135,7 @@ export default function CustomizedDialogs({title, description}) {
 }
 
 CustomizedDialogs.propTypes = {
+    viewResult: PropTypes.bool,
     title: PropTypes.string,
     description: PropTypes.string,
   };

@@ -13,7 +13,7 @@ import Divider from '@material-ui/core/Divider';
 
 // import HomeSections component
 import Snackbar from './Snackbar';
-// import Alert from './Alert';
+import Alert from './Alert';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -50,6 +50,7 @@ export default function TransferList() {
   const classes = useStyles();
   const [checked, setChecked] = React.useState([]);
   // const [answer, setAnswer] = React.useState(false);
+  const [Alertcomponent, setAlertcomponent] = React.useState(null);
 
   // update the sentences
   const [left, setLeft] = React.useState(
@@ -166,95 +167,90 @@ export default function TransferList() {
     </Card>
   );
 
-  const rightAnswer = {
-    message: 'Congrats!\n Your anser is right.',
-  };
-
-  const wrongAnswer = {
-    message: 'Try again!\n Your anser is wrong.',
-  };
-
   const instruction = {
     message: 'Select and move the rows into relavant alignment.',
   };
 
-  // const rightAnswerAlert = {
-  //   title: 'Congrats!',
-  //   description: 'Your anser is right.',
-  // };
+  const rightAnswerAlert = {
+    viewResult: true,
+    title: 'Congrats!',
+    description: 'Your anser is right.',
+  };
 
-  // const wrongAnswerAlert = {
-  //   title: 'Try again!',
-  //   description: 'Your anser is wrong.',
-  // };
-
+  const wrongAnswerAlert = {
+    viewResult: true,
+    title: 'Try again!',
+    description: 'Your anser is wrong.',
+  };
 
   const checkResult = () => {
      // snack bar is not working! . doesn't know why. but alert is working----
     if (left.length === pairwise.length && right.length === msa.length) {
         return (
-          window.alert(rightAnswer.message)
-          // setAnswer(true)
-          // <Alert onClick = {checkResult} {...rightAnswerAlert} />
+          setAlertcomponent(
+          <Alert onClick = {checkResult} {...rightAnswerAlert} />,
+          )
         );
     } else {
       return (
-        window.alert(wrongAnswer.message)
-        // setAnswer(false)
-        // <Alert onClick = {checkResult} {...wrongAnswerAlert} />
+        setAlertcomponent(
+        <Alert onClick = {checkResult} {...wrongAnswerAlert} />,
+        )
       );
     }
   };
 
   return (
-    <Grid container testid='gridId'
-        spacing={2}
-        justify="center"
-        alignItems="center"
-        className={classes.root}
-    >
-      <Grid item testid='gridItemId1'>
-        {customList('Pairwise Alignment', left)}</Grid>
-      <Grid item testid='gridItemId2'>
-        <Grid container direction="column" alignItems="center"
-          testid='gridContainerId'>
-          <Button testid='buttonId1'
-            variant="outlined"
-            size="small"
-            className={classes.button}
-            onClick={handleCheckedRight}
-            disabled={leftChecked.length === 0}
-            aria-label="move selected right"
-          >
-            &gt;
-          </Button>
+    <div className={classes.root}>
+      <Grid container testid='gridId'
+          spacing={2}
+          justify="center"
+          alignItems="center"
+          className={classes.root}
+      >
+        <Grid item testid='gridItemId1'>
+          {customList('Pairwise Alignment', left)}</Grid>
+        <Grid item testid='gridItemId2'>
+          <Grid container direction="column" alignItems="center"
+            testid='gridContainerId'>
+            <Button testid='buttonId1'
+              variant="outlined"
+              size="small"
+              className={classes.button}
+              onClick={handleCheckedRight}
+              disabled={leftChecked.length === 0}
+              aria-label="move selected right"
+            >
+              &gt;
+            </Button>
 
-           <Button testid='buttonId2'
-            onClick = {checkResult}
-            >Submit</Button>
+            <Button testid='buttonId2'
+              onClick = {checkResult}
+              >{
+                Alertcomponent?
+                  'Re-submit':
+                    'Submit'}
+                </Button>
 
-            {/* {answer?
-              <Alert onClick = {checkResult} {...rightAnswerAlert} /> :
-                <Alert onClick = {checkResult} {...wrongAnswerAlert} />
-            } */}
+              {Alertcomponent}
 
-
-          <Button testid='buttonId3'
-            variant="outlined"
-            size="small"
-            className={classes.button}
-            onClick={handleCheckedLeft}
-            disabled={rightChecked.length === 0}
-            aria-label="move selected left"
-          >
-            &lt;
-          </Button>
+            <Button testid='buttonId3'
+              variant="outlined"
+              size="small"
+              className={classes.button}
+              onClick={handleCheckedLeft}
+              disabled={rightChecked.length === 0}
+              aria-label="move selected left"
+            >
+              &lt;
+            </Button>
+          </Grid>
         </Grid>
-      </Grid>
-      <Snackbar {...instruction} testid='snackbarId' />
-      <Grid item testid='gridItemId3'>
-        {customList('MSA Alignment', right)}</Grid>
+        <Snackbar {...instruction} testid='snackbarId' />
+        <Grid item testid='gridItemId3'>
+          {customList('MSA Alignment', right)}</Grid>
 
-    </Grid>
+      </Grid>
+    </div>
   );
 }
