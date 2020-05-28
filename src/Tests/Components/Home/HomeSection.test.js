@@ -9,7 +9,7 @@ import {mount} from 'enzyme';
 import HomeSection from '../../../Components/HomeSection/HomeSection';
 import Services from '../../../Components/HomeSection/Services';
 import Steps from '../../../Components/HomeSection/Steps';
-import DialogScreen from '../../../Components/HomeSection/DialogScreen';
+// import DialogScreen from '../../../Components/HomeSection/DialogScreen';
 
 
 const mockStore = configureStore();
@@ -47,5 +47,4 @@ describe('Testing the HomeSection component', () => {
         const StepsComponent = wrapper.find(Steps);
         expect(StepsComponent.length).toBe(1);
     });
-
 });

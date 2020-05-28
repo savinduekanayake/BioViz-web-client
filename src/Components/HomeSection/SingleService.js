@@ -9,7 +9,7 @@ import Paper from '@material-ui/core/Paper';
 // import css modules
 import style from './assets/css/image.module.css';
 
-// pages
+// import HomeSections component
 import ViewMore from './ViewMore';
 
 
