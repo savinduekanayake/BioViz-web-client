@@ -23,13 +23,16 @@ export default function MSAContent() {
 
 
     const sequences = sequences_.map((element) => getSubstring(element));
+    const sequencesNames = sequences_.map((element) => element.name);
 
 
     const onReceive = (data) => {
         console.log(data);
         setloading(false);
         if (data) {
-            setResult({result: data.result, input: sequences});
+            setResult({
+                result: data.result,
+                input: {sequences, sequencesNames, match, mismatch, gap}});
         }
     };
 
@@ -72,7 +75,11 @@ export default function MSAContent() {
             <br />
             {result ?
                 <Box boxShadow={3} padding={3} marginTop={7}>
-                    <div><MSAResult result={result.result} /></div>
+                    <div>
+                        <MSAResult
+                            result={result.result}
+                            input={result.input} />
+                    </div>
                 </Box> :
                 ''}
 
