@@ -12,8 +12,8 @@ import Paper from '@material-ui/core/Paper';
 // import css modules
 import style from './assets/css/image.module.css';
 
-// pages
-// import Ratings from './Ratings';
+// import HomeSections component
+import Alert from './Alert';
 import Rating from './Rating';
 
 
@@ -30,6 +30,10 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 50,
     paddingBottom: 50,
   },
+  position: {
+    marginTop: '20px',
+    marginLeft: '85%',
+  },
 }));
 
 
@@ -43,6 +47,11 @@ const rows = [
   createData('Satistification of visualizing the result', <Rating />),
   createData('Satistification of response time', <Rating />),
 ];
+
+const details = {
+  title: 'Thank you!',
+  description: 'This help us to imorove our website better in the future.',
+};
 
 
 export default function Feedback() {
@@ -78,6 +87,11 @@ export default function Feedback() {
           </TableBody>
         </Table>
       </TableContainer>
+
+      <div className={classes.position}>
+        <Alert {...details} />
+      </div>
+
     </div>
   );
 }

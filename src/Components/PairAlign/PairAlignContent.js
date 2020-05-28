@@ -17,6 +17,8 @@ export default function PairAlignContent() {
     const [loading, setloading] = React.useState(false);
     const genomeType = useSelector((state) => state.genomeType);
     const seqA = getSubstring(useSelector((state) => state.P1));
+    const seqAname = useSelector((state) => state.P1.name);
+    const seqBname = useSelector((state) => state.P2.name);
     const seqB = getSubstring(useSelector((state) => state.P2));
     const match = useSelector((state) => state.matchScore);
     const mismatch = useSelector((state) => state.mismatchPenalty);
@@ -37,7 +39,7 @@ export default function PairAlignContent() {
         if (data) {
             setResult({
                 result: data.result, input: {
-                    seqA, seqB, match,
+                    seqA, seqAname, seqB, seqBname, match,
                     mismatch, gap, gapOpen, gapExtend, scoringMethod,
                     tracebackPriority, similarityMatrixName,
                     DNASimilarityMatrix, genomeType,
@@ -71,7 +73,7 @@ export default function PairAlignContent() {
     return (
         <div>
             <h2>PairAlign Mode</h2>
-            <Box boxShadow={3} padding={5}>
+            <Box boxShadow={3} padding={5} marginBottom={3}>
                 <GenomeTypeInput />
             </Box>
             <PairAlignInput />

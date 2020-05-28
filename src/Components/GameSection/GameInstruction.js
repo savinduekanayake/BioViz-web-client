@@ -87,10 +87,18 @@ export default function GameInstruction() {
                             <li><h3>Try to avoid unnecessary gaps
                                  in the middle of the sequences.</h3></li>
                             <li><h3>Trailing gaps cannot be removed.</h3></li>
-                            <li><h3>Make matches as much as possible.</h3></li>
+                            <li><h3>Increase the identity
+                                 as much as possible.</h3></li>
                             <li><h3>Change the Match,Mismatch and Gap scores
                                  to get a higher score.</h3></li>
                         </ul>
+                        <h3 style={{color: '#af9617'}}>
+                            Hint: start from the left</h3>
+                        <h3>Sequences can be replaced at any time by the state
+                             with the maximum identity you achieved.
+                             <br/>Feel free
+                             to play and get the maximum identity possible.
+                        </h3>
                 </DialogContent>
                 <DialogActions>
                     <Button autoFocus onClick={handleClose} color="primary">

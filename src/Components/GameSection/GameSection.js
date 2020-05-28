@@ -23,6 +23,7 @@ export default function GameSection() {
             setAlignment({
                 alignA: data.alignA,
                 alignB: data.alignB,
+                identity: data.identity,
                 match: matchScore,
                 mismatch: mismatchPenanlty,
                 gap: gapPenalty,

@@ -30,13 +30,16 @@ export default function SimilarityMatrixInput() {
     const proteinMatrices = ['BLOSUM30', 'BLOSUM45',
         'BLOSUM50', 'BLOSUM60', 'BLOSUM90'];
     const menuItems = [];
-    menuItems.push(<MenuItem value={'DEFAULT'}>Default</MenuItem>);
+    menuItems.push(<MenuItem key={'DEFAULT'}
+        value={'DEFAULT'}>Default</MenuItem>);
     if (genomeType === 'DNA') {
-        menuItems.push(<MenuItem value={'CUSTOM'}>Custom</MenuItem>);
+        menuItems.push(<MenuItem key={'CUSTOM'}
+            value={'CUSTOM'}>Custom</MenuItem>);
     } else if (genomeType === 'PROTEIN') {
         proteinMatrices.forEach((matrixName) => {
             menuItems.push(
-                <MenuItem value={matrixName}>{matrixName}</MenuItem>,
+                <MenuItem key={matrixName}
+                    value={matrixName}>{matrixName}</MenuItem>,
             );
         });
     }

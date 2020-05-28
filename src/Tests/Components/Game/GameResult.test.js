@@ -14,6 +14,7 @@ describe('GameResult Component', () => {
         aligns: {
             alignA: 'AACG---TC-AGeee',
             alignB: 'AA-GCAA-GTACCTG',
+            identity: 0.334,
             match: 5,
             mismatch: -1,
             gap: -1,

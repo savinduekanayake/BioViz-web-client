@@ -11,7 +11,7 @@ import image1 from './assets/img/1.jpg';
 import image2 from './assets/img/2.jpg';
 import image3 from './assets/img/3.png';
 
-// import pages
+// import HomeSections component
 import SingleService from './SingleService';
 
 const services = [
