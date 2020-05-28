@@ -1,7 +1,7 @@
 import React from 'react';
 import PairAlignInput from './PairAlignInput';
 import Button from '@material-ui/core/Button';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {
     fetchNW, fetchSW,
     fetchNWExtended, fetchSWExtended,
@@ -11,8 +11,11 @@ import LoadingOverlay from './LoadingOverlay';
 import GenomeTypeInput from '../GeomeType/GenomeTypeInput';
 import {Box} from '@material-ui/core';
 import {getSubstring} from '../../util/substring';
+import {setSnackBar} from '../../Redux/Actions/Snackbar';
+
 
 export default function PairAlignContent() {
+    const dispatch = useDispatch();
     const [result, setResult] = React.useState(false);
     const [loading, setloading] = React.useState(false);
     const genomeType = useSelector((state) => state.genomeType);
@@ -45,6 +48,8 @@ export default function PairAlignContent() {
                     DNASimilarityMatrix, genomeType,
                 },
             });
+        } else {
+            dispatch(setSnackBar('Plese check your input'));
         }
     };
 

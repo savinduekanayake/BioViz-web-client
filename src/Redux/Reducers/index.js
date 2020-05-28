@@ -13,6 +13,7 @@ import {
 } from './Score';
 import {MSASeqReducer, MSAAlgoReducer, MSAOrderReducer} from './MSA';
 import {SeqAReducer, SeqBReducer} from './Game';
+import {SnackbarReducer} from './Snackbar';
 
 const allReducers = combineReducers({
     mode: modeReducer,
@@ -34,6 +35,7 @@ const allReducers = combineReducers({
     msaOrder: MSAOrderReducer,
     GameSeqA: SeqAReducer,
     GameSeqB: SeqBReducer,
+    snackBar: SnackbarReducer,
 });
 
 export default allReducers;

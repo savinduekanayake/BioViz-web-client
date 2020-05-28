@@ -14,8 +14,8 @@ export default function PairAlignInput() {
     return (
         <div>
             <Grid container direction="column" spacing={3}>
-                <Grid item style={{padding: 0}}>
-                    <Box boxShadow={3} paddingTop={2}>
+                <Grid >
+                    <Box boxShadow={3} padding={5}>
                         <CommonInput inputHandler={setP1Input}
                             rangeInputHandler={setP1Range}
                             nameInputHandler={setP1Name}
@@ -26,8 +26,8 @@ export default function PairAlignInput() {
                             type="PA" />
                     </Box>
                 </Grid>
-                <Grid item style={{padding: 0}}>
-                    <Box boxShadow={3} paddingTop={2}>
+                <Grid >
+                    <Box boxShadow={3} padding={5}>
                         <CommonInput inputHandler={setP2Input}
                             rangeInputHandler={setP2Range}
                             nameInputHandler={setP2Name}

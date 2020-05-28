@@ -1,6 +1,6 @@
 import React from 'react';
 import MSAInput from './MSAInput';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 
@@ -9,9 +9,11 @@ import MSAResult from './MSAResult';
 import LoadingOverlay from './LoadingOverlay';
 import msaOrderValidate from '../../Validators/MSA/MSAOrderValidator';
 import {getSubstring} from '../../util/substring';
+import {setSnackBar} from '../../Redux/Actions/Snackbar';
 
 
 export default function MSAContent() {
+    const dispatch = useDispatch();
     const [result, setResult] = React.useState(undefined);
     const [loading, setloading] = React.useState(false);
     const sequences_ = useSelector((state) => state.MSASeq);
@@ -33,6 +35,8 @@ export default function MSAContent() {
             setResult({
                 result: data.result,
                 input: {sequences, sequencesNames, match, mismatch, gap}});
+        } else {
+            dispatch(setSnackBar('Plese check your input'));
         }
     };
 
