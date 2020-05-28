@@ -47,6 +47,16 @@ const useStyles = makeStyles(() => ({
         color: '#1e2e51',
         fontWeight: 'bolder',
     },
+    bestStateBtn: {
+        backgroundColor: 'transparent',
+        color: '#494946',
+        fontWeight: 'bolder',
+        border: 'none',
+        cursor: 'pointer',
+        float: 'left',
+        marginLeft: 60,
+        padding: 0,
+    },
 }));
 
 export default function GameAlign(props) {
@@ -54,9 +64,18 @@ export default function GameAlign(props) {
     const initialInput = props.input;
     const [align, setAlign] = useState(props.input);
     const [prev, setPrev] = useState(false);
+    const [bestAlign, setBestAlign] = useState({
+        matches: 0,
+        identity: 0,
+        alignment: {}});
 
     useEffect(() => {
         setAlign(props.input);
+        setBestAlign({
+            matches: 0,
+            identity: 0,
+            alignment: {},
+        });
     }, [props.input]);
 
     const indexLine = [];
@@ -65,6 +84,7 @@ export default function GameAlign(props) {
     let match = 0;
     let mismatch = 0;
     let gap = 0;
+    let identity = 0;
     for (let i = 0; i < align.seqA.length; i++) {
         const index = i;
         const baseA = align.seqA.charAt(i) === '-' ? 'ga': align.seqA.charAt(i);
@@ -125,6 +145,16 @@ export default function GameAlign(props) {
                 </span>
             </Tooltip></td>,
         );
+    }
+
+    identity = match/align.seqA.length;
+
+    if (identity>bestAlign.identity) {
+       setBestAlign({
+        matches: match,
+        identity: identity,
+        alignment: align,
+       });
     }
 
     function changeSeqA(index) {
@@ -205,9 +235,14 @@ export default function GameAlign(props) {
         }
     }
 
-    function reset() {
+    function setBestIdentityState() {
+        setAlign(bestAlign.alignment);
         setPrev(true);
+    }
+
+    function reset() {
         setAlign(initialInput);
+        setPrev(true);
     }
 
     function usePrevious(value) {
@@ -225,19 +260,32 @@ export default function GameAlign(props) {
     }
 
     function sendAlign() {
-        props.fetchAlign({alignA: align.seqA, alignB: align.seqB});
+        props.fetchAlign({alignA: align.seqA, alignB: align.seqB,
+                        identity: identity});
     }
 
     return (
         <Box className={classes.gameplay}>
             <GamePlay/>
-                <br />
-                <Box boxShadow={6} className={classes.box}>
+            <br />
+            <Box boxShadow={6} className={classes.box}>
                 <GameAlignTable align1={row1} align2={row2}
                 indexLine={indexLine}/>
                 <div testid={'checkState'} value={align}/>
-                <br /><br />
-                <GameLable match={match} mismatch={mismatch} gap={gap}/>
+                <br />
+                <GameLable match={match} mismatch={mismatch} gap={gap}
+                    identity={identity} bestMatch={bestAlign.matches}
+                    bestIdentity={bestAlign.identity}/>
+                <br/><br/><br/><br/>
+                <Tooltip
+                title={'Go to a state with maximum identity achieved so far'}
+                placement="bottom" arrow>
+                    <Button
+                        className={classes.bestStateBtn}
+                        onClick={setBestIdentityState}>
+                        Go to a best identity state
+                    </Button>
+                </Tooltip>
                 <br/><br/>
                 <Button
                     testid=''
