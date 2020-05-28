@@ -144,7 +144,9 @@ export default function ExtendedMatrix(props) {
 
     return (
         <div className={classes.matrix}>
-            <Grid container direction="row" spacing={1}>
+            <Grid container direction="row" spacing={1} align="center"
+                justify="center"
+                alignItems="center">
                 <Grid item>
                     <div style={{height: cellSize}}>&nbsp;</div>
                     <br />
@@ -220,7 +222,9 @@ ExtendedMatrix.propTypes = {
         seqB: PropTypes.string,
     }),
     result: PropTypes.shape({
-        score_matrix: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)),
+        score_matrix: PropTypes.arrayOf(PropTypes.arrayOf(
+            PropTypes.arrayOf(PropTypes.oneOfType(
+                [PropTypes.number, PropTypes.string])))),
         direction_matrix: PropTypes.arrayOf(
             PropTypes.arrayOf(
                 PropTypes.arrayOf(PropTypes.number))),
