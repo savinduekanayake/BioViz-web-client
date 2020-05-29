@@ -1,4 +1,4 @@
-export const fetchResults = async (url, data, onSuccess, onError)=>{
+export const fetchPost = async (url, data, cb)=>{
     const options = {
         method: 'POST',
         headers: {
@@ -6,16 +6,20 @@ export const fetchResults = async (url, data, onSuccess, onError)=>{
         },
         body: JSON.stringify(data),
     };
-    const res = await fetch(url, options);
-    if (res.status === 200) {
-        const jsonRes = await res.clone().json();
-        onSuccess(jsonRes);
-    } else {
-        onError();
-    }
+    fetch(url, options)
+    .then(async (res) => {
+        if (res.status === 200) {
+            const jsonRes = await res.clone().json();
+            cb({error: undefined, response: jsonRes});
+        } else {
+            cb({error: res.status});
+        }
+    }).catch((err) => {
+        cb({error: -1});
+    });
 };
 
-export const fetchGet = async (url, qParams, onSuccess, onError) =>{
+export const fetchGet = async (url, qParams, cb) =>{
     if (qParams.length >0) {
         url = url.concat('?');
         qParams.forEach((e) => {
@@ -27,11 +31,15 @@ export const fetchGet = async (url, qParams, onSuccess, onError) =>{
         method: 'GET',
 
     };
-    const res = await fetch(url, options);
-    if (res.status === 200) {
-        const jsonRes = await res.clone().json();
-        onSuccess(jsonRes);
-    } else {
-        onError();
-    }
+    fetch(url, options)
+    .then(async (res) => {
+        if (res.status === 200) {
+            const jsonRes = await res.clone().json();
+            cb({error: undefined, response: jsonRes});
+        } else {
+            cb({error: res.status});
+        }
+    }).catch((err) => {
+        cb({error: -1});
+    });
 };

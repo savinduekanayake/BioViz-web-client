@@ -5,6 +5,7 @@ import {fetchGenomeById} from '../../GenomeAPI/GenomeAPI';
 import {useDispatch} from 'react-redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
+import {setSnackBar} from '../../Redux/Actions/Snackbar';
 
 import PropTypes from 'prop-types';
 
@@ -17,18 +18,20 @@ export default function APIinput(props) {
 
     const onReceiveData = (data) => {
         setloading(false);
-        if (data !== undefined) {
+        if (data.error === undefined) {
             if (props.type === 'MSA') {
-                dispatch(props.inputHandler(data.seq.trim(),
+                dispatch(props.inputHandler(data.response.seq.trim(),
                     props.MSAkey));
             } else {
-                dispatch(props.inputHandler(data.seq.trim()));
+                dispatch(props.inputHandler(data.response.seq.trim()));
             }
-
-
             seterror(false);
-        } else {
+        } else if (data.error === 400) {
             seterror(true);
+        } else {
+            seterror(false);
+            dispatch(setSnackBar(
+                'Importing data from API failed. Try again later'));
         }
     };
 

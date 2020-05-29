@@ -1,7 +1,7 @@
 import React from 'react';
 import PairAlignInput from './PairAlignInput';
 import Button from '@material-ui/core/Button';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {
     fetchNW, fetchSW,
     fetchNWExtended, fetchSWExtended,
@@ -11,8 +11,11 @@ import LoadingOverlay from './LoadingOverlay';
 import GenomeTypeInput from '../GeomeType/GenomeTypeInput';
 import {Box} from '@material-ui/core';
 import {getSubstring} from '../../util/substring';
+import {setSnackBar} from '../../Redux/Actions/Snackbar';
+
 
 export default function PairAlignContent() {
+    const dispatch = useDispatch();
     const [result, setResult] = React.useState(false);
     const [loading, setloading] = React.useState(false);
     const genomeType = useSelector((state) => state.genomeType);
@@ -36,15 +39,19 @@ export default function PairAlignContent() {
     const onReceive = (data) => {
         console.log(data);
         setloading(false);
-        if (data) {
+        if (data.error === undefined) {
             setResult({
-                result: data.result, input: {
+                result: data.response.result, input: {
                     seqA, seqAname, seqB, seqBname, match,
                     mismatch, gap, gapOpen, gapExtend, scoringMethod,
                     tracebackPriority, similarityMatrixName,
                     DNASimilarityMatrix, genomeType,
                 },
             });
+        } else if (data.error === 400) {
+            dispatch(setSnackBar('Plese check your input'));
+        } else {
+            dispatch(setSnackBar('Could not load results. Try again later'));
         }
     };
 

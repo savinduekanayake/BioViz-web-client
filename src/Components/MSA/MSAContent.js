@@ -1,6 +1,6 @@
 import React from 'react';
 import MSAInput from './MSAInput';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 
@@ -9,9 +9,12 @@ import MSAResult from './MSAResult';
 import LoadingOverlay from './LoadingOverlay';
 import msaOrderValidate from '../../Validators/MSA/MSAOrderValidator';
 import {getSubstring} from '../../util/substring';
+import {setSnackBar} from '../../Redux/Actions/Snackbar';
+import GenomeTypeInput from '../GeomeType/GenomeTypeInput';
 
 
 export default function MSAContent() {
+    const dispatch = useDispatch();
     const [result, setResult] = React.useState(undefined);
     const [loading, setloading] = React.useState(false);
     const sequences_ = useSelector((state) => state.MSASeq);
@@ -29,10 +32,14 @@ export default function MSAContent() {
     const onReceive = (data) => {
         console.log(data);
         setloading(false);
-        if (data) {
+        if (data.error === undefined) {
             setResult({
-                result: data.result,
+                result: data.response.result,
                 input: {sequences, sequencesNames, match, mismatch, gap}});
+        } else if (data.error === 400) {
+            dispatch(setSnackBar('Plese check your input'));
+        } else {
+            dispatch(setSnackBar('Could not load results. Try again later'));
         }
     };
 
@@ -48,6 +55,8 @@ export default function MSAContent() {
                     mismatch,
                     gap,
                     onReceive);
+            } else {
+                dispatch(setSnackBar('Invalid pairing order.'));
             }
         } else {
             setResult(undefined);
@@ -63,6 +72,9 @@ export default function MSAContent() {
     return (
         <div>
             <h2>MSA Mode</h2>
+            <Box boxShadow={3} padding={5} marginBottom={3}>
+                <GenomeTypeInput/>
+            </Box>
             <MSAInput />
             <Button
                 variant="contained"
