@@ -10,6 +10,7 @@ import LoadingOverlay from './LoadingOverlay';
 import msaOrderValidate from '../../Validators/MSA/MSAOrderValidator';
 import {getSubstring} from '../../util/substring';
 import {setSnackBar} from '../../Redux/Actions/Snackbar';
+import GenomeTypeInput from '../GeomeType/GenomeTypeInput';
 
 
 export default function MSAContent() {
@@ -71,6 +72,9 @@ export default function MSAContent() {
     return (
         <div>
             <h2>MSA Mode</h2>
+            <Box boxShadow={3} padding={5} marginBottom={3}>
+                <GenomeTypeInput/>
+            </Box>
             <MSAInput />
             <Button
                 variant="contained"
