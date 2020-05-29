@@ -31,12 +31,14 @@ export default function MSAContent() {
     const onReceive = (data) => {
         console.log(data);
         setloading(false);
-        if (data) {
+        if (data.error === undefined) {
             setResult({
-                result: data.result,
+                result: data.response.result,
                 input: {sequences, sequencesNames, match, mismatch, gap}});
-        } else {
+        } else if (data.error === 400) {
             dispatch(setSnackBar('Plese check your input'));
+        } else {
+            dispatch(setSnackBar('Could not load results. Try again later'));
         }
     };
 
@@ -52,6 +54,8 @@ export default function MSAContent() {
                     mismatch,
                     gap,
                     onReceive);
+            } else {
+                dispatch(setSnackBar('Invalid pairing order.'));
             }
         } else {
             setResult(undefined);
