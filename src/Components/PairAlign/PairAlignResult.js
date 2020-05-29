@@ -35,14 +35,15 @@ export default function PairAlignResult(props) {
 
     const [selectedAlignment, setselectedAlignment] = React.useState(0);
     const [reportOpen, setReportOpen] = React.useState(false);
-    const alignments = [
+    const alignments = props.result.alignments.length > 0 ? [
         <PairAlignAlignment
             alignment={props.result.alignments[selectedAlignment]}
             index={selectedAlignment}
             key={selectedAlignment}
         />,
+    ] : <h4>Could not find alignments according
+        to the provided scoring schema</h4>;
 
-    ];
     const onNext = () => {
         setselectedAlignment((selectedAlignment + 1) % max);
     };
@@ -100,7 +101,7 @@ export default function PairAlignResult(props) {
                                 <IconButton size='small'
                                     className={classes.directionArrow}
                                     onClick={onNext}>
-                                    <KeyboardArrowLeftIcon/>
+                                    <KeyboardArrowLeftIcon />
                                 </IconButton>
                             </Grid>
                             <Grid item xs={9}>
@@ -125,8 +126,10 @@ export default function PairAlignResult(props) {
                     <h3>Report</h3>
                     <br />
                     <div style={{marginBottom: 10}}>
-                        Identity : {props.result.alignments[
-                            selectedAlignment].identity}
+                        {props.result.alignments.length > 0 ?
+                            `Identity : ${props.result.alignments[
+                                selectedAlignment].identity}` :
+                            ''}
                         <br />
                         Score : {props.result.score}
                         <br />

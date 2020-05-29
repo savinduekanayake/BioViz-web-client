@@ -1,4 +1,4 @@
-import {fetchResults} from '../util/fetch';
+import {fetchPost} from '../util/fetch';
 import {apiHost} from '../config/config';
 
 
@@ -9,9 +9,7 @@ function pairAign(algorithm = 1) {
             const data = {match, mismatch, gap};
             data.seq_a = seqA;
             data.seq_b = seqB;
-            await fetchResults(url, data, callback, () => {
-                callback(undefined);
-            });
+            await fetchPost(url, data, callback);
         }
     );
 }
@@ -37,9 +35,7 @@ function pairAignExtended(algorithm = 1) {
                     data.sub_mat = DNAmatrix;
                 }
             }
-            await fetchResults(url, data, callback, () => {
-                callback(undefined);
-            });
+            await fetchPost(url, data, callback);
         }
     );
 }

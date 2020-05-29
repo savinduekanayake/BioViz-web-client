@@ -59,7 +59,8 @@ export default function Matrix(props) {
     const inputLenB = props.input.seqB.length;
     const scoreMatrix = props.result.score_matrix;
     const directionMatrix = props.result.direction_matrix;
-    const path = props.result.alignments[props.selected].path;
+    const path = props.result.alignments.length>0 ?
+        props.result.alignments[props.selected].path : [];
     const pathSet = new Set();
     path.forEach((p) => {
         pathSet.add(`${p[0]}${p[1]}${p[0] * p[1]}`);
