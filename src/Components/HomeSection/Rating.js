@@ -2,6 +2,8 @@
 import React from 'react';
 import {withStyles, makeStyles} from '@material-ui/core/styles';
 import Slider from '@material-ui/core/Slider';
+import {useDispatch} from 'react-redux';
+import PropTypes from 'prop-types';
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -81,14 +83,34 @@ const IOSSlider = withStyles({
 })(Slider);
 
 
-export default function CustomizedSlider() {
+export default function CustomizedSlider(props) {
   const classes = useStyles();
+
+  const dispatch = useDispatch();
+
+  const [value, setValue] = React.useState(75);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
   return (
     <div className={classes.margin}>
       <IOSSlider
         testid='IOSSliderId'
-        aria-label="ios slider" defaultValue={75} marks={marks} valueLabelDisplay="on" />
+        aria-label="ios slider"
+        // defaultValue={75}
+        marks={marks}
+        valueLabelDisplay="on"
+        // getAriaValueText={valuetext}
+        value={value}
+        onChange={handleChange}
+        />
+        {/* {value} */}
     </div>
   );
 }
+
+CustomizedSlider.propTypes = {
+  inputSliderAction: PropTypes.func,
+};
