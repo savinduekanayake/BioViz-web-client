@@ -130,12 +130,65 @@ describe('GameAlign Component', () => {
                 //  from '-' to 'T'(6th element of input seqB)
         });
 
+        it('should set previous state', () => {
+            const prevStateValue = {
+                seqA: 'AACGT-GGCCAeeee',
+                seqB: 'CCGA-TG-TT-CACG',
+            };
+            // state of the sequences after executing the click events
+            //  in the previous test cases on the testProp1
+            findByAttr(wrapper1, 'testid',
+             'prevBtn').hostNodes().simulate('click');// click back button
+            const currentState = findByAttr(wrapper1, 'testid',
+            'checkState').hostNodes();
+            expect(currentState.prop('value')).toEqual(prevStateValue);
+        });
+
+        it('should set best identity state', () => {
+            const bestState = {
+                seqA: 'A-ACGT-GGCCAee',
+                seqB: 'CCGA-TG-TTCACG',
+            };
+            // state of the sequences with the best identity
+            //  after executing the click events
+            //  in the previous test cases on the testProp1
+            findByAttr(wrapper1, 'testid', 'bestIdentityBtn').
+                hostNodes().simulate('click');
+                // click 'Go to a best identity state' button
+            const currentState = findByAttr(wrapper1, 'testid',
+            'checkState').hostNodes();
+            expect(currentState.prop('value')).toEqual(bestState);
+        });
+
         it('state should updated to initial input when reset', () => {
             findByAttr(wrapper1, 'testid',
              'resetBtn').hostNodes().simulate('click');// click reset button
             const resetState = findByAttr(wrapper1, 'testid',
             'checkState').hostNodes();
            expect(resetState.prop('value')).toEqual(testProp1.input);
+        });
+    });
+
+    describe('sendAlign function', ()=>{
+        it('should invoke sendAlign function with state values', () => {
+            const mockfunc = jest.fn();
+            const testProp = {
+                input: {
+                    seqA: 'A-ACGTGGCCAeee',
+                    seqB: 'CCGA-TG-TTCACG',
+                },
+                fetchAlign: mockfunc,
+            };
+            const data = {
+                alignA: 'A-ACGTGGCCAeee',
+                alignB: 'CCGA-TG-TTCACG',
+                identity: 0.14285714285714285,
+            };
+            const wrapper = mount(<Provider store={store}>
+                <GameAlign {...testProp}></GameAlign></Provider>);
+            findByAttr(wrapper, 'testid',
+             'submitBtn').hostNodes().simulate('click');// click submit button
+            expect(mockfunc).toBeCalledWith(data);
         });
     });
 });

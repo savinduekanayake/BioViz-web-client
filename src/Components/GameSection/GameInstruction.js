@@ -25,8 +25,7 @@ const styles = (theme) => ({
 const DialogTitle = withStyles(styles)((props) => {
     const {children, classes, onClose, ...other} = props;
     return (
-        <MuiDialogTitle disableTypography className={classes.root} {...other}
-        testid={'DialogTitle'}>
+        <MuiDialogTitle disableTypography className={classes.root} {...other}>
             <Typography variant="h6">{children}</Typography>
             {onClose ? (
                 <IconButton
@@ -66,16 +65,18 @@ export default function GameInstruction() {
     return (
         <div>
             <Button
-            style={{color: '#1e2e51', fontWeight: 'bolder'}}
-            variant="outlined"
-            color="primary"
-            onClick={handleClickOpen}>
-                Instructions
+                testid = "openBtn"
+                style={{color: '#1e2e51', fontWeight: 'bolder'}}
+                variant="outlined"
+                color="primary"
+                onClick={handleClickOpen}>
+                    Instructions
             </Button>
             <Dialog
-            onClose={handleClose}
-             aria-labelledby="customized-dialog-title"
-             open={open}>
+                testid={'dialog'}
+                onClose={handleClose}
+                aria-labelledby="customized-dialog-title"
+                open={open}>
                 <DialogTitle id="customized-dialog-title" onClose={handleClose}>
                     How to Play
                 </DialogTitle>
@@ -101,9 +102,10 @@ export default function GameInstruction() {
                         </h3>
                 </DialogContent>
                 <DialogActions>
-                    <Button autoFocus onClick={handleClose} color="primary">
+                    <Button autoFocus onClick={handleClose}
+                            testid = "closeBtn" color="primary">
                         OK
-          </Button>
+                    </Button>
                 </DialogActions>
             </Dialog>
         </div>

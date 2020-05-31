@@ -5,12 +5,8 @@ import PropTypes from 'prop-types';
 
 export default function GameTextInput(props) {
     const dispatch = useDispatch();
-    // const [functest, setfuncval] = React.useState(false);
 
     function inputSeq(event) {
-        // console.log('correct');
-        // setfuncval(true);
-        // console.log(functest);
         dispatch(props.inputAction(event.target.value.trim()));
     }
 
@@ -25,7 +21,6 @@ export default function GameTextInput(props) {
                 value={props.value}
                 onChange={inputSeq} >
             </TextField>
-            {/* {functest? <div testid={'testfunc'}></div>:''} */}
         </div>
     );
 }

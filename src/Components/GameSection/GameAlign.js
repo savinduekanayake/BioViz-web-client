@@ -281,6 +281,7 @@ export default function GameAlign(props) {
                 title={'Go to a state with maximum identity achieved so far'}
                 placement="bottom" arrow>
                     <Button
+                        testid='bestIdentityBtn'
                         className={classes.bestStateBtn}
                         onClick={setBestIdentityState}>
                         Go to a best identity state
@@ -288,7 +289,7 @@ export default function GameAlign(props) {
                 </Tooltip>
                 <br/><br/>
                 <Button
-                    testid=''
+                    testid='prevBtn'
                     className={classes.resetBtn}
                     variant="outlined"
                     color="primary"
@@ -306,6 +307,7 @@ export default function GameAlign(props) {
                     Reset
                 </Button>
                 <Button
+                    testid='submitBtn'
                     variant="outlined"
                     className={classes.submitBtn}
                     color="primary"

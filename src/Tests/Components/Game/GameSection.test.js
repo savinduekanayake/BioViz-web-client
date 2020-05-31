@@ -6,6 +6,7 @@ import GameSection from '../../../Components/GameSection/GameSection';
 import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
 import GameAlign from '../../../Components/GameSection/GameAlign';
+import GameResult from '../../../Components/GameSection/GameResult';
 
 const mockStore = configureStore();
 
@@ -55,8 +56,21 @@ describe('GameSection Component', () => {
         expect(game.prop('input')).toEqual(expectedState);
     });
 
-        it('should render error message for invalid inputs', () => {
+        it('should render error message for invalid inputA', () => {
+            // invalid input seqA
             const store = mockStore({GameSeqA: 'AACCGQC', GameSeqB: 'CCGGTTA'});
+            const wrapper = mount( <Provider store={store}>
+                            <GameSection></GameSection></Provider>);
+            findByAttr(wrapper, 'testid',
+                        'submitBtn').hostNodes().simulate('click');
+            const errMsg1 = findByAttr(wrapper, 'testid',
+                        'invalidInput').hostNodes();
+            expect(errMsg1.length).toBe(1);
+        });
+
+        it('should render error message for invalid inputB', () => {
+            // invalid input seqB
+            const store = mockStore({GameSeqA: 'AACCGAA', GameSeqB: 'CCGTAKL'});
             const wrapper = mount( <Provider store={store}>
                             <GameSection></GameSection></Provider>);
             findByAttr(wrapper, 'testid',
@@ -95,6 +109,43 @@ describe('GameSection Component', () => {
             const emptydiv = findByAttr(wrapper, 'testid',
                         'alignmentNotSet').hostNodes();
             expect(emptydiv.length).toBe(1);
+        });
+
+        it('should not set alignment-state for error score schema', ()=>{
+            const store = mockStore({matchScore: 5, mismatchPenalty: -1});
+                // gapPenanlty is not assigned
+            const wrapper = mount( <Provider store={store}>
+                            <GameSection></GameSection></Provider>);
+            findByAttr(wrapper, 'testid',
+             'testCallback').hostNodes().simulate('click');
+            const errMsg = findByAttr(wrapper, 'testid',
+                'testscore').hostNodes();
+            expect(errMsg.length).toBe(1);
+                //  display error msg as gapPenanlty is not assigned
+        });
+
+        it('should set alignment-state for correct score schema', ()=>{
+            const store = mockStore({matchScore: 5,
+                mismatchPenalty: -1, gapPenalty: -1});
+            const wrapper = mount( <Provider store={store}>
+                            <GameSection></GameSection></Provider>);
+            const data = {
+                alignA: 'AACTA',
+                alignB: 'CCGAT',
+                identity: 0.200,
+            };
+            findByAttr(wrapper, 'testid',
+             'testCallback').hostNodes().simulate('click', data);
+            const expectedState = {
+                alignA: data.alignA,
+                alignB: data.alignB,
+                identity: data.identity,
+                match: 5,
+                mismatch: -1,
+                gap: -1,
+            };
+            const result = wrapper.find(GameResult);
+            expect(result.prop('aligns')).toEqual(expectedState);
         });
     });
 });
