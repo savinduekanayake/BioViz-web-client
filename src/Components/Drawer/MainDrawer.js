@@ -15,7 +15,7 @@ import Box from '@material-ui/core/Box';
 import {DrawerList} from './DrawerList';
 import MainContent from '../MainContent';
 
-const drawerWidth = 240;
+const drawerWidth = 300;
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -105,7 +105,7 @@ function MainDrawer(props) {
                             // Better open performance on mobile.
                         }}
                     >
-                        <DrawerList />
+                        <DrawerList closeDrawer={handleDrawerToggle}/>
                     </Drawer>
 
             </nav>

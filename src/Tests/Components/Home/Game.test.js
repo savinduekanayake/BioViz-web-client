@@ -8,6 +8,7 @@ import {findByAttr} from '../../helper';
 
 
 import Game from '../../../Components/HomeSection/Game';
+import Alert from '../../../Components/HomeSection/Alert';
 
 
 const mockStore = configureStore();
@@ -303,7 +304,7 @@ describe('Testing the Game component', () => {
     it('simulate right answer', () => {
         expect(wrapper).toBeTruthy();
         // remember the jsdom alert
-        const jsdomAlert = window.alert;
+        // const jsdomAlert = window.alert;
         // provide an empty implementation for window.alert
         window.alert = () => {};
         const CheckBoxComponent = findByAttr(wrapper,
@@ -325,6 +326,10 @@ describe('Testing the Game component', () => {
         expect(SubmitButtont.length).toBe(1);
         SubmitButtont.simulate('click');
 
-        window.alert = jsdomAlert; // restore the jsdom alert
+        const alertComponent = wrapper.find(Alert);
+        expect(alertComponent.length).toBe(1);
+
+// remove the alert for now
+        // window.alert = jsdomAlert; // restore the jsdom alert
     });
 });

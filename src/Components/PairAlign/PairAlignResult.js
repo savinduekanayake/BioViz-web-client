@@ -19,21 +19,31 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    directionArrow: {
+        backgroundColor: '#0000FF30',
+    },
 }));
 
 export default function PairAlignResult(props) {
     const classes = useStyles();
     const max = props.result.alignments.length;
+
+    const divRef = React.useRef(null);
+    React.useEffect(() => {
+        divRef.current.scrollIntoView({behavior: 'smooth'});
+    }, [props.result]);
+
     const [selectedAlignment, setselectedAlignment] = React.useState(0);
     const [reportOpen, setReportOpen] = React.useState(false);
-    const alignments = [
+    const alignments = props.result.alignments.length > 0 ? [
         <PairAlignAlignment
             alignment={props.result.alignments[selectedAlignment]}
             index={selectedAlignment}
             key={selectedAlignment}
         />,
+    ] : <h4>Could not find alignments according
+        to the provided scoring schema</h4>;
 
-    ];
     const onNext = () => {
         setselectedAlignment((selectedAlignment + 1) % max);
     };
@@ -69,10 +79,10 @@ export default function PairAlignResult(props) {
     }
 
     return (
-        <div>
+        <div ref={divRef}>
             <h2>PariAlign Result</h2>
             <Grid container direction='row' spacing={2}>
-                <Grid item >
+                <Grid item xs={12} lg={4}>
                     <h3>DP Matrix</h3>
                     <br />
                     {matrix}
@@ -81,14 +91,16 @@ export default function PairAlignResult(props) {
                     orientation="vertical"
                     flexItem
                     style={{marginLeft: 20}} />
-                <Grid item xs={6}>
+                <Grid item xs={12} lg={6}>
                     <div>
                         <Grid container spacing={0} align="center"
                             justify="center"
                             alignItems="center" direction='row'>
                             <Grid item xs={1}>
                                 <h4>Previous</h4>
-                                <IconButton onClick={onNext}>
+                                <IconButton size='small'
+                                    className={classes.directionArrow}
+                                    onClick={onNext}>
                                     <KeyboardArrowLeftIcon />
                                 </IconButton>
                             </Grid>
@@ -99,7 +111,9 @@ export default function PairAlignResult(props) {
                             </Grid>
                             <Grid item xs={1}>
                                 <h4>Next</h4>
-                                <IconButton onClick={onPrevious}>
+                                <IconButton size='small'
+                                    className={classes.directionArrow}
+                                    onClick={onPrevious}>
                                     <KeyboardArrowRightIcon />
                                 </IconButton>
                             </Grid>
@@ -108,12 +122,14 @@ export default function PairAlignResult(props) {
                 </Grid>
                 <Divider orientation="vertical" flexItem />
 
-                <Grid item >
+                <Grid item xs={12} lg={'auto'}>
                     <h3>Report</h3>
                     <br />
-                    <div style={{textAlign: 'left', marginBottom: 10}}>
-                        Identity : {props.result.alignments[
-                            selectedAlignment].identity}
+                    <div style={{marginBottom: 10}}>
+                        {props.result.alignments.length > 0 ?
+                            `Identity : ${props.result.alignments[
+                                selectedAlignment].identity}` :
+                            ''}
                         <br />
                         Score : {props.result.score}
                         <br />

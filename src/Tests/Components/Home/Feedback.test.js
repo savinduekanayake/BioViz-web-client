@@ -9,6 +9,7 @@ import {findByAttr} from '../../helper';
 
 // page
 import Feedback from '../../../Components/HomeSection/Feedback';
+import Alert from '../../../Components/HomeSection/Alert';
 
 const mockStore = configureStore();
 
@@ -139,5 +140,30 @@ describe('Testing the Steps component', () => {
             'testid',
             'tableCellId3').hostNodes();
         expect(TableCellComponent.length).toBe(4);
+    });
+
+    it('render the tableCell(save-buton) in Feadback component', () => {
+        expect(wrapper).toBeTruthy();
+
+        const SaveButtonComponent = findByAttr(wrapper,
+            'testid',
+            'saveButtonId').hostNodes();
+        expect(SaveButtonComponent.length).toBe(1);
+    });
+
+    it('simulate save-buton in Feadback component', () => {
+        expect(wrapper).toBeTruthy();
+
+        const SaveButtonComponent = findByAttr(wrapper,
+            'testid',
+            'saveButtonId').hostNodes();
+        expect(SaveButtonComponent.length).toBe(1);
+        SaveButtonComponent.simulate('click');
+    });
+
+    it('render all SingleService component', () => {
+        expect(wrapper).toBeTruthy();
+        const AlertComponent = wrapper.find(Alert);
+        expect(AlertComponent.length).toBe(1);
     });
 });

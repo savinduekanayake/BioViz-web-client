@@ -34,6 +34,7 @@ const useStyles = makeStyles((theme) => ({
     },
     emptyRow: {
         height: '25px',
+        textAlign: 'center',
     },
 
 }));

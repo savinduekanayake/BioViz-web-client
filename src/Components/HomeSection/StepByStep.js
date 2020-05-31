@@ -12,6 +12,7 @@ import PropTypes from 'prop-types';
 // import css modules
 import style from './assets/css/image.module.css';
 
+// import components
 import PairwaiseDetails from './Details/PairwiseDetails';
 import MSADetails from './Details/MSADetails';
 import DialogScreen from './DialogScreen';
@@ -149,15 +150,28 @@ export default function VerticalLinearStepper({HeadTitle, image, title1, title2,
                     <Button testid='finalButtonId'
                         variant="outlined"
                         color="secondary"
-                    >Go To Pairwise Alignment
+                    >
+                    {
+                        `${HeadTitle}` === 'Pairwise' ?
+                            'Go To Pairwise Alignment' :
+                        `${HeadTitle}` === 'MSA' ?
+                            'Go To MSA Alignment':
+                            'Go To Game Alignment'
+                    }
                     </Button>
                 </Paper>
 
             )}
+
             <div className={classes.details}>
 
-                 {/* eslint-disable-next-line max-len */}
-                {`${HeadTitle}` === 'Pairwise' ?<PairwaiseDetails testid = 'testPWDetails' /> : `${HeadTitle}` === 'MSA' ?<MSADetails testid = 'testPWDetails' /> : <DialogScreen />}
+                {
+                    `${HeadTitle}` === 'Pairwise' ?
+                        <PairwaiseDetails testid = 'testPWDetails' /> :
+                     `${HeadTitle}` === 'MSA' ?
+                        <MSADetails testid = 'testPWDetails' /> :
+                        <DialogScreen />
+                }
             </div>
         </div>
     );

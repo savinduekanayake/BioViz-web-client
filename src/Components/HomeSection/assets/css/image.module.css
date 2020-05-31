@@ -44,3 +44,8 @@
 .servicesBackground {
     background-color: rgb(248, 249, 250) !important;
 }
+
+.position {
+    marginTop: '20px';
+    marginLeft: '85%';
+  }
