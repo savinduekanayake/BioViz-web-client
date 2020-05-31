@@ -18,6 +18,9 @@ const useStyles = makeStyles((theme) => ({
         borderStyle: 'solid',
 
     },
+    headerCell: {
+        backgroundColor: '#0000FF30',
+    },
     inpath: {
         backgroundColor: 'lightgreen',
     },
@@ -56,7 +59,8 @@ export default function Matrix(props) {
     const inputLenB = props.input.seqB.length;
     const scoreMatrix = props.result.score_matrix;
     const directionMatrix = props.result.direction_matrix;
-    const path = props.result.alignments[props.selected].path;
+    const path = props.result.alignments.length>0 ?
+        props.result.alignments[props.selected].path : [];
     const pathSet = new Set();
     path.forEach((p) => {
         pathSet.add(`${p[0]}${p[1]}${p[0] * p[1]}`);
@@ -80,7 +84,8 @@ export default function Matrix(props) {
         const headerCell = cIdx === 0 ? '' :
             <HeaderCell value={props.input.seqB[cIdx - 1]} index={cIdx} />;
         return (
-            <div style={style} className={classes.cell}>
+            <div style={style}
+                className={`${classes.cell} ${classes.headerCell}`}>
                 {headerCell}
             </div>
         );
@@ -96,7 +101,8 @@ export default function Matrix(props) {
         const leftHeaderCell = rIdx === 0 ? '' :
             <LeftHeaderCell value={props.input.seqA[rIdx - 1]} index={rIdx} />;
         return (
-            <div style={style} className={classes.cell}>
+            <div style={style}
+                className={`${classes.cell} ${classes.headerCell}`}>
                 {leftHeaderCell}
             </div>
         );
@@ -138,7 +144,9 @@ export default function Matrix(props) {
 
     return (
         <div className={classes.matrix}>
-            <Grid container direction="row" spacing={1}>
+            <Grid container direction="row" spacing={1} align="center"
+                justify="center"
+                alignItems="center">
                 <Grid item>
                     <div style={{height: cellSize}}>&nbsp;</div>
                     <br />
@@ -223,7 +231,7 @@ Matrix.propTypes = {
         alignments: PropTypes.arrayOf(
             PropTypes.shape({
                 path: PropTypes.arrayOf(
-                    PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number))),
+                    PropTypes.arrayOf(PropTypes.number)),
             })),
     }),
     selected: PropTypes.number,

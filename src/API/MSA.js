@@ -1,4 +1,4 @@
-import {fetchResults} from '../util/fetch';
+import {fetchPost} from '../util/fetch';
 import {apiHost} from '../config/config';
 
 export const fetchMSAProgressive = async function(
@@ -9,16 +9,12 @@ export const fetchMSAProgressive = async function(
         return [element[0], element[1]];
     });
     data.order = formattedOrder;
-    await fetchResults(url, data, callback, () => {
-        callback(undefined);
-    });
+    await fetchPost(url, data, callback);
 };
 
 export const fetchMSAProgressiveOptimal = async function(
     sequences, match, mismatch, gap, callback) {
     const url = apiHost + '/msa/progressive-optimal';
     const data = {sequences, match, mismatch, gap};
-    await fetchResults(url, data, callback, () => {
-        callback(undefined);
-    });
+    await fetchPost(url, data, callback);
 };

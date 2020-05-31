@@ -55,7 +55,8 @@ export default function ExtendedMatrix(props) {
     const inputLenB = props.input.seqB.length;
     const scoreMatrix = props.result.score_matrix;
     const directionMatrix = props.result.direction_matrix;
-    const path = props.result.alignments[props.selected].path;
+    const path = props.result.alignments.length>0 ?
+        props.result.alignments[props.selected].path : [];
     const pathSet = new Set();
     path.forEach((p) => {
         pathSet.add(`${p[0]}|${p[1]}|${p[2]}`);
@@ -144,7 +145,9 @@ export default function ExtendedMatrix(props) {
 
     return (
         <div className={classes.matrix}>
-            <Grid container direction="row" spacing={1}>
+            <Grid container direction="row" spacing={1} align="center"
+                justify="center"
+                alignItems="center">
                 <Grid item>
                     <div style={{height: cellSize}}>&nbsp;</div>
                     <br />
@@ -220,7 +223,9 @@ ExtendedMatrix.propTypes = {
         seqB: PropTypes.string,
     }),
     result: PropTypes.shape({
-        score_matrix: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)),
+        score_matrix: PropTypes.arrayOf(PropTypes.arrayOf(
+            PropTypes.arrayOf(PropTypes.oneOfType(
+                [PropTypes.number, PropTypes.string])))),
         direction_matrix: PropTypes.arrayOf(
             PropTypes.arrayOf(
                 PropTypes.arrayOf(PropTypes.number))),

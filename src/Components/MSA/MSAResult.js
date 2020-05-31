@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useRef} from 'react';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
@@ -6,42 +6,104 @@ import Divider from '@material-ui/core/Divider';
 
 import MSATree from './MSATree';
 import MSAAlignment from './MSAAlignment';
+import {Modal} from '@material-ui/core';
+import {makeStyles} from '@material-ui/core/styles';
+
+import MSAReport from './MSAReport';
+
+const useStyles = makeStyles((theme) => ({
+    reportModal: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+}));
 
 export default function MSAResult(props) {
+    const classes = useStyles();
+    const divRef = useRef(null);
+
+    useEffect(() => {
+        divRef.current.scrollIntoView({behavior: 'smooth'});
+    }, [props.result]);
+
     const [selectedProfile, setselectedProfile] = React.useState(undefined);
+    const [reportOpen, setReportOpen] = React.useState(false);
     const nInputSequences = props.result.alignments.length;
     let intermediateProf = null;
     if (selectedProfile) {
-        const heading = <p>Intermediate Profile ({`${selectedProfile}`})</p>;
         if (selectedProfile <= nInputSequences) {
-            intermediateProf =<>{heading} <MSAAlignment
+            const heading = <p>
+                Input Sequence
+                ({`${props.input.sequencesNames[selectedProfile - 1]}`})
+                </p>;
+            intermediateProf = <>{heading} <MSAAlignment
                 alignments={[props.result.profiles[selectedProfile]]} /></>;
         } else {
-            intermediateProf =<>{heading} <MSAAlignment
+            const heading = <p>
+                Intermediate Profile ({`${selectedProfile}`})
+                </p>;
+            intermediateProf = <>{heading} <MSAAlignment
                 alignments={props.result.profiles[selectedProfile]} /></>;
         }
     }
+
+    const onClickDownload = () => {
+        const canvas = document.getElementById(
+            'MSA-tree-result').getElementsByTagName('canvas')[0];
+
+
+        const link = document.createElement('a');
+        link.setAttribute('download', 'tree.png');
+        link.setAttribute('href',
+            canvas.toDataURL('image/png').replace('image/png',
+                'image/octet-stream'));
+        link.click();
+    };
+    const handleReportOpen = () => {
+        setReportOpen(true);
+    };
+
+    const handleReportClose = () => {
+        setReportOpen(false);
+    };
+
     return (
-        <div>
+        <div ref={divRef}>
 
             <br />
-            <Grid container direction='row' spacing={1}>
-                <Grid item xs={5}>
+            <Grid container direction='row' spacing={0}>
+                <Grid item xs={12} lg={5}>
                     <h3>Tree</h3>
                     <br />
                     Hover on nodes to view intermediate profiles.
                     Double click on canvas to recenter the graph.
-                    <br/>
-                    <MSATree
-                        treeData={props.result.graph}
-                        setSelected={setselectedProfile} />
+                    <br />
+                    <div style={{textAlign: 'right'}}>
+                        <Button
+                            variant="outlined"
+                            onClick={onClickDownload}
+                            size="small">
+                            Print this
+                        </Button>
+                    </div>
+                    <br />
+                    <div>
+                        <MSATree
+                            type='result'
+                            treeData={props.result.graph}
+                            setSelected={setselectedProfile}
+                            sequencesNames={props.input.sequencesNames} />
+                    </div>
                 </Grid>
 
                 <Divider
                     orientation="vertical"
                     flexItem
-                    style={{marginLeft: 25, marginRight: 10}} />
-                <Grid item container direction='column' xs={5}>
+                    style={{marginLeft: 15}} />
+                <Grid item container direction='column' xs={12} lg={5}
+                    align="center"
+                    alignItems="center">
                     <Grid item >
                         <h3>Final Alignment</h3>
                         <br />
@@ -56,16 +118,30 @@ export default function MSAResult(props) {
                 </Grid>
 
                 <Divider orientation="vertical" flexItem />
-                <Grid item>
-                <h3>Report</h3>
+                <Grid item xs={12} lg={'auto'} align="center">
+                    <h3>Report</h3>
                     <br />
-                    <div style={{textAlign: 'left', marginBottom: 10}}>
+                    <div style={{marginBottom: 10}}>
                         Identity : {props.result.identity.toFixed(5)}
                         <br />
                     </div>
-                    <Button variant="outlined">
+                    <Button variant="outlined" size="small"
+                        onClick={handleReportOpen}>
                         Generate Report
                     </Button>
+                    <Modal
+                        open={reportOpen}
+                        className={classes.reportModal}
+                        onClose={handleReportClose}
+                        aria-labelledby="report-modal-title"
+                        aria-describedby="report-modal-description"
+
+                    >
+                        <MSAReport
+                            input={props.input}
+                            result={props.result}
+                        />
+                    </Modal>
                 </Grid>
             </Grid>
 
@@ -87,6 +163,9 @@ MSAResult.propTypes = {
             ),
         ),
         identity: PropTypes.number,
+    }),
+    input: PropTypes.shape({
+        sequencesNames: PropTypes.arrayOf(PropTypes.string),
     }),
 
 };

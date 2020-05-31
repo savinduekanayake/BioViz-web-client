@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import {useSelector, useDispatch} from 'react-redux';
 import {addNewMSA, setMSAInput, removeMSA,
      setMSAInputRange, setMSAInputName} from '../../../Redux/Actions/MSA';
+import {Divider} from '@material-ui/core';
 
 export default function MSASequencesInput() {
     const dispatch = useDispatch();
@@ -37,14 +38,15 @@ export default function MSASequencesInput() {
             container
             direction="column"
             spacing={0}
-            style={{width: '95%'}}
+            style={{width: '98%'}}
             >
                 {inputs}
+                <Divider style={{marginBottom: 10}}/>
                 <Grid item>
-                    <Button variant="outlined"
+                    <Button variant="contained"
                         color="secondary"
-                        style={{color: 'green', borderColor: 'green'}}
-                        onClick={handleMSAadd}>Add</Button>
+                        style={{color: 'white', backgroundColor: 'green'}}
+                        onClick={handleMSAadd}>Add More</Button>
                 </Grid>
             </Grid>
 

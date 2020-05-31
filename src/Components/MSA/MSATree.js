@@ -9,6 +9,7 @@ const useStyles = makeStyles((theme) => ({
         borderStyle: 'solid',
         width: 600,
         height: 400,
+        margin: 'auto',
     },
     sampleTree: {
         width: 600,
@@ -21,6 +22,9 @@ export default function MSATree(props) {
     const ref = React.useRef(null);
     const {treeData, setSelected} = props;
     const treeType = props.type;
+    const sequencesNames = props.sequencesNames;
+    const htmlId = props.type === 'sample' ? 'MSA-tree-sample' :
+        'MSA-tree-result';
 
 
     useEffect(() => {
@@ -88,9 +92,14 @@ export default function MSATree(props) {
                 if (node.id === '1') {
                     centerX = node.x;
                 }
+                let nodeLabel = node.id;
+                if (treeType==='result' &&
+                    Number(node.id)<=sequencesNames.length) {
+                    nodeLabel = sequencesNames[Number(node.id)-1];
+                }
 
                 return {
-                    label: node.id,
+                    label: nodeLabel,
                     labelCfg: {
                         position:
                             node.children && node.children.length > 0 ?
@@ -120,10 +129,10 @@ export default function MSATree(props) {
         graph.data(treeData);
         graph.render();
         graph.fitView(0);
-    }, [setSelected, treeData, treeType]);
+    }, [setSelected, treeData, treeType, sequencesNames]);
 
     return (
-        <div ref={ref} className={`${classes.tree} 
+        <div ref={ref} id={htmlId} className={`${classes.tree} 
         ${props.type === 'sample' ? classes.sampleTree : ''}`}>
         </div>
     );
@@ -136,5 +145,6 @@ MSATree.propTypes = {
     }),
     setSelected: PropTypes.func,
     type: PropTypes.string,
+    sequencesNames: PropTypes.arrayOf(PropTypes.string),
 };
 
