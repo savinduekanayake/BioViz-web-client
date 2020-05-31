@@ -25,7 +25,8 @@ describe('GameSection Component', () => {
             expect(game.prop('input')).toEqual(expectedState);
         });
 
-        it('should adjust input sequences for same length', () => {
+        it('should adjust input sequences to same length:adjust seqA', () => {
+                // when seqA is short than seqB
             const store = mockStore({GameSeqA: 'AAACC', GameSeqB: 'CCAAGGTTA'});
             const wrapper = mount( <Provider store={store}>
                             <GameSection></GameSection></Provider>);
@@ -39,6 +40,21 @@ describe('GameSection Component', () => {
             expect(game.prop('input')).toEqual(expectedState);
         });
 
+        it('should adjust input sequences to same length:adjust seqB', () => {
+            // when seqB is short than seqA
+        const store = mockStore({GameSeqA: 'AAACCGGT', GameSeqB: 'CCA'});
+        const wrapper = mount( <Provider store={store}>
+                        <GameSection></GameSection></Provider>);
+        const expectedState = {
+            seqA: 'AAACCGGT',
+            seqB: 'CCAeeeee',
+        };
+        findByAttr(wrapper, 'testid',
+         'submitBtn').hostNodes().simulate('click');
+        const game = wrapper.find(GameAlign);
+        expect(game.prop('input')).toEqual(expectedState);
+    });
+
         it('should render error message for invalid inputs', () => {
             const store = mockStore({GameSeqA: 'AACCGQC', GameSeqB: 'CCGGTTA'});
             const wrapper = mount( <Provider store={store}>
@@ -50,16 +66,16 @@ describe('GameSection Component', () => {
             expect(errMsg1.length).toBe(1);
         });
 
-        // it('should render error message when one/two input missing', () => {
-        //     const store = mockStore({GameSeqA: 'AACCGQC', GameSeqB: ''});
-        //     const wrapper = mount( <Provider store={store}>
-        //                     <GameSection></GameSection></Provider>);
-        //     findByAttr(wrapper, 'testid',
-        //                 'submitBtn').hostNodes().simulate('click');
-        //     const errMsg2 = findByAttr(wrapper, 'testid',
-        //                 'inputmissed').hostNodes();
-        //     expect(errMsg2.length).toBe(1);
-        // });
+        it('should render error message when one/two input missing', () => {
+            const store = mockStore({GameSeqA: 'AACCGC', GameSeqB: ''});
+            const wrapper = mount( <Provider store={store}>
+                            <GameSection></GameSection></Provider>);
+            findByAttr(wrapper, 'testid',
+                        'submitBtn').hostNodes().simulate('click');
+            const errMsg2 = findByAttr(wrapper, 'testid',
+                        'inputmissed').hostNodes();
+            expect(errMsg2.length).toBe(1);
+        });
 
         it('should not render Game when input is not set', () => {
             const store = mockStore({});

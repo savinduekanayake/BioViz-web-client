@@ -18,7 +18,6 @@ export default function GameInput(props) {
                     <h4 style={{color: '#141938'}}>
                         Input sequence should only contain A C G T characters
                         <br/>Use `-` to indicate any gaps in the sequence
-                        <br/>Make sure to input both sequences
                     </h4>
                     <h3>Input Sequence 1</h3>
                     <GameFileUpload inputAction={setGameInputA}
