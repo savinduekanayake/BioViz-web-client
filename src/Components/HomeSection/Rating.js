@@ -85,7 +85,7 @@ const IOSSlider = withStyles({
 
 export default function CustomizedSlider(props) {
   const classes = useStyles();
-
+// eslint-disable-next-line
   const dispatch = useDispatch();
 
   const [value, setValue] = React.useState(75);
