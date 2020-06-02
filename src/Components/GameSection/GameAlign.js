@@ -36,7 +36,7 @@ const useStyles = makeStyles(() => ({
         borderRadius: '10px',
         padding: 10,
         paddingBottom: 40,
-        paddingTop: 80,
+        paddingTop: 40,
     },
     resetBtn: {
         marginRight: 20,
@@ -48,14 +48,15 @@ const useStyles = makeStyles(() => ({
         fontWeight: 'bolder',
     },
     bestStateBtn: {
-        backgroundColor: 'transparent',
-        color: '#494946',
+        backgroundColor: '#9e9e9499',
+        color: '#222c5a',
         fontWeight: 'bolder',
-        border: 'none',
-        cursor: 'pointer',
-        float: 'left',
-        marginLeft: 60,
-        padding: 0,
+        padding: 10,
+        // borderColor: '#272724e6',
+        // cursor: 'pointer',
+        // float: 'left',
+        // marginLeft: 60,
+        // padding: 0,
     },
 }));
 
@@ -267,16 +268,16 @@ export default function GameAlign(props) {
     return (
         <Box className={classes.gameplay}>
             <GamePlay/>
-            <br />
+            <br /><br />
             <Box boxShadow={6} className={classes.box}>
-                <GameAlignTable align1={row1} align2={row2}
-                indexLine={indexLine}/>
-                <div testid={'checkState'} value={align}/>
-                <br />
-                <GameLable match={match} mismatch={mismatch} gap={gap}
-                    identity={identity} bestMatch={bestAlign.matches}
-                    bestIdentity={bestAlign.identity}/>
-                <br/><br/><br/><br/>
+                <div>
+                    <h3 style={{color: '#494946'}}>
+                        Sequences can be replaced at any time by the state
+                        with the maximum identity you achieved.
+                        <br/>Feel free to play and get the
+                         maximum identity possible.
+                    </h3>
+                </div>
                 <Tooltip
                 title={'Go to a state with maximum identity achieved so far'}
                 placement="bottom" arrow>
@@ -288,6 +289,39 @@ export default function GameAlign(props) {
                     </Button>
                 </Tooltip>
                 <br/><br/>
+                <GameLable match={match} mismatch={mismatch} gap={gap}
+                    identity={identity} bestMatch={bestAlign.matches}
+                    bestIdentity={bestAlign.identity}/>
+                {/* <Tooltip
+                title={'Go to a state with maximum identity achieved so far'}
+                placement="bottom" arrow>
+                    <Button
+                        testid='bestIdentityBtn'
+                        className={classes.bestStateBtn}
+                        onClick={setBestIdentityState}>
+                        Go to a best identity state
+                    </Button>
+                </Tooltip> */}
+                 <br/><br/><br/><br/>
+                <GameAlignTable align1={row1} align2={row2}
+                indexLine={indexLine}/>
+                <div testid={'checkState'} value={align}/>
+                <br />
+                {/* <GameLable match={match} mismatch={mismatch} gap={gap}
+                    identity={identity} bestMatch={bestAlign.matches}
+                    bestIdentity={bestAlign.identity}/>
+                <br/><br/><br/><br/> */}
+                {/* <Tooltip
+                title={'Go to a state with maximum identity achieved so far'}
+                placement="bottom" arrow>
+                    <Button
+                        testid='bestIdentityBtn'
+                        className={classes.bestStateBtn}
+                        onClick={setBestIdentityState}>
+                        Go to a best identity state
+                    </Button>
+                </Tooltip>
+                <br/><br/> */}
                 <Button
                     testid='prevBtn'
                     className={classes.resetBtn}

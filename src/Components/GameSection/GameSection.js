@@ -4,6 +4,7 @@ import GameInput from './GameInput';
 import GameResult from './GameResult';
 import {Button} from '@material-ui/core';
 import {useSelector} from 'react-redux';
+import GameIntroduction from './GameIntroduction';
 
 export default function GameSection() {
     const [input, setInput] = React.useState(undefined);
@@ -90,6 +91,7 @@ export default function GameSection() {
     return (
         <div>
             <h2>Alignment Game</h2>
+            <GameIntroduction/>
             <GameInput errMsgA={inputErrorA} errMsgB={inputErrorB} />
             <br />
             <Button

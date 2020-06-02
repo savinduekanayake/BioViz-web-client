@@ -15,13 +15,16 @@ export default function GameInput(props) {
         <div>
             <Grid container direction="column" spacing={3}>
                 <Grid item>
-                    <h4 style={{color: '#141938'}}>
+                    {/* <h4 style={{color: '#141938'}}>
                         Input sequence should only contain A C G T characters
                         <br/>Use `-` to indicate any gaps in the sequence
-                    </h4>
+                    </h4> */}
                     <h3>Input Sequence 1</h3>
                     <GameFileUpload inputAction={setGameInputA}
                         value={useSelector((state) => state.GameSeqA)} />
+                    <h3>or</h3>
+                    <h3 style={{color: '#283471'}}>
+                        Type sequence in the input field</h3>
                     <GameTextInput inputAction={setGameInputA}
                         value={useSelector((state) => state.GameSeqA)} />
                 </Grid>
@@ -32,6 +35,9 @@ export default function GameInput(props) {
                     <h3>Input Sequence 2</h3>
                     <GameFileUpload inputAction={setGameInputB}
                         value={useSelector((state) => state.GameSeqB)} />
+                    <h3>or</h3>
+                    <h3 style={{color: '#283471'}}>
+                        Type sequence in the input field</h3>
                     <GameTextInput inputAction={setGameInputB}
                         value={useSelector((state) => state.GameSeqB)} />
                 </Grid>

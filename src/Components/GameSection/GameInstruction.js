@@ -70,7 +70,7 @@ export default function GameInstruction() {
                 variant="outlined"
                 color="primary"
                 onClick={handleClickOpen}>
-                    instructions to play
+                    instructions
             </Button>
             <Dialog
                 testid={'dialog'}
@@ -97,12 +97,12 @@ export default function GameInstruction() {
                         </ul>
                         <h3 style={{color: '#af9617'}}>
                             Hint: start from the left</h3>
-                        <h3 style={{color: '##222c5a'}}>
+                        {/* <h3 style={{color: '##222c5a'}}>
                             Sequences can be replaced at any time by the state
                             with the maximum identity you achieved.
                             <br/>Feel free to play and get the
                              maximum identity possible.
-                        </h3>
+                        </h3> */}
                 </DialogContent>
                 <DialogActions>
                     <Button autoFocus onClick={handleClose}
