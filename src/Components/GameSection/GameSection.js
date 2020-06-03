@@ -4,6 +4,7 @@ import GameInput from './GameInput';
 import GameResult from './GameResult';
 import {Button} from '@material-ui/core';
 import {useSelector} from 'react-redux';
+import GameIntroduction from './GameIntroduction';
 
 export default function GameSection() {
     const [input, setInput] = React.useState(undefined);
@@ -90,6 +91,7 @@ export default function GameSection() {
     return (
         <div>
             <h2>Alignment Game</h2>
+            <GameIntroduction/>
             <GameInput errMsgA={inputErrorA} errMsgB={inputErrorB} />
             <br />
             <Button
@@ -102,19 +104,31 @@ export default function GameSection() {
             <br /><br />
             {input ?
                 (inputErrorA || inputErrorB) ?
-                    <h3 testid={'invalidInput'}
-                    style={{color: '#ea0909'}}>INVALID INPUT.
-                    READ INSTRUCTIONS CAREFULLY TO INPUT THE SEQUENCES</h3> :
+                    <div testid={'invalidInput'}>
+                        <h3 style={{color: '#ea0909'}}>
+                            INVALID INPUT. READ INSTRUCTIONS CAREFULLY TO
+                            INPUT THE SEQUENCES
+                        </h3>
+                    </div> :
                     (input.seqA === '' || input.seqB === '') ?
-                    <h3 testid={'inputmissed'}
-                     style={{color: '#ea0909'}}>INPUT BOTH SEQUENCES</h3> :
+                        <div testid={'inputmissed'}>
+                            <h3 style={{color: '#ea0909'}}>
+                                INPUT BOTH SEQUENCES
+                            </h3>
+                        </div> :
                         <GameAlign
-                        input={input}
-                        fetchAlign={callbackAlign} /> :
+                            input={input}
+                            fetchAlign={callbackAlign} /> :
                          <div testid={'inputNotSet'}/>}
+            <button style={{display: 'none'}} testid={'testCallback'}
+                    onClick={callbackAlign}></button>
             {scoreErr?
-             <h3 style={{color: '#ea0909'}}>INVALID SCORING SCHEMA.
-                                SUBMIT AGAIN WITH VALID SCORE/PENALTY</h3>:
+                <div testid={'testscore'}>
+                    <h3 style={{color: '#ea0909'}}>
+                        INVALID SCORING SCHEMA. SUBMIT AGAIN
+                         WITH VALID SCORE/PENALTY
+                    </h3>
+                </div>:
                 alignment ? <GameResult aligns={alignment} />:
                 <div testid={'alignmentNotSet'}/>}
         </div>

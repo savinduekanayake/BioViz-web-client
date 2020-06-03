@@ -10,6 +10,7 @@ export default function GameFileUpload(props) {
     const handleFileRead = () => {
         const content = fileReader.result;
         dispatch(props.inputAction(content.trim()));
+        console.log(content);
     };
 
     const handleError = (error) => {
@@ -29,20 +30,25 @@ export default function GameFileUpload(props) {
         }
     };
 
-    return <div className='upload-expense'>
-        <Button variant="contained" color="primary"
-            component="label" size="small" testid={'uploadbtn'}>
-            Upload Text File
-        <input type='file'
-                id='file'
-                className='input-file'
-                accept='.txt'
-                onChange={(e) => handleFileChosen(e.target.files[0])}
-                style={{display: 'none'}}
-            />
-        </Button>
-    </div>;
-};
+    return (
+        <div className='upload-expense'>
+            <Button variant="contained" color="primary"
+                component="label" size="small" testid={'uploadbtn'}>
+                Upload Text File
+                <input
+                    type='file'
+                    id='file'
+                    testid = 'file'
+                    className='input-file'
+                    accept='.txt'
+                    onChange={(e) => handleFileChosen(e.target.files[0])}
+                    style={{display: 'none'}} />
+            </Button>
+            <button style={{display: 'none'}}
+                testid={'handleErrorTest'} onClick={()=>handleError()}/>
+        </div>
+    );
+}
 
 GameFileUpload.propTypes = {
     inputAction: PropTypes.func,
