@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import {withStyles} from '@material-ui/core/styles';
 
 import PropTypes from 'prop-types';
@@ -29,6 +29,8 @@ const useStyles = (theme) => ({
         marginLeft: 0,
     },
 });
+
+const DNAbases = ['A', 'G', 'C', 'T'];
 
 
 class MSAReport extends Component {
@@ -75,6 +77,28 @@ class MSAReport extends Component {
         </>;
 
 
+        let DNASimilarityScores = null;
+
+        if (this.props.input.genomeType === 'DNA' &&
+            this.props.input.similarityMatrixName === 'CUSTOM') {
+            DNASimilarityScores = [];
+            DNAbases.forEach((base1) => {
+                DNAbases.forEach((base2) => {
+                    const pair = base1.concat(base2);
+                    if (this.props.input.DNASimilarityMatrix.hasOwnProperty(
+                        pair)) {
+                        DNASimilarityScores.push(
+                            <Fragment key={pair}>
+                                {pair} : {
+                                    this.props.input.DNASimilarityMatrix[pair]}
+                                <br />
+                            </Fragment>);
+                    }
+                });
+            });
+        }
+
+
         const alignmets = this.props.result.alignments.map((element, index) => {
             return <><br />
                 {`>${this.props.input.sequencesNames[index]}`}<br />
@@ -97,6 +121,10 @@ class MSAReport extends Component {
             on {dateStr}
                     <br />
                     {line}
+                    Sequence Type : {this.props.input.genomeType}
+                    <br/>
+                    <br/>
+                    {line}
                     <br />
             InputSequences
                 <div className={classes.wrapped}>
@@ -104,18 +132,23 @@ class MSAReport extends Component {
                     </div>
                     {line}
                     <br />
-            Scoring method : BASIC
+            Scoring method : BASIC (without affine gaps)
                     <br />
                     <br />
                     <div>
                         {scores}
                     </div>
                     <br />
+            Similarity Matrix : {this.props.input.similarityMatrixName}
+                    <br />
+                    {DNASimilarityScores}
+                    <br />
+                    <br />
                     {line}
                     <br />
 
             Alignments
-                <div>
+                <div className={classes.wrapped}>
                         {alignmets}
                         <br/>
                         {`Identity : ${this.props.result.identity}`}<br />
@@ -135,8 +168,24 @@ MSAReport.propTypes = {
         match: PropTypes.number,
         mismatch: PropTypes.number,
         gap: PropTypes.number,
+        similarityMatrixName: PropTypes.string,
+        genomeType: PropTypes.string,
         sequences: PropTypes.arrayOf(PropTypes.string),
         sequencesNames: PropTypes.arrayOf(PropTypes.string),
+        DNASimilarityMatrix: (props, propName, componentName) => {
+            const keys = Object.keys(props[propName]);
+            for (let index = 0; index < keys.length; index++) {
+                if (!(DNAbases.includes(keys[index][0]) &&
+                        DNAbases.includes(keys[index][1]))) {
+                    return new Error(
+                        'Invalid key `' + keys[index] + '` supplied to ' +
+                        '`' + componentName +
+                        '`; expected to match with two characters in' +
+                        DNAbases + '.',
+                    );
+                }
+            }
+        },
     }),
 };
 export default withStyles(useStyles)(MSAReport);
