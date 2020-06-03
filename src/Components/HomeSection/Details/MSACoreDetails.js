@@ -35,7 +35,7 @@ export default function MSACoreDetails() {
       <br />
 
       <Typography component={'span'} variant="h5" gutterBottom>
-        Types of pairwise alignment
+        Types of MSA alignment
         <br />
       </Typography>
 

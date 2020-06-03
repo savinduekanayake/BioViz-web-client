@@ -38,4 +38,21 @@ describe('Testing the Steps component', () => {
             'IOSSliderId').hostNodes();
         expect(TooltipComponent.length).toBe(1);
     });
+
+    // This is not working. need to implement onchangeto full coverage
+    it(`simulate onchange in the insde
+        components(IOSSlider) in Rating component`, () => {
+        expect(wrapper).toBeTruthy();
+
+        // const handleChangeMock = jest.fn();
+        // const mockFn = jest.fn();
+
+        const TooltipComponent = findByAttr(wrapper,
+            'testid',
+            'IOSSliderId').hostNodes();
+        // const instance = TooltipComponent.instance();
+        // instance.handleChange(event);
+        expect(TooltipComponent.length).toBe(1);
+        TooltipComponent.simulate('change', {target: {value: 50}});
+    });
 });

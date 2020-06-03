@@ -113,6 +113,7 @@ export default function VerticalLinearStepper({HeadTitle, image, title1, title2,
                                     </Typography>
 
                                     <Button testid='backButtonId'
+                                        id = 'BackButtonId'
                                         disabled={activeStep === 0}
                                         onClick={handleBack}
                                         className={classes.button}
@@ -120,6 +121,7 @@ export default function VerticalLinearStepper({HeadTitle, image, title1, title2,
                                         Back
                                     </Button>
                                     <Button testid='nextButtonId'
+                                        id = 'NextButtonId'
                                         variant="contained"
                                         color="primary"
                                         onClick={handleNext}
@@ -143,13 +145,14 @@ export default function VerticalLinearStepper({HeadTitle, image, title1, title2,
                         All steps completed - you&apos;re finished
                     </Typography>
                     <Button onClick={handleReset} className={classes.button}
+                        id = 'ResetButtonId'
                         testid='resetButtonId'>
                         Reset
                     </Button>
-
+                    <br />
                     <Button testid='finalButtonId'
                         variant="outlined"
-                        color="secondary"
+                        color="primary"
                     >
                     {
                         `${HeadTitle}` === 'Pairwise' ?
