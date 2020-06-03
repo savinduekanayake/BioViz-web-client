@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Button} from '@material-ui/core';
+import {Button, Tooltip} from '@material-ui/core';
 import {useDispatch} from 'react-redux';
 import {parseFASTA} from '../../util/FASTA';
 
@@ -44,17 +44,21 @@ export default function FileUpload(props) {
     };
 
     return <div className='upload-expense'>
-        <Button variant="contained" color="primary"
-        component="label" size="small">
-            Upload Text File
-        <input type='file'
-                id='file'
-                className='input-file'
-                accept='.txt'
-                onChange={(e) => handleFileChosen(e.target.files[0])}
-                style={{display: 'none'}}
-            />
-        </Button>
+        <Tooltip
+            title=".txt file in single sequence FASTA format"
+            interactive arrow>
+            <Button variant="contained" color="primary"
+                component="label" size="small">
+                Upload Text File
+            <input type='file'
+                    id='file'
+                    className='input-file'
+                    accept='.txt'
+                    onChange={(e) => handleFileChosen(e.target.files[0])}
+                    style={{display: 'none'}}
+                />
+            </Button>
+        </Tooltip>
     </div>;
 };
 

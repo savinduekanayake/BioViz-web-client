@@ -81,7 +81,7 @@ export default function Matrix(props) {
 
     const makeHeaderCell = ({columnIndex, style}) => {
         const cIdx = columnIndex;
-        const headerCell = cIdx === 0 ? '' :
+        const headerCell = cIdx === 0 ? 'Seq. 1' :
             <HeaderCell value={props.input.seqB[cIdx - 1]} index={cIdx} />;
         return (
             <div style={style}
@@ -98,7 +98,7 @@ export default function Matrix(props) {
 
     const makeLeftHeaderCell = ({rowIndex, style}) => {
         const rIdx = rowIndex;
-        const leftHeaderCell = rIdx === 0 ? '' :
+        const leftHeaderCell = rIdx === 0 ? 'Seq. 2' :
             <LeftHeaderCell value={props.input.seqA[rIdx - 1]} index={rIdx} />;
         return (
             <div style={style}

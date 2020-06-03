@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import TextField from '@material-ui/core/TextField';
-import {Button, Typography} from '@material-ui/core';
+import {Button, Typography, Tooltip} from '@material-ui/core';
 import {fetchGenomeById} from '../../GenomeAPI/GenomeAPI';
 import {useDispatch} from 'react-redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -62,12 +62,24 @@ export default function APIinput(props) {
                 <Grid item>
                     <div style={{marginLeft: 3, width: 170}}>
                         {loading ? <CircularProgress thickness={5} /> :
+                            <Tooltip
+                            title={
+                            <>Search sequence id in  &nbsp;
+                                <a href="https://www.ensembl.org/"
+                                target="_blank" rel="noopener noreferrer"
+                                style={{color: 'white'}}>
+                                    ensembl.org
+                                </a>
+                                &nbsp; genome browser
+                            </>
+                            }
+                            interactive arrow>
                             <Button onClick={onClickSearchButton}>
                                 <Typography variant='button'>
                                 Search in Ensembl Database
                                 </Typography>
-
                             </Button>
+                            </Tooltip>
                         }
                     </div>
                 </Grid>

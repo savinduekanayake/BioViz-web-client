@@ -4,7 +4,7 @@ import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
 import PairAlignAlignment from './PairAlignAlignment';
 import Matrix from './Matrix/Matrix';
-import {Grid, IconButton, Divider} from '@material-ui/core';
+import {Grid, IconButton, Divider, Tooltip} from '@material-ui/core';
 import PlayableResut from './PlayableResut';
 import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
@@ -83,7 +83,12 @@ export default function PairAlignResult(props) {
             <h2>PariAlign Result</h2>
             <Grid container direction='row' spacing={2}>
                 <Grid item xs={12} lg={4}>
-                    <h3>DP Matrix</h3>
+                    <Tooltip
+                        title="Dynamic Programming matrix
+                        used to calculate the score"
+                        interactive arrow>
+                        <h3>DP Matrix</h3>
+                    </Tooltip>
                     <br />
                     {matrix}
                 </Grid>
@@ -128,7 +133,7 @@ export default function PairAlignResult(props) {
                     <div style={{marginBottom: 10}}>
                         {props.result.alignments.length > 0 ?
                             `Identity : ${props.result.alignments[
-                                selectedAlignment].identity}` :
+                                selectedAlignment].identity.toFixed(5)}` :
                             ''}
                         <br />
                         Score : {props.result.score}
