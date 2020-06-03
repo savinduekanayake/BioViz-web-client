@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {makeStyles} from '@material-ui/core/styles';
 import Slider from '@material-ui/core/Slider';
 import Input from '@material-ui/core/Input';
-import {Grid} from '@material-ui/core';
+import {Grid, Tooltip} from '@material-ui/core';
 import {useDispatch} from 'react-redux';
 
 const useStyles = makeStyles({
@@ -55,9 +55,14 @@ export default function RangeSelector(props) {
 
     return (
         <div className={classes.root}>
-            <b>
-                Select required range in the sequence
-            </b>
+            <Tooltip
+                title="Select a segment from the sequence"
+                placement="right"
+                interactive arrow>
+                <b>
+                    Select required range in the sequence
+                </b>
+            </Tooltip>
 
             <Slider
                 value={rangeValues}
