@@ -1,0 +1,76 @@
+.gap{
+    color: black !important;
+    background-color: black !important;
+}
+
+.DNA-base{
+    color: white !important;
+}
+
+.DNA-A{
+    background-color: red !important;
+}
+
+.DNA-C{
+    background-color: blue !important;
+}
+
+.DNA-G{
+    background-color: purple !important;
+}
+
+.DNA-T{
+    background-color: green !important;
+}
+
+.PROTEIN-base{
+    color: white !important;
+    background-color: gray !important;
+}
+
+.PROTEIN-A, .PROTEIN-I,
+.PROTEIN-L, .PROTEIN-F,
+.PROTEIN-W, .PROTEIN-V,
+.PROTEIN-M
+{
+    background-color: blue !important;
+}
+
+.PROTEIN-K, .PROTEIN-R
+{
+    background-color: red !important;
+}
+
+.PROTEIN-E, .PROTEIN-D
+{
+    background-color: magenta !important;
+}
+
+.PROTEIN-K, .PROTEIN-R
+{
+    background-color: red !important;
+}
+
+.PROTEIN-N, .PROTEIN-Q,
+.PROTEIN-S, .PROTEIN-T
+{
+    background-color: green !important;
+}
+
+.PROTEIN-C
+{
+    background-color: pink !important;
+    color: black !important;
+}
+
+.PROTEIN-G
+{
+    background-color: orange !important;
+    color: black !important;
+}
+
+.PROTEIN-P
+{
+    background-color: yellow !important;
+    color: black !important;
+}
