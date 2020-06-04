@@ -15,14 +15,16 @@ export default function GamePlay() {
     return (
         <div>
         <h2 className={classes.title}>GamePlay</h2>
-        <br /><br />
+        <GameInstruction />
+        <br />
+        <h3 style={{color: '#1e2e51'}}>
+            Change input values for Match score, Mismatch penalty and
+             Gap penalty on your preference</h3>
         <div style={{textAlign: 'center'}}>
             <div style={{display: 'inline-block'}}>
             <CommonScore />
             </div>
         </div>
-        <br />
-        <GameInstruction />
         </div>
     );
 }

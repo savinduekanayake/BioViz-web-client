@@ -17,12 +17,17 @@ export default function MSAContent() {
     const dispatch = useDispatch();
     const [result, setResult] = React.useState(undefined);
     const [loading, setloading] = React.useState(false);
+    const genomeType = useSelector((state) => state.genomeType);
     const sequences_ = useSelector((state) => state.MSASeq);
     const match = useSelector((state) => state.matchScore);
     const mismatch = useSelector((state) => state.mismatchPenalty);
     const gap = useSelector((state) => state.gapPenalty);
     const msaAlgo = useSelector((state) => state.msaAlgo);
     const msaOrder = useSelector((state) => state.msaOrder);
+    const similarityMatrixName =
+        useSelector((state) => state.similarityMatrixName);
+    const DNASimilarityMatrix =
+        useSelector((state) => state.DNASimilarityMatrix);
 
 
     const sequences = sequences_.map((element) => getSubstring(element));
@@ -35,7 +40,8 @@ export default function MSAContent() {
         if (data.error === undefined) {
             setResult({
                 result: data.response.result,
-                input: {sequences, sequencesNames, match, mismatch, gap}});
+                input: {sequences, sequencesNames, match, mismatch, gap,
+                    genomeType, similarityMatrixName, DNASimilarityMatrix}});
         } else if (data.error === 400) {
             dispatch(setSnackBar('Plese check your input'));
         } else {
@@ -54,6 +60,9 @@ export default function MSAContent() {
                     match,
                     mismatch,
                     gap,
+                    genomeType,
+                    similarityMatrixName,
+                    DNASimilarityMatrix,
                     onReceive);
             } else {
                 dispatch(setSnackBar('Invalid pairing order.'));
@@ -66,6 +75,9 @@ export default function MSAContent() {
                 match,
                 mismatch,
                 gap,
+                genomeType,
+                similarityMatrixName,
+                DNASimilarityMatrix,
                 onReceive);
         }
     };
