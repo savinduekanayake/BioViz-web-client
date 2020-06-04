@@ -4,6 +4,7 @@ import CommonScore from '../CommonScoreSchema/ScoreSchema';
 import MSASequencesInput from './Input/MSASequencesInput';
 import MSAAlgoSelector from './Input/MSAAlgoSelector';
 import {Box, FormLabel} from '@material-ui/core';
+import SimilarityMatrixInput from '../CommonScoreSchema/SimilarityMatrixInput';
 
 
 export default function MSAInput() {
@@ -18,6 +19,8 @@ export default function MSAInput() {
                     <FormLabel>Define your score schema</FormLabel>
                     <br/><br/>
                     <CommonScore />
+                    <br/><br/>
+                    <SimilarityMatrixInput style={{marginTop: 5}}/>
                 </div>
             </Box>
 

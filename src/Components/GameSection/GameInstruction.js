@@ -25,8 +25,7 @@ const styles = (theme) => ({
 const DialogTitle = withStyles(styles)((props) => {
     const {children, classes, onClose, ...other} = props;
     return (
-        <MuiDialogTitle disableTypography className={classes.root} {...other}
-        testid={'DialogTitle'}>
+        <MuiDialogTitle disableTypography className={classes.root} {...other}>
             <Typography variant="h6">{children}</Typography>
             {onClose ? (
                 <IconButton
@@ -66,44 +65,50 @@ export default function GameInstruction() {
     return (
         <div>
             <Button
-            style={{color: '#1e2e51', fontWeight: 'bolder'}}
-            variant="outlined"
-            color="primary"
-            onClick={handleClickOpen}>
-                Instructions
+                testid = "openBtn"
+                style={{color: '#1e2e51', fontWeight: 'bolder'}}
+                variant="outlined"
+                color="primary"
+                onClick={handleClickOpen}>
+                    instructions
             </Button>
             <Dialog
-            onClose={handleClose}
-             aria-labelledby="customized-dialog-title"
-             open={open}>
+                testid={'dialog'}
+                onClose={handleClose}
+                aria-labelledby="customized-dialog-title"
+                open={open}>
                 <DialogTitle id="customized-dialog-title" onClose={handleClose}>
                     How to Play
                 </DialogTitle>
                 <DialogContent dividers>
                         <ul>
                             <li><h3>Click on an element in the sequence
-                                 to move the sub sequence starting
-                                  from that point, to the right.</h3></li>
-                            <li><h3>Try to avoid unnecessary gaps
-                                 in the middle of the sequences.</h3></li>
+                                    to move the sub sequence starting
+                                    from that point, to the right.</h3></li>
+                            <li><h3 style={{color: '#222c5a'}}>
+                                    Try to avoid unnecessary gaps
+                                    in the middle of the sequences.</h3></li>
                             <li><h3>Trailing gaps cannot be removed.</h3></li>
-                            <li><h3>Increase the identity
-                                 as much as possible.</h3></li>
+                            <li><h3 style={{color: '#222c5a'}}>
+                                    Increase the identity
+                                    as much as possible.</h3></li>
                             <li><h3>Change the Match,Mismatch and Gap scores
-                                 to get a higher score.</h3></li>
+                                    to get a higher score.</h3></li>
                         </ul>
                         <h3 style={{color: '#af9617'}}>
                             Hint: start from the left</h3>
-                        <h3>Sequences can be replaced at any time by the state
-                             with the maximum identity you achieved.
-                             <br/>Feel free
-                             to play and get the maximum identity possible.
-                        </h3>
+                        {/* <h3 style={{color: '##222c5a'}}>
+                            Sequences can be replaced at any time by the state
+                            with the maximum identity you achieved.
+                            <br/>Feel free to play and get the
+                             maximum identity possible.
+                        </h3> */}
                 </DialogContent>
                 <DialogActions>
-                    <Button autoFocus onClick={handleClose} color="primary">
+                    <Button autoFocus onClick={handleClose}
+                            testid = "closeBtn" color="primary">
                         OK
-          </Button>
+                    </Button>
                 </DialogActions>
             </Dialog>
         </div>

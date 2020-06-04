@@ -55,6 +55,11 @@ export default function ExtendedCell(props) {
         const bgColor = index === props.inPathSegment ?
             inPathColor : colors[index];
 
+        if (index===0) {
+            directionArrow = '';
+            directionMatrices=[];
+        }
+
         const cell = (
             <Fragment key={index}>
                 <tr

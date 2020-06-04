@@ -38,12 +38,14 @@ export default function MSAResult(props) {
                 ({`${props.input.sequencesNames[selectedProfile - 1]}`})
                 </p>;
             intermediateProf = <>{heading} <MSAAlignment
+                genomeType={props.input.genomeType}
                 alignments={[props.result.profiles[selectedProfile]]} /></>;
         } else {
             const heading = <p>
                 Intermediate Profile ({`${selectedProfile}`})
                 </p>;
             intermediateProf = <>{heading} <MSAAlignment
+                genomeType={props.input.genomeType}
                 alignments={props.result.profiles[selectedProfile]} /></>;
         }
     }
@@ -74,7 +76,7 @@ export default function MSAResult(props) {
             <br />
             <Grid container direction='row' spacing={0}>
                 <Grid item xs={12} lg={5}>
-                    <h3>Tree</h3>
+                    <h3>Phylogenetic Tree</h3>
                     <br />
                     Hover on nodes to view intermediate profiles.
                     Double click on canvas to recenter the graph.
@@ -107,7 +109,9 @@ export default function MSAResult(props) {
                     <Grid item >
                         <h3>Final Alignment</h3>
                         <br />
-                        <MSAAlignment alignments={props.result.alignments} />
+                        <MSAAlignment
+                            alignments={props.result.alignments}
+                            genomeType={props.input.genomeType} />
                     </Grid>
                     <Grid item>
                         <h4>Intermediate Profiles</h4>
@@ -166,6 +170,7 @@ MSAResult.propTypes = {
     }),
     input: PropTypes.shape({
         sequencesNames: PropTypes.arrayOf(PropTypes.string),
+        genomeType: PropTypes.string,
     }),
 
 };

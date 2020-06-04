@@ -105,6 +105,7 @@ export default function PlayableResut(props) {
         modifiedResult.alignments[0].path.length > 0) {
         const path = [...modifiedResult.alignments[0].path];
         alignment = <PairAlignAlignment
+            genomeType={props.input.genomeType}
             alignment={getTracebackAlignment(props.input.seqA,
                 props.input.seqB,
                 path[0],
@@ -156,6 +157,7 @@ PlayableResut.propTypes = {
     input: PropTypes.shape({
         seqA: PropTypes.string,
         seqB: PropTypes.string,
+        genomeType: PropTypes.string,
     }),
     result: PropTypes.shape({
         score_matrix: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)),

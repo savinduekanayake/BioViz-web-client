@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {makeStyles} from '@material-ui/core/styles';
 import {FixedSizeGrid} from 'react-window';
 import {Avatar} from '@material-ui/core';
+import genomeStyles from '../../styles/GenomeStyles.module.css';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -12,26 +13,26 @@ const useStyles = makeStyles((theme) => ({
         fontSize: '12px',
 
     },
-    A: {
-        color: 'white',
-        backgroundColor: 'red',
-    },
-    C: {
-        color: 'white',
-        backgroundColor: 'blue',
-    },
-    G: {
-        color: 'white',
-        backgroundColor: 'purple',
-    },
-    T: {
-        color: 'white',
-        backgroundColor: 'green',
-    },
-    ga: {
-        color: 'black',
-        backgroundColor: 'black',
-    },
+    // A: {
+    //     color: 'white',
+    //     backgroundColor: 'red',
+    // },
+    // C: {
+    //     color: 'white',
+    //     backgroundColor: 'blue',
+    // },
+    // G: {
+    //     color: 'white',
+    //     backgroundColor: 'purple',
+    // },
+    // T: {
+    //     color: 'white',
+    //     backgroundColor: 'green',
+    // },
+    // ga: {
+    //     color: 'black',
+    //     backgroundColor: 'black',
+    // },
     emptyRow: {
         '& tr': {
             height: '20px',
@@ -47,12 +48,15 @@ function MSAAlignment(props) {
 
     const makeBase = ({columnIndex, rowIndex, style}) => {
         const character = props.alignments[rowIndex].charAt(columnIndex);
-        const styleClass = character === '-' ? 'ga' : character;
+        const styleClass = character === '-' ? 'gap' :
+            props.genomeType.concat('-', character.toUpperCase());
 
         return (
             <div style={style}>
                 <Avatar variant="square"
-                        className={`${classes.avatar} ${classes[styleClass]}`}>
+                        className={
+                            `${classes.avatar} ${genomeStyles[styleClass]}`
+                            }>
                         {character}</Avatar>
 
 
@@ -84,6 +88,7 @@ function MSAAlignment(props) {
 
 MSAAlignment.propTypes = {
     alignments: PropTypes.arrayOf(PropTypes.string),
+    genomeType: PropTypes.string,
 
 };
 

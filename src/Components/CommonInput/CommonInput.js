@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import FileUpload from '../CommonInput/FileUpload';
 import TextInput from '../CommonInput/TextInput';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
-import {IconButton, Grid} from '@material-ui/core';
+import {IconButton, Grid, Tooltip, Divider} from '@material-ui/core';
 import {useDispatch} from 'react-redux';
 import APIinput from './APIinput';
 import RangeSelector from './RangeSelector';
@@ -19,13 +19,24 @@ export default function CommonInput(props) {
     };
 
     const cancelButton = props.type === 'MSA' ?
-        <IconButton onClick={onclickCancelButton} testid='MSASeqCloseButton'>
-            <HighlightOffIcon color="error" />
-        </IconButton> : '';
+        <Tooltip
+            title="Remove this sequence"
+            interactive arrow
+            placement='right'>
+            <IconButton
+                onClick={onclickCancelButton}
+                testid='MSASeqCloseButton'>
+                <HighlightOffIcon color="error" />
+            </IconButton>
+        </Tooltip> : '';
     return (
         <div>
 
             <h3>{props.title} {cancelButton}</h3>
+            <Divider
+            variant='fullWidth'
+            style={{height: 2, color: 'black'}}/>
+            <br/>
             <div style={{marginBottom: 30}}>
                 <NameInput
                 nameInputHandler={props.nameInputHandler}
