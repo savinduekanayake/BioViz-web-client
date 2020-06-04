@@ -40,6 +40,7 @@ export default function PairAlignResult(props) {
             alignment={props.result.alignments[selectedAlignment]}
             index={selectedAlignment}
             key={selectedAlignment}
+            genomeType={props.input.genomeType}
         />,
     ] : <h4>Could not find alignments according
         to the provided scoring schema</h4>;
@@ -176,6 +177,7 @@ PairAlignResult.propTypes = {
         score: PropTypes.number,
     }),
     input: PropTypes.shape({
+        genomeType: PropTypes.string,
         scoringMethod: PropTypes.string,
         seqA: PropTypes.string,
         seqB: PropTypes.string,

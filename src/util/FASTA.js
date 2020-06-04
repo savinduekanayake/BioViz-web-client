@@ -12,7 +12,8 @@ export const parseFASTA = function(raw) {
             return;
         }
         const description = splitted.shift().slice(1).trim();
-        const sequence = splitted.join('').replace(/(\r\n|\n|\r)/gm, '').trim();
+        const sequence = splitted.join('').replace(
+            /(\r\n|\n|\r)/gm, '').trim().toUpperCase();
 
         const pattern = /^[A-Za-z]+$/;
         const testStatus = sequence.match(pattern);

@@ -122,8 +122,10 @@ export default function MSAOrderInput(props) {
         <div>
             <Divider />
             <br />
-            Input your desired order to align the sequences,
-            one pair of sequences/profiles per one line.
+            Sequences will be compared progressively
+            with Global Alignment algorithm
+            <br/>
+            according to the user defined phylogenetic tree.
             <br />
             <HelpModal />
             <br />
