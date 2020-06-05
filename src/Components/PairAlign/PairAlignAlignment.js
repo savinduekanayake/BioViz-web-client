@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {Avatar} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
 import {FixedSizeList} from 'react-window';
+import genomeStyles from '../../styles/GenomeStyles.module.css';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -12,26 +13,26 @@ const useStyles = makeStyles((theme) => ({
         fontSize: '12px',
 
     },
-    A: {
-        color: 'white',
-        backgroundColor: 'red',
-    },
-    C: {
-        color: 'white',
-        backgroundColor: 'blue',
-    },
-    G: {
-        color: 'white',
-        backgroundColor: 'purple',
-    },
-    T: {
-        color: 'white',
-        backgroundColor: 'green',
-    },
-    ga: {
-        color: 'black',
-        backgroundColor: 'black',
-    },
+    // A: {
+    //     color: 'white',
+    //     backgroundColor: 'red',
+    // },
+    // C: {
+    //     color: 'white',
+    //     backgroundColor: 'blue',
+    // },
+    // G: {
+    //     color: 'white',
+    //     backgroundColor: 'purple',
+    // },
+    // T: {
+    //     color: 'white',
+    //     backgroundColor: 'green',
+    // },
+    // ga: {
+    //     color: 'black',
+    //     backgroundColor: 'black',
+    // },
     emptyRow: {
         height: '25px',
         textAlign: 'center',
@@ -47,16 +48,18 @@ export default function PairAlignAlignment(props) {
     const totalLen = algnA.length;
 
     const makeSegment = ({index, style}) => {
-        const classA = algnA.charAt(index) === '-' ? 'ga' : algnA.charAt(index);
-        const classB = algnB.charAt(index) === '-' ? 'ga' : algnB.charAt(index);
+        const classA = algnA.charAt(index) === '-' ? 'gap' :
+            props.genomeType.concat('-', algnA.charAt(index).toUpperCase());
+        const classB = algnB.charAt(index) === '-' ? 'gap' :
+            props.genomeType.concat('-', algnB.charAt(index).toUpperCase());
 
         const upper = <Avatar variant="square"
-            className={`${classes.avatar} ${classes[classA]}`}>
+            className={`${classes.avatar} ${genomeStyles[classA]}`}>
             {algnA.charAt(index)}</Avatar>;
 
 
         const lower = <Avatar variant="square"
-            className={`${classes.avatar} ${classes[classB]}`}>
+            className={`${classes.avatar} ${genomeStyles[classB]}`}>
             {algnB.charAt(index)}</Avatar>;
 
         const middle = (algnA.charAt(index) === algnB.charAt(index) &&
@@ -108,6 +111,7 @@ export default function PairAlignAlignment(props) {
 }
 
 PairAlignAlignment.propTypes = {
+    genomeType: PropTypes.string,
     alignment: PropTypes.shape({
         algn_a: PropTypes.string,
         algn_b: PropTypes.string,

@@ -20,10 +20,12 @@ export default function APIinput(props) {
         setloading(false);
         if (data.error === undefined) {
             if (props.type === 'MSA') {
-                dispatch(props.inputHandler(data.response.seq.trim(),
+                dispatch(props.inputHandler(
+                    data.response.seq.trim().toUpperCase(),
                     props.MSAkey));
             } else {
-                dispatch(props.inputHandler(data.response.seq.trim()));
+                dispatch(props.inputHandler(
+                    data.response.seq.trim().toUpperCase()));
             }
             seterror(false);
         } else if (data.error === 400) {

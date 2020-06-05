@@ -20,10 +20,12 @@ export default function TextInput(props) {
         seterrorStatus(
             !validateSequence(event.target.value.trim(), genomeType));
         if (props.type === 'MSA') {
-            dispatch(props.inputHandler(event.target.value.trim(),
+            dispatch(props.inputHandler(
+                event.target.value.trim().toUpperCase(),
                 props.MSAkey));
         } else {
-            dispatch(props.inputHandler(event.target.value.trim().trim()));
+            dispatch(props.inputHandler(
+                event.target.value.trim().trim().toUpperCase()));
         }
     };
     return (
