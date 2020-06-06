@@ -8,8 +8,17 @@ import {addNewMSA, setMSAInput, removeMSA,
      setMSAInputRange, setMSAInputName} from '../../../Redux/Actions/MSA';
 import {Divider} from '@material-ui/core';
 
+/**
+ * Component to display upto 6 sequence input sections
+ * @return {React.ReactElement}
+ */
 export default function MSASequencesInput() {
     const dispatch = useDispatch();
+
+    /**
+     * onClick "Add More" button for MSA
+     * @param {Object} e - onClick event
+     */
     const handleMSAadd = (e) => {
         dispatch(addNewMSA());
     };
