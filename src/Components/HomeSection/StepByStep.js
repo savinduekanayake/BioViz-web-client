@@ -48,6 +48,16 @@ const useStyles = makeStyles((theme) => ({
 }),
 );
 
+
+/**
+ * Component to visualize one step path
+ * @param {String} HeadTitle - Main titile of the VerticalLinearStepper
+ * @param {String} title - title of each step(title1,title2,title3,title4)
+ * @param {String} step - description of each step(step1,step2,step3,step4)
+ * @param {node} image - the image in the VerticalLinearStepper
+ * @return {React.ReactElement}
+ */
+
 // eslint-disable-next-line max-len
 export default function VerticalLinearStepper({HeadTitle, image, title1, title2, title3, title4, step1, step2, step3, step4}) {
     const classes = useStyles();
