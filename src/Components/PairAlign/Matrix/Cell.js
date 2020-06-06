@@ -14,7 +14,16 @@ import {LEFT, DIAGONAL, UP} from '../../../config/config';
 
 // }));
 
+/**
+ * Function to create matrix cell component.
+ * (in basic scoring method)
+ * @param {Object} props
+ * @return {React.ReactElement}
+ */
 export default function Cell(props) {
+    /**
+     * Arrow symbols in unicode notation
+     */
     const left = props.directions.indexOf(LEFT) >= 0 ? '\u2190' :
         '\u00A0\u00A0';
     const diagonal = props.directions.indexOf(DIAGONAL) >= 0 ? '\u2196' :

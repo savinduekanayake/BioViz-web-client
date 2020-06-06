@@ -5,13 +5,28 @@ import {getTracebackAlignment} from '../../util/traceback';
 import {Grid, Button, Divider} from '@material-ui/core';
 import PropTypes from 'prop-types';
 
+/**
+ * Component to show interactive clickable DP matrix.
+ * Cells can be clicked to show a desired path.
+ * @param {Object} props
+ * @return {React.ReactElement}
+ */
 export default function PlayableResut(props) {
+    /**
+     * storing modified path in new variable because
+     * original result object should not be changed
+     */
     const initialModifiedResult = {};
 
     initialModifiedResult.score_matrix = props.result.score_matrix;
     initialModifiedResult.direction_matrix = props.result.direction_matrix;
     initialModifiedResult.alignments = [{path: []}];
     const [modifiedResult, setmodifiedResult] = useState(initialModifiedResult);
+
+    /**
+     * stores direction path
+     * ex: ['LEFT','UP','DIAG']
+     */
     const [directionPath, setdirectionPath] = useState([]);
 
     const addToDirectionPath = (direction) => {
@@ -50,6 +65,11 @@ export default function PlayableResut(props) {
     };
 
 
+    /**
+     * Callback function when cell is clicked
+     * @param {Number} rIdx  - row index of clicked cell
+     * @param {Number} cIdx  - column indec of clicked cell
+     */
     const editPath = (rIdx, cIdx) => {
         const path = modifiedResult.alignments[0].path;
 
@@ -100,6 +120,10 @@ export default function PlayableResut(props) {
             return;
         }
     };
+
+    /**
+     * Changing displayed alignment according to the new path
+     */
     let alignment = null;
     if (directionPath.length > 0 &&
         modifiedResult.alignments[0].path.length > 0) {

@@ -20,6 +20,9 @@ const useStyles = makeStyles((theme) => ({
     inpath: {
         backgroundColor: 'lightgreen',
     },
+    /**
+     * making scrollbars smaller for better usability
+     */
     hideScroll: {
         '&::-webkit-scrollbar': {
             width: '0.5em',
@@ -45,11 +48,21 @@ const useStyles = makeStyles((theme) => ({
 const cellSize = 40;
 const matrixSize = 400;
 
+/**
+ * Component to display DP matrix for extended scoring method (with affine gaps)
+ * @param {Object} props
+ * @return {React.ReactElement}
+ */
 export default function ExtendedMatrix(props) {
+    /**
+     * Ref s are used to synchronize matrix scrolling with
+     * header rows and header columns
+     */
     const headerRef = React.createRef();
     const leftHeaderRef = React.createRef();
-    const classes = useStyles();
     const gridRef = React.createRef();
+
+    const classes = useStyles();
 
     const inputLenA = props.input.seqA.length;
     const inputLenB = props.input.seqB.length;
@@ -58,10 +71,18 @@ export default function ExtendedMatrix(props) {
     const path = props.result.alignments.length>0 ?
         props.result.alignments[props.selected].path : [];
     const pathSet = new Set();
+
+    /**
+     * convering path array to a set of string elements for faster lookups
+     */
     path.forEach((p) => {
         pathSet.add(`${p[0]}|${p[1]}|${p[2]}`);
     });
 
+    /**
+     * During initial rendering, scroll to the begining
+     * of the path in the matrix
+     */
     const scrollToPath = () => {
         if (path.length > 0) {
             gridRef.current.scrollToItem({
@@ -75,9 +96,15 @@ export default function ExtendedMatrix(props) {
         scrollToPath();
     });
 
+    /**
+     * Function to create a header cell
+     * @param {Object} param
+     * @param {Number} param.columnIndex - column index of cell
+     * @return {React.ReactElement}
+     */
     const makeHeaderCell = ({columnIndex, style}) => {
         const cIdx = columnIndex;
-        const headerCell = cIdx === 0 ? 'Seq. 1' :
+        const headerCell = cIdx === 0 ? 'Seq. 2' :
             <HeaderCell value={props.input.seqB[cIdx - 1]} index={cIdx} />;
         return (
             <div style={style} className={classes.cell}>
@@ -91,9 +118,15 @@ export default function ExtendedMatrix(props) {
     };
 
 
+    /**
+     * Function to create a left header cell
+     * @param {Object} param
+     * @param {Number} param.rowIndex - row index of cell
+     * @return {React.ReactElement}
+     */
     const makeLeftHeaderCell = ({rowIndex, style}) => {
         const rIdx = rowIndex;
-        const leftHeaderCell = rIdx === 0 ? 'Seq. 2' :
+        const leftHeaderCell = rIdx === 0 ? 'Seq. 1' :
             <LeftHeaderCell value={props.input.seqA[rIdx - 1]} index={rIdx} />;
         return (
             <div style={style} className={classes.cell}>
@@ -107,6 +140,13 @@ export default function ExtendedMatrix(props) {
     };
 
 
+    /**
+     * Function to create a cell in matrix
+     * @param {Object} param
+     * @param {Number} param.columnIndex - column index of cell
+     * @param {Number} param.rowIndex - row index of cell
+     * @return {React.ReactElement}
+     */
     const makeCell = ({columnIndex, rowIndex, style}) => {
         const cIdx = columnIndex;
         const rIdx = rowIndex;
@@ -124,9 +164,6 @@ export default function ExtendedMatrix(props) {
             directions={directionMatrix[rIdx][cIdx]}
             cellSize={cellSize}
             inPathSegment={inPathSegment}/>;
-        // const inPath = pathSet.has(
-        //     `${rIdx}|${cIdx}${(rIdx) * (cIdx)}`,
-        // );
 
 
         return (
@@ -198,6 +235,10 @@ export default function ExtendedMatrix(props) {
                         rowHeight={cellSize*3}
                         width={matrixSize}
                         ref={gridRef}
+                        /**
+                         * synchronizing scorlling of matrix and
+                         * header rows, header columns
+                         */
                         onScroll={({scrollLeft, scrollTop}) => {
                             headerRef.current.scrollTo({scrollLeft});
                             leftHeaderRef.current.scrollTo({scrollTop});

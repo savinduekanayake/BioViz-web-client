@@ -41,13 +41,29 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
+/**
+ * Component to display the alignment result of PairAlign.
+ * Displays different colors for each DNA/Protein base
+ * @param {Object} props
+ * @return {React.ReactElement}
+ */
 export default function PairAlignAlignment(props) {
     const classes = useStyles();
     const algnA = props.alignment.algn_a;
     const algnB = props.alignment.algn_b;
     const totalLen = algnA.length;
 
+
+    /**
+     * function to create a pair of bases for alignment visualization.
+     * @param {Object} param
+     * @param {Number} param.index - index of the base pair
+     * @return {React.ReactElement}
+     */
     const makeSegment = ({index, style}) => {
+        /**
+         * style class is chosen according to the character
+         */
         const classA = algnA.charAt(index) === '-' ? 'gap' :
             props.genomeType.concat('-', algnA.charAt(index).toUpperCase());
         const classB = algnB.charAt(index) === '-' ? 'gap' :
