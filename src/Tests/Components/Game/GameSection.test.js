@@ -54,45 +54,10 @@ describe('GameSection Component', () => {
          'submitBtn').hostNodes().simulate('click');
         const game = wrapper.find(GameAlign);
         expect(game.prop('input')).toEqual(expectedState);
-    });
-
-        it('should render error message for invalid inputA', () => {
-            // invalid input seqA
-            const store = mockStore({GameSeqA: 'AACCGQC', GameSeqB: 'CCGGTTA'});
-            const wrapper = mount( <Provider store={store}>
-                            <GameSection></GameSection></Provider>);
-            findByAttr(wrapper, 'testid',
-                        'submitBtn').hostNodes().simulate('click');
-            const errMsg1 = findByAttr(wrapper, 'testid',
-                        'invalidInput').hostNodes();
-            expect(errMsg1.length).toBe(1);
-        });
-
-        it('should render error message for invalid inputB', () => {
-            // invalid input seqB
-            const store = mockStore({GameSeqA: 'AACCGAA', GameSeqB: 'CCGTAKL'});
-            const wrapper = mount( <Provider store={store}>
-                            <GameSection></GameSection></Provider>);
-            findByAttr(wrapper, 'testid',
-                        'submitBtn').hostNodes().simulate('click');
-            const errMsg1 = findByAttr(wrapper, 'testid',
-                        'invalidInput').hostNodes();
-            expect(errMsg1.length).toBe(1);
-        });
-
-        it('should render error message when one/two input missing', () => {
-            const store = mockStore({GameSeqA: 'AACCGC', GameSeqB: ''});
-            const wrapper = mount( <Provider store={store}>
-                            <GameSection></GameSection></Provider>);
-            findByAttr(wrapper, 'testid',
-                        'submitBtn').hostNodes().simulate('click');
-            const errMsg2 = findByAttr(wrapper, 'testid',
-                        'inputmissed').hostNodes();
-            expect(errMsg2.length).toBe(1);
         });
 
         it('should not render Game when input is not set', () => {
-            const store = mockStore({});
+            const store = mockStore({GameSeqA: 'AACCGC', GameSeqB: 'GGATTACC'});
             const wrapper = mount( <Provider store={store}>
                             <GameSection></GameSection></Provider>);
             const emptydiv = findByAttr(wrapper, 'testid',
@@ -103,7 +68,7 @@ describe('GameSection Component', () => {
 
     describe('alignment-state', () => {
         it('should not render GameResult when alignment is not set', ()=>{
-            const store = mockStore({});
+            const store = mockStore({GameSeqA: 'AACCGC', GameSeqB: 'GGATTACC'});
             const wrapper = mount( <Provider store={store}>
                             <GameSection></GameSection></Provider>);
             const emptydiv = findByAttr(wrapper, 'testid',
@@ -112,7 +77,8 @@ describe('GameSection Component', () => {
         });
 
         it('should not set alignment-state for error score schema', ()=>{
-            const store = mockStore({matchScore: 5, mismatchPenalty: -1});
+            const store = mockStore({GameSeqA: 'AACCGC', GameSeqB: 'GGATTACC',
+                matchScore: 5, mismatchPenalty: -1});
                 // gapPenanlty is not assigned
             const wrapper = mount( <Provider store={store}>
                             <GameSection></GameSection></Provider>);
@@ -125,8 +91,8 @@ describe('GameSection Component', () => {
         });
 
         it('should set alignment-state for correct score schema', ()=>{
-            const store = mockStore({matchScore: 5,
-                mismatchPenalty: -1, gapPenalty: -1});
+            const store = mockStore({GameSeqA: 'AACCGC', GameSeqB: 'GGATTACC',
+            matchScore: 5, mismatchPenalty: -1, gapPenalty: -1});
             const wrapper = mount( <Provider store={store}>
                             <GameSection></GameSection></Provider>);
             const data = {

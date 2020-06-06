@@ -273,7 +273,7 @@ export default function GameAlign(props) {
                 <div>
                     <h3 style={{color: '#494946'}}>
                         Sequences can be replaced at any time by the state
-                        with the maximum identity you achieved.
+                        with the maximum identity you have achieved.
                         <br/>Feel free to play and get the
                          maximum identity possible.
                     </h3>
@@ -285,7 +285,7 @@ export default function GameAlign(props) {
                         testid='bestIdentityBtn'
                         className={classes.bestStateBtn}
                         onClick={setBestIdentityState}>
-                        Go to a best identity state
+                        Go to a your best identity state
                     </Button>
                 </Tooltip>
                 <br/><br/>

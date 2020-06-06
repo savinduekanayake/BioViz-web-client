@@ -11,3 +11,4 @@ export const setGameInputB = (input) => {
         payload: input,
     };
 };
+
