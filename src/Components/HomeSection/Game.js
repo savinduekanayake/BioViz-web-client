@@ -46,6 +46,10 @@ function intersection(a, b) {
 //   return [...a, ...not(b, a)];
 // }
 
+/**
+ *Component is to move the items of game
+ * @return {React.ReactElement}
+ */
 export default function TransferList() {
   const classes = useStyles();
   const [checked, setChecked] = React.useState([]);
@@ -81,6 +85,9 @@ export default function TransferList() {
   const leftChecked = intersection(checked, left);
   const rightChecked = intersection(checked, right);
 
+  /*
+    This function is to mark an unmark items
+  */
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
@@ -104,11 +111,18 @@ export default function TransferList() {
   //   }
   // };
 
+  /*
+    This function is to change left side selected item move to right
+  */
   const handleCheckedRight = () => {
     setRight(right.concat(leftChecked));
     setLeft(not(left, leftChecked));
     setChecked(not(checked, leftChecked));
   };
+
+    /*
+    This function is to change right side selected item move to left
+  */
 
   const handleCheckedLeft = () => {
     setLeft(left.concat(rightChecked));
@@ -184,7 +198,6 @@ export default function TransferList() {
   };
 
   const checkResult = () => {
-     // snack bar is not working! . doesn't know why. but alert is working----
     if (left.length === pairwise.length && right.length === msa.length) {
         return (
           setAlertcomponent(

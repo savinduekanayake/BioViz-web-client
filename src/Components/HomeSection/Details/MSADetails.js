@@ -49,6 +49,11 @@ const ExpansionPanelDetails = withStyles((theme) => ({
   },
 }))(MuiExpansionPanelDetails);
 
+/**
+ *Component to show the details of MSA to expansion panel
+ * @return {React.ReactElement}
+ */
+
 export default function PairwiseDetails() {
   const [expanded, setExpanded] = React.useState('panel1');
 

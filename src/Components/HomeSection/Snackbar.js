@@ -5,6 +5,12 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import PropTypes from 'prop-types';
 
+/**
+ * Component to visualize Snackbar
+ * @param {String} message - massage of the snackbar
+ * @return {React.ReactElement}
+ */
+
 export default function SimpleSnackbar({message}) {
   const [open, setOpen] = React.useState(true);
 

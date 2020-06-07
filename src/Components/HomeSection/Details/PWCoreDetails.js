@@ -11,6 +11,11 @@ const useStyles = makeStyles({
   },
 });
 
+/**
+ *Component to show the core details of Pairwise
+ * @return {React.ReactElement}
+ */
+
 export default function PWCoreDetails() {
   const classes = useStyles();
 
@@ -25,11 +30,11 @@ export default function PWCoreDetails() {
       </Typography>
 
       <Typography component={'span'} variant="body1" gutterBottom>
-        body1. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-         Quos blanditiis tenetur
-        unde suscipit, quam beatae rerum inventore consectetur,
-         neque doloribus, cupiditate numquam
-        dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.<br />
+        Pairwise Sequence Alignment is used to identify regions of similarity
+        that may indicate functional, structural and/or evolutionary
+        relationships between two biological sequences
+        (protein or nucleic acid).
+        <br />
       </Typography>
 
       <br />
@@ -40,11 +45,29 @@ export default function PWCoreDetails() {
       </Typography>
 
       <Typography component={'span'} variant="subtitle1" gutterBottom>
-        1. Smith Waterman
+        1. Needleman Wunsch
         <br />
       </Typography>
       <Typography component={'span'} variant="subtitle1" gutterBottom>
-        2. Needleman Wunsch
+        2. Smith Waterman
+        <br />
+      </Typography>
+
+      <br />
+
+      <Typography component={'span'} variant="h6" gutterBottom>
+        Needleman Wunsch Algorithm
+        <br />
+      </Typography>
+
+      <Typography component={'span'} variant="body2" gutterBottom>
+        This is the most basic and important algorithm of bioinformatics
+        Needleman–Wunsch Algorithm developed by Saul B. Needleman and
+        Christian D. Wunsch in 1970. It was designed to compare biological
+        sequences and was one of the first applications of dynamic programming
+         to the biological sequence comparison. This algorithm is usually used
+          for global alignment of two sequences (nucleotide or amino acids).
+          which now find application in the Human Genome Project.
         <br />
       </Typography>
 
@@ -52,32 +75,24 @@ export default function PWCoreDetails() {
 
       <Typography component={'span'} variant="h6" gutterBottom>
 
-        Smith Waterman
+        Smith Waterman Algorithm
         <br />
       </Typography>
 
       <Typography component={'span'} variant="body2" gutterBottom>
-        body2. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-         Quos blanditiis tenetur
-        unde suscipit, quam beatae rerum inventore consectetur,
-         neque doloribus, cupiditate numquam
-        dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
-        <br />
-      </Typography>
-
-      <br />
-
-      <Typography component={'span'} variant="h6" gutterBottom>
-        Needleman
-        <br />
-      </Typography>
-
-      <Typography component={'span'} variant="body2" gutterBottom>
-        body2. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-         Quos blanditiis tenetur
-        unde suscipit, quam beatae rerum inventore consectetur,
-         neque doloribus, cupiditate numquam
-        dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
+        The Smith-Waterman algorithm which is also called as local alignment
+        is a database search algorithm
+        developed byT.F. Smith and M.S. Waterman, and based
+        on an earlier model appropriately named Needleman and Wunsch
+        after its original creators. The S-W Algorithm
+        implements a technique called dynamic programming, which
+        takes alignments of any length, at any location, in any
+        sequence, and determines whether an optimal alignment
+        can be found. Based on these calculations, scores or
+        weights are assigned to each character-to-character
+        comparison: positive for exact matches/substitutions,
+        negative for insertions/deletions. In weight matrices,
+        scores are added together and the highest scoring alignment is reported.
         <br />
       </Typography>
 

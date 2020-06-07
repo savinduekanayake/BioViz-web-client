@@ -53,6 +53,10 @@ const details = {
   description: 'This help us to imorove our website better in the future.',
 };
 
+/**
+ *Component to get feedback
+ * @return {React.ReactElement}
+ */
 
 export default function Feedback() {
   const classes = useStyles();
@@ -61,7 +65,9 @@ export default function Feedback() {
     <div className={classes.root}>
       <h2 className={style.heading}>Give us feedback</h2>
       <p className={style.subHeading}>
-            Lorem ipsum dolor sit amet consectetur.</p>
+        We are happy to have your valueble feedback to
+        improve our website better.
+        </p>
 
       <TableContainer testid='tableContainerId' component={Paper}>
         <Table

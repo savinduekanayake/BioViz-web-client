@@ -82,6 +82,11 @@ const IOSSlider = withStyles({
   },
 })(Slider);
 
+/**
+ * Component to visualize the rating slider
+ * @param {prop} prop - Get slider props
+ * @return {React.ReactElement}
+ */
 
 export default function CustomizedSlider(props) {
   const classes = useStyles();

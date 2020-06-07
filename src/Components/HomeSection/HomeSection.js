@@ -6,6 +6,11 @@ import Services from './Services';
 import Steps from './Steps';
 import Feedback from './Feedback';
 
+/**
+ * Component to visualize Home page
+ * @return {React.ReactElement}
+ */
+
 export default function HomeSection() {
     return (
         <div>

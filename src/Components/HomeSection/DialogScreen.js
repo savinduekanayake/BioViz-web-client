@@ -22,9 +22,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+/**
+ *function is to animation of dialog screen
+ * @return {Component}
+ */
+
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
+
+/**
+ *Component to open a dialog screen
+ * @return {React.ReactElement}
+ */
 
 export default function FullScreenDialog() {
   const classes = useStyles();
