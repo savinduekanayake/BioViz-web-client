@@ -17,6 +17,10 @@ import PairwaiseDetails from './Details/PairwiseDetails';
 import MSADetails from './Details/MSADetails';
 import DialogScreen from './DialogScreen';
 
+// import react-redux
+import {useDispatch} from 'react-redux';
+import {setMode} from '../../Redux/Actions/Mode';
+
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '80%',
@@ -64,6 +68,8 @@ export default function VerticalLinearStepper({HeadTitle, image, title1, title2,
     const [activeStep, setActiveStep] = React.useState(0);
     const steps = getSteps();
 
+    const dispatch = useDispatch();
+
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
@@ -74,6 +80,14 @@ export default function VerticalLinearStepper({HeadTitle, image, title1, title2,
 
     const handleReset = () => {
         setActiveStep(0);
+    };
+
+    const onMove = () =>{
+        `${HeadTitle}` === 'Pairwise' ?
+            dispatch(setMode(1)) :
+        `${HeadTitle}` === 'MSA' ?
+            dispatch(setMode(2)):
+            dispatch(setMode(3));
     };
 
     function getSteps() {
@@ -163,7 +177,8 @@ export default function VerticalLinearStepper({HeadTitle, image, title1, title2,
                     <Button testid='finalButtonId'
                         variant="outlined"
                         color="primary"
-                    >
+                        onClick={onMove}
+                        >
                     {
                         `${HeadTitle}` === 'Pairwise' ?
                             'Go To Pairwise Alignment' :
