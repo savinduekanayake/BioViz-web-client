@@ -96,6 +96,7 @@ export default function CustomizedSlider(props) {
   const [value, setValue] = React.useState(75);
 
   const handleChange = (event, newValue) => {
+    /* istanbul ignore next */
     setValue(newValue);
   };
 
