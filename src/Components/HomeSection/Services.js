@@ -7,9 +7,9 @@ import Grid from '@material-ui/core/Grid';
 import style from './assets/css/image.module.css';
 
 // import images
-import image1 from './assets/img/1.jpg';
-import image2 from './assets/img/2.jpg';
-import image3 from './assets/img/3.png';
+import analyzeImage from './assets/img/1.jpg';
+import visualizeImage from './assets/img/2.jpg';
+import gamePlayImage from './assets/img/3.png';
 
 // import HomeSections component
 import SingleService from './SingleService';
@@ -17,20 +17,23 @@ import SingleService from './SingleService';
 const services = [
      {
     title: 'Analyze DNA Sequence',
-     description: 'Lorem ipsum dolor sit amet consectetur.',
-     image: image1,
+     description: `Sequences are analyling according to 
+        intetnational standards or user customizations.`,
+     image: analyzeImage,
     },
 
     {
     title: 'Visualize DNA Alignment',
-    description: 'Lorem ipsum dolor sit amet consectetur.',
-    image: image2,
+    description: `Results are visualize with 
+        user-friendly with matrixes and alignments.`,
+    image: visualizeImage,
     },
 
     {
     title: 'Simple GamePlay',
-    description: 'Lorem ipsum dolor sit amet consectetur',
-    image: image3,
+    description: `This activity is to some enterainment 
+        and also get a basic knowledge about how alignments work.`,
+    image: gamePlayImage,
     },
 ];
 
@@ -42,6 +45,10 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
+/**
+ * Component to visualize services of the website
+ * @return {React.ReactElement}
+ */
 
 export default function Services() {
     const classes = useStyles();
@@ -51,7 +58,7 @@ export default function Services() {
 
             <h2 className={style.heading}>Services</h2>
             <p className={style.subHeading}>
-                Lorem ipsum dolor sit amet consectetur.
+                These are the services providing by this website.
             </p>
 
             <Grid container className={classes.root} >
@@ -63,10 +70,16 @@ export default function Services() {
                         })}
 
                     </Grid>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        Aut eaque, laboriosam veritatis, quos
-                         non quis ad perspiciatis,
-                        totam corporis ea, alias ut unde.</p>
+
+                    <p>
+                        These services will help you to analyze and visualize
+                        the Bioinformatics sequences with different ways of
+                        alignments and gather more knowledge about these areas.
+                        <br />
+                        This website provide userfriendly visualizations
+                        to easily understand the result.
+                    </p>
+
                 </Grid>
 
             </Grid>

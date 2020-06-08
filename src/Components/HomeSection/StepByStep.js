@@ -17,6 +17,10 @@ import PairwaiseDetails from './Details/PairwiseDetails';
 import MSADetails from './Details/MSADetails';
 import DialogScreen from './DialogScreen';
 
+// import react-redux
+import {useDispatch} from 'react-redux';
+import {setMode} from '../../Redux/Actions/Mode';
+
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '80%',
@@ -48,11 +52,23 @@ const useStyles = makeStyles((theme) => ({
 }),
 );
 
+
+/**
+ * Component to visualize one step path
+ * @param {String} HeadTitle - Main titile of the VerticalLinearStepper
+ * @param {String} title - title of each step(title1,title2,title3,title4)
+ * @param {String} step - description of each step(step1,step2,step3,step4)
+ * @param {node} image - the image in the VerticalLinearStepper
+ * @return {React.ReactElement}
+ */
+
 // eslint-disable-next-line max-len
 export default function VerticalLinearStepper({HeadTitle, image, title1, title2, title3, title4, step1, step2, step3, step4}) {
     const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(0);
     const steps = getSteps();
+
+    const dispatch = useDispatch();
 
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -64,6 +80,14 @@ export default function VerticalLinearStepper({HeadTitle, image, title1, title2,
 
     const handleReset = () => {
         setActiveStep(0);
+    };
+
+    const onMove = () =>{
+        `${HeadTitle}` === 'Pairwise' ?
+            dispatch(setMode(1)) :
+        `${HeadTitle}` === 'MSA' ?
+            dispatch(setMode(2)):
+            dispatch(setMode(3));
     };
 
     function getSteps() {
@@ -153,7 +177,8 @@ export default function VerticalLinearStepper({HeadTitle, image, title1, title2,
                     <Button testid='finalButtonId'
                         variant="outlined"
                         color="primary"
-                    >
+                        onClick={onMove}
+                        >
                     {
                         `${HeadTitle}` === 'Pairwise' ?
                             'Go To Pairwise Alignment' :
