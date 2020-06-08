@@ -6,24 +6,43 @@ import {Button} from '@material-ui/core';
 import {useSelector} from 'react-redux';
 import GameIntroduction from './GameIntroduction';
 
+/**
+ * Component to wrap all the components in Game mode
+ * @return {React.ReactElement}
+ */
 export default function GameSection() {
+    /**
+     * object to keep input sequences
+     */
     const [input, setInput] = React.useState(undefined);
+    /**
+     * object to keep align results
+     */
     const [alignment, setAlignment] = React.useState(undefined);
+    /**
+     * keep error status of input score
+     */
     const [scoreErr, setErrMsg] = React.useState(false);
     const inputA = useSelector((state) => state.GameSeqA);
     const inputB = useSelector((state) => state.GameSeqB);
     const matchScore = useSelector((state) => state.matchScore);
     const mismatchPenanlty = useSelector((state) => state.mismatchPenalty);
     const gapPenalty = useSelector((state) => state.gapPenalty);
+    /**
+     * input sequence validation
+     */
     const pattern = /^[AGCT]+$/;
     let inputErr = false;
     if (!inputA.match(pattern) || !inputB.match(pattern)) {
         inputErr = true;
     }
 
+    /**
+     * set align results and validate input scores
+     * @param {Object} data - align results from GameAlign Component
+     */
     function callbackAlign(data) {
         if (matchScore>0 && (mismatchPenanlty<0 && gapPenalty<0)) {
-            // input score validation
             setAlignment({
                 alignA: data.alignA,
                 alignB: data.alignB,
@@ -40,19 +59,25 @@ export default function GameSection() {
         }
     }
 
+    /**
+     * adjust input sequences to same length and set to input object
+     */
     function onSubmit() {
         setAlignment(undefined);
-        // adjust input sequences for same length
         if (inputB.length > 0 && inputA.length > inputB.length) {
             const remain = 'e'.repeat(inputA.length - inputB.length);
-            // add trailing gaps 'e', to end of inputB
+            /**
+             * add trailing gaps 'e', to end of inputB
+             */
             setInput({
                 seqA: inputA,
                 seqB: inputB + remain,
             });
         } else if (inputA.length > 0 && inputB.length > inputA.length) {
             const remain = 'e'.repeat(inputB.length - inputA.length);
-            // add trailing gaps 'e', to end of inputA
+            /**
+             * add trailing gaps 'e', to end of inputA
+             */
             setInput({
                 seqA: inputA + remain,
                 seqB: inputB,

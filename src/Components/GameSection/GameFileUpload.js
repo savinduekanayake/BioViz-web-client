@@ -1,23 +1,37 @@
 import React from 'react';
-import {Button} from '@material-ui/core';
+import {Button, Tooltip} from '@material-ui/core';
 import {useDispatch} from 'react-redux';
 import PropTypes from 'prop-types';
+import {parseFASTA} from '../../util/FASTA';
 
+/**
+ * Component to handle input file upload
+ * @param {Object} props - props
+ * @return {React.ReactElement}
+ */
 export default function GameFileUpload(props) {
     let fileReader;
     const dispatch = useDispatch();
 
-    const handleFileRead = () => {
+    const handleFileRead = async (e) => {
         const content = fileReader.result;
-        dispatch(props.inputAction(content.trim()));
-        console.log(content);
+        const parsedData = await parseFASTA(content);
+        dispatch(props.inputAction(parsedData.sequence));
     };
 
+    /**
+     * handle file error
+     * @param {Object} error
+     */
     const handleError = (error) => {
         fileReader.abort();
         console.log(error);
     };
 
+    /**
+     * read file content
+     * @param {File} file - input file
+     */
     const handleFileChosen = (file) => {
         fileReader = new FileReader();
         fileReader.onerror = handleError;
@@ -32,18 +46,21 @@ export default function GameFileUpload(props) {
 
     return (
         <div className='upload-expense'>
-            <Button variant="contained" color="primary"
-                component="label" size="small" testid={'uploadbtn'}>
-                Upload Text File
-                <input
-                    type='file'
-                    id='file'
-                    testid = 'file'
-                    className='input-file'
-                    accept='.txt'
-                    onChange={(e) => handleFileChosen(e.target.files[0])}
-                    style={{display: 'none'}} />
-            </Button>
+            <Tooltip title={'.txt file in single sequence FASTA format'}
+            arrow>
+                <Button variant="contained" color="primary"
+                    component="label" size="small" testid={'uploadbtn'}>
+                    Upload Text File
+                    <input
+                        type='file'
+                        id='file'
+                        testid = 'file'
+                        className='input-file'
+                        accept='.txt'
+                        onChange={(e) => handleFileChosen(e.target.files[0])}
+                        style={{display: 'none'}} />
+                </Button>
+            </Tooltip>
             <button style={{display: 'none'}}
                 testid={'handleErrorTest'} onClick={()=>handleError()}/>
         </div>

@@ -1,13 +1,29 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import TextField from '@material-ui/core/TextField';
 import {useDispatch} from 'react-redux';
 import PropTypes from 'prop-types';
 
+/**
+ * Component to handle text input
+ * @param {Object} props - props
+ * @return {React.ReactElement}
+ */
 export default function GameTextInput(props) {
     const dispatch = useDispatch();
-    const pattern = /^[AGCT]+$/;
+    const pattern = /^[AGCT-]+$/;
     const [inputErr, setInputErr] = useState(false);
 
+    // useEffect(()=>{
+    //     if (!props.value.match(pattern)) {
+    //         setInputErr(true);
+    //     } else {
+    //         setInputErr(false);
+    //     }
+    // }, [pattern, props.value]);
+    /**
+     * store text input in state and handle error status
+     * @param {Object} event
+     */
     function inputSeq(event) {
         dispatch(props.inputAction(event.target.value.trim()));
         if (!event.target.value.match(pattern)) {

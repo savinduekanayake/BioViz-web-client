@@ -6,7 +6,7 @@ import {makeStyles} from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() => ({
     table: {
-        maxWidth: 1300,
+        maxWidth: 1100,
         overflowX: 'auto',
         display: 'block',
     },
@@ -16,6 +16,11 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
+/**
+ * Component to display two sequences in game
+ * @param {Object} props - props
+ * @return {React.ReactElement}
+ */
 export default function GameAlignTable(props) {
     const classes = useStyles();
     return (

@@ -16,6 +16,11 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+/**
+ * Component to view attributes of game aligning
+ * @param {Object} props - props
+ * @return {React.ReactElement}
+ */
 export default function GameLable(props) {
     const classes = useStyles();
 

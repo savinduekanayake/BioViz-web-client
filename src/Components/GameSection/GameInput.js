@@ -5,6 +5,10 @@ import {setGameInputA, setGameInputB} from '../../Redux/Actions/Game';
 import GameFileUpload from './GameFileUpload';
 import {useSelector} from 'react-redux';
 
+/**
+ * Component to display file upload and text input fields for 2 sequences
+ * @return {React.ReactElement}
+ */
 export default function GameInput() {
     return (
         <div>

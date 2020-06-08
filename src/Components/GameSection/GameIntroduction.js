@@ -14,6 +14,10 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+/**
+ * Component to view introduction
+ * @return {React.ReactElement}
+ */
 export default function GameIntroduction() {
     const classes = useStyles();
 
@@ -26,10 +30,11 @@ export default function GameIntroduction() {
                   position-which indicate matches
                    in the alignment of two sequences.</p>
             <p>Identity of the alignment is calculated as:
-                 no of matches/length of sequence. Try to acheive maximum
+                 no of matches/length of alignment. Try to acheive maximum
                   identity by aligning more matches with lesser gaps.</p>
             <p>Input sequence should only contain &apos;A&apos; &apos;C&apos;
-                &apos;G&apos; &apos;T&apos; characters.
+                &apos;G&apos; &apos;T&apos; characters. File
+                 should be in FASTA format
             </p>
             </div>
         </Box>

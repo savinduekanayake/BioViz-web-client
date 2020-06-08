@@ -10,6 +10,10 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
+/**
+ * Component to view game instructions and score input
+ * @return {React.ReactElement}
+ */
 export default function GamePlay() {
     const classes = useStyles();
     return (

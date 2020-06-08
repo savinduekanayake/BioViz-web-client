@@ -52,19 +52,29 @@ const useStyles = makeStyles(() => ({
         color: '#222c5a',
         fontWeight: 'bolder',
         padding: 10,
-        // borderColor: '#272724e6',
-        // cursor: 'pointer',
-        // float: 'left',
-        // marginLeft: 60,
-        // padding: 0,
     },
 }));
 
+/**
+ * Component to control the state of the game and view the game sequences
+ * @param {Object} props - props
+ * @return {React.ReactElement}
+ */
 export default function GameAlign(props) {
     const classes = useStyles();
     const initialInput = props.input;
+    /**
+     * current state of game aligns
+     */
     const [align, setAlign] = useState(props.input);
+    /**
+     * handle 'back' button
+     * false -> disabled
+     */
     const [prev, setPrev] = useState(false);
+    /**
+     * maximum identity state
+     */
     const [bestAlign, setBestAlign] = useState({
         matches: 0,
         identity: 0,
@@ -97,14 +107,11 @@ export default function GameAlign(props) {
         let T = 0;
         if ((align.seqA.charAt(i) === '-' || align.seqB.charAt(i) === '-') ||
         (align.seqA.charAt(i) === 'e' || align.seqB.charAt(i) === 'e')) {
-            // if gap in the middle or end
             gap+=1;
         } else if (align.seqA.charAt(i) === align.seqB.charAt(i)) {
-            // if 2 elements are matching
             match+=1;
             T = 1;
         } else {
-            // if 2 elements mismatch
             mismatch+=1;
         }
         indexLine.push(
@@ -127,7 +134,7 @@ export default function GameAlign(props) {
                     </Button>
                     </span>
                 </Tooltip></td>,
-            );
+        );
         row2.push(
             <td key={index} testid={'outputSeqB'}>
             <Tooltip title={titleB} placement="bottom" arrow>
@@ -150,6 +157,9 @@ export default function GameAlign(props) {
 
     identity = match/align.seqA.length;
 
+    /**
+     * if current identity is greater
+     */
     if (identity>bestAlign.identity) {
        setBestAlign({
         matches: match,
@@ -158,40 +168,57 @@ export default function GameAlign(props) {
        });
     }
 
+    /**
+     * change seqA in state object 'align' when button in seqA is clicked
+     * @param {Number} index - index of element in seqA
+     */
     function changeSeqA(index) {
         setPrev(true);
-                // change seqA in state object 'align'
         const lastIndex = align.seqA.length - 1;
-        if (align.seqA.charAt(index) === '-') { //  REMOVE A GAP
+        /**
+         * remove a gap in seqA
+         */
+        if (align.seqA.charAt(index) === '-') {
             if (align.seqB.charAt(lastIndex) === 'e') {
-                //  'e'-trailing gaps, only one seq has 'e's at a time
-                //  if there is a gap at end of the seqB remove '-' from seqA
-                //  and remove last 'e' of seqB to keep equal lengths
+                /**
+                 * 'e'-trailing gaps, only one seq has 'e's at a time
+                 * if there is a gap at end of the seqB remove '-' from seqA
+                 * and remove last 'e' of seqB to keep equal lengths
+                 */
                 setAlign({
                     seqA: align.seqA.substring(0, index) +
                         align.seqA.substring(index + 1),
                     seqB: align.seqB.substring(0, lastIndex),
                 });
             } else {
-                //  remove '-' from seqA and add 'e' to the end of seqA
-                //  to keep equal lengths in 2 sequences
+                /**
+                 * remove '-' from seqA and add 'e' to the end of seqA
+                 * to keep equal lengths in 2 sequences
+                 */
                 setAlign({
                     seqA: align.seqA.substring(0, index) +
                         align.seqA.substring(index + 1) + 'e',
                     seqB: align.seqB,
                 });
             }
-        } else { // ADD A GAP
+        /**
+         * add a gap before element at index in seqA
+         */
+        } else {
             if (align.seqA.charAt(lastIndex) === 'e') {
-                //  if there is a gap at end of the seqA, add '-'
-                //  and remove that 'e' in seqA
+                /**
+                 * if there is a gap at end of the seqA, add '-'
+                 * and remove that 'e' in seqA
+                 */
                 setAlign({
                     seqA: align.seqA.substring(0, index) + '-' +
                         align.seqA.substring(index, lastIndex),
                     seqB: align.seqB,
                 });
             } else {
-                //  add '-' to seqA and 'e' to end of seqB to keep equal lengths
+                /**
+                 * add '-' to seqA and 'e' to end of seqB to keep equal lengths
+                 */
                 setAlign({
                     seqA: align.seqA.substring(0, index) + '-' +
                         align.seqA.substring(index),
@@ -201,32 +228,57 @@ export default function GameAlign(props) {
         }
     }
 
+     /**
+     * change seqB in state object 'align' when button in seqB is clicked
+     * @param {Number} index - index of element in seqB
+     */
     function changeSeqB(index) {
         setPrev(true);
-                // change seqB in state object 'align'
         const lastIndex = align.seqA.length - 1;
-        if (align.seqB.charAt(index) === '-') { // REMOVE A GAP
+        /**
+         * remove a gap in seqB
+         */
+        if (align.seqB.charAt(index) === '-') {
             if (align.seqA.charAt(lastIndex) === 'e') {
+                /**
+                 * 'e'-trailing gaps, only one seq has 'e's at a time
+                 * if there is a gap at end of the seqA remove '-' from seqB
+                 * and remove last 'e' of seqA to keep equal lengths
+                 */
                 setAlign({
                     seqA: align.seqA.substring(0, lastIndex),
                     seqB: align.seqB.substring(0, index) +
                         align.seqB.substring(index + 1),
                 });
             } else {
+                /**
+                 * remove '-' from seqB and add 'e' to the end of seqB
+                 * to keep equal lengths in 2 sequences
+                 */
                 setAlign({
                     seqA: align.seqA,
                     seqB: align.seqB.substring(0, index) +
                         align.seqB.substring(index + 1) + 'e',
                 });
             }
-        } else { // ADD A GAP
+         /**
+         * add a gap before element at index in seqB
+         */
+        } else {
             if (align.seqB.charAt(lastIndex) === 'e') {
+                /**
+                 * if there is a gap at end of the seqB, add '-'
+                 * and remove that 'e' in seqB
+                 */
                 setAlign({
                     seqA: align.seqA,
                     seqB: align.seqB.substring(0, index) + '-' +
                         align.seqB.substring(index, lastIndex),
                 });
             } else {
+                /**
+                 * add '-' to seqA and 'e' to end of seqB to keep equal lengths
+                 */
                 setAlign({
                     seqA: align.seqA + 'e',
                     seqB: align.seqB.substring(0, index) + '-' +
@@ -236,16 +288,27 @@ export default function GameAlign(props) {
         }
     }
 
+    /**
+     * set current state with maximum identity state
+     */
     function setBestIdentityState() {
         setAlign(bestAlign.alignment);
         setPrev(true);
     }
 
+    /**
+     * set current state with initialInput in props.input
+     */
     function reset() {
         setAlign(initialInput);
         setPrev(true);
     }
 
+    /**
+     * keep previous state
+     * @param {Object} value - align object
+     * @return {Object} - previous state
+     */
     function usePrevious(value) {
         const ref = useRef();
         useEffect(() => {
@@ -254,13 +317,23 @@ export default function GameAlign(props) {
         return ref.current;
     }
 
+    /**
+     * variable to keep previous state
+     */
     const prevState = usePrevious(align);
+    /**
+     * set current state with previous state
+     */
     function back() {
         setAlign(prevState);
         setPrev(false);
     }
 
-    function sendAlign() {
+    /**
+     * when submit send alignment details to
+     * callback function in GameSection Component
+     */
+    function onSubmit() {
         props.fetchAlign({alignA: align.seqA, alignB: align.seqB,
                         identity: identity});
     }
@@ -292,36 +365,11 @@ export default function GameAlign(props) {
                 <GameLable match={match} mismatch={mismatch} gap={gap}
                     identity={identity} bestMatch={bestAlign.matches}
                     bestIdentity={bestAlign.identity}/>
-                {/* <Tooltip
-                title={'Go to a state with maximum identity achieved so far'}
-                placement="bottom" arrow>
-                    <Button
-                        testid='bestIdentityBtn'
-                        className={classes.bestStateBtn}
-                        onClick={setBestIdentityState}>
-                        Go to a best identity state
-                    </Button>
-                </Tooltip> */}
                  <br/><br/><br/><br/>
                 <GameAlignTable align1={row1} align2={row2}
                 indexLine={indexLine}/>
                 <div testid={'checkState'} value={align}/>
                 <br />
-                {/* <GameLable match={match} mismatch={mismatch} gap={gap}
-                    identity={identity} bestMatch={bestAlign.matches}
-                    bestIdentity={bestAlign.identity}/>
-                <br/><br/><br/><br/> */}
-                {/* <Tooltip
-                title={'Go to a state with maximum identity achieved so far'}
-                placement="bottom" arrow>
-                    <Button
-                        testid='bestIdentityBtn'
-                        className={classes.bestStateBtn}
-                        onClick={setBestIdentityState}>
-                        Go to a best identity state
-                    </Button>
-                </Tooltip>
-                <br/><br/> */}
                 <Button
                     testid='prevBtn'
                     className={classes.resetBtn}
@@ -345,7 +393,7 @@ export default function GameAlign(props) {
                     variant="outlined"
                     className={classes.submitBtn}
                     color="primary"
-                    onClick={sendAlign} endIcon={<Icon>send</Icon>}
+                    onClick={onSubmit} endIcon={<Icon>send</Icon>}
                 >
                     Submit
                 </Button>
