@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Button} from '@material-ui/core';
 import {useDispatch} from 'react-redux';
 import PropTypes from 'prop-types';
+import {parseFASTA} from '../../util/FASTA';
 
 /**
  * Component to handle input file upload
@@ -11,13 +12,16 @@ import PropTypes from 'prop-types';
 export default function GameFileUpload(props) {
     let fileReader;
     const dispatch = useDispatch();
-    const pattern = /^[AGCT-]+$/;
+    const pattern = /^[AGCT]+$/;
     const [inputErr, setInputErr] = useState(false);
 
-    const handleFileRead = () => {
+    const handleFileRead = async () => {
         const content = fileReader.result;
-        dispatch(props.inputAction(content.trim()));
-        if (!content.match(pattern)) {
+        const parsedData =
+            await parseFASTA(content);
+        const sequence = parsedData.sequence.toUpperCase().trim();
+        dispatch(props.inputAction(sequence));
+        if (!sequence.match(pattern)) {
             setInputErr(true);
         } else {
             setInputErr(false);
@@ -38,36 +42,38 @@ export default function GameFileUpload(props) {
      * @param {File} file - input file
      */
     const handleFileChosen = (file) => {
-        fileReader = new FileReader();
-        fileReader.onerror = handleError;
-        fileReader.onloadend = handleFileRead;
-        const extension = file.name.split('.').pop().toLowerCase();
-        if (extension === 'txt') {
-            fileReader.readAsText(file);
-        } else {
-            console.log('invalid file type');
+        if (file) {
+            fileReader = new FileReader();
+            fileReader.onerror = handleError;
+            fileReader.onloadend = handleFileRead;
+            const extension = file.name.split('.').pop().toLowerCase();
+            if (extension === 'txt') {
+                fileReader.readAsText(file);
+            } else {
+                console.log('invalid file type');
+            }
         }
     };
 
     return (
         <div className='upload-expense'>
-                <Button variant="contained" color="primary"
-                    component="label" size="small" testid={'uploadbtn'}>
-                    Upload Text File
+            <Button variant="contained" color="primary"
+                component="label" size="small" testid={'uploadbtn'}>
+                Upload Text File
                     <input
-                        type='file'
-                        id='file'
-                        testid = 'file'
-                        className='input-file'
-                        accept='.txt'
-                        onChange={(e) => handleFileChosen(e.target.files[0])}
-                        style={{display: 'none'}} />
-                </Button>
-                {inputErr ? <div><br/>
-                     <span style={{color: '#ea0909'}}>invalid input</span>
-                     </div>: null}
+                    type='file'
+                    id='file'
+                    testid='file'
+                    className='input-file'
+                    accept='.txt'
+                    onChange={(e) => handleFileChosen(e.target.files[0])}
+                    style={{display: 'none'}} />
+            </Button>
+            {inputErr ? <div><br />
+                <span style={{color: '#ea0909'}}>invalid input</span>
+            </div> : null}
             <button style={{display: 'none'}}
-                testid={'handleErrorTest'} onClick={()=>handleError()}/>
+                testid={'handleErrorTest'} onClick={() => handleError()} />
         </div>
     );
 }

@@ -11,3 +11,10 @@ export const setGenomeType = (genomeType)=>{
         payload: genomeType,
     };
 };
+
+export const setDrawerOpen = (openStatus)=>{
+    return {
+        type: 'SET_DRAWER_OPEN',
+        payload: openStatus,
+    };
+};
