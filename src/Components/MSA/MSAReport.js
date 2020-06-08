@@ -32,13 +32,18 @@ const useStyles = (theme) => ({
 
 const DNAbases = ['A', 'G', 'C', 'T'];
 
-
+/**
+ * Component to display MSA report overlay
+ */
 class MSAReport extends Component {
     constructor(props) {
         super(props);
         this.downloadTxtFile = this.downloadTxtFile.bind(this);
     }
 
+    /**
+     * Function to download the report as a text file
+     */
     downloadTxtFile() {
         const element = document.createElement('a');
         const file = new Blob(

@@ -19,10 +19,27 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+/**
+ * Wrapper component for 2 dropdown inputs.
+ * Accepts a set of options and displays them in 2 dropdown menus.
+ * @param {Object} props - props
+ * @return {React.ReactElement}
+ */
 export default function DropDownInput(props) {
     const classes = useStyles();
+    /**
+     * erorr status - same option can not be selected in the 2 dropdown menus
+     */
     const [errorStatus, seterrorStatus] = useState(false);
+
+    /**
+     * selected option 1
+     */
     const [seq1, setseq1] = useState(' ');
+
+    /**
+     * selected option 2
+     */
     const [seq2, setseq2] = useState(' ');
     const errorText = 'Invalid Pair';
     const items = [];

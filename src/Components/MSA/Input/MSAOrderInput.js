@@ -31,15 +31,26 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+/**
+ * Component to view the user input for user defined MSA order
+ * @param {Object} props - props
+ * @return {React.ReactElement}
+ */
 export default function MSAOrderInput(props) {
     const classes = useStyles();
     const dispatch = useDispatch();
 
+    /**
+     * state variable to store pairing order
+     */
     const pairingOrder = useSelector((state) => state.msaOrder);
     const setpairingOrder = useCallback((p) => {
         dispatch(setMSAOrder(p));
     }, [dispatch]);
 
+    /**
+     * when sequences are added or removed, reset all pairing order data
+     */
     useEffect(() => {
         const currentSequences = Array(
             props.sequences.length).fill().map((_, i) => i + 1,
@@ -55,12 +66,20 @@ export default function MSAOrderInput(props) {
         props.sequences.length).fill().map((_, i) => i + 1,
         );
 
+    /**
+     * currently available sequences for pairing
+     */
     const [availableSet, setavailableSet] = useState(new Set(currentSequences));
 
 
     const [nextProfileIndex,
         setnextProfileIndex] = useState(props.sequences.length + 1);
 
+    /**
+     * Callback function when "Add Pair" is clicked
+     * @param {Number} seq1 - first sequence in the pair
+     * @param {Number} seq2 - second sequence in the pair
+     */
     const onSubmitPair = (seq1, seq2) => {
         const newOrder = pairingOrder;
         newOrder.push([seq1, seq2, nextProfileIndex]);
@@ -73,14 +92,9 @@ export default function MSAOrderInput(props) {
         setnextProfileIndex(nextProfileIndex + 1);
     };
 
-    // const onCheckPairs = () => {
-    //     if (msaOrderValidate(pairingOrder, currentSequences.length)) {
-    //         dispatch(setMSAOrder(pairingOrder));
-    //     } else {
-    //         console.log('error in pairing');
-    //     }
-    // };
-
+    /**
+     * reset all pairing data
+     */
     const onReset = () => {
         setavailableSet(new Set(currentSequences));
         setpairingOrder(new Array(0));

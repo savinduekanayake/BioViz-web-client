@@ -17,12 +17,23 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+
+/**
+ * Component to view phylogenetic tree. Created with @antv/g6 package.
+ * @param {Object} props - props
+ * @return {React.ReactElement}
+ */
 export default function MSATree(props) {
     const classes = useStyles();
     const ref = React.useRef(null);
     const {treeData, setSelected} = props;
     const treeType = props.type;
     const sequencesNames = props.sequencesNames;
+
+    /**
+     * same component is used in MSA result and MSA helper dialog overlay.
+     * seperating those two occasions with 'type' attribute
+     */
     const htmlId = props.type === 'sample' ? 'MSA-tree-sample' :
         'MSA-tree-result';
 
@@ -38,6 +49,7 @@ export default function MSATree(props) {
                 modes: {
                     default: [
                         {
+                            // graph can be collapsed and expanded from any node
                             type: 'collapse-expand',
                             onChange: function onChange(item, collapsed) {
                                 const data = item.get('model').data;
@@ -45,6 +57,7 @@ export default function MSATree(props) {
                                 return true;
                             },
                         },
+                        // dragging and moving is enabled in the graph
                         'drag-canvas',
                         'zoom-canvas',
                     ],
@@ -92,6 +105,10 @@ export default function MSATree(props) {
                 if (node.id === '1') {
                     centerX = node.x;
                 }
+                /**
+                 * for input sequenced node label is the sequence name
+                 * for others profile id
+                 */
                 let nodeLabel = node.id;
                 if (treeType==='result' &&
                     Number(node.id)<=sequencesNames.length) {
@@ -115,13 +132,17 @@ export default function MSATree(props) {
                     },
                 };
             });
+            /**
+             * view the relevent sequence/profile when
+             *      mouse is hovering over a node
+             */
             graph.on('node:mouseover', (e) => {
                 const id = e.item.defaultCfg.id;
                 setSelected(id);
             });
-            // graph.on('node:mouseleave', (e) => {
-            //     setSelected(undefined);
-            // });
+            /**
+             * reset graph on double click on canvas
+             */
             graph.on('canvas:dblclick', (e) => {
                 graph.fitView(0);
             });
