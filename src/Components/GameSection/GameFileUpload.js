@@ -1,8 +1,7 @@
-import React from 'react';
-import {Button, Tooltip} from '@material-ui/core';
+import React, {useState} from 'react';
+import {Button} from '@material-ui/core';
 import {useDispatch} from 'react-redux';
 import PropTypes from 'prop-types';
-import {parseFASTA} from '../../util/FASTA';
 
 /**
  * Component to handle input file upload
@@ -12,11 +11,17 @@ import {parseFASTA} from '../../util/FASTA';
 export default function GameFileUpload(props) {
     let fileReader;
     const dispatch = useDispatch();
+    const pattern = /^[AGCT-]+$/;
+    const [inputErr, setInputErr] = useState(false);
 
-    const handleFileRead = async (e) => {
+    const handleFileRead = () => {
         const content = fileReader.result;
-        const parsedData = await parseFASTA(content);
-        dispatch(props.inputAction(parsedData.sequence));
+        dispatch(props.inputAction(content.trim()));
+        if (!content.match(pattern)) {
+            setInputErr(true);
+        } else {
+            setInputErr(false);
+        }
     };
 
     /**
@@ -46,8 +51,6 @@ export default function GameFileUpload(props) {
 
     return (
         <div className='upload-expense'>
-            <Tooltip title={'.txt file in single sequence FASTA format'}
-            arrow>
                 <Button variant="contained" color="primary"
                     component="label" size="small" testid={'uploadbtn'}>
                     Upload Text File
@@ -60,7 +63,9 @@ export default function GameFileUpload(props) {
                         onChange={(e) => handleFileChosen(e.target.files[0])}
                         style={{display: 'none'}} />
                 </Button>
-            </Tooltip>
+                {inputErr ? <div><br/>
+                     <span style={{color: '#ea0909'}}>invalid input</span>
+                     </div>: null}
             <button style={{display: 'none'}}
                 testid={'handleErrorTest'} onClick={()=>handleError()}/>
         </div>

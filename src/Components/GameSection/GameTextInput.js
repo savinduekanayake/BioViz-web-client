@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import TextField from '@material-ui/core/TextField';
 import {useDispatch} from 'react-redux';
 import PropTypes from 'prop-types';
@@ -13,13 +13,6 @@ export default function GameTextInput(props) {
     const pattern = /^[AGCT-]+$/;
     const [inputErr, setInputErr] = useState(false);
 
-    // useEffect(()=>{
-    //     if (!props.value.match(pattern)) {
-    //         setInputErr(true);
-    //     } else {
-    //         setInputErr(false);
-    //     }
-    // }, [pattern, props.value]);
     /**
      * store text input in state and handle error status
      * @param {Object} event
