@@ -32,6 +32,9 @@ const useStyles = (theme) => ({
 
 const DNAbases = ['A', 'G', 'C', 'T'];
 
+/**
+ * Class component to display PairAlign report
+ */
 class PairAlignReport extends Component {
     constructor(props) {
         super(props);
@@ -41,6 +44,10 @@ class PairAlignReport extends Component {
             this.props.input.seqBname];
     }
 
+    /**
+     * Displays a prompt to download the content of the component
+     * as a text file
+     */
     downloadTxtFile() {
         const element = document.createElement('a');
         const file = new Blob(
@@ -87,6 +94,9 @@ class PairAlignReport extends Component {
 
         let DNASimilarityScores = null;
 
+        /**
+         * Displaying DNA similarity matrix for each pair of bases
+         */
         if (this.props.input.genomeType === 'DNA' &&
             this.props.input.similarityMatrixName === 'CUSTOM' &&
             this.props.input.scoringMethod === 'EXTENDED') {

@@ -9,7 +9,11 @@ import AlgoSelector from './AlgoSelector';
 import Score from '../CommonScoreSchema/Score';
 import {Box} from '@material-ui/core';
 
-
+/**
+ * Wrapper component for the input section of PairAlign mode.
+ * Contains 2 sequence input sections, algorithm selector and score schema input
+ * @return {React.ReactElement}
+ */
 export default function PairAlignInput() {
     return (
         <div>

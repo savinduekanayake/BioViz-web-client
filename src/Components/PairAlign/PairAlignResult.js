@@ -24,17 +24,41 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+/**
+ * Wrapper component to display results of PairAlign
+ * @param {Object} props
+ * @return {React.ReactElement}
+ */
 export default function PairAlignResult(props) {
     const classes = useStyles();
     const max = props.result.alignments.length;
 
+
+    /**
+     * ref is used to automatically scroll to this section
+     * when the results are fetched
+     */
     const divRef = React.useRef(null);
     React.useEffect(() => {
         divRef.current.scrollIntoView({behavior: 'smooth'});
     }, [props.result]);
 
+
+    /**
+     * Currently selected alignmment
+     *
+     * Used when cycling through different alignments in
+     * Smith Waterman Algorithm
+     */
     const [selectedAlignment, setselectedAlignment] = React.useState(0);
+
+
+    /**
+     * Open status of modal of final report
+     */
     const [reportOpen, setReportOpen] = React.useState(false);
+
+
     const alignments = props.result.alignments.length > 0 ? [
         <PairAlignAlignment
             alignment={props.result.alignments[selectedAlignment]}
@@ -45,9 +69,17 @@ export default function PairAlignResult(props) {
     ] : <h4>Could not find alignments according
         to the provided scoring schema</h4>;
 
+    /**
+     * on click to show next alignment
+     */
     const onNext = () => {
         setselectedAlignment((selectedAlignment + 1) % max);
     };
+
+
+    /**
+     * on click to show previous alignment
+     */
     const onPrevious = () => {
         setselectedAlignment(
             selectedAlignment - 1 === -1 ? max - 1 : selectedAlignment - 1,
@@ -64,6 +96,11 @@ export default function PairAlignResult(props) {
 
     let matrix;
     let playableResult;
+
+
+    /**
+     * Selecting relevant matrix depending on the scoring method
+     */
     if (props.input.scoringMethod === 'BASIC') {
         matrix = <Matrix input={props.input}
             result={props.result}

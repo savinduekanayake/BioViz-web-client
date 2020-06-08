@@ -7,10 +7,18 @@ import FormLabel from '@material-ui/core/FormLabel';
 import {useDispatch, useSelector} from 'react-redux';
 import {setPAlgo} from '../../Redux/Actions/PairAlign';
 
-
+/**
+ * Component to select PairAlign algorithm
+ * @return {React.ReactElement}
+ */
 export default function AlgoSelector() {
     const dispatch = useDispatch();
 
+    /**
+     * Callback function when radio button group value changed
+     * @param {Object} event - event for radio button group change
+     * @param {String} event.target.value - new value for radio button group
+     */
     const handleChange = (event)=>{
         dispatch(setPAlgo(event.target.value));
     };
