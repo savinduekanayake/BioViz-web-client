@@ -18,8 +18,8 @@ import MSADetails from './Details/MSADetails';
 import DialogScreen from './DialogScreen';
 
 // import react-redux
-import {useDispatch} from 'react-redux';
-import {setMode} from '../../Redux/Actions/Mode';
+import {useDispatch, useSelector} from 'react-redux';
+import {setDrawerOpen} from '../../Redux/Actions/Mode';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -67,6 +67,7 @@ export default function VerticalLinearStepper({HeadTitle, image, title1, title2,
     const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(0);
     const steps = getSteps();
+    const drawerOpenStatus = useSelector((state) => state.drawerOpen);
 
     const dispatch = useDispatch();
 
@@ -83,11 +84,7 @@ export default function VerticalLinearStepper({HeadTitle, image, title1, title2,
     };
 
     const onMove = () =>{
-        `${HeadTitle}` === 'Pairwise' ?
-            dispatch(setMode(1)) :
-        `${HeadTitle}` === 'MSA' ?
-            dispatch(setMode(2)):
-            dispatch(setMode(3));
+        dispatch(setDrawerOpen(!drawerOpenStatus));
     };
 
     function getSteps() {

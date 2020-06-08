@@ -6,7 +6,7 @@ export default function validateSequence(sequence, type) {
     if (type==='DNA') {
         pattern = /^[AGCTagct]+$/;
     } else {
-        pattern = /^[A-Za-z]+$/;
+        pattern = /^[ABCDEFGHIKLMNPQRSTVWXYZabcdefghiklmnpqrstvwxyz]+$/;
     }
 
     const testStatus = sequence.match(pattern);

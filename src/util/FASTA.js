@@ -6,6 +6,7 @@ export const parseFASTA = function(raw) {
             resolve({description: '', sequence: '', status: false});
             return;
         }
+        raw = raw.trim();
         const splitted = raw.split('\n');
         if (splitted.length<2) {
             resolve({description: '', sequence: '', status: false});

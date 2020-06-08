@@ -10,10 +10,12 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import {makeStyles, useTheme} from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
+import {useDispatch, useSelector} from 'react-redux';
 
 
 import {DrawerList} from './DrawerList';
 import MainContent from '../MainContent';
+import {setDrawerOpen} from '../../Redux/Actions/Mode';
 
 const drawerWidth = 300;
 
@@ -22,23 +24,23 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
     },
     drawer: {
-        [theme.breakpoints.up('xl')]: {
-            width: drawerWidth,
-            flexShrink: 0,
-        },
+        // [theme.breakpoints.up('xl')]: {
+        //     width: drawerWidth,
+        //     flexShrink: 0,
+        // },
     },
     appBar: {
-        [theme.breakpoints.up('xl')]: {
-            width: `calc(100% - ${drawerWidth}px)`,
-            marginLeft: drawerWidth,
-        },
+        // [theme.breakpoints.up('xl')]: {
+        //     width: `calc(100% - ${drawerWidth}px)`,
+        //     marginLeft: drawerWidth,
+        // },
 
     },
     menuButton: {
         marginRight: theme.spacing(2),
-        [theme.breakpoints.up('xl')]: {
-            display: 'none',
-        },
+        // [theme.breakpoints.up('xl')]: {
+        //     display: 'none',
+        // },
     },
     toolbar: theme.mixins.toolbar,
     drawerPaper: {
@@ -56,13 +58,16 @@ const useStyles = makeStyles((theme) => ({
 
 function MainDrawer(props) {
     const {container} = props;
+    const dispatch = useDispatch();
     const classes = useStyles();
     const theme = useTheme();
 
-    const [mobileOpen, setMobileOpen] = React.useState(false);
+    const drawerOpenStatus = useSelector((state) => state.drawerOpen);
+    // const [mobileOpen, setMobileOpen] = React.useState(false);
 
     const handleDrawerToggle = () => {
-        setMobileOpen(!mobileOpen);
+        // setMobileOpen(!mobileOpen);
+        dispatch(setDrawerOpen(!drawerOpenStatus));
     };
 
 
@@ -95,7 +100,7 @@ function MainDrawer(props) {
                         container={container}
                         variant="temporary"
                         anchor={theme.direction === 'rtl' ? 'right' : 'left'}
-                        open={mobileOpen}
+                        open={drawerOpenStatus}
                         onClose={handleDrawerToggle}
                         classes={{
                             paper: classes.drawerPaper,

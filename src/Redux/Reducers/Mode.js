@@ -17,3 +17,13 @@ export const genomeTypeReducer = (state = 'DNA', action)=>{
             return state;
     }
 };
+
+export const drawerOpenReducer = (state = false, action)=>{
+    switch (action.type) {
+        case 'SET_DRAWER_OPEN':
+            return action.payload;
+
+        default:
+            return state;
+    }
+};
