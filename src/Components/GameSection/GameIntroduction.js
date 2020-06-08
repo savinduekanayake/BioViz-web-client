@@ -33,8 +33,7 @@ export default function GameIntroduction() {
                  no of matches/length of alignment. Try to acheive maximum
                   identity by aligning more matches with lesser gaps.</p>
             <p>Input sequence should only contain &apos;A&apos; &apos;C&apos;
-                &apos;G&apos; &apos;T&apos; characters. File
-                 should be in FASTA format
+                &apos;G&apos; &apos;T&apos; characters.
             </p>
             </div>
         </Box>
