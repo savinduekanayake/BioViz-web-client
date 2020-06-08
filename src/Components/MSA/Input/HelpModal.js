@@ -34,8 +34,16 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+/**
+ * Component to display helper dialog box for MSA pairing order
+ * @return {React.ReactElement}
+ */
 export default function HelpModal() {
     const classes = useStyles();
+
+    /**
+     * open state of the dialog box
+     */
     const [open, setOpen] = React.useState(false);
 
     const handleOpen = () => {

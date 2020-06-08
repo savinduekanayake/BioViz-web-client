@@ -1,4 +1,4 @@
-import {modeReducer, genomeTypeReducer} from './Mode';
+import {modeReducer, genomeTypeReducer, drawerOpenReducer} from './Mode';
 import {P1Reducer, P2Reducer, PAlgoReducer} from './PairAlign';
 import {combineReducers} from 'redux';
 import {
@@ -16,6 +16,7 @@ import {SeqAReducer, SeqBReducer} from './Game';
 import {SnackbarReducer} from './Snackbar';
 
 const allReducers = combineReducers({
+    drawerOpen: drawerOpenReducer,
     mode: modeReducer,
     genomeType: genomeTypeReducer,
     P1: P1Reducer,

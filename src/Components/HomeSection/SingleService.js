@@ -38,6 +38,14 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
+/**
+ * Component to visualize single service
+ * @param {String} title - title of the single service
+ * @param {String} description - details of the single service
+ * @param {node} image - the image of single service
+ * @return {React.ReactElement}
+ */
+
 
 export default function SingleService({title, description, image}) {
     const classes = useStyles();

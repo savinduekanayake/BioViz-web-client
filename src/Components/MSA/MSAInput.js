@@ -6,7 +6,12 @@ import MSAAlgoSelector from './Input/MSAAlgoSelector';
 import {Box, FormLabel} from '@material-ui/core';
 import SimilarityMatrixInput from '../CommonScoreSchema/SimilarityMatrixInput';
 
-
+/**
+ * Wrapper component for MSA input section.
+ * Contains inputs for maximum 6 sequences, algorithm selector
+ *  and score schema input.
+ * @return {React.ReactElement}
+ */
 export default function MSAInput() {
     return (
         <div>

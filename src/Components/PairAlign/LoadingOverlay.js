@@ -15,6 +15,10 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
+/**
+ * Component to display loading overlay while fetching data
+ * @return {React.ReactElement}
+ */
 export default function LoadingOverlay() {
     const classes = useStyles();
 

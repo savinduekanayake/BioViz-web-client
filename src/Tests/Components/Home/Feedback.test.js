@@ -42,7 +42,10 @@ describe('Testing the Steps component', () => {
         expect(wrapper).toBeTruthy();
 
         const heading = wrapper.find('div p');
-        expect(heading.text()).toBe('Lorem ipsum dolor sit amet consectetur.');
+        expect(heading.text())
+        .toBe(
+`We are happy to have your valueble feedback to improve our website better.`,
+            );
     });
 
     it('render the caption in Feadback component', () => {

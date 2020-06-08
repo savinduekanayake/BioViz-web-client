@@ -14,7 +14,9 @@ import StepByStep from './StepByStep';
 import style from './assets/css/image.module.css';
 
 // icons
-import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
+import Icon from '@material-ui/core/Icon';
+import DnaIcon from '../../assets/icons/dna.svg';
+import SportsEsportsRoundedIcon from '@material-ui/icons/SportsEsportsRounded';
 
 // images
 import msaImage from './assets/img/Steps/MSA.png';
@@ -27,20 +29,24 @@ const pairwiseData = {
   image: pwImage,
   title1: `Select the BioInformatic Pairwise Alignment`,
   title2: `Enter your DNA sequences`,
-  title3: `Enter your variables`,
-  title4: `Click enter to results`,
+  title3: `Select and enter your variables`,
+  title4: `Get final results`,
   step1: `First click the menu icon. 
-          Then you can see some menu items in leftside. 
+          Then you can see some menu items in leftside.
           After that click 'PairAlign' to visit Pairwise Alignment.`,
-  step2: `There are two inputs.
-          You need to enter your two DNA sequences. 
-          You can either upload ".txt" file or type the sequence.`,
-  step3: `There are default values for 'match' 'mismatch' and 'gap'. 
+  step2: `This alignment needs two sequences.
+          There are many options to enter the sequences.
+          You can type your two DNA sequences, Upload text file with 
+          'FASTA' format or Query from database by using 'Ensembl-id'.`,
+  step3: `First you need to select a alignment type. Then either you can choose
+          scoring method 'Basic' or 'Extended' According to that
+          you need to enter variables.
+          'Extended' is more advanced and user customizable option to user. 
           If you willing to change the values 
-          you can enter new values for relavent variables.`,
+          you can enter new values and try the result.`,
   step4: `If you are finished the all above steps just click 
         'Enter' to get the result. This may can get few 
-          secounds to visualize the result.`,
+          secounds to visualize the result with final alignment with matrix.`,
 };
 
 const MSAData = {
@@ -48,21 +54,24 @@ const MSAData = {
   image: msaImage,
   title1: `Select the BioInformatic MSA Alignment`,
   title2: `Enter your DNA sequences`,
-  title3: `Enter your variables`,
-  title4: `Click enter to results`,
+  title3: `Select and enter your variables`,
+  title4: `Get final results`,
   step1: `First click the menu icon. Then you can see some menu
         items in leftside. After that click 'MSA' to visit
         Multiple Sequence Alignment.`,
-  step2: `There are two inputs in default. 
-        You can add new input according to your requirments.
-        You need to enter your DNA sequences. You can either upload 
-        ".txt" file or type the sequence.`,
-   step3: `There are default values for 'match' 'mismatch' and 'gap'. 
-        If you willing to change the values 
-        you can enter new values for relavent variables.`,
+  step2: `This alignment can give input upto six sequences.
+        There are many options to enter the sequences.
+        You can type your two DNA sequences, Upload text file with 
+        'FASTA' format or Query from database by using 'Ensembl-id'.`,
+   step3: `First you need to select 'Genome Type'. Then either you can choose 
+        'Algorithm Type' Progressive Algorithm or User Defined algorithm.
+        'Progressive Algorithm' is the most standard way and 
+        'User Defined algorithm' is more custamizable option to user.
+        If you willing to change the values you can 
+        enter new values and try the result.`,
   step4: `If you are finished the all above steps just click 
       'Enter' to get the result. This may can get few 
-      secounds to visualize the result.`,
+      secounds/minutes to visualize the result.`,
 };
 
 const gameData = {
@@ -82,6 +91,7 @@ const gameData = {
         click 'Enter' to get the result. This may can get 
         few secounds to visualize the score.`,
 };
+
 
 function TabPanel(props) {
   const {children, value, index, ...other} = props;
@@ -128,6 +138,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+/**
+ *Component to visualize steps of the website to get alignments
+ * @return {React.ReactElement}
+ */
+
 export default function ScrollableTabsButtonAuto() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
@@ -141,7 +156,8 @@ export default function ScrollableTabsButtonAuto() {
 
       <h2 className={style.heading}>Steps</h2>
       <p className={style.subHeading}>
-        Lorem ipsum dolor sit amet consectetur.
+        This will help you how to enter sequences and
+        step by stept to get the final results.
       </p>
 
       <AppBar position="static" color="default" testid='appBarId'>
@@ -154,10 +170,21 @@ export default function ScrollableTabsButtonAuto() {
           aria-label="scrollable auto tabs example"
           centered
         >
-          <Tab testid='tabsId1' label="Pairwise Alignment" {...a11yProps(0)} />
-          <Tab testid='tabsId2' label="MSA Alignment" {...a11yProps(1)} />
+          <Tab testid='tabsId1' label="Pairwise Alignment"
+            icon={
+            <Icon key='1'><img src={DnaIcon} alt="PairAlign Icon" /></Icon>
+            } {...a11yProps(0)} />
+
+          <Tab testid='tabsId2' label="MSA Alignment"
+            icon={
+              <span>
+                <Icon><img src={DnaIcon} alt="MSA Icon" /></Icon>
+                <Icon><img src={DnaIcon} alt="MSA Icon" /></Icon>
+              </span>
+            } {...a11yProps(1)} />
+
           <Tab testid='tabsId3' label="Game Play"
-            icon={<SportsEsportsIcon />} {...a11yProps(2)} />
+            icon={<SportsEsportsRoundedIcon />} {...a11yProps(2)} />
 
         </Tabs>
       </AppBar>

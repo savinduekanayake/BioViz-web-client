@@ -4,11 +4,8 @@ import {makeStyles} from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
     box: {
-        // backgroundColor: '#b7c0d138',
         borderRadius: '10px',
-        padding: 10,
-        paddingBottom: 20,
-        paddingTop: 20,
+        padding: 5,
     },
 
     line: {
@@ -17,6 +14,10 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+/**
+ * Component to view introduction
+ * @return {React.ReactElement}
+ */
 export default function GameIntroduction() {
     const classes = useStyles();
 
@@ -24,12 +25,15 @@ export default function GameIntroduction() {
         <Box boxShadow={6} className={classes.box}>
             <h3>Introduction</h3>
             <div className={classes.line}>
-            <p>In this game you have to align 2 sequences
-                 to get same characters to the same
-                  position-which indicate a match</p>
-            <p>Try to get the best identity</p>
-            <p>Input sequence should only contain A C G T characters.
-                 Use `-` to indicate any gaps in the sequence
+            <p>In this game you have to align two sequences
+                 to get the same characters to the same
+                  position-which indicate matches
+                   in the alignment of two sequences.</p>
+            <p>Identity of the alignment is calculated as:
+                 no of matches/length of alignment. Try to acheive maximum
+                  identity by aligning more matches with lesser gaps.</p>
+            <p>Input sequence should only contain &apos;A&apos; &apos;C&apos;
+                &apos;G&apos; &apos;T&apos; characters.
             </p>
             </div>
         </Box>

@@ -13,26 +13,6 @@ const useStyles = makeStyles((theme) => ({
         fontSize: '12px',
 
     },
-    // A: {
-    //     color: 'white',
-    //     backgroundColor: 'red',
-    // },
-    // C: {
-    //     color: 'white',
-    //     backgroundColor: 'blue',
-    // },
-    // G: {
-    //     color: 'white',
-    //     backgroundColor: 'purple',
-    // },
-    // T: {
-    //     color: 'white',
-    //     backgroundColor: 'green',
-    // },
-    // ga: {
-    //     color: 'black',
-    //     backgroundColor: 'black',
-    // },
     emptyRow: {
         '& tr': {
             height: '20px',
@@ -42,10 +22,24 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
+/**
+ * Component to display the alignment result of MSA.
+ * Displays different colors for each DNA/Protein base
+ * @param {Object} props - props
+ * @return {React.ReactElement}
+ */
 function MSAAlignment(props) {
     const classes = useStyles();
     const totalLen = props.alignments[0].length;
 
+    /**
+     * function to create single protein/DNA base element.
+     * @param {Object} obj
+     * @param {Number} obj.columnIndex - index of the base in
+     *      the aligned sequence
+     * @param {Number} obj.rowIndex - index of the sequence in the alignment
+     * @return {React.ReactElement}
+     */
     const makeBase = ({columnIndex, rowIndex, style}) => {
         const character = props.alignments[rowIndex].charAt(columnIndex);
         const styleClass = character === '-' ? 'gap' :

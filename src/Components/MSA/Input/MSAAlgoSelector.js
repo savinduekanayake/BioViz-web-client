@@ -9,10 +9,19 @@ import {setMSAAlgo} from '../../../Redux/Actions/MSA';
 import MSAOrderInput from './MSAOrderInput';
 import Box from '@material-ui/core/Box';
 
+/**
+ * Component to view MSA algorithm selector
+ * @return {React.ReactElement}
+ */
 
 export default function MSAAlgoSelector() {
     const dispatch = useDispatch();
 
+    /**
+     * Callback function when radio button group is changed
+     * @param {Object} event - onChange event
+     * @param {String} event.target.value - new algorithm id
+     */
     const handleChange = (event) => {
         dispatch(setMSAAlgo(event.target.value));
     };

@@ -10,20 +10,21 @@ const mockStore = configureStore();
 
 describe('GameAlign Component', () => {
     const store = mockStore({});
-    const testProp= {
-        errMsgA: false,
-        errMsgB: true,
-    };
     const wrapper = mount(<Provider store={store}>
-        <GameInput {...testProp}></GameInput></Provider>);
+        <GameInput></GameInput></Provider>);
 
-    it('should not display error when error msg false', () =>{
-        const errA = findByAttr(wrapper, 'testid', 'seq1Err');
-        expect(errA.length).toBe(0);
-    });
+    // it('should not display error when error msg false', () =>{
+    //     const errA = findByAttr(wrapper, 'testid', 'seq1Err');
+    //     expect(errA.length).toBe(0);
+    // });
 
-    it('should display error when error msg true', () =>{
-        const errB = findByAttr(wrapper, 'testid', 'seq2Err');
-        expect(errB.length).toBe(1);
+    // it('should display error when error msg true', () =>{
+    //     const errB = findByAttr(wrapper, 'testid', 'seq2Err');
+    //     expect(errB.length).toBe(1);
+    // });
+
+    it('should display fileupload', ()=>{
+        const file = findByAttr(wrapper, 'testid', 'file1');
+        expect(file.length).toBe(1);
     });
 });

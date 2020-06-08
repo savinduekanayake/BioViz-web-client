@@ -13,11 +13,26 @@ import {Box} from '@material-ui/core';
 import {getSubstring} from '../../util/substring';
 import {setSnackBar} from '../../Redux/Actions/Snackbar';
 
-
+/**
+ * Wrapper component for PairAlign section
+ * @return {React.ReactElement}
+ */
 export default function PairAlignContent() {
     const dispatch = useDispatch();
+
+    /**
+     * state variable to store result from backend
+     */
     const [result, setResult] = React.useState(false);
+
+    /**
+     * loading status when fetching data
+     */
     const [loading, setloading] = React.useState(false);
+
+    /**
+     * getting all input data from redux-store
+     */
     const genomeType = useSelector((state) => state.genomeType);
     const seqA = getSubstring(useSelector((state) => state.P1));
     const seqAname = useSelector((state) => state.P1.name);
@@ -36,6 +51,11 @@ export default function PairAlignContent() {
         useSelector((state) => state.DNASimilarityMatrix);
     const algo = useSelector((state) => state.pAlgo);
 
+
+    /**
+     * Callback function when data is received
+     * @param {Object} data - data from backend API
+     */
     const onReceive = (data) => {
         console.log(data);
         setloading(false);
@@ -55,9 +75,18 @@ export default function PairAlignContent() {
         }
     };
 
+
+    /**
+     * Callback function when Submit button is clicked
+     */
     const onSubmit = () => {
         setResult(undefined);
         setloading(true);
+
+        /**
+         * Selecting backend endpoint
+         * according to the algorithm and scoring method
+         */
         if (algo === 'GLOBAL') {
             if (scoringMethod === 'BASIC') {
                 fetchNW(seqA, seqB, match, mismatch, gap, onReceive);

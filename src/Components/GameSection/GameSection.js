@@ -6,21 +6,43 @@ import {Button} from '@material-ui/core';
 import {useSelector} from 'react-redux';
 import GameIntroduction from './GameIntroduction';
 
+/**
+ * Component to wrap all the components in Game mode
+ * @return {React.ReactElement}
+ */
 export default function GameSection() {
+    /**
+     * object to keep input sequences
+     */
     const [input, setInput] = React.useState(undefined);
+    /**
+     * object to keep align results
+     */
     const [alignment, setAlignment] = React.useState(undefined);
-    const [inputErrorA, setMsgA] = React.useState(false);
-    const [inputErrorB, setMsgB] = React.useState(false);
+    /**
+     * keep error status of input score
+     */
     const [scoreErr, setErrMsg] = React.useState(false);
     const inputA = useSelector((state) => state.GameSeqA);
     const inputB = useSelector((state) => state.GameSeqB);
     const matchScore = useSelector((state) => state.matchScore);
     const mismatchPenanlty = useSelector((state) => state.mismatchPenalty);
     const gapPenalty = useSelector((state) => state.gapPenalty);
+    /**
+     * input sequence validation
+     */
+    const pattern = /^[AGCT]+$/;
+    let inputErr = false;
+    if (!inputA.match(pattern) || !inputB.match(pattern)) {
+        inputErr = true;
+    }
 
+    /**
+     * set align results and validate input scores
+     * @param {Object} data - align results from GameAlign Component
+     */
     function callbackAlign(data) {
         if (matchScore>0 && (mismatchPenanlty<0 && gapPenalty<0)) {
-            // input score validation
             setAlignment({
                 alignA: data.alignA,
                 alignB: data.alignB,
@@ -37,45 +59,25 @@ export default function GameSection() {
         }
     }
 
+    /**
+     * adjust input sequences to same length and set to input object
+     */
     function onSubmit() {
         setAlignment(undefined);
-        // input sequences validation
-        const array = ['A', 'C', 'G', 'T', '-'];
-        let A = 0; // no invalid characters in inputA
-        let B = 0; // no invalid characters in inputB
-        for (let i = 0; i < inputA.length; i++) {
-            if (!array.includes(inputA.charAt(i))) {
-                setMsgA(true);
-                A = 1; // invalid character in inputA
-                break;
-            }
-        }
-        if (A === 0 && inputErrorA) {
-            setMsgA(false);
-            // set error msg A to false if there are no invalid characters
-            // in current inputA and if there was a error in previous inputA
-        }
-        for (let j = 0; j < inputB.length; j++) {
-            if (!array.includes(inputB.charAt(j))) {
-                setMsgB(true);
-                B = 1; // invalid character in inputB
-                break;
-            }
-        }
-        if (B === 0 && inputErrorB) {
-            setMsgB(false);
-        }
-        // adjust input sequences for same length
         if (inputB.length > 0 && inputA.length > inputB.length) {
             const remain = 'e'.repeat(inputA.length - inputB.length);
-            // add trailing gaps 'e', to end of inputB
+            /**
+             * add trailing gaps 'e', to end of inputB
+             */
             setInput({
                 seqA: inputA,
                 seqB: inputB + remain,
             });
         } else if (inputA.length > 0 && inputB.length > inputA.length) {
             const remain = 'e'.repeat(inputB.length - inputA.length);
-            // add trailing gaps 'e', to end of inputA
+            /**
+             * add trailing gaps 'e', to end of inputA
+             */
             setInput({
                 seqA: inputA + remain,
                 seqB: inputB,
@@ -92,34 +94,26 @@ export default function GameSection() {
         <div>
             <h2>Alignment Game</h2>
             <GameIntroduction/>
-            <GameInput errMsgA={inputErrorA} errMsgB={inputErrorB} />
+            <GameInput/>
             <br />
             <Button
                 testid='submitBtn'
                 variant="outlined"
                 color="secondary"
+                disabled={inputErr?true:false}
                 onClick={onSubmit} >
                 Submit
             </Button>
+            {inputErr?
+                <div>
+                <span style={{color: '#ea0909'}}>invalid input</span>
+                </div>:null}
             <br /><br />
             {input ?
-                (inputErrorA || inputErrorB) ?
-                    <div testid={'invalidInput'}>
-                        <h3 style={{color: '#ea0909'}}>
-                            INVALID INPUT. READ INSTRUCTIONS CAREFULLY TO
-                            INPUT THE SEQUENCES
-                        </h3>
-                    </div> :
-                    (input.seqA === '' || input.seqB === '') ?
-                        <div testid={'inputmissed'}>
-                            <h3 style={{color: '#ea0909'}}>
-                                INPUT BOTH SEQUENCES
-                            </h3>
-                        </div> :
-                        <GameAlign
-                            input={input}
-                            fetchAlign={callbackAlign} /> :
-                         <div testid={'inputNotSet'}/>}
+                <GameAlign
+                    input={input}
+                    fetchAlign={callbackAlign} /> :
+                <div testid={'inputNotSet'}/>}
             <button style={{display: 'none'}} testid={'testCallback'}
                     onClick={callbackAlign}></button>
             {scoreErr?

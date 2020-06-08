@@ -36,6 +36,11 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
+/**
+ * Component to get the type(color and letter) of an element in a sequence
+ * @param {Object} props - props
+ * @return {React.ReactElement}
+ */
 export default function Base(props) {
     const classes = useStyles();
     const index = props.index;

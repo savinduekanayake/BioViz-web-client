@@ -82,6 +82,11 @@ const IOSSlider = withStyles({
   },
 })(Slider);
 
+/**
+ * Component to visualize the rating slider
+ * @param {prop} prop - Get slider props
+ * @return {React.ReactElement}
+ */
 
 export default function CustomizedSlider(props) {
   const classes = useStyles();
@@ -91,6 +96,7 @@ export default function CustomizedSlider(props) {
   const [value, setValue] = React.useState(75);
 
   const handleChange = (event, newValue) => {
+    /* istanbul ignore next */
     setValue(newValue);
   };
 

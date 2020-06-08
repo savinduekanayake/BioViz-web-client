@@ -19,15 +19,28 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+/**
+ * Wrapper component for MSA result section.
+ *      Contains phylogenetic tree, alignment view and report
+ * @param {Object} props - props
+ * @return {React.ReactElement}
+ */
 export default function MSAResult(props) {
     const classes = useStyles();
     const divRef = useRef(null);
 
+    /**
+     * scroll into this component once the results are fetched from backend
+     */
     useEffect(() => {
         divRef.current.scrollIntoView({behavior: 'smooth'});
     }, [props.result]);
 
+    /**
+     * currently viewing intermediate profile
+     */
     const [selectedProfile, setselectedProfile] = React.useState(undefined);
+
     const [reportOpen, setReportOpen] = React.useState(false);
     const nInputSequences = props.result.alignments.length;
     let intermediateProf = null;
@@ -50,6 +63,9 @@ export default function MSAResult(props) {
         }
     }
 
+    /**
+     * download the phylogenetic tree as a png file
+     */
     const onClickDownload = () => {
         const canvas = document.getElementById(
             'MSA-tree-result').getElementsByTagName('canvas')[0];

@@ -22,6 +22,11 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+/**
+ * Component to display current pairing order
+ * @param {Object} props - props
+ * @return {React.ReactElement}
+ */
 export default function PairingOrderList(props) {
     const classes = useStyles();
     function makeAvatar(character) {

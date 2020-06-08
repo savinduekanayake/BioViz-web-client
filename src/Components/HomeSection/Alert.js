@@ -63,6 +63,13 @@ const DialogActions = withStyles((theme) => ({
   },
 }))(MuiDialogActions);
 
+/**
+ * Component to visualize a Alert
+ * @param {String} viewResult - type of result
+ * @param {String} title - title of the alert
+ * @param {String} description - description of the alert
+ * @return {React.ReactElement}
+ */
 
 export default function CustomizedDialogs({viewResult, title, description}) {
     const classes = useStyles();

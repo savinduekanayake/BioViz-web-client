@@ -1,32 +1,57 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Button} from '@material-ui/core';
 import {useDispatch} from 'react-redux';
 import PropTypes from 'prop-types';
+import {parseFASTA} from '../../util/FASTA';
 
+/**
+ * Component to handle input file upload
+ * @param {Object} props - props
+ * @return {React.ReactElement}
+ */
 export default function GameFileUpload(props) {
     let fileReader;
     const dispatch = useDispatch();
+    const pattern = /^[AGCT]+$/;
+    const [inputErr, setInputErr] = useState(false);
 
-    const handleFileRead = () => {
+    const handleFileRead = async () => {
         const content = fileReader.result;
-        dispatch(props.inputAction(content.trim()));
-        console.log(content);
+        const parsedData =
+            await parseFASTA(content);
+        const sequence = parsedData.sequence.toUpperCase().trim();
+        dispatch(props.inputAction(sequence));
+        if (!sequence.match(pattern)) {
+            setInputErr(true);
+        } else {
+            setInputErr(false);
+        }
     };
 
+    /**
+     * handle file error
+     * @param {Object} error
+     */
     const handleError = (error) => {
         fileReader.abort();
         console.log(error);
     };
 
+    /**
+     * read file content
+     * @param {File} file - input file
+     */
     const handleFileChosen = (file) => {
-        fileReader = new FileReader();
-        fileReader.onerror = handleError;
-        fileReader.onloadend = handleFileRead;
-        const extension = file.name.split('.').pop().toLowerCase();
-        if (extension === 'txt') {
-            fileReader.readAsText(file);
-        } else {
-            console.log('invalid file type');
+        if (file) {
+            fileReader = new FileReader();
+            fileReader.onerror = handleError;
+            fileReader.onloadend = handleFileRead;
+            const extension = file.name.split('.').pop().toLowerCase();
+            if (extension === 'txt') {
+                fileReader.readAsText(file);
+            } else {
+                console.log('invalid file type');
+            }
         }
     };
 
@@ -35,17 +60,20 @@ export default function GameFileUpload(props) {
             <Button variant="contained" color="primary"
                 component="label" size="small" testid={'uploadbtn'}>
                 Upload Text File
-                <input
+                    <input
                     type='file'
                     id='file'
-                    testid = 'file'
+                    testid='file'
                     className='input-file'
                     accept='.txt'
                     onChange={(e) => handleFileChosen(e.target.files[0])}
                     style={{display: 'none'}} />
             </Button>
+            {inputErr ? <div><br />
+                <span style={{color: '#ea0909'}}>invalid input</span>
+            </div> : null}
             <button style={{display: 'none'}}
-                testid={'handleErrorTest'} onClick={()=>handleError()}/>
+                testid={'handleErrorTest'} onClick={() => handleError()} />
         </div>
     );
 }

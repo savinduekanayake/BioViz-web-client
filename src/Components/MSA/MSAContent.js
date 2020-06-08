@@ -12,11 +12,26 @@ import {getSubstring} from '../../util/substring';
 import {setSnackBar} from '../../Redux/Actions/Snackbar';
 import GenomeTypeInput from '../GeomeType/GenomeTypeInput';
 
-
+/**
+ * Wrapper component for MSA section
+ * @return {React.ReactElement}
+ */
 export default function MSAContent() {
     const dispatch = useDispatch();
+
+    /**
+     * state variable to store result from backend
+     */
     const [result, setResult] = React.useState(undefined);
+
+    /**
+     * loading status when fetching data
+     */
     const [loading, setloading] = React.useState(false);
+
+    /**
+     * getting all input data from redux-store
+     */
     const genomeType = useSelector((state) => state.genomeType);
     const sequences_ = useSelector((state) => state.MSASeq);
     const match = useSelector((state) => state.matchScore);
@@ -29,11 +44,19 @@ export default function MSAContent() {
     const DNASimilarityMatrix =
         useSelector((state) => state.DNASimilarityMatrix);
 
-
+    /**
+     * slicing sequences according to the given range
+     */
     const sequences = sequences_.map((element) => getSubstring(element));
+
     const sequencesNames = sequences_.map((element) => element.name);
 
-
+    /**
+     * Callback function when data is received
+     * @param {Object} data - data from backend API
+     * @param {Number} data.error - error status
+     * @param {Object} data.respone - actual data
+     */
     const onReceive = (data) => {
         console.log(data);
         setloading(false);
@@ -49,7 +72,13 @@ export default function MSAContent() {
         }
     };
 
+    /**
+     * Callback function when Submit button is clicked
+     */
     const onSubmit = () => {
+        /**
+         * selecting the endpoint based on the algorithm type
+         */
         if (msaAlgo === '2') {
             if (msaOrderValidate(msaOrder, sequences.length)) {
                 setResult(undefined);
