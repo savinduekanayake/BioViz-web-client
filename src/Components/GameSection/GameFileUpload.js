@@ -1,23 +1,42 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Button} from '@material-ui/core';
 import {useDispatch} from 'react-redux';
 import PropTypes from 'prop-types';
 
+/**
+ * Component to handle input file upload
+ * @param {Object} props - props
+ * @return {React.ReactElement}
+ */
 export default function GameFileUpload(props) {
     let fileReader;
     const dispatch = useDispatch();
+    const pattern = /^[AGCT-]+$/;
+    const [inputErr, setInputErr] = useState(false);
 
     const handleFileRead = () => {
         const content = fileReader.result;
         dispatch(props.inputAction(content.trim()));
-        console.log(content);
+        if (!content.match(pattern)) {
+            setInputErr(true);
+        } else {
+            setInputErr(false);
+        }
     };
 
+    /**
+     * handle file error
+     * @param {Object} error
+     */
     const handleError = (error) => {
         fileReader.abort();
         console.log(error);
     };
 
+    /**
+     * read file content
+     * @param {File} file - input file
+     */
     const handleFileChosen = (file) => {
         fileReader = new FileReader();
         fileReader.onerror = handleError;
@@ -32,18 +51,21 @@ export default function GameFileUpload(props) {
 
     return (
         <div className='upload-expense'>
-            <Button variant="contained" color="primary"
-                component="label" size="small" testid={'uploadbtn'}>
-                Upload Text File
-                <input
-                    type='file'
-                    id='file'
-                    testid = 'file'
-                    className='input-file'
-                    accept='.txt'
-                    onChange={(e) => handleFileChosen(e.target.files[0])}
-                    style={{display: 'none'}} />
-            </Button>
+                <Button variant="contained" color="primary"
+                    component="label" size="small" testid={'uploadbtn'}>
+                    Upload Text File
+                    <input
+                        type='file'
+                        id='file'
+                        testid = 'file'
+                        className='input-file'
+                        accept='.txt'
+                        onChange={(e) => handleFileChosen(e.target.files[0])}
+                        style={{display: 'none'}} />
+                </Button>
+                {inputErr ? <div><br/>
+                     <span style={{color: '#ea0909'}}>invalid input</span>
+                     </div>: null}
             <button style={{display: 'none'}}
                 testid={'handleErrorTest'} onClick={()=>handleError()}/>
         </div>

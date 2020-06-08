@@ -4,51 +4,42 @@ import {Grid} from '@material-ui/core';
 import {setGameInputA, setGameInputB} from '../../Redux/Actions/Game';
 import GameFileUpload from './GameFileUpload';
 import {useSelector} from 'react-redux';
-import PropTypes from 'prop-types';
 
-
-export default function GameInput(props) {
-    const errMsgA = props.errMsgA;
-    const errMsgB = props.errMsgB;
-
+/**
+ * Component to display file upload and text input fields for 2 sequences
+ * @return {React.ReactElement}
+ */
+export default function GameInput() {
     return (
         <div>
             <Grid container direction="column" spacing={3}>
                 <Grid item>
-                    {/* <h4 style={{color: '#141938'}}>
-                        Input sequence should only contain A C G T characters
-                        <br/>Use `-` to indicate any gaps in the sequence
-                    </h4> */}
                     <h3>Input Sequence 1</h3>
-                    <GameFileUpload inputAction={setGameInputA}
+                    <div testid={'file1'}>
+                    <GameFileUpload
+                        inputAction={setGameInputA}
                         value={useSelector((state) => state.GameSeqA)} />
+                    </div>
                     <h3>or</h3>
                     <h3 style={{color: '#283471'}}>
                         Type sequence in the input field</h3>
-                    <GameTextInput inputAction={setGameInputA}
+                    <GameTextInput
+                        inputAction={setGameInputA}
                         value={useSelector((state) => state.GameSeqA)} />
                 </Grid>
-                {errMsgA ? <h3 testid='seq1Err' style={{color: '#ea0909'}}>
-                    Input sequence 1 is invalid</h3> : ''}
-
                 <Grid item>
                     <h3>Input Sequence 2</h3>
-                    <GameFileUpload inputAction={setGameInputB}
+                    <GameFileUpload
+                        inputAction={setGameInputB}
                         value={useSelector((state) => state.GameSeqB)} />
                     <h3>or</h3>
                     <h3 style={{color: '#283471'}}>
                         Type sequence in the input field</h3>
-                    <GameTextInput inputAction={setGameInputB}
+                    <GameTextInput
+                        inputAction={setGameInputB}
                         value={useSelector((state) => state.GameSeqB)} />
                 </Grid>
-                {errMsgB ? <h3 testid='seq2Err' style={{color: '#ea0909'}}>
-                    Input sequence 2 is invalid</h3> : ''}
             </Grid>
         </div>
     );
 }
-
-GameInput.propTypes = {
-    errMsgA: PropTypes.bool,
-    errMsgB: PropTypes.bool,
-};

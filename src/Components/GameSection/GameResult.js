@@ -47,7 +47,7 @@ const useStyles = makeStyles(() => ({
         marginRight: 'auto',
     },
     tablerow: {
-        maxWidth: 1300,
+        maxWidth: 1100,
         overflowX: 'scroll',
         display: 'block',
         marginLeft: 'auto',
@@ -55,6 +55,11 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
+/**
+ * Component to calculate game scores and view results
+ * @param {Object} props - props
+ * @return {React.ReactElement}
+ */
 export default function GameResult(props) {
     const classes = useStyles();
     const alignA = props.aligns.alignA;
@@ -63,28 +68,27 @@ export default function GameResult(props) {
     const mismatchPenanlty = props.aligns.mismatch;
     const gapPenalty = props.aligns.gap;
     const identity = props.aligns.identity;
+    /**
+     * array to keep a status icon for each element in alignmet
+     */
     const row = [];
     let score = 0;
     let matchSc = 0;
     let mismatchSc = 0;
     let gapSc = 0;
 
-
     for (let i = 0; i < alignA.length; i++) {
         if ((alignA.charAt(i) === '-' || alignB.charAt(i) === '-') ||
             (alignA.charAt(i) === 'e' || alignB.charAt(i) === 'e')) {
-                // if gap in the middle or end
             score += gapPenalty;
             gapSc += gapPenalty;
             row.push({type: <MinimizeIcon />, index: i+1});
         } else if (alignA.charAt(i) === alignB.charAt(i)) {
-                // if 2 elements are matching
             score += matchScore;
             matchSc += matchScore;
             row.push({type: <DoneOutlineRoundedIcon
                  className={classes[alignA.charAt(i)]} />, index: i+1});
         } else {
-                // if 2 elements mismatch
             score += mismatchPenanlty;
             mismatchSc += mismatchPenanlty;
             row.push({type: <CloseRoundedIcon style={{color: '#9b8989'}} />,

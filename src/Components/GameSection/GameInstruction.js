@@ -52,6 +52,10 @@ const DialogActions = withStyles((theme) => ({
     },
 }))(MuiDialogActions);
 
+/**
+ * Component to handle popup dialog for game instructions
+ * @return {React.ReactElement}
+ */
 export default function GameInstruction() {
     const [open, setOpen] = React.useState(false);
 
@@ -94,15 +98,12 @@ export default function GameInstruction() {
                                     as much as possible.</h3></li>
                             <li><h3>Change the Match,Mismatch and Gap scores
                                     to get a higher score.</h3></li>
+                            <li><h3 style={{color: '#222c5a'}}>
+                                    You can go to a best identity state
+                                     you achieved at any time</h3></li>
                         </ul>
                         <h3 style={{color: '#af9617'}}>
                             Hint: start from the left</h3>
-                        {/* <h3 style={{color: '##222c5a'}}>
-                            Sequences can be replaced at any time by the state
-                            with the maximum identity you achieved.
-                            <br/>Feel free to play and get the
-                             maximum identity possible.
-                        </h3> */}
                 </DialogContent>
                 <DialogActions>
                     <Button autoFocus onClick={handleClose}
