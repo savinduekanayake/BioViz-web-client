@@ -54,7 +54,7 @@ export default function Services() {
     const classes = useStyles();
 
     return (
-        <div className={style.servicesBackground}>
+        <div >
 
             <h2 className={style.heading}>Services</h2>
             <p className={style.subHeading}>

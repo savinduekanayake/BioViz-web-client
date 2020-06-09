@@ -24,15 +24,15 @@ const useStyles = makeStyles(() => ({
         minHeight: 25,
         padding: 4,
         borderRadius: 2,
-        backgroundColor: '#1e2e51',
+        backgroundColor: 'lightgreen',
     },
     gameplay: {
-        backgroundColor: '#b7c0d138',
+        // backgroundColor: '#b7c0d138',
         borderRadius: '10px',
         padding: 20,
     },
     box: {
-        backgroundColor: '#b7c0d138',
+        // backgroundColor: '#b7c0d138',
         borderRadius: '10px',
         padding: 10,
         paddingBottom: 40,
@@ -40,16 +40,16 @@ const useStyles = makeStyles(() => ({
     },
     resetBtn: {
         marginRight: 20,
-        color: '#1e2e51',
+        // color: '#1e2e51',
         fontWeight: 'bolder',
     },
     submitBtn: {
-        color: '#1e2e51',
+        // color: '#1e2e51',
         fontWeight: 'bolder',
     },
     bestStateBtn: {
-        backgroundColor: '#9e9e9499',
-        color: '#222c5a',
+        // backgroundColor: '#9e9e9499',
+        // color: '#222c5a',
         fontWeight: 'bolder',
         padding: 10,
     },
@@ -115,7 +115,7 @@ export default function GameAlign(props) {
             mismatch+=1;
         }
         indexLine.push(
-            <td key={index}><h4 style={{color: '#40455e'}}>{index+1}</h4></td>,
+            <td key={index}><h4>{index+1}</h4></td>,
         );
         row1.push(
             <td key={index} testid={'outputSeqA'}>
@@ -344,7 +344,7 @@ export default function GameAlign(props) {
             <br /><br />
             <Box boxShadow={6} className={classes.box}>
                 <div>
-                    <h3 style={{color: '#494946'}}>
+                    <h3>
                         Sequences can be replaced at any time by the state
                         with the maximum identity you have achieved.
                         <br/>Feel free to play and get the

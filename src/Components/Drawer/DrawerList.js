@@ -11,9 +11,10 @@ import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
 import HomeIcon from '@material-ui/icons/Home';
 
 import DnaIcon from '../../assets/icons/dna.svg';
-
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
 import {useDispatch, useSelector} from 'react-redux';
-import {setMode} from '../../Redux/Actions/Mode';
+import {setMode, setTheme} from '../../Redux/Actions/Mode';
 
 const useStyles = makeStyles((theme) => ({
     toolbar: theme.mixins.toolbar,
@@ -44,6 +45,19 @@ export function DrawerList(props) {
     const classes = useStyles();
     const dispatch = useDispatch();
     const currentMode = useSelector((state) => state.mode);
+    const currentTheme = useSelector((state) => state.currentTheme);
+    let themeSelectorValue;
+    if (currentTheme === 'dark') {
+        themeSelectorValue = true;
+    }
+
+    const onThemeChange = (event)=>{
+        if (event.target.checked === true) {
+            dispatch(setTheme('dark'));
+        } else {
+            dispatch(setTheme('light'));
+        }
+    };
 
 
     // array with menu name, description and icon
@@ -78,12 +92,26 @@ export function DrawerList(props) {
                         }}>
                         <ListItemIcon>{item[2]}</ListItemIcon>
                         <ListItemText
-                        primary={item[0]}
-                        primaryTypographyProps={{variant: 'h6'}}
-                        secondary={item[1]} />
+                            primary={item[0]}
+                            primaryTypographyProps={{variant: 'h6'}}
+                            secondary={item[1]} />
                     </ListItem>
                 ))}
             </List>
+            <Divider />
+            <div style={{textAlign: 'center', marginTop: 3}}>
+            <FormControlLabel
+                control={
+                    <Switch
+                        checked={themeSelectorValue}
+                        onChange={onThemeChange}
+                        name="themeValue"
+                        color="primary"
+                    />
+                }
+                label="Dark Mode"
+            />
+            </div>
         </div>
     );
 }

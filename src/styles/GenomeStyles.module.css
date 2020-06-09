@@ -1,10 +1,12 @@
+
+.genome-base{
+    color: white !important;
+    background-color: gray !important;
+}
+
 .gap{
     color: black !important;
     background-color: black !important;
-}
-
-.DNA-base{
-    color: white !important;
 }
 
 .DNA-A{
@@ -23,10 +25,6 @@
     background-color: green !important;
 }
 
-.PROTEIN-base{
-    color: white !important;
-    background-color: gray !important;
-}
 
 .PROTEIN-A, .PROTEIN-I,
 .PROTEIN-L, .PROTEIN-F,

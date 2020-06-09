@@ -5,14 +5,12 @@ import {Tooltip} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     labe: {
-        color: '#1e2e51',
         fontWeight: 'bolder',
     },
     value: {
-        color: '#535350de',
-        fontWeight: 'bolder',
+        fontWeight: 'normal',
         paddingLeft: 10,
-        paddingRight: 20,
+        paddingRight: 30,
     },
 }));
 
@@ -29,7 +27,7 @@ export default function GameLable(props) {
             <Tooltip title={'Maximum identity achieved so far'}
                 placement="top" arrow>
                 <label className={classes.labe} style={{float: 'left'}}>
-                    Best Identity
+                    Best Identity:
                     <label className={classes.value}>
                         {props.bestIdentity.toFixed(3)}</label>
                 </label>
@@ -37,7 +35,7 @@ export default function GameLable(props) {
             <Tooltip title={'Maximum matches achieved so far'}
                 placement="top" arrow>
                 <label className={classes.labe} style={{float: 'left'}}>
-                    Best Matches
+                    Best Matches:
                     <label className={classes.value}>
                         {props.bestMatch}</label>
                 </label>
@@ -47,13 +45,13 @@ export default function GameLable(props) {
                 <label className={classes.value}>
                     {props.identity.toFixed(3)}</label>
             </label>
-            <label className={classes.labe}>Matches
+            <label className={classes.labe}>Matches:
                 <label className={classes.value}>{props.match}</label>
             </label>
-            <label className={classes.labe}>Mismatches
+            <label className={classes.labe}>Mismatches:
                 <label className={classes.value}>{props.mismatch}</label>
             </label>
-            <label className={classes.labe}>Gaps
+            <label className={classes.labe}>Gaps:
                 <label className={classes.value}>{props.gap}</label>
             </label>
         </div>
