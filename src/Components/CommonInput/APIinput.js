@@ -9,13 +9,31 @@ import {setSnackBar} from '../../Redux/Actions/Snackbar';
 
 import PropTypes from 'prop-types';
 
-
+/**
+ * Component to fetch sequence from Ensemble.org
+ * @param {Object} props
+ * @return {React.ReactElement}
+ */
 export default function APIinput(props) {
     const dispatch = useDispatch();
+    /**
+     * user input sequence id value
+     */
     const [inputValue, setinputValue] = useState('ENSG00000248378');
+
+    /**
+     * loading status while fetching data to diaplyed circular progress icon
+     */
     const [loading, setloading] = useState(false);
     const [error, seterror] = useState(false);
 
+    /**
+     *
+     * @param {Object} data - data from API
+     * @param {Number} data.error - HTTP status code if error occured
+     * @param {Object} data.response - JSON response from API
+     * @param {String} data.response.seq - sequence string
+     */
     const onReceiveData = (data) => {
         setloading(false);
         if (data.error === undefined) {

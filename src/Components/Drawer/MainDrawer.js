@@ -56,6 +56,11 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
+/**
+ * Component display main navigation drawer.
+ * @param {Object} props
+ * @return {React.ReactElement}
+ */
 function MainDrawer(props) {
     const {container} = props;
     const dispatch = useDispatch();
@@ -76,6 +81,7 @@ function MainDrawer(props) {
             <CssBaseline />
             <AppBar position="fixed" className={classes.appBar}>
                 <Toolbar>
+                    {/* button to open the drawer */}
                     <IconButton
                         color="inherit"
                         aria-label="open drawer"
@@ -117,7 +123,7 @@ function MainDrawer(props) {
             <main className={classes.content}>
                 <div className={classes.toolbar} />
 
-
+                {/* content to display in each mode */}
                 <Box >
                     <MainContent />
 

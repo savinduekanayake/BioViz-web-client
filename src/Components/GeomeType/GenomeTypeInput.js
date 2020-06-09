@@ -7,7 +7,11 @@ import FormLabel from '@material-ui/core/FormLabel';
 import {useDispatch, useSelector} from 'react-redux';
 import {setGenomeType} from '../../Redux/Actions/Mode';
 
-
+/**
+ * Component to select between DNA and protein genome types.
+ * Contains 2 radio buttons.
+ * @return {React.ReactElement}
+ */
 export default function GenomeTypeInput() {
     const dispatch = useDispatch();
 

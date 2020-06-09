@@ -22,9 +22,18 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function SnackbarAlert(props) {
+
+/**
+ * Components to diaply alerts and warnings in the buttom as a snackbar
+ * @return {React.ReactElement}
+ */
+export default function SnackbarAlert() {
     const classes = useStyles();
     const dispatch = useDispatch();
+
+    /**
+     * current message to display is fetched form redux state
+     */
     const snackbarInfo = useSelector((state) => state.snackBar);
 
 
@@ -53,6 +62,7 @@ export default function SnackbarAlert(props) {
                                 </td>
                                 <td><div>{snackbarInfo.message}</div></td>
                                 <td>
+                                    {/* button to close */}
                                     <IconButton
                                         onClick={handleClose}
                                         className={classes.icon}>
