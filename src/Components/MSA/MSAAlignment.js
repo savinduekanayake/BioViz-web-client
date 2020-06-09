@@ -49,7 +49,8 @@ function MSAAlignment(props) {
             <div style={style}>
                 <Avatar variant="square"
                         className={
-                            `${classes.avatar} ${genomeStyles[styleClass]}`
+                            `${classes.avatar} ${genomeStyles['genome-base']}
+                             ${genomeStyles[styleClass]}`
                             }>
                         {character}</Avatar>
 

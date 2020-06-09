@@ -18,3 +18,10 @@ export const setDrawerOpen = (openStatus)=>{
         payload: openStatus,
     };
 };
+
+export const setTheme = (themeValue)=>{
+    return {
+        type: 'SET_THEME',
+        payload: themeValue,
+    };
+};
