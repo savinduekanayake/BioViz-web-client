@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/BioViz-web-client/static/css/main.fda87b3f.chunk.css",
+    "main.js": "/BioViz-web-client/static/js/main.64f21956.chunk.js",
+    "main.js.map": "/BioViz-web-client/static/js/main.64f21956.chunk.js.map",
+    "runtime-main.js": "/BioViz-web-client/static/js/runtime-main.d97b5dd1.js",
+    "runtime-main.js.map": "/BioViz-web-client/static/js/runtime-main.d97b5dd1.js.map",
+    "static/js/2.2f6caff3.chunk.js": "/BioViz-web-client/static/js/2.2f6caff3.chunk.js",
+    "static/js/2.2f6caff3.chunk.js.map": "/BioViz-web-client/static/js/2.2f6caff3.chunk.js.map",
+    "index.html": "/BioViz-web-client/index.html",
+    "precache-manifest.5a597416b42a2feecb82333090dfe9a5.js": "/BioViz-web-client/precache-manifest.5a597416b42a2feecb82333090dfe9a5.js",
+    "service-worker.js": "/BioViz-web-client/service-worker.js",
+    "static/css/main.fda87b3f.chunk.css.map": "/BioViz-web-client/static/css/main.fda87b3f.chunk.css.map",
+    "static/js/2.2f6caff3.chunk.js.LICENSE.txt": "/BioViz-web-client/static/js/2.2f6caff3.chunk.js.LICENSE.txt",
+    "static/media/1.jpg": "/BioViz-web-client/static/media/1.eff3baf8.jpg",
+    "static/media/2.jpg": "/BioViz-web-client/static/media/2.a44f7dee.jpg",
+    "static/media/3.png": "/BioViz-web-client/static/media/3.7d298726.png",
+    "static/media/MSA.png": "/BioViz-web-client/static/media/MSA.f1cd5369.png",
+    "static/media/dna.svg": "/BioViz-web-client/static/media/dna.701c38d5.svg",
+    "static/media/game.jpg": "/BioViz-web-client/static/media/game.f98482e5.jpg",
+    "static/media/pw.png": "/BioViz-web-client/static/media/pw.26d40194.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.d97b5dd1.js",
+    "static/js/2.2f6caff3.chunk.js",
+    "static/css/main.fda87b3f.chunk.css",
+    "static/js/main.64f21956.chunk.js"
+  ]
+}
