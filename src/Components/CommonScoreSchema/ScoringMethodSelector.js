@@ -7,7 +7,12 @@ import FormLabel from '@material-ui/core/FormLabel';
 import {useDispatch, useSelector} from 'react-redux';
 import {setScoringMethod} from '../../Redux/Actions/Score';
 
-
+/**
+ * Component to select between basic and extended scoring methods.
+ * Contains 2 radio buttons.
+ * @param {Object} props
+ * @return {React.ReactElement}
+ */
 export default function ScoringMethodSelector() {
     const dispatch = useDispatch();
 

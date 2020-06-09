@@ -7,7 +7,12 @@ import {makeStyles} from '@material-ui/core/styles';
 import {useDispatch, useSelector} from 'react-redux';
 import {setTracebackPriority} from '../../Redux/Actions/Score';
 
-
+/**
+ * Component to select between LOWROAD and HIGHROAD traceback priorities
+ * Contains 2 radio buttons.
+ * @param {Object} props
+ * @return {React.ReactElement}
+ */
 const useStyles = makeStyles((theme) => ({
     formControl: {
       minWidth: 200,

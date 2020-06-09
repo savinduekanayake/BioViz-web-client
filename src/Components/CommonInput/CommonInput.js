@@ -9,11 +9,20 @@ import APIinput from './APIinput';
 import RangeSelector from './RangeSelector';
 import NameInput from './NameInput';
 
-
+/**
+ * Wrapper component to display sequence input section.
+ * Contains file upload, fetching sequence from Ensembl API, text input
+ * , range selector and name input for sequence.
+ * @param {Object} props
+ * @return {React.ReactElement}
+ */
 export default function CommonInput(props) {
     const dispatch = useDispatch();
 
-
+    /**
+     * removing the input section
+     * (for MSA only)
+     */
     const onclickCancelButton = () => {
         dispatch(props.closeHandler(props.MSAkey));
     };
@@ -29,6 +38,8 @@ export default function CommonInput(props) {
                 <HighlightOffIcon color="error" />
             </IconButton>
         </Tooltip> : '';
+
+
     return (
         <div>
 
@@ -38,6 +49,7 @@ export default function CommonInput(props) {
             style={{height: 2, color: 'black'}}/>
             <br/>
             <div style={{marginBottom: 30}}>
+                {/* name input */}
                 <NameInput
                 nameInputHandler={props.nameInputHandler}
                 MSAkey={props.MSAkey}
@@ -92,15 +104,32 @@ export default function CommonInput(props) {
         </div>
     );
 }
+/**
+ * Since this component is reused to input several sequences in both pairalign
+ * and MSA mode, dispatch functions for redux store and current value
+ * fetched from redux-store should be dynamic. They are passed as props.
+ * These props are passed to subsequent child components
+ */
 
 CommonInput.propTypes = {
+    /**
+     * functions to dispatch for each attribute change
+     */
     inputHandler: PropTypes.func,
     rangeInputHandler: PropTypes.func,
     nameInputHandler: PropTypes.func,
     closeHandler: PropTypes.func,
     title: PropTypes.string,
+
+    /**
+     * identify which MSA sequence
+     */
     MSAkey: PropTypes.number,
     value: PropTypes.string,
+
+    /**
+     * identify pairalign or MSA sequence
+     */
     type: PropTypes.string,
     sequenceName: PropTypes.string,
     range: PropTypes.arrayOf(PropTypes.number),

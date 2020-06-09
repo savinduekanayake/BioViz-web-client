@@ -4,12 +4,23 @@ import TextField from '@material-ui/core/TextField';
 import {useDispatch, useSelector} from 'react-redux';
 import validateSequence from '../../Validators/sequence';
 
-
+/**
+ * Component to input the sequence as a text input
+ * @param {Object} props
+ * @return {React.ReactElement}
+ */
 export default function TextInput(props) {
     const dispatch = useDispatch();
+
+    /**
+     * genome type is needed to validate the sequence
+     */
     const genomeType = useSelector((state) => state.genomeType);
     const [errorStatus, seterrorStatus] = useState(false);
 
+    /**
+     * validate again when genome type is changed
+     */
     useEffect(() => {
         seterrorStatus(!validateSequence(props.value, genomeType));
     }, [genomeType, props.value]);
@@ -49,6 +60,7 @@ export default function TextInput(props) {
     );
 }
 
+// refer <CommonInput/> for details
 TextInput.propTypes = {
     type: PropTypes.string,
     inputHandler: PropTypes.func,

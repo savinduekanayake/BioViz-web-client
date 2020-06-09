@@ -4,7 +4,11 @@ import {Button, Tooltip} from '@material-ui/core';
 import {useDispatch} from 'react-redux';
 import {parseFASTA} from '../../util/FASTA';
 
-
+/**
+ * Component to upload .txt files in FASTA format
+ * @param {Object} props
+ * @return {React.ReactElement}
+ */
 export default function FileUpload(props) {
     let fileReader;
     const dispatch = useDispatch();
@@ -12,6 +16,7 @@ export default function FileUpload(props) {
 
     const handleFileRead = async (e) => {
         const content = fileReader.result;
+        // validate for FASTA format
         const parsedData = await parseFASTA(content);
 
         if (props.type === 'MSA') {
@@ -35,6 +40,7 @@ export default function FileUpload(props) {
             fileReader.onerror = handleError;
             fileReader.onloadend = handleFileRead;
             const extension = file.name.split('.').pop().toLowerCase();
+            // check for .txt file type
             if (extension === 'txt') {
                 fileReader.readAsText(file);
             } else {
@@ -62,6 +68,7 @@ export default function FileUpload(props) {
     </div>;
 };
 
+// refer <CommonInput/> component for details
 FileUpload.propTypes = {
     type: PropTypes.string,
     inputHandler: PropTypes.func,

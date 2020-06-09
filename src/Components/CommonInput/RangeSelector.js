@@ -18,10 +18,20 @@ const useStyles = makeStyles({
     },
 });
 
+/**
+ * Helper function for Slider component
+ * @param {Number} value - slider value
+ * @return {String} value converted to string type
+ */
 function valuetext(value) {
     return `${value}`;
 }
 
+/**
+ * Component to display range slider to select a range from sequence
+ * @param {Object} props
+ * @return {React.ReactElement}
+ */
 export default function RangeSelector(props) {
     const dispatch = useDispatch();
     const classes = useStyles();

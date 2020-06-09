@@ -16,6 +16,11 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+/**
+ * Component to input similarity matrix type
+ * @param {Object} props
+ * @return {React.ReactElement}
+ */
 export default function SimilarityMatrixInput() {
     const classes = useStyles();
     const dispatch = useDispatch();
@@ -26,6 +31,9 @@ export default function SimilarityMatrixInput() {
     const matrixName = useSelector((state) => state.similarityMatrixName);
 
     const genomeType = useSelector((state) => state.genomeType);
+
+    // default type is telling backend to choose match score, mismatch penalty
+    // as similarity scores
 
     const proteinMatrices = ['BLOSUM30', 'BLOSUM45',
         'BLOSUM50', 'BLOSUM60', 'BLOSUM90'];
@@ -63,6 +71,8 @@ export default function SimilarityMatrixInput() {
                 </Select>
                 <FormHelperText>{helperText}</FormHelperText>
             </FormControl>
+            {/* DNA similarity matrix input is only displayed when genomeType
+            is DNA and similarity matrix type is CUSTOM */}
             {genomeType === 'DNA' && matrixName === 'CUSTOM' ?
                 <DNAMatrixInput /> : null}
 

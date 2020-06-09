@@ -7,10 +7,18 @@ import GameSection from './GameSection/GameSection';
 import SnackbarAlert from './CommonAlert/SnackbarAlert';
 
 
+/**
+ * Wrapper component for the displayed section
+ * @return {React.ReactElement}
+ */
 export default function MainContent() {
     const modeValue = useSelector((state) => state.mode);
     let content;
 
+    /**
+     * content is changed according to the selected mode
+     * homesection, pairalign, msa, game
+     */
     switch (modeValue) {
         case 0:
             content = <HomeSection/>;
