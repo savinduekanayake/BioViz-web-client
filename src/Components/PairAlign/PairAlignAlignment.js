@@ -70,12 +70,14 @@ export default function PairAlignAlignment(props) {
             props.genomeType.concat('-', algnB.charAt(index).toUpperCase());
 
         const upper = <Avatar variant="square"
-            className={`${classes.avatar} ${genomeStyles[classA]}`}>
+            className={`${classes.avatar} ${genomeStyles['genome-base']}
+             ${genomeStyles[classA]}`}>
             {algnA.charAt(index)}</Avatar>;
 
 
         const lower = <Avatar variant="square"
-            className={`${classes.avatar} ${genomeStyles[classB]}`}>
+            className={`${classes.avatar} ${genomeStyles['genome-base']}
+             ${genomeStyles[classB]}`}>
             {algnB.charAt(index)}</Avatar>;
 
         const middle = (algnA.charAt(index) === algnB.charAt(index) &&

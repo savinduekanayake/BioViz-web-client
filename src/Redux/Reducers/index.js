@@ -1,4 +1,5 @@
-import {modeReducer, genomeTypeReducer, drawerOpenReducer} from './Mode';
+import {modeReducer, genomeTypeReducer,
+    drawerOpenReducer, themeReducer} from './Mode';
 import {P1Reducer, P2Reducer, PAlgoReducer} from './PairAlign';
 import {combineReducers} from 'redux';
 import {
@@ -17,6 +18,7 @@ import {SnackbarReducer} from './Snackbar';
 
 const allReducers = combineReducers({
     drawerOpen: drawerOpenReducer,
+    currentTheme: themeReducer,
     mode: modeReducer,
     genomeType: genomeTypeReducer,
     P1: P1Reducer,

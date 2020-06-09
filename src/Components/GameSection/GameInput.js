@@ -21,7 +21,7 @@ export default function GameInput() {
                         value={useSelector((state) => state.GameSeqA)} />
                     </div>
                     <h3>or</h3>
-                    <h3 style={{color: '#283471'}}>
+                    <h3 >
                         Type sequence in the input field</h3>
                     <GameTextInput
                         inputAction={setGameInputA}
@@ -33,7 +33,7 @@ export default function GameInput() {
                         inputAction={setGameInputB}
                         value={useSelector((state) => state.GameSeqB)} />
                     <h3>or</h3>
-                    <h3 style={{color: '#283471'}}>
+                    <h3 >
                         Type sequence in the input field</h3>
                     <GameTextInput
                         inputAction={setGameInputB}

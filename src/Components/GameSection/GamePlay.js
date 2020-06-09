@@ -5,7 +5,6 @@ import {makeStyles} from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() => ({
     title: {
-        color: '#1e2e51',
         fontSize: 24,
     },
 }));
@@ -21,7 +20,7 @@ export default function GamePlay() {
         <h2 className={classes.title}>GamePlay</h2>
         <GameInstruction />
         <br />
-        <h3 style={{color: '#1e2e51'}}>
+        <h3>
             Change input values for Match score, Mismatch penalty and
              Gap penalty on your preference</h3>
         <div style={{textAlign: 'center'}}>

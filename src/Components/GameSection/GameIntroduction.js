@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
     },
 
     line: {
-        color: '#1e2e51',
+        // color: '#1e2e51',
         fontWeight: 'bolder',
     },
 }));

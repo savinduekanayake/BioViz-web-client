@@ -70,7 +70,7 @@ export default function GameInstruction() {
         <div>
             <Button
                 testid = "openBtn"
-                style={{color: '#1e2e51', fontWeight: 'bolder'}}
+                style={{fontWeight: 'bolder'}}
                 variant="outlined"
                 color="primary"
                 onClick={handleClickOpen}>
@@ -89,16 +89,16 @@ export default function GameInstruction() {
                             <li><h3>Click on an element in the sequence
                                     to move the sub sequence starting
                                     from that point, to the right.</h3></li>
-                            <li><h3 style={{color: '#222c5a'}}>
+                            <li><h3 style={{fontWeight: 'bolder'}}>
                                     Try to avoid unnecessary gaps
                                     in the middle of the sequences.</h3></li>
                             <li><h3>Trailing gaps cannot be removed.</h3></li>
-                            <li><h3 style={{color: '#222c5a'}}>
+                            <li><h3 style={{fontWeight: 'bolder'}}>
                                     Increase the identity
                                     as much as possible.</h3></li>
                             <li><h3>Change the Match,Mismatch and Gap scores
                                     to get a higher score.</h3></li>
-                            <li><h3 style={{color: '#222c5a'}}>
+                            <li><h3 style={{fontWeight: 'bolder'}}>
                                     You can go to a best identity state
                                      you achieved at any time</h3></li>
                         </ul>
