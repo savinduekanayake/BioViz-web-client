@@ -19,6 +19,12 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+/**
+ * Function to get the id of each cell in similarity matrix
+ * @param {String} a - DNA base in the row of the cell
+ * @param {String} b - DNA base in the column of the cell
+ * @return {String} a and b parameters concatenated in revese alphabetic order
+ */
 const getIdentifier = function(a, b) {
     if (a < b) {
         return b.concat(a);
@@ -27,6 +33,11 @@ const getIdentifier = function(a, b) {
     }
 };
 
+/**
+ * Component to input similarity matrix for DNA algorithms
+ * @param {Object} props
+ * @return {React.ReactElement}
+ */
 export default function DNAMatrixInput() {
     const classes = useStyles();
     const dispatch = useDispatch();
@@ -46,6 +57,8 @@ export default function DNAMatrixInput() {
         const row = [];
         for (let j = 0; j < bases.length + 1; j++) {
             const key = `${i}${j}`;
+            // i=0, j=0 denotes header cells
+            // header cells contain symbol of base
             if (i === 0 && j === 0) {
                 row.push(<th key={key} className={classes.cell}>...</th>);
             } else if (i === 0) {
@@ -56,6 +69,7 @@ export default function DNAMatrixInput() {
                     <th key={key} className={classes.cell}>{bases[i - 1]}</th>);
             } else {
                 const identifier = getIdentifier(bases[i - 1], bases[j - 1]);
+                // textfield input for each cell
                 row.push(
                     <td key={key} className={classes.cell}>
                         <TextField

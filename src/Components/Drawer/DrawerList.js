@@ -35,12 +35,18 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+/**
+ * Component to display navigation manus in drawer.
+ * @param {Object} props
+ * @return {React.ReactElement}
+ */
 export function DrawerList(props) {
     const classes = useStyles();
     const dispatch = useDispatch();
     const currentMode = useSelector((state) => state.mode);
 
 
+    // array with menu name, description and icon
     const navItems =
         [['Home',
             'Homepage with instructions',
@@ -63,6 +69,7 @@ export function DrawerList(props) {
             <List>
                 {navItems.map((item, index) => (
                     <ListItem
+                        // currently selected nav manu has a different styling
                         className={`${classes.navItem} ${index === currentMode ?
                             classes.navItemSelected : null}`}
                         button key={item[0]} onClick={() => {

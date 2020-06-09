@@ -12,6 +12,12 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+
+/**
+ * Component to input a name for the input sequence
+ * @param {Object} props
+ * @return {React.ReactElement}
+ */
 export default function NameInput(props) {
     const classes = useStyles();
     const dispatch = useDispatch();
@@ -41,6 +47,7 @@ export default function NameInput(props) {
     );
 }
 
+// refer <CommonInput/> for details
 NameInput.propTypes = {
     sequenceName: PropTypes.string,
     nameInputHandler: PropTypes.func,

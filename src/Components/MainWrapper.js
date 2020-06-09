@@ -4,7 +4,12 @@ import MainDrawer from './Drawer/MainDrawer';
 // Favicon attribution
 // Icons made by <a href="https://www.flaticon.com/authors/good-ware" title="Good Ware">Good Ware</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
 
+/**
+ * Wrapper component for whole web page
+ * @return {React.ReactElement}
+ */
 export const MainWrapper = () =>{
+    // changing the title
     document.title = 'BioViz Web Client';
     return (
         <div>

@@ -8,6 +8,14 @@ import {
 import TracebackPrioritySelector from './TracebackPrioritySelector';
 import SimilarityMatrixInput from './SimilarityMatrixInput';
 
+/**
+ * Component to display extended score schema input.
+ * Contains match score, mismatch penalty, gap open score,
+ * gap extend score, traceback priority selector,
+ * custom similarity matrix input selector
+ * @param {Object} props
+ * @return {React.ReactElement}
+ */
 export default function CommonExtendedScore(props) {
     return (
         <div>
