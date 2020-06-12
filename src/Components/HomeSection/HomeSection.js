@@ -5,8 +5,9 @@ import Divider from '@material-ui/core/Divider';
 import Services from './Services';
 import Steps from './Steps';
 import Feedback from './Feedback';
-import DialogScreen from './DialogScreen';
 import OutlineGame from './OutlineGame';
+
+
 
 /**
  * Component to visualize Home page
@@ -16,10 +17,9 @@ import OutlineGame from './OutlineGame';
 export default function HomeSection() {
     return (
         <div>
+
             <Services />
             <Divider />
-            {/* <DialogScreen /> */}
-            
             <Steps />
             <OutlineGame />
             <Feedback />

@@ -12,9 +12,6 @@ import Slide from '@material-ui/core/Slide';
 // import HomeSections component
 import Game from './Game';
 
-// import image
-import image from './assets/img/KnowledgeGame/knoldge.jpg';
-
 const useStyles = makeStyles((theme) => ({
   appBar: {
     position: 'relative',

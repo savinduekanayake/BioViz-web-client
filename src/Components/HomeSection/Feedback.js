@@ -15,6 +15,7 @@ import style from './assets/css/image.module.css';
 // import HomeSections component
 import Alert from './Alert';
 import Rating from './Rating';
+import TextArea from './TextArea';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -46,6 +47,7 @@ const rows = [
   createData('Satistification of fuctionalities', <Rating />),
   createData('Satistification of visualizing the result', <Rating />),
   createData('Satistification of response time', <Rating />),
+  createData('Any other genaral comment', <TextArea />),
 ];
 
 const details = {
