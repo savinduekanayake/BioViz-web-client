@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Button} from '@material-ui/core';
 import {useDispatch} from 'react-redux';
 import PropTypes from 'prop-types';
@@ -12,8 +12,6 @@ import {parseFASTA} from '../../util/FASTA';
 export default function GameFileUpload(props) {
     let fileReader;
     const dispatch = useDispatch();
-    const pattern = /^[AGCT]+$/;
-    const [inputErr, setInputErr] = useState(false);
 
     const handleFileRead = async () => {
         const content = fileReader.result;
@@ -21,11 +19,6 @@ export default function GameFileUpload(props) {
             await parseFASTA(content);
         const sequence = parsedData.sequence.toUpperCase().trim();
         dispatch(props.inputAction(sequence));
-        if (!sequence.match(pattern)) {
-            setInputErr(true);
-        } else {
-            setInputErr(false);
-        }
     };
 
     /**
@@ -69,9 +62,9 @@ export default function GameFileUpload(props) {
                     onChange={(e) => handleFileChosen(e.target.files[0])}
                     style={{display: 'none'}} />
             </Button>
-            {inputErr ? <div><br />
+            {/* {inputErr ? <div><br />
                 <span style={{color: '#ea0909'}}>invalid input</span>
-            </div> : null}
+            </div> : null} */}
             <button style={{display: 'none'}}
                 testid={'handleErrorTest'} onClick={() => handleError()} />
         </div>

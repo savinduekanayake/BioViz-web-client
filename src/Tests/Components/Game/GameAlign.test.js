@@ -9,7 +9,7 @@ import configureStore from 'redux-mock-store';
 const mockStore = configureStore();
 
 describe('GameAlign Component', () => {
-    const store = mockStore({});
+    const store = mockStore({genomeType: 'DNA'});
     const testProp1 = { // trailing gaps('e') in seqA
         input: {
             seqA: 'A-ACGTGGCCAeee',

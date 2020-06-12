@@ -2,6 +2,8 @@ import React from 'react';
 import {Avatar} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
+import genomeStyles from '../../styles/GameStyles.module.css';
+import {useSelector} from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
     avatar: {
@@ -9,31 +11,6 @@ const useStyles = makeStyles((theme) => ({
         width: '25px',
         fontSize: '14px',
     },
-    A: {
-        color: 'white',
-        backgroundColor: 'red',
-    },
-    C: {
-        color: 'white',
-        backgroundColor: 'blue',
-    },
-    G: {
-        color: 'white',
-        backgroundColor: 'purple',
-    },
-    T: {
-        color: 'white',
-        backgroundColor: 'green',
-    },
-    ga: {
-        color: 'black',
-        backgroundColor: 'black',
-    },
-    e: {
-        color: 'black',
-        backgroundColor: 'black',
-    },
-
 }));
 
 /**
@@ -43,12 +20,15 @@ const useStyles = makeStyles((theme) => ({
  */
 export default function Base(props) {
     const classes = useStyles();
+    const genomeType = useSelector((state)=>(state.genomeType));
     const index = props.index;
     const base = props.base;
+    const baseColor = (base === '-' || base === 'e') ? 'gap' :
+    genomeType.concat('-', base);
 
     return (
         <Avatar variant='square' id={index}
-            className={`${classes.avatar} ${classes[base]}`} >
+            className={`${classes.avatar} ${genomeStyles[baseColor]}`} >
             {base}</Avatar>
     );
 }

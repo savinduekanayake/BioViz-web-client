@@ -9,7 +9,7 @@ import GameResult from '../../../Components/GameSection/GameResult';
 const mockStore = configureStore();
 
 describe('GameResult Component', () => {
-    const store = mockStore({});
+    const store = mockStore({genomeType: 'DNA'});
     const testProp1 = { // trailing gaps('e') in seqA
         aligns: {
             alignA: 'AACG---TC-AGeee',

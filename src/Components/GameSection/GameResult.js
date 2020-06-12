@@ -5,20 +5,10 @@ import MinimizeIcon from '@material-ui/icons/Minimize';
 import DoneOutlineRoundedIcon from '@material-ui/icons/DoneOutlineRounded';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import {makeStyles} from '@material-ui/core/styles';
+import genomeStyles from '../../styles/GameStyles.module.css';
+import {useSelector} from 'react-redux';
 
 const useStyles = makeStyles(() => ({
-    A: {
-        color: 'red',
-    },
-    C: {
-        color: 'blue',
-    },
-    G: {
-        color: 'purple',
-    },
-    T: {
-        color: 'green',
-    },
     label: {
         color: '#7984d3de',
     },
@@ -68,6 +58,7 @@ export default function GameResult(props) {
     const mismatchPenanlty = props.aligns.mismatch;
     const gapPenalty = props.aligns.gap;
     const identity = props.aligns.identity;
+    const genomeType = useSelector((state)=>(state.genomeType));
     /**
      * array to keep a status icon for each element in alignmet
      */
@@ -86,8 +77,10 @@ export default function GameResult(props) {
         } else if (alignA.charAt(i) === alignB.charAt(i)) {
             score += matchScore;
             matchSc += matchScore;
+            const baseColor = 'label'.concat('-',
+                genomeType, '-', alignA.charAt(i));
             row.push({type: <DoneOutlineRoundedIcon
-                 className={classes[alignA.charAt(i)]} />, index: i+1});
+                 className={genomeStyles[baseColor]} />, index: i+1});
         } else {
             score += mismatchPenanlty;
             mismatchSc += mismatchPenanlty;

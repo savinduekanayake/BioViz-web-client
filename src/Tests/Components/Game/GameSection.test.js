@@ -13,7 +13,8 @@ const mockStore = configureStore();
 describe('GameSection Component', () => {
     describe('input-state', () => {
         it('should assign valid input to state input', () => {
-            const store = mockStore({GameSeqA: 'AAACCGT', GameSeqB: 'CCAAGGT'});
+            const store = mockStore({GameSeqA: 'AAACCGT', GameSeqB: 'CCAAGGT',
+                genomeType: 'DNA'});
             const wrapper = mount( <Provider store={store}>
                             <GameSection></GameSection></Provider>);
             const expectedState = {
@@ -28,7 +29,8 @@ describe('GameSection Component', () => {
 
         it('should adjust input sequences to same length:adjust seqA', () => {
                 // when seqA is short than seqB
-            const store = mockStore({GameSeqA: 'AAACC', GameSeqB: 'CCAAGGTTA'});
+            const store = mockStore({GameSeqA: 'AAACC', GameSeqB: 'CCAAGGTTA',
+            genomeType: 'DNA'});
             const wrapper = mount( <Provider store={store}>
                             <GameSection></GameSection></Provider>);
             const expectedState = {
@@ -43,7 +45,8 @@ describe('GameSection Component', () => {
 
         it('should adjust input sequences to same length:adjust seqB', () => {
             // when seqB is short than seqA
-        const store = mockStore({GameSeqA: 'AAACCGGT', GameSeqB: 'CCA'});
+        const store = mockStore({GameSeqA: 'AAACCGGT', GameSeqB: 'CCA',
+        genomeType: 'DNA'});
         const wrapper = mount( <Provider store={store}>
                         <GameSection></GameSection></Provider>);
         const expectedState = {
@@ -68,7 +71,8 @@ describe('GameSection Component', () => {
 
     describe('alignment-state', () => {
         it('should not render GameResult when alignment is not set', ()=>{
-            const store = mockStore({GameSeqA: 'AACCGC', GameSeqB: 'GGATTACC'});
+            const store = mockStore({GameSeqA: 'AACCGC', GameSeqB: 'GGATTACC',
+        });
             const wrapper = mount( <Provider store={store}>
                             <GameSection></GameSection></Provider>);
             const emptydiv = findByAttr(wrapper, 'testid',
@@ -78,7 +82,7 @@ describe('GameSection Component', () => {
 
         it('should not set alignment-state for error score schema', ()=>{
             const store = mockStore({GameSeqA: 'AACCGC', GameSeqB: 'GGATTACC',
-                matchScore: 5, mismatchPenalty: -1});
+            genomeType: 'DNA', matchScore: 5, mismatchPenalty: -1});
                 // gapPenanlty is not assigned
             const wrapper = mount( <Provider store={store}>
                             <GameSection></GameSection></Provider>);
@@ -92,7 +96,8 @@ describe('GameSection Component', () => {
 
         it('should set alignment-state for correct score schema', ()=>{
             const store = mockStore({GameSeqA: 'AACCGC', GameSeqB: 'GGATTACC',
-            matchScore: 5, mismatchPenalty: -1, gapPenalty: -1});
+            genomeType: 'DNA', matchScore: 5, mismatchPenalty: -1,
+            gapPenalty: -1});
             const wrapper = mount( <Provider store={store}>
                             <GameSection></GameSection></Provider>);
             const data = {

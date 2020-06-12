@@ -98,17 +98,17 @@ export default function GameAlign(props) {
     let identity = 0;
     for (let i = 0; i < align.seqA.length; i++) {
         const index = i;
-        const baseA = align.seqA.charAt(i) === '-' ? 'ga': align.seqA.charAt(i);
-        const titleA = baseA === 'ga' ? 'Remove Gap' :
+        const baseA = align.seqA.charAt(i);
+        const titleA = baseA === '-' ? 'Remove Gap' :
             baseA === 'e' ? 'end' : 'move -->';
-        const baseB = align.seqB.charAt(i) === '-' ? 'ga': align.seqB.charAt(i);
-        const titleB = baseB === 'ga' ? 'Remove Gap' :
+        const baseB = align.seqB.charAt(i);
+        const titleB = baseB === '-' ? 'Remove Gap' :
             baseB === 'e' ? 'end' : 'move -->';
         let T = 0;
-        if ((align.seqA.charAt(i) === '-' || align.seqB.charAt(i) === '-') ||
-        (align.seqA.charAt(i) === 'e' || align.seqB.charAt(i) === 'e')) {
+        if ((baseA === '-' || baseB === '-') ||
+        (baseA === 'e' || baseB === 'e')) {
             gap+=1;
-        } else if (align.seqA.charAt(i) === align.seqB.charAt(i)) {
+        } else if (baseA === baseB) {
             match+=1;
             T = 1;
         } else {
@@ -129,7 +129,7 @@ export default function GameAlign(props) {
                         onClick={() => changeSeqA(index)}
                         disabled={baseA==='e'?true:false}
                         style={baseA==='e'? {backgroundColor: '#0a22536e'} : {}}
-                        label={align.seqA.charAt(i)} >
+                        label={baseA} >
                             <Base index={index} base={baseA} />
                     </Button>
                     </span>
@@ -147,7 +147,7 @@ export default function GameAlign(props) {
                         onClick={() => changeSeqB(index)}
                         disabled={baseB==='e'?true:false}
                         style={baseB==='e'? {backgroundColor: '#0a22536e'} : {}}
-                        label={align.seqB.charAt(i)} >
+                        label={baseB} >
                             <Base index={index} base={baseB} />
                     </Button>
                 </span>

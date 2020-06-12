@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import TextField from '@material-ui/core/TextField';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import PropTypes from 'prop-types';
+import validateSequence from '../../Validators/sequence';
 
 /**
  * Component to handle text input
@@ -10,20 +11,26 @@ import PropTypes from 'prop-types';
  */
 export default function GameTextInput(props) {
     const dispatch = useDispatch();
-    const pattern = /^[AGCT-]+$/;
+    // const pattern = /^[AGCTacgt]+$/;
+    const genomeType = useSelector((state)=>state.genomeType);
     const [inputErr, setInputErr] = useState(false);
+
+    useEffect(() => {
+        setInputErr(!validateSequence(props.value, genomeType));
+    }, [genomeType, props.value]);
 
     /**
      * store text input in state and handle error status
      * @param {Object} event
      */
     function inputSeq(event) {
-        dispatch(props.inputAction(event.target.value.trim()));
-        if (!event.target.value.match(pattern)) {
-            setInputErr(true);
-        } else {
-            setInputErr(false);
-        }
+        dispatch(props.inputAction(event.target.value.trim().toUpperCase()));
+        setInputErr(!validateSequence(event.target.value.trim(), genomeType));
+        // if (!event.target.value.match(pattern)) {
+        //     setInputErr(true);
+        // } else {
+        //     setInputErr(false);
+        // }
     }
 
     return (

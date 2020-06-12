@@ -2,7 +2,7 @@
 
 exports[`Base Component matches snapshot 1`] = `
 <div
-  className="MuiAvatar-root MuiAvatar-square makeStyles-avatar-1 makeStyles-G-4 MuiAvatar-colorDefault"
+  className="MuiAvatar-root MuiAvatar-square makeStyles-avatar-1 DNA-G MuiAvatar-colorDefault"
   id={4}
 >
   G
