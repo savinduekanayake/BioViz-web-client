@@ -12,6 +12,9 @@ import Slide from '@material-ui/core/Slide';
 // import HomeSections component
 import Game from './Game';
 
+// import image
+import image from './assets/img/KnowledgeGame/knoldge.jpg';
+
 const useStyles = makeStyles((theme) => ({
   appBar: {
     position: 'relative',
@@ -50,6 +53,15 @@ export default function FullScreenDialog() {
 
   return (
     <div>
+
+      <h1>Lets have a fun!</h1>
+      <p>Lets see your performing of knowledge</p>
+
+      {/* <img
+        className={classes.imgage}
+        src={image} alt=''
+        /> */}
+
       <Button variant="outlined" color="primary" onClick={handleClickOpen}
         testid='buttonId'>
         Knowlege Game

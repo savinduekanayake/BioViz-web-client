@@ -15,7 +15,7 @@ import style from './assets/css/image.module.css';
 // import components
 import PairwaiseDetails from './Details/PairwiseDetails';
 import MSADetails from './Details/MSADetails';
-import DialogScreen from './DialogScreen';
+// import DialogScreen from './DialogScreen';
 
 // import react-redux
 import {useDispatch, useSelector} from 'react-redux';
@@ -195,7 +195,8 @@ export default function VerticalLinearStepper({HeadTitle, image, title1, title2,
                         <PairwaiseDetails testid = 'testPWDetails' /> :
                      `${HeadTitle}` === 'MSA' ?
                         <MSADetails testid = 'testPWDetails' /> :
-                        <DialogScreen />
+                        // <DialogScreen />
+                        ''
                 }
             </div>
         </div>
