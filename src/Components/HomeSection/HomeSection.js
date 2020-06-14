@@ -7,6 +7,7 @@ import Steps from './Steps';
 import Feedback from './Feedback';
 import OutlineGame from './OutlineGame';
 
+
 /**
  * Component to visualize Home page
  * @return {React.ReactElement}

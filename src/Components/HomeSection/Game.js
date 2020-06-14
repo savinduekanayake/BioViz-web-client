@@ -14,6 +14,7 @@ import Divider from '@material-ui/core/Divider';
 // import HomeSections component
 import Snackbar from './Snackbar';
 import Alert from './Alert';
+import ShowResults from './ShowResults';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -213,7 +214,7 @@ export default function TransferList() {
         }
       });
 
-      if (a==b && a) {
+      if (a===b && a) {
         return (
         setAlertcomponent(
         <Alert onClick = {checkResult} {...rightAnswerAlert} />,
@@ -286,6 +287,8 @@ export default function TransferList() {
           {customList('MSA Alignment', right)}</Grid>
 
       </Grid>
+
+      <ShowResults />
     </div>
   );
 }
