@@ -130,6 +130,7 @@ export default function TransferList() {
     setChecked(not(checked, rightChecked));
   };
 
+
   const customList = (title, items) => (
     <Card testid='cardId'>
       <CardHeader testid='cardHeaderId'
@@ -152,8 +153,11 @@ export default function TransferList() {
       />
       <Divider testid='dividerId' />
       <List className={classes.list} dense component="div" role="list"
-        testid='listId'>
+        testid='listId' >
         {items.map((value) => {
+          // const val = valu.split(':');
+          // const value=val[0];
+          // const alignment = val[1];
           const labelId = `transfer-list-all-item-${value}-label`;
 
           return (
@@ -199,11 +203,29 @@ export default function TransferList() {
 
   const checkResult = () => {
     if (left.length === pairwise.length && right.length === msa.length) {
+      let a = 0;
+      let b = 0;
+      right.map((item) => {
+        if (item === 'Can compare more than 2 sequeneces' ) {
+          a = 1;
+        } else if (item === 'Time proposinal based on no of input sequences') {
+          b =1;
+        }
+      });
+
+      if (a==b && a) {
+        return (
+        setAlertcomponent(
+        <Alert onClick = {checkResult} {...rightAnswerAlert} />,
+        )
+      );
+      } else {
         return (
           setAlertcomponent(
-          <Alert onClick = {checkResult} {...rightAnswerAlert} />,
+          <Alert onClick = {checkResult} {...wrongAnswerAlert} />,
           )
         );
+      }
     } else {
       return (
         setAlertcomponent(

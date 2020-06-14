@@ -62,7 +62,11 @@ export default function RecipeReviewCard() {
             />
             <DialogScreen />
             <CardContent>
-                <Typography variant="body2" color="textSecondary" component="p">
+                <Typography
+                    component={'span'}
+                    variant="body2"
+                    color="textSecondary"
+                    >
                     This is a simple game which only look out your basic and
                     fundermental knowledge about the
                     two aignment of Pairwise and MSA.
