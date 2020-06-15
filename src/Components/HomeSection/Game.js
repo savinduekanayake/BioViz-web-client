@@ -206,6 +206,7 @@ export default function TransferList() {
     if (left.length === pairwise.length && right.length === msa.length) {
       let a = 0;
       let b = 0;
+      // eslint-disable-next-line
       right.map((item) => {
         if (item === 'Can compare more than 2 sequeneces' ) {
           a = 1;

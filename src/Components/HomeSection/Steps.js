@@ -18,15 +18,30 @@ import Icon from '@material-ui/core/Icon';
 import DnaIcon from '../../assets/icons/dna.svg';
 import SportsEsportsRoundedIcon from '@material-ui/icons/SportsEsportsRounded';
 
-// images
-import msaImage from './assets/img/Steps/MSA.png';
+// images for pw
 import pwImage from './assets/img/Steps/pw.png';
-import gameImage from './assets/img/Steps/game.jpg';
+import select3Image from './assets/img/Steps/select3.jpg';
+import input4Image from './assets/img/Steps/input4.jpg';
+import variable1Image from './assets/img/Steps/variable1.jpg';
 
+// images for msa
+import msaImage from './assets/img/Steps/MSA.png';
+import select2Image from './assets/img/Steps/select2.jpg';
+import input1Image from './assets/img/Steps/input1.jpg';
+import variable4Image from './assets/img/Steps/variable4.png';
+
+// images for gameplay
+import select4Image from './assets/img/Steps/select4.png';
+import instruction4Image from './assets/img/Steps/instruction4.jpg';
+import input3Image from './assets/img/Steps/input3.jpg';
+import score2Image from './assets/img/Steps/score2.jpg';
 
 const pairwiseData = {
   HeadTitle: 'Pairwise',
-  image: pwImage,
+  image1: select2Image,
+  image2: input4Image,
+  image3: variable1Image,
+  image4: pwImage,
   title1: `Select the BioInformatic Pairwise Alignment`,
   title2: `Enter your DNA sequences`,
   title3: `Select and enter your variables`,
@@ -51,7 +66,10 @@ const pairwiseData = {
 
 const MSAData = {
   HeadTitle: 'MSA',
-  image: msaImage,
+  image1: select3Image,
+  image2: input1Image,
+  image3: variable4Image,
+  image4: msaImage,
   title1: `Select the BioInformatic MSA Alignment`,
   title2: `Enter your DNA sequences`,
   title3: `Select and enter your variables`,
@@ -76,7 +94,10 @@ const MSAData = {
 
 const gameData = {
   HeadTitle: 'Gameplay',
-  image: gameImage,
+  image1: select4Image,
+  image2: instruction4Image,
+  image3: input3Image,
+  image4: score2Image,
   title1: `Select the Gameplay`,
   title2: `Read the instruction`,
   title3: `Enter your answer`,

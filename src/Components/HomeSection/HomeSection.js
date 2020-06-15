@@ -6,7 +6,7 @@ import Services from './Services';
 import Steps from './Steps';
 import Feedback from './Feedback';
 import OutlineGame from './OutlineGame';
-
+// import Carousel from './Carousel';
 
 /**
  * Component to visualize Home page
@@ -18,6 +18,7 @@ export default function HomeSection() {
         <div>
 
             <Services />
+            {/* <Carousel /> */}
             <Divider />
             <Steps />
             <OutlineGame />

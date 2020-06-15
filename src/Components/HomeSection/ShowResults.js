@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import Switch from '@material-ui/core/Switch';
 import Paper from '@material-ui/core/Paper';
 import Grow from '@material-ui/core/Grow';
@@ -73,11 +73,11 @@ export default function SimpleGrow() {
           </Paper>
         </Grow>
 
-        {/* Conditionally applies the timeout prop to change the entry speed. */}
+    {/* Conditionally applies the timeout prop to change the entry speed. */}
         <Grow
           in={checked}
-          style={{ transformOrigin: '0 0 0' }}
-          {...(checked ? { timeout: 1000 } : {})}
+          style={{transformOrigin: '0 0 0'}}
+          {...(checked ? {timeout: 1000} : {})}
         >
           <Paper elevation={4} className={classes.paper}>
             <div className={classes.svg}>
