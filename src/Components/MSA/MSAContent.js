@@ -112,7 +112,7 @@ export default function MSAContent() {
     };
     return (
         <div>
-            <h2>MSA Mode</h2>
+            <h1>MSA Mode</h1>
             <Box boxShadow={3} padding={5} marginBottom={3}>
                 <GenomeTypeInput/>
             </Box>

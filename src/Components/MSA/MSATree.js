@@ -70,13 +70,13 @@ export default function MSATree(props) {
                     ],
                     style: {
                         fill: '#FF0000',
-                        stroke: '#FF0000',
+                        stroke: '#0000FF',
                     },
                 },
                 defaultEdge: {
                     type: 'cubic-horizontal',
                     style: {
-                        stroke: '#0000FF',
+                        stroke: '#FF4500',
                         startArrow: true,
                     },
                 },
@@ -126,8 +126,8 @@ export default function MSATree(props) {
                                     'left',
                         offset: 5,
                         style: {
-                            fill: '#0000FF',
-                            fontSize: 17,
+                            fill: '#FF4500',
+                            fontSize: 19,
                         },
                     },
                 };
